@@ -1,0 +1,29 @@
+.text{
+    font-size: 20px;
+    
+}
+
+.form{
+    top: 10%;
+}
+
+.error{
+    margin: 7%;
+    background-color: rgba(253, 1, 1, 0.63);
+    padding: 5%;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bolder;
+    text-align: center
+}
+
+.entrar, .label{
+    font-weight: bolder;
+    font-size:20px;
+}
+
+.links{
+    top: 10%;
+}
+
+
