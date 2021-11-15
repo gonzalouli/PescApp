@@ -1,0 +1,7 @@
+{
+  "name": "PescApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
