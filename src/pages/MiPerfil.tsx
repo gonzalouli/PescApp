@@ -23,7 +23,7 @@ const MiPerfil: React.FC = () => {
                     IMAGEN
                 </IonItem>
             </IonList >
-            <IonList className="form" >
+            <IonList>
                 <IonItem className="formItem ">
                     <IonLabel className="label" position="stacked">Nombre</IonLabel>
                     <IonInput className="text" type="text" value={name}  placeholder={name}
@@ -45,8 +45,8 @@ const MiPerfil: React.FC = () => {
                     onIonChange={e=>setDni(e.detail.value)}/>       
                 </IonItem>
             </IonList>  
-                <div className="form buttons">
-                    <IonList className="form buttons">
+                <div className="buttons">
+                    <IonList className="buttons">
                         <IonItem>
                             <IonButton href="/my/changePass">
                                 Cambiar contraseña

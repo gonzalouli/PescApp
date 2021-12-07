@@ -1,10 +1,13 @@
 .text{
     font-size: 20px;
-    
 }
 
 .form{
     top: 10%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 500px;
 }
 
 .error{

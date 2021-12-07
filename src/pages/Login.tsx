@@ -50,7 +50,7 @@ const Home: React.FC = () => {
           <IonTitle >PescApp login</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding form">
+      <IonContent className="form">
         <IonList >
           <IonItem>
             <IonLabel className="label" position="stacked">Email</IonLabel>

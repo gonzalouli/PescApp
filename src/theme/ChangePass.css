@@ -1,12 +1,16 @@
 .submit{
     top: 10%;
-    position: relative;
-    margin: 0 auto;
-    position: relative;
-    margin: 0 auto !important;
-    max-width: 500px;
+
 }
 
+.text{
+    width: 80%;
+}
+
+.eyebutton{
+    background-color: transparent;
+    height: 0 auto !;
+}
 
 .buttons{
     display: flex;
