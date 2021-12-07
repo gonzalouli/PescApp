@@ -1,0 +1,44 @@
+.text{
+    font-size: 20px;
+    
+}
+
+.form{
+    top: 10%;
+}
+
+.error{
+    position: relative;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 400px;
+    padding: 10px;
+    background-color: rgba(253, 1, 1, 0.63);
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bolder;
+    text-align: center;
+    align-items: center
+}
+
+.entrar, .label{
+    font-weight: bolder;
+    font-size: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.entrar{
+    margin-top: 20px !important;
+
+}
+
+.links{
+    position: relative;
+    margin: 0 auto !important;
+    padding-top: 10px;
+    max-width: 400px;
+}
+

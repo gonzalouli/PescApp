@@ -1,7 +1,9 @@
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import NotFoundPage from './pages/NotFoundPage';
 import Login from './pages/Login';
+import Home from './pages/Home';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -21,16 +23,25 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import MiPerfil from './pages/MiPerfil';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
+        <Route exact path="/my/home">
+            <Home/>
+        </Route>
         <Route exact path="/login">
           <Login />
         </Route>
-        <Route exact path="/">
-          <Redirect to="/login" />
+        <Route exact path="/my/profile">
+          <MiPerfil />
+        </Route>
+        <Redirect exact path="/" to="/login"/>
+      
+        <Route>
+          <NotFoundPage />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
