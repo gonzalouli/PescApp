@@ -2,8 +2,9 @@ import { IonButton, IonButtons, IonContent, IonGrid, IonHeader, IonIcon, IonInpu
 import React, { useState } from 'react'
 import BackButton from '../components/BackButton'
 import '../theme/Header.css'
+import '../theme/MiPerfil.css'
 
-  const MiPerfil: React.FC = () => {
+const MiPerfil: React.FC = () => {
 
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('');
@@ -14,43 +15,48 @@ import '../theme/Header.css'
       <IonPage>
             <IonHeader className="header">
                 <BackButton refer="/my/home" />
+                <IonTitle >Mi Perfil</IonTitle>
             </IonHeader>
             <IonContent>
             <IonList >
                 <IonItem>
                     IMAGEN
                 </IonItem>
-                <IonItem>
+            </IonList >
+            <IonList className="form" >
+                <IonItem className="formItem ">
                     <IonLabel className="label" position="stacked">Nombre</IonLabel>
                     <IonInput className="text" type="text" value={name}  placeholder={name}
                     onIonChange={e=>setName(e.detail.value)}/>            
                 </IonItem>
-                <IonItem>
+                <IonItem className="formItem">
                     <IonLabel className="label" position="stacked">Apellidos</IonLabel>
                     <IonInput className="text" type="text" value={surname} placeholder={surname}
                     onIonChange={e=>setSurname(e.detail.value)}/>       
                 </IonItem>
-                <IonItem>
+                <IonItem className="formItem">
                     <IonLabel className="label" position="stacked">Email</IonLabel>
                     <IonInput className="text" type="text" value={email} placeholder={email}
                     onIonChange={e=>setEmail(e.detail.value)}/>       
                 </IonItem>
-                <IonItem>
+                <IonItem className="formItem">
                     <IonLabel className="label" position="stacked">DNI</IonLabel>
                     <IonInput className="text" type="text" value={dni} placeholder={dni}
-                    onIonChange={e=>setEmail(e.detail.value)}/>       
+                    onIonChange={e=>setDni(e.detail.value)}/>       
                 </IonItem>
             </IonList>  
-                <IonGrid>
-                    <IonItem>
-                        <IonButton href="/my/newPass">
-                            Cambiar contraseña
-                        </IonButton>
-                    </IonItem>
-                    <IonItem>
-                        <IonButton>Guardar</IonButton>
-                    </IonItem>
-                </IonGrid>
+                <div className="form buttons">
+                    <IonList className="form buttons">
+                        <IonItem>
+                            <IonButton href="/my/changePass">
+                                Cambiar contraseña
+                            </IonButton>
+                        </IonItem>
+                        <IonItem>
+                            <IonButton>Guardar</IonButton>
+                        </IonItem>
+                    </IonList>  
+                </div>
             </IonContent>
       </IonPage>
     );

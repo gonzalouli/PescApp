@@ -4,7 +4,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import NotFoundPage from './pages/NotFoundPage';
 import Login from './pages/Login';
 import Home from './pages/Home';
-
+import ChangePass from './pages/ChangePass'
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -37,6 +37,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/my/profile">
           <MiPerfil />
+        </Route>
+        <Route exact path="/my/changePass">
+          <ChangePass />
         </Route>
         <Redirect exact path="/" to="/login"/>
       

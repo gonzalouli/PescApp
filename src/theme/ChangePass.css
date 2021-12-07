@@ -1,0 +1,15 @@
+.submit{
+    top: 10%;
+    position: relative;
+    margin: 0 auto;
+    position: relative;
+    margin: 0 auto !important;
+    max-width: 500px;
+}
+
+
+.buttons{
+    display: flex;
+    align-items: center;
+}
+

@@ -1,0 +1,19 @@
+.form{
+    position: relative;
+    margin: 0 auto;
+    position: relative;
+    margin: 0 auto !important;
+    max-width: 500px;
+}
+
+.formItem{
+    margin: 0 auto;
+}
+
+.buttons{
+    margin-top: 5% !important;
+    display: flex;
+    align-items: center;
+}
+
+
