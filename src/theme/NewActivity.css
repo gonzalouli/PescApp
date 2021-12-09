@@ -1,8 +1,13 @@
 .label{
-    font-size: 110% !important;
+    font-size: 130% !important;
 }
 
 .container{
-    margin: 10% !important;
+    margin-top: 5% !important;
+}
 
+.dates{
+    margin: 0 auto !important;
+    width: 60%;
+    margin-top: 20% !important;
 }

@@ -3,19 +3,13 @@ import { IonButton, IonContent, IonHeader, IonIcon, IonList, IonPage, IonRefresh
 import React from 'react'
 import LogOutButton from '../components/LogOutButton'
 import MiPerfilButton from '../components/MiPerfilButton'
+import RefreshComponent from '../components/RefreshComponent'
 import '../theme/Header.css'
 import '../theme/Home.css'
 
 const Home: React.FC = () => {
 
-    function doRefresh(event: CustomEvent<RefresherEventDetail>) {
-        console.log('Begin async operation');
-      
-        setTimeout(() => {
-          console.log('Async operation has ended');
-          event.detail.complete();
-        }, 2000);
-      }
+   
       
     return (
         
@@ -26,14 +20,12 @@ const Home: React.FC = () => {
                     <LogOutButton></LogOutButton>
             </IonHeader>
             <IonContent>
-                <IonRefresher slot="fixed" onIonRefresh={doRefresh} pullFactor={0.5} pullMin={40} pullMax={80}>
-                    <IonRefresherContent></IonRefresherContent>
-                </IonRefresher>
+               <RefreshComponent/>
                 <IonList className="container">
                     <IonButton className="main-button" expand="block" href="my/newActivity">Nueva Actividad</IonButton>
                     <IonButton className="main-button"  expand="block">Mis Actividades</IonButton>
                     <IonButton className="main-button"  expand="block">Meteorología</IonButton>
-                    <IonButton className="main-button"  expand="block">Especies piscícolas</IonButton>
+                    <IonButton className="main-button"  expand="block">Especies</IonButton>
                     <IonButton className="main-button"  expand="block">Documentación</IonButton>
                     <IonButton className="main-button"  expand="block">Notificaciones</IonButton>
                 </IonList>

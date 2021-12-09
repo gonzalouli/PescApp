@@ -6,7 +6,9 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import ChangePass from './pages/ChangePass'
 import NewActivity from './pages/NewActivity'
-
+import Register from './pages/Register';
+import NewActivityDate from './pages/NewActivityDate';
+import NewActivityTackle from './pages/NewActivityTackle';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -26,6 +28,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import MiPerfil from './pages/MiPerfil';
+import ResetPass from './pages/ResetPass';
 
 const App: React.FC = () => (
   <IonApp>
@@ -45,6 +48,18 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/my/newActivity">
           <NewActivity />
+        </Route>
+        <Route exact path="/my/newActivity/Date">
+          <NewActivityDate />
+        </Route>
+        <Route exact path="/my/newActivity/Tackle">
+          <NewActivityTackle/>
+        </Route>
+        <Route exact path="/forgotPass">
+            <ResetPass/>
+        </Route>
+        <Route exact path="/register">
+            <Register/>
         </Route>
         <Redirect exact path="/" to="/login"/>
       

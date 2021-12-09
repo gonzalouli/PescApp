@@ -54,7 +54,7 @@ const Home: React.FC = () => {
         <IonList className="container" >
           <IonItem>
             <IonLabel className="label" position="stacked">Email</IonLabel>
-            <IonInput className="text" type="email" value={email}  placeholder="Email"
+            <IonInput className="text" inputmode="email" value={email}  placeholder="Email"
             onIonChange={e=>setEmail(e.detail.value)}/>            
           </IonItem>
           <IonItem>
