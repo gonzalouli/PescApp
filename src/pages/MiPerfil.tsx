@@ -15,7 +15,7 @@ const MiPerfil: React.FC = () => {
       <IonPage>
             <IonHeader className="header">
                 <BackButton refer="/my/home" />
-                <IonTitle >Mi Perfil</IonTitle>
+                <IonTitle className="tittle">Mi Perfil</IonTitle>
             </IonHeader>
             <IonContent>
             <IonList className="container" >
@@ -46,17 +46,14 @@ const MiPerfil: React.FC = () => {
                 </IonItem>
             </IonList>  
                 <div className="buttons">
-                    <IonList className="buttons">
-                        <IonItem>
-                            <IonButton className="save" href="/my/changePass">
+                        <IonButton className="save" href="/my/changePass">
                                 Cambiar contraseña
-                            </IonButton>
-                        </IonItem>
-                        <IonItem>
-                            <IonButton className="save" >Guardar</IonButton>
-                        </IonItem>
-                    </IonList>  
+                        </IonButton>
                 </div>
+                <div className="buttons">
+                        <IonButton className="save">Guardar</IonButton>
+                </div>
+
             </IonContent>
       </IonPage>
     );

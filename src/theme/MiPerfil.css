@@ -5,8 +5,11 @@
 }
 
 .buttons{
-    margin: 0 auto;
-    margin-top: 10px;
+    display:flex;
+    align-items: center;
+    margin-top: 5% !important;
+    flex-direction: row;
+    justify-content: center;
     
 }
 
