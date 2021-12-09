@@ -1,19 +1,28 @@
 .submit{
     top: 10%;
-
 }
 
-.text{
-    width: 80%;
-}
 
 .eyebutton{
     background-color: transparent;
-    height: 0 auto !;
+    margin-bottom: -13%;
 }
 
 .buttons{
     display: flex;
     align-items: center;
+}
+
+.button{
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.save{
+    height: 40px;
+}
+
+.grid-fixed{
+    width: 90%;
 }
 

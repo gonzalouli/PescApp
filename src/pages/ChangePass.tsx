@@ -22,7 +22,7 @@ import '../theme/ChangePass.css'
                 <BackButton refer="/my/profile" />
             </IonHeader>
             <IonContent>
-            <IonGrid >
+            <IonGrid className="grid-fixed">
                 <IonRow>
                     <IonCol>
                         <IonItem>
@@ -69,7 +69,7 @@ import '../theme/ChangePass.css'
                 <div className="submit buttons">
                     <IonList className="submit buttons">
                         <IonItem >
-                            <IonButton onClick={()=>{}}>Guardar</IonButton>
+                            <IonButton className="save" onClick={()=>{}}>Guardar</IonButton>
                         </IonItem>
                     </IonList>
                 </div>

@@ -47,11 +47,11 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar className="ion-align-items-center">
-          <IonTitle >PescApp login</IonTitle>
+          <IonTitle className="tittle" >PescApp</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="form">
-        <IonList >
+        <IonList className="container" >
           <IonItem>
             <IonLabel className="label" position="stacked">Email</IonLabel>
             <IonInput className="text" type="email" value={email}  placeholder="Email"

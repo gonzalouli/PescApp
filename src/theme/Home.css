@@ -1,0 +1,13 @@
+.container{
+    margin: 0 auto;
+    width: 90%;
+    margin-top: 5% !important;
+
+}
+
+.main-button{
+    position: relative;
+    font-weight: bolder;
+    font-size: 25px !important;   
+    margin: 5%; 
+}
