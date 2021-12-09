@@ -3,11 +3,17 @@
     display: flex;
     justify-content: space-between ;
     padding: 15px;
+    padding-right: 20% !important;
     font-size: 12px !important;
 }
 
+.backButton{
+    position: absolute;
+    z-index: 1;
+}
+
 .tittle{
-    text-align: center;
     font-size: 200%;
-    font-weight: bolder
+    font-weight: bolder;
+    
 }

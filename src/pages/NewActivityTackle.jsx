@@ -24,7 +24,7 @@ export default function Takle() {
     return (
         <IonPage>
             <IonHeader className="header">
-                    <BackButton refer="/my/home" />
+                    <BackButton className="backButton" refer="/my/home" />
                     <IonTitle className='tittle' >Equipo</IonTitle>
             </IonHeader>
             <IonContent>
@@ -53,6 +53,13 @@ export default function Takle() {
                     {items.map(item => (
                     <li className='labelName' key={item.id}>{item.id+1}: {item.name}</li>
                     ))}
+                <div className="submit buttons">
+                    <IonList className="submit buttons">
+                        <IonItem >
+                            <IonButton className="save" onClick={()=>{}}>Guardar</IonButton>
+                        </IonItem>
+                    </IonList>
+                </div>
                 </IonContent>
             </IonContent>
         </IonPage>
