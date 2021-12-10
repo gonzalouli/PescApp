@@ -9,6 +9,7 @@ import { TileLayer, Tooltip, Marker, MapContainer, Popup } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import '../theme/NewActivityLocalization.css';
 import {MarkerComponent} from '../components/MarkerComponent';
+import MapComponent from '../components/MapComponent';
 
 /* initialize() is important for iOS,
   Android doesn't need any initialization.
@@ -31,38 +32,37 @@ function NewActivityLocalization() {
     const [zoom, setZoom] = useState()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<LocationError>({showError: false})
-    let pos =[]
 
     const handleClick =(e)=>{
         setCoords({lat:e.lat,lng:e.lng})
     }
     
-    const currentPosition = async() => {
-        setLoading(true)
+    // const currentPosition = async() => {
+    //     setLoading(true)
         
-        try{
-            const position= await Geolocation.getCurrentPosition();
-            console.log(position)
-            pos.push(position.coords.latitude)
-            pos.push(position.coords.longitude)
-            // setCoords({lat:position.coords.latitude, lng:position.coords.longitude})
+    //     try{
+    //         const position= await Geolocation.getCurrentPosition();
+    //         console.log(position)
+    //         pos.push(position.coords.latitude)
+    //         pos.push(position.coords.longitude)
+    //         // setCoords({lat:position.coords.latitude, lng:position.coords.longitude})
 
-            // coord=[latitude,longitude]
+    //         // coord=[latitude,longitude]
 
-            setLoading(false)
-            setError({showError: false, message: undefined,})
-        } catch (error) {
-            const message = error.message.length >0 ? error.message: "No se pudo localizar..."
-            setError({showError: true, message})
-            setLoading(false)
+    //         setLoading(false)
+    //         setError({showError: false, message: undefined,})
+    //     } catch (error) {
+    //         const message = error.message.length >0 ? error.message: "No se pudo localizar..."
+    //         setError({showError: true, message})
+    //         setLoading(false)
 
-        }
-    };
+    //     }
+    // };
     
-    useEffect(()=>{
-        currentPosition()
+    // useEffect(()=>{
+    //     currentPosition()
 
-    },[])
+    // },[])
 
     return (
             <IonPage>
@@ -74,7 +74,7 @@ function NewActivityLocalization() {
                     <RefreshComponent/>
                     <IonLoading isOpen={loading} message={"Tomando posición"} onDidDismiss={()=>{setLoading(false)}}/>
                     <IonToast isOpen={error.showError} message={error.message} duration={3000} onDidDismiss={()=>{setError({message: undefined, showError: false})}} />
-                    <div className="Map">
+                    {/* <div className="Map">
                         <MapContainer className='Map-container'
                             center={[21,21]}
                             zoom={20}
@@ -84,8 +84,8 @@ function NewActivityLocalization() {
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             />
                         </MapContainer>
-                    </div>
-
+                    </div> */}
+                    <MapComponent></MapComponent>
                 </IonContent>
             </IonPage>
         )
