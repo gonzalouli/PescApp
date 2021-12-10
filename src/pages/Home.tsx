@@ -19,7 +19,7 @@ const Home: React.FC = () => {
                     <MiPerfilButton text="Mi Perfil"></MiPerfilButton>
                     <LogOutButton></LogOutButton>
             </IonHeader>
-            <IonContent>
+            <IonContent >
                <RefreshComponent/>
                 <IonList className="container">
                     <IonButton className="main-button" expand="block" href="my/newActivity">Nueva Actividad</IonButton>

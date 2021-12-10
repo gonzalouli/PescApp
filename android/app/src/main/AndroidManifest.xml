@@ -12,7 +12,7 @@
         <meta-data 
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD35fG5wYOtLp68_0XIvZmzz4CJD-YB6mk"
-        >
+        ></meta-data>
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
             android:name="com.pescapp.MainActivity"
