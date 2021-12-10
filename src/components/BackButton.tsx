@@ -2,7 +2,7 @@ import { IonBackButton, IonButton, IonButtons } from '@ionic/react'
 import React, { useState } from 'react'
 import { Redirect } from 'react-router'
 
-export default function BackButton({refer="/my/home"}) {
+export default function BackButton({refer="/"}) {
     
     return (
         <IonButtons>

@@ -4,7 +4,7 @@ import BackButton from '../components/BackButton'
 import RefreshComponent from '../components/RefreshComponent'
 import '../theme/NewActivityTackle.css'
 
-export default function Takle() {
+export default function NewActivityTackle() {
 
     const [items, setItems] = useState([]);
     const [itemName, setItemName] = useState("");
@@ -24,21 +24,21 @@ export default function Takle() {
     return (
         <IonPage>
             <IonHeader className="header">
-                    <BackButton className="backButton" refer="/my/home" />
-                    <IonTitle className='tittle' >Equipo</IonTitle>
+                 <BackButton refer="/my/newActivity" />
+                 <IonTitle className='tittle' >Equipo</IonTitle>
             </IonHeader>
             <IonContent>
                 <RefreshComponent/>
                 <IonLabel className="labelNombre" >Nombre</IonLabel>
                 <IonItem>
                     <form className="formTackle" onSubmit={addItem}>
-                        <input class="addInput"
+                        <input className="addInput"
                             name="item"
                             type="text"
                             value={itemName}
                             onChange={e => setItemName(e.target.value)}
                         ></input>
-                        <IonButton onClick={addItem} class="buttonAdd"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="36" height="36" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <IonButton onClick={addItem} class="buttonAdd"><svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-circle-plus" width="36" height="36" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <circle cx="12" cy="12" r="9" />
                         <line x1="9" y1="12" x2="15" y2="12" />

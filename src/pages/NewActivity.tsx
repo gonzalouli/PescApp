@@ -22,10 +22,10 @@ export default function NewActivity() {
                     <IonInput className="text" type='text' value={name} 
                         onIonChange={e=>setName(e.detail.value)}/>
                 </IonItem>
-                <IonButton className="main-button"  expand="block">Localización</IonButton>
-                <IonButton className="main-button"  expand="block" href="/my/newActivity/Tackle">Equipo</IonButton>
+                <IonButton className="main-button"  expand="block" href="/my/NewActivity/Localization">Localización</IonButton>
+                <IonButton className="main-button"  expand="block" href="/my/NewActivity/Tackle">Equipo</IonButton>
                 <IonButton className="main-button"  expand="block">Captura</IonButton>
-                <IonButton className="main-button"  expand="block" href="/my/newActivity/Date">Fecha</IonButton>
+                <IonButton className="main-button"  expand="block" href="/my/NewActivity/Date">Fecha</IonButton>
             </IonList>
             <div className="submit buttons">
                     <IonList className="submit buttons">

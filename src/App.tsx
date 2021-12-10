@@ -1,6 +1,8 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+
+// Pages to route
 import NotFoundPage from './pages/NotFoundPage';
 import Login from './pages/Login';
 import Home from './pages/Home';
@@ -9,6 +11,10 @@ import NewActivity from './pages/NewActivity'
 import Register from './pages/Register';
 import NewActivityDate from './pages/NewActivityDate';
 import NewActivityTackle from './pages/NewActivityTackle';
+import MiPerfil from './pages/MiPerfil';
+import ResetPass from './pages/ResetPass';
+import NewActivityLocalization from './pages/NewActivityLocalization'
+
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -27,8 +33,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import MiPerfil from './pages/MiPerfil';
-import ResetPass from './pages/ResetPass';
+;
 
 const App: React.FC = () => (
   <IonApp>
@@ -46,14 +51,17 @@ const App: React.FC = () => (
         <Route exact path="/my/changePass">
           <ChangePass />
         </Route>
-        <Route exact path="/my/newActivity">
+        <Route exact path="/my/NewActivity">
           <NewActivity />
         </Route>
-        <Route exact path="/my/newActivity/Date">
+        <Route exact path="/my/NewActivity/Date">
           <NewActivityDate />
         </Route>
-        <Route exact path="/my/newActivity/Tackle">
+        <Route exact path="/my/NewActivity/Tackle">
           <NewActivityTackle/>
+        </Route>
+        <Route exact path="/my/NewActivity/Localization">
+            <NewActivityLocalization/>
         </Route>
         <Route exact path="/forgotPass">
             <ResetPass/>
