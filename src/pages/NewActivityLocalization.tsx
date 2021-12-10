@@ -14,41 +14,41 @@ import {MarkerComponent} from '../components/MarkerComponent';
   Android doesn't need any initialization.
 */
 
-const CustomMarker = props => {
-    const initMarker = ref => {
-      if (ref) {
-        ref.leafletElement.openPopup()
-      }
-    }
-    return <Marker ref={initMarker} {...props}/>
-  }
 
-  interface LocationError{
+interface LocationError{
       showError: boolean;
       message?: string
-  }
+}
+
+interface Coordinates{
+    lat: number,
+    lng: number
+}
 
 function NewActivityLocalization() {
-    const [ currentLocation, setCurrentLocation ] = useState({lat: 0, lon: 0})
+    const [ coords, setCoords] = useState<Coordinates>()
+ 
     const [zoom, setZoom] = useState()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<LocationError>({showError: false})
-
-    useEffect(()=>{
-        currentPosition()
-    },[])
+    let pos =[]
 
     const handleClick =(e)=>{
-        this.setState({ currentLocation: e.latlng });
+        setCoords({lat:e.lat,lng:e.lng})
     }
     
     const currentPosition = async() => {
         setLoading(true)
-        try {        
+        
+        try{
             const position= await Geolocation.getCurrentPosition();
             console.log(position)
-            setCurrentLocation({lat:position.coords.latitude, lon: position.coords.longitude})
-            console.log(currentLocation)
+            pos.push(position.coords.latitude)
+            pos.push(position.coords.longitude)
+            // setCoords({lat:position.coords.latitude, lng:position.coords.longitude})
+
+            // coord=[latitude,longitude]
+
             setLoading(false)
             setError({showError: false, message: undefined,})
         } catch (error) {
@@ -59,6 +59,10 @@ function NewActivityLocalization() {
         }
     };
     
+    useEffect(()=>{
+        currentPosition()
+
+    },[])
 
     return (
             <IonPage>
@@ -70,16 +74,17 @@ function NewActivityLocalization() {
                     <RefreshComponent/>
                     <IonLoading isOpen={loading} message={"Tomando posición"} onDidDismiss={()=>{setLoading(false)}}/>
                     <IonToast isOpen={error.showError} message={error.message} duration={3000} onDidDismiss={()=>{setError({message: undefined, showError: false})}} />
-                    
-                    <MapContainer
-                        center={[currentLocation.lat,currentLocation.lon]}
-                        zoom={7}
-                        scrollWheelZoom={true}>
-                        <TileLayer  attribution='&copy; 
-                        <a href=»http://osm.org/copyright»>OpenStreetMap</a> 
-                        contributors'  url={`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`}  />
-                    </MapContainer>
-
+                    <div className="Map">
+                        <MapContainer className='Map-container'
+                            center={[21,21]}
+                            zoom={20}
+                            scrollWheelZoom={true}>
+                            <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            />
+                        </MapContainer>
+                    </div>
 
                 </IonContent>
             </IonPage>
