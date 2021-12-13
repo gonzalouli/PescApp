@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonLoading, IonPage, IonRefresher, IonRefresherContent, IonTitle, IonToast } from '@ionic/react'
+import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonLoading, IonPage, IonRefresher, IonRefresherContent, IonTextarea, IonTitle, IonToast } from '@ionic/react'
 import React, { Component, useEffect, useState } from 'react'
 import RefreshComponent from '../components/RefreshComponent'
 import BackButton from '../components/BackButton'
@@ -34,7 +34,7 @@ interface Coordinates{
 
 
 function NewActivityLocalization() {
-  
+    const [text, setText] = useState("")
     
     return (
             <IonPage>
@@ -43,9 +43,14 @@ function NewActivityLocalization() {
                 <IonTitle className='tittle' >Localización</IonTitle>
                 </IonHeader>
                 <IonContent>
-                    <RefreshComponent/>
                     <MapComponent></MapComponent>
-                   
+                    <IonList>
+                        <IonItem className="description">
+                            <IonLabel position="floating">Descripción</IonLabel>
+                            <IonTextarea value={text} onIonChange={(e) => setText(e.detail.value!)}></IonTextarea>
+                        </IonItem>
+                        <IonButton className="button-acept">Aceptar</IonButton>
+                    </IonList>
                 </IonContent>
             </IonPage>
         )

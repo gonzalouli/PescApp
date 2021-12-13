@@ -73,21 +73,18 @@ const MapComponent: React.VFC = () => {
 
 
   return (
-    <div style={{ display: "flex", height: "80%" }}>
+    <div className="map-container" style={{ display: "flex", height: "80%" }}>
       <Wrapper apiKey={"AIzaSyD35fG5wYOtLp68_0XIvZmzz4CJD-YB6mk"} render={render}>
         <Map
           center={center}
           onClick={onClick}
           onIdle={onIdle}
           zoom={zoom}
-          style={{ flexGrow: "1", height: "80%" }}
+          style={{ flexGrow: "1", height: "85%" }}
         >
-          
-          {marker!=null ? <Marker position={{lat: marker.lat, lng: marker.lng}} ></Marker> : null}         
-           
+          {marker!=null ? <Marker position={{lat: marker.lat, lng: marker.lng}} ></Marker> : null}           
         </Map>
       </Wrapper>
-
     </div>
   );
 };

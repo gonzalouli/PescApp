@@ -1,12 +1,12 @@
-.Map{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    width: 80vw;
-    height: 70vh;
+.description{
+    margin-top: -10px;
 }
 
-.Map-container{
-    width: 100%;
-    height: 100%;
+.map-container{margin-bottom: -6em;}
+
+.button-acept{
+    display: flex;
+    align-items: center;
+    
+    margin-top: 3em;;
 }
