@@ -16,7 +16,7 @@ import MapComponent from '../components/MapComponent';
 */
 
 // prueba de googlemaps
-import { GoogleMap, useJsApiLoader, useLoadScript } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 
 
@@ -28,64 +28,13 @@ interface LocationError{
 interface Coordinates{
     lat: number,
     lng: number,
-    date: string;
+    time: string;
 }
 
 
 
-function NewActivityLocalization(props) {
-    const [ coords, setCoords] = useState<Coordinates>()
-    const [marker, setMarker] = useState<Coordinates>()
-    const [zoom, setZoom] = useState()
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState<LocationError>({showError: false})
-
+function NewActivityLocalization() {
   
-    const currentPosition = async() => {
-        setLoading(true)
-        
-        try{
-            const position= await Geolocation.getCurrentPosition();
-            console.log(position)
-            setCoords({lat:position.coords.latitude,lng:position.coords.longitude, date: new Date().toISOString()})
-            // coord=[latitude,longitude]
-
-            setLoading(false)
-            setError({showError: false, message: undefined,})
-        } catch (error) {
-            const message = error.message.length >0 ? error.message: "No se pudo localizar..."
-            setError({showError: true, message})
-            setLoading(false)
-
-        }
-    };
-    
-    useEffect(()=>{
-        currentPosition()
-    },[])
-    const libraries = ["places"]
-
-    const { isLoaded, loadError } = useLoadScript
-    //useJsApiLoader
-    ({
-        id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyD35fG5wYOtLp68_0XIvZmzz4CJD-YB6mk",
-        
-      })
-    
-    const [map, setMap] = React.useState(null)
-
-    const onLoad = React.useCallback(function callback(map) {
-
-        const bounds = new window.google.maps.LatLngBounds();
-        map.fitBounds(bounds);
-        setMap(map)
-    }, [])
-
-    const onUnmount = React.useCallback(function callback(map) {
-        setMap(null)
-      }, [])
-
     
     return (
             <IonPage>
@@ -95,40 +44,8 @@ function NewActivityLocalization(props) {
                 </IonHeader>
                 <IonContent>
                     <RefreshComponent/>
-                    <IonLoading isOpen={loading} message={"Tomando posición"} onDidDismiss={()=>{setLoading(false)}}/>
-                    <IonToast isOpen={error.showError} message={error.message} duration={3000} onDidDismiss={()=>{setError({message: undefined, showError: false})}} />
-                    <div className="Map">
-                    {isLoaded ? (
-                        <GoogleMap
-                            options={  
-                                {mapTypeId: 'satellite'}
-                            }
-                            center={coords}
-                            zoom={10}
-                            onLoad={onLoad}
-                            onUnmount={onUnmount}
-                            onClick={(e)=>{
-                                setMarker({lat: e.latLng.lat(), lng: e.latLng.lng(), date: new Date().toISOString()})
-                            }}
-                        >
-                            { /* Child components, such as markers, info windows, etc. */ }
-                            <></>
-                            {marker!=null ? <Marker position={{lat: marker.lat, lng: marker.lng}} ></Marker> : null}
-                        </GoogleMap>
-                    ) : <></>}
-                    </div>
-                    {/* <div className="Map">
-                        <MapContainer className='Map-container'
-                            center={[21,21]}
-                            zoom={20}
-                            scrollWheelZoom={true}>
-                            <TileLayer
-                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            />
-                        </MapContainer>
-                    </div> */}
-                    {/* <MapComponent></MapComponent> */}
+                    <MapComponent></MapComponent>
+                   
                 </IonContent>
             </IonPage>
         )

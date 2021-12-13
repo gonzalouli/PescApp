@@ -1,10 +1,14 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.pescapp',
+  appId: 'com.gonzalouli.pescapp',
   appName: 'PescApp',
   webDir: 'build',
-  bundledWebRuntime: false
+  bundledWebRuntime: false,
+  server : {
+    url : "http://192.168.50.192:8100"
+  },
+  cordova:{}
 };
 
 export default config;
