@@ -2,52 +2,67 @@ import * as ReactDom from "react-dom";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { createCustomEqual } from "fast-equals";
 import { isLatLngLiteral } from "@googlemaps/typescript-guards"
-import * as React from 'react';
+import  React, {useState, useEffect} from 'react';
 import { Geolocation } from '@capacitor/geolocation';
 
 const render = (status: Status) => {
     return <h1>{status}</h1>;
 };
 
+interface LocationError{
+  showError: boolean;
+  message?: string
+}
+
+interface Coordinates{
+lat: number,
+lng: number,
+date: string;
+}
 
 
 
 const MapComponent: React.VFC = () => {
-  const [ lati, setLati] = React.useState<google.maps.LatLng>()
-  const [ long, setLong] = React.useState<google.maps.LatLng>()
+  const [ coords, setCoords] = useState<Coordinates>()
+  const [marker, setMarker] = useState<Coordinates>()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<LocationError>({showError: false})
 
-  const [clicks, setClicks] = React.useState<google.maps.LatLng[]>([]);
-  const [zoom, setZoom] = React.useState(3); // initial zoom
+  const [clicks, setClicks] = React.useState<google.maps.LatLng>();
+  const [zoom, setZoom] = React.useState(14); // initial zoom
   const [center, setCenter] = React.useState<google.maps.LatLngLiteral>({
     lat: 0,
     lng: 0,
   });
 
   const currentPosition = async() => {
-    // setLoading(true)
+    setLoading(true)
     
     try{
         const position= await Geolocation.getCurrentPosition();
-     
-        setLati(new google.maps.LatLng(position.coords.latitude))
-        setLong(new google.maps.LatLng(position.coords.longitude))
+        console.log(position)
+        setCoords({lat:position.coords.latitude,lng:position.coords.longitude, date: new Date().toISOString()})
+        setCenter({lat: position.coords.latitude, lng: position.coords.longitude})
+        setMarker({lat:position.coords.latitude,lng:position.coords.longitude, date: new Date().toISOString()})
 
-        setCenter({lati,long})
-        // coord=[latitude,longitude]
-
-        // setLoading(false)
-        // setError({showError: false, message: undefined,})
+        setLoading(false)
+        setError({showError: false, message: undefined,})
     } catch (error) {
         const message = error.message.length >0 ? error.message: "No se pudo localizar..."
-        // setError({showError: true, message})
-        // setLoading(false)
+        setError({showError: true, message})
+        setLoading(false)
 
     }
-};
+  };
+
+  React.useEffect(()=>{
+      currentPosition()
+  },[])
 
   const onClick = (e: google.maps.MapMouseEvent) => {
     // avoid directly mutating state
-    setClicks([...clicks, e.latLng!]);
+    setClicks(e.latLng);
+    setMarker({lat: e.latLng.lat(), lng: e.latLng.lng(), date: new Date().toISOString()})
   };
 
   const onIdle = (m: google.maps.Map) => {
@@ -59,17 +74,17 @@ const MapComponent: React.VFC = () => {
 
   return (
     <div style={{ display: "flex", height: "80%" }}>
-      <Wrapper apiKey={"AIzaSyD35fG5wYOtLp68_0XIvZmzz4CJD"} render={render}>
+      <Wrapper apiKey={"AIzaSyD35fG5wYOtLp68_0XIvZmzz4CJD-YB6mk"} render={render}>
         <Map
           center={center}
           onClick={onClick}
           onIdle={onIdle}
           zoom={zoom}
-          style={{ flexGrow: "1", height: "100%" }}
+          style={{ flexGrow: "1", height: "80%" }}
         >
-          {clicks.map((latLng, i) => (
-            <Marker key={i} position={latLng} />
-          ))}
+          
+          {marker!=null ? <Marker position={{lat: marker.lat, lng: marker.lng}} ></Marker> : null}         
+           
         </Map>
       </Wrapper>
 

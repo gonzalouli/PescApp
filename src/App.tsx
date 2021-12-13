@@ -33,6 +33,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import MapComponent from './components/MapComponent';
 ;
 
 const App: React.FC = () => (
@@ -61,7 +62,8 @@ const App: React.FC = () => (
           <NewActivityTackle/>
         </Route>
         <Route exact path="/my/NewActivity/Localization">
-            <NewActivityLocalization/>
+            {/* <NewActivityLocalization/> */}
+          <MapComponent/>
         </Route>
         <Route exact path="/forgotPass">
             <ResetPass/>
