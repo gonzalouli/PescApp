@@ -2,8 +2,9 @@ import * as ReactDom from "react-dom";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { createCustomEqual } from "fast-equals";
 import { isLatLngLiteral } from "@googlemaps/typescript-guards"
-import  React, {useState, useEffect} from 'react';
+import  React, {useState, useEffect, Fragment} from 'react';
 import { Geolocation } from '@capacitor/geolocation';
+import { IonLoading, IonToast } from "@ionic/react";
 
 const render = (status: Status) => {
     return <h1>{status}</h1>;
@@ -20,8 +21,6 @@ lng: number,
 date: string;
 }
 
-
-
 const MapComponent: React.VFC = () => {
   const [ coords, setCoords] = useState<Coordinates>()
   const [marker, setMarker] = useState<Coordinates>()
@@ -37,7 +36,6 @@ const MapComponent: React.VFC = () => {
 
   const currentPosition = async() => {
     setLoading(true)
-    
     try{
         const position= await Geolocation.getCurrentPosition();
         console.log(position)
@@ -73,6 +71,9 @@ const MapComponent: React.VFC = () => {
 
 
   return (
+    <Fragment>
+    <IonLoading isOpen={loading} message={"Tomando posición..."} onDidDismiss={()=>{setLoading(false)}}/>
+    <IonToast isOpen={error.showError} message={error.message} duration={3000} onDidDismiss={()=>{setError({message: undefined, showError: false})}} />    
     <div className="map-container" style={{ display: "flex", height: "80%" }}>
       <Wrapper apiKey={"AIzaSyD35fG5wYOtLp68_0XIvZmzz4CJD-YB6mk"} render={render}>
         <Map
@@ -86,6 +87,7 @@ const MapComponent: React.VFC = () => {
         </Map>
       </Wrapper>
     </div>
+    </Fragment>
   );
 };
 
@@ -113,8 +115,7 @@ const Map: React.FC<MapProps> = ({
     }
   }, [ref, map]);
 
-  // because React does not do deep comparisons, a custom hook is used
-  // see discussion in https://github.com/googlemaps/js-samples/issues/946
+
   useDeepCompareEffectForMaps(() => {
     if (map) {
       map.setOptions(options);

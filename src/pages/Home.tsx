@@ -21,7 +21,7 @@ const Home: React.FC = () => {
             </IonHeader>
             <IonContent >
                <RefreshComponent/>
-                <IonList className="container">
+                <IonList className="container-home">
                     <IonButton className="main-button" expand="block" href="my/newActivity">Nueva Actividad</IonButton>
                     <IonButton className="main-button"  expand="block">Mis Actividades</IonButton>
                     <IonButton className="main-button"  expand="block">Meteorología</IonButton>

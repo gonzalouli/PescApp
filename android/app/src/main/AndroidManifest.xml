@@ -11,10 +11,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         >
-        <meta-data 
+        <!-- <meta-data 
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD35fG5wYOtLp68_0XIvZmzz4CJD-YB6mk"
-        ></meta-data>
+        ></meta-data> -->
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
             android:name="com.pescapp.MainActivity"
@@ -39,11 +39,15 @@
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
     </application>
-
     <!-- Permissions -->
     <!-- Geolocation API -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-feature android:name="android.hardware.location.gps" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+
 </manifest>

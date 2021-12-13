@@ -33,6 +33,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import NewActivityCatch from './pages/NewActivityCatch';
 ;
 
 const App: React.FC = () => (
@@ -62,6 +63,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/my/NewActivity/Localization">
             <NewActivityLocalization/>
+        </Route>
+        <Route exact path="/my/NewActivity/Catch">
+            <NewActivityCatch/>
         </Route>
         <Route exact path="/forgotPass">
             <ResetPass/>

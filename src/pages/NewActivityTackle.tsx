@@ -25,7 +25,7 @@ export default function NewActivityTackle() {
         <IonPage>
             <IonHeader className="header">
                  <BackButton refer="/my/newActivity" />
-                 <IonTitle className='tittle' >Equipo</IonTitle>
+                 <IonTitle className='tittle' >Equipo utilizado</IonTitle>
             </IonHeader>
             <IonContent>
                 <RefreshComponent/>
