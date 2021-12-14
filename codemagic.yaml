@@ -1,0 +1,20 @@
+workflows:
+  my-workflow:
+    environment:
+      node: 16.9.0
+      npm: latest
+    scripts:
+      - name: Install dependencies
+        script: npm ci
+    
+      - name: Add Android platform
+        script: |
+          set -e # exit on first failed command
+
+          ionic cap remove android --nosave
+          ionic cap add android --confirm --no-interactive --noresources
+      - name: Build Android release
+        script: |
+          set -e # exit on first failed command
+
+          ionic cap build android --no-interactive
