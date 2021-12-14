@@ -1,6 +1,6 @@
 import { RefresherEventDetail } from '@ionic/core'
 import { IonButton, IonContent, IonHeader, IonIcon, IonList, IonPage, IonRefresher, IonRefresherContent, IonTitle, IonToolbar } from '@ionic/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import LogOutButton from '../components/LogOutButton'
 import MiPerfilButton from '../components/MiPerfilButton'
 import RefreshComponent from '../components/RefreshComponent'
@@ -9,8 +9,30 @@ import '../theme/Home.css'
 
 const Home: React.FC = () => {
 
-   
+    useEffect(()=>{
+        if(JSON.parse(window.sessionStorage.getItem("newActivity"))===null){
+            const newActivity = 
+            {
+                name: "",
+                localization: {},
+                tackle: [{}],
+                catch: [{}],
+                meteorology:[{}],
+                date: {}
+            }
+            window.sessionStorage.setItem("newActivity",JSON.stringify(newActivity))
+        }
+
+    },[])   
       
+    // name: "",
+    // localization: {text:" ", coords: { lat:null, lng:null}},
+    // tackle: [{id:0, nombre:""}],
+    // catch: [{id:0 , nombre: "", imageUrl: process.env.PUBLIC_URL+'/assets/placeholderimage.jpg'}],
+    // date: { fInicio: "", fFin: "", hInicio: "", hFin: ""},
+    // meteorology:[{}]
+
+    // JSON.parse(window.sessionStorage.getItem('newActivity'))
     return (
         
         

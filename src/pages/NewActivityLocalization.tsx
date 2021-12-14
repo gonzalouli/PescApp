@@ -14,23 +14,21 @@ import '../theme/NewActivityLocalization.css';
 */
 
 // prueba de googlemaps
-interface LocationError{
-    showError: boolean;
-    message?: string
-}
-interface Coordinates{
-    lat: number,
-    lng: number,
-    date: string;
-    }
+
 
 function NewActivityLocalization() {
 
+    const [text, setText] = useState(JSON.parse(window.sessionStorage.getItem("newActivity")).localization.text || "")
    
     const handleTextChange = e  =>{
+        
         const activityMod = JSON.parse(window.sessionStorage.getItem("newActivity"))
-        activityMod.localization.text = e.target.value
+        setText(e.target.value)
+        activityMod.localization.text = text;
+        console.log(e.target.value)
+
         window.sessionStorage.setItem("newActivity",JSON.stringify(activityMod))
+
     }
 
 
@@ -42,11 +40,11 @@ function NewActivityLocalization() {
                 <IonTitle className='tittle' >Localización</IonTitle>
             </IonHeader>
                 <IonContent>
-                    <MapComponent  />
+                    <MapComponent/>
                     <IonList className="form-container">
                         <IonItem className="description">
                             <IonLabel className="label" position="floating">Descripción</IonLabel>
-                            <IonTextarea value={JSON.parse(window.sessionStorage.getItem("newActivity")).localization.text} onIonChange={handleTextChange}></IonTextarea>
+                            <IonTextarea value={text} onIonChange={handleTextChange}></IonTextarea>
                         </IonItem>
                         <IonButton className="button-acept">Aceptar</IonButton>
                     </IonList>
@@ -54,6 +52,5 @@ function NewActivityLocalization() {
             </IonPage>
         )
 }
-
 
 export default NewActivityLocalization;

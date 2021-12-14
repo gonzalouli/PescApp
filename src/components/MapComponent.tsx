@@ -48,7 +48,7 @@ const MapComponent: React.VFC = () => {
         }else{
           const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
           setCenter({lat: activity.localization.coords.lat, lng: activity.localization.coords.lng})
-          setMarker({lat: activity.localization.coords.lat, lng:activity.localization.coords.lng})
+          setMarker({lat: activity.localization.coords.lat, lng: activity.localization.coords.lng})
          
         }
 
@@ -72,6 +72,8 @@ const MapComponent: React.VFC = () => {
     setMarker({lat: e.latLng.lat(), lng: e.latLng.lng()})
     const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
     activity.localization.coords = {lat: e.latLng.lat(), lng: e.latLng.lng()}
+    console.log(JSON.parse(window.sessionStorage.getItem("newActivity")).localization.text)
+
     window.sessionStorage.setItem('newActivity', JSON.stringify(activity))
   };
 
