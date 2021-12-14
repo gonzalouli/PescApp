@@ -35,19 +35,25 @@ const MapComponent: React.VFC = () => {
   const currentPosition = async() => {
     setLoading(true)
     try{
-        if(JSON.parse(window.sessionStorage.getItem("newActivity"))){
-          const position= await Geolocation.getCurrentPosition();
-          console.log(position)
-          setCenter({lat: position.coords.latitude, lng: position.coords.longitude})
-          setMarker({lat:position.coords.latitude,lng:position.coords.longitude})
+        const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
+        console.log(activity.localization.coords===undefined)
+        if(activity.localization.coords===undefined){
 
-          setLoading(false)
-          setError({showError: false, message: undefined,})
+          const position= await Geolocation.getCurrentPosition();
+          setCenter({lat: position.coords.latitude, lng: position.coords.longitude})
+          setMarker({lat: position.coords.latitude, lng:position.coords.longitude})
+          activity.localization.coords = {lat: position.coords.latitude, lng: position.coords.longitude}
+          window.sessionStorage.setItem('newActivity', JSON.stringify(activity))
+
         }else{
           const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
-          setCenter({lat: activity.coords.lat, lng: activity.coords.lng})
-          setMarker({lat: activity.coords.lat, lng:activity.coords.lng})
+          setCenter({lat: activity.localization.coords.lat, lng: activity.localization.coords.lng})
+          setMarker({lat: activity.localization.coords.lat, lng:activity.localization.coords.lng})
+         
         }
+
+        setLoading(false)
+        setError({showError: false, message: undefined,})
     } catch (error) {
         const message = error.message.length >0 ? error.message: "No se pudo localizar..."
         setError({showError: true, message})
@@ -65,7 +71,7 @@ const MapComponent: React.VFC = () => {
     setClicks(e.latLng);
     setMarker({lat: e.latLng.lat(), lng: e.latLng.lng()})
     const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
-    activity.localization.coords = {lat: e.latLng.lat(), lng: e.latLng.lng(), date: new Date().toISOString()}
+    activity.localization.coords = {lat: e.latLng.lat(), lng: e.latLng.lng()}
     window.sessionStorage.setItem('newActivity', JSON.stringify(activity))
   };
 

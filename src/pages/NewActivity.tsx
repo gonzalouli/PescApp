@@ -42,7 +42,6 @@ export default function NewActivity() {
         window.sessionStorage.setItem("newActivity",JSON.stringify(activity))
     }
 
-
     const sendNewActivity= ()=>{
 
 
@@ -64,7 +63,8 @@ export default function NewActivity() {
             <IonList className="container">
                 <IonItem className="name">
                     <IonLabel className="label" position="floating">Nombre</IonLabel>
-                    <IonInput className="text" type='text' value={JSON.parse(window.sessionStorage.getItem("newActivity"))==null ? "" : JSON.parse(window.sessionStorage.getItem("newActivity")).name } 
+                    <IonInput className="text" type='text' 
+                        value={JSON.parse(window.sessionStorage.getItem("newActivity"))==null ? "" : JSON.parse(window.sessionStorage.getItem("newActivity")).name } 
                         onIonChange={handleChange}/>
                 </IonItem>
                 <IonButton className="main-button"  expand="block" href="/my/NewActivity/Localization">Localización</IonButton>
