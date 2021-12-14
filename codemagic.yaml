@@ -1,0 +1,99 @@
+workflows:
+  ionic-capacitor-android-workflow:
+    name: Ionic Capacitor Android Workflow
+    max_build_duration: 120
+    instance_type: mac_mini
+    environment:
+      node: latest
+    triggering:
+      events:
+        - push
+        - tag
+        - pull_request
+      branch_patterns:
+        - pattern: develop
+          include: true
+          source: true
+    scripts:
+      - name: Install npm dependencies for Ionic Capacitor project
+        script: |
+                    npm install
+      - name: Set Android SDK location
+        script: |
+                    echo "sdk.dir=$ANDROID_SDK_ROOT" > "$FCI_BUILD_DIR/android/local.properties"   
+      - name: Update dependencies and copy web assets to native project
+        script: |
+          # npx cap copy # <- use this is you don't need to update native dependencies
+          npx cap sync # <- update native dependencies and copy web assets to native project          
+      - name: Build Android release
+        script: |
+          cd android
+          ./gradlew assembleRelease          
+    artifacts:
+      - android/app/build/outputs/**/*.apk
+  ionic-capacitor-ios-workflow:
+    name: Ionic Capacitor iOS Workflow
+    max_build_duration: 120
+    instance_type: mac_mini
+    environment:
+      groups:
+        # - manual_code_signing # <-- (Includes FCI_CERTIFICATE, FCI_CERTIFICATE_PASSWORD, FCI_PROVISIONING_PROFILE)
+        # Automatic Code Signing
+        # https://appstoreconnect.apple.com/access/api
+        - app_store_credentials # <-- (Includes APP_STORE_CONNECT_ISSUER_ID, APP_STORE_CONNECT_KEY_IDENTIFIER, APP_STORE_CONNECT_PRIVATE_KEY)
+        - certificate_credentials # <-- (Includes CERTIFICATE_PRIVATE_KEY)
+        - other
+      # Add the group environment variables in Codemagic UI (either in Application/Team variables) - https://docs.codemagic.io/variables/environment-variable-groups/
+      vars:
+        # Ionic Capacitor Xcode worskspace and scheme
+        XCODE_WORKSPACE: "platforms/ios/YOUR_APP.xcworkspace" # <- Update with your workspace name
+        XCODE_SCHEME: "YOUR_SCHEME" # <- Update with your workspace scheme
+      node: latest
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: develop
+          include: true
+          source: true
+    scripts:
+      - name: Install npm dependencies for Ionic project
+        script: |
+                    npm install
+      - name: Cocoapods installation
+        script: |
+                    cd ios/App && pod install
+      - name: Update dependencies and copy web assets to native project
+        script: |
+          # npx cap copy # <- use this is you don't need to update native dependencies
+          npx cap sync # <- update native dependencies and copy web assets to native project          
+      - name: Set up keychain to be used for code signing using Codemagic CLI 'keychain' command
+        script: |
+                    keychain initialize
+      # - name: Set up Provisioning profiles from environment variables (Use with manual code signing)
+      #   script: |
+      #     PROFILES_HOME="$HOME/Library/MobileDevice/Provisioning Profiles"
+      #     mkdir -p "$PROFILES_HOME"
+      #     PROFILE_PATH="$(mktemp "$PROFILES_HOME"/$(uuidgen).mobileprovision)"
+      #     echo ${FCI_PROVISIONING_PROFILE} | base64 --decode > "$PROFILE_PATH"
+      #     echo "Saved provisioning profile $PROFILE_PATH"
+
+      - name: Increment build number
+        script: |
+          #!/bin/sh
+          set -e
+          set -x
+          cd $FCI_BUILD_DIR/ios/App
+          agvtool new-version -all $(($BUILD_NUMBER +1))          
+      - name: Set up code signing settings on Xcode project
+        script: |
+                    xcode-project use-profiles
+     
+    artifacts:
+        - build/ios/ipa/*.ipa
+        - /tmp/xcodebuild_logs/*.log
+        - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+        - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+   
