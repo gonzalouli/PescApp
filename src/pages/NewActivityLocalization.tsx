@@ -3,51 +3,50 @@ import React, { Component, useEffect, useState } from 'react'
 import RefreshComponent from '../components/RefreshComponent'
 import BackButton from '../components/BackButton'
 import 'leaflet-css/dist/leaflet.css';
-import environment from '../ENVIRONMENT';
 import { Geolocation } from '@capacitor/geolocation';
-import { TileLayer, Tooltip, Marker, MapContainer, Popup } from "react-leaflet";
+
 import 'leaflet/dist/leaflet.css';
 import '../theme/NewActivityLocalization.css';
-import {MarkerComponent} from '../components/MarkerComponent';
-import MapComponent from '../components/MapComponent';
+ import MapComponent from '../components/MapComponent';
 
 /* initialize() is important for iOS,
   Android doesn't need any initialization.
 */
 
 // prueba de googlemaps
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-
-
-
 interface LocationError{
-      showError: boolean;
-      message?: string
+    showError: boolean;
+    message?: string
 }
-
 interface Coordinates{
     lat: number,
     lng: number,
-    time: string;
-}
-
-
+    date: string;
+    }
 
 function NewActivityLocalization() {
-    const [text, setText] = useState("")
+
+   
+    const handleTextChange = e  =>{
+        const activityMod = JSON.parse(window.sessionStorage.getItem("newActivity"))
+        activityMod.localization.text = e.target.value
+        window.sessionStorage.setItem("newActivity",JSON.stringify(activityMod))
+    }
+
+
     
     return (
             <IonPage>
             <IonHeader className="header">
                 <BackButton refer="/my/newActivity" />
                 <IonTitle className='tittle' >Localización</IonTitle>
-                </IonHeader>
+            </IonHeader>
                 <IonContent>
-                    <MapComponent></MapComponent>
-                    <IonList>
+                    <MapComponent  />
+                    <IonList className="form-container">
                         <IonItem className="description">
-                            <IonLabel position="floating">Descripción</IonLabel>
-                            <IonTextarea value={text} onIonChange={(e) => setText(e.detail.value!)}></IonTextarea>
+                            <IonLabel className="label" position="floating">Descripción</IonLabel>
+                            <IonTextarea value={JSON.parse(window.sessionStorage.getItem("newActivity")).localization.text} onIonChange={handleTextChange}></IonTextarea>
                         </IonItem>
                         <IonButton className="button-acept">Aceptar</IonButton>
                     </IonList>

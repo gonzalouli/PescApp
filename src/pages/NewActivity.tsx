@@ -11,21 +11,28 @@ export default function NewActivity() {
     
     useEffect(()=>{
         if(JSON.parse(window.sessionStorage.getItem("newActivity"))===null){
+            console.log("selimpia")
             const newActivity = 
             {
                 name: "",
                 localization: {},
-                tackle: {},
-                catch: {},
+                tackle: [{}],
+                catch: [{}],
+                meteorology:[{}],
                 date: {}
             }
             window.sessionStorage.setItem("newActivity",JSON.stringify(newActivity))
-        }else{
-            const newActivity = JSON.parse(window.sessionStorage.getItem("newActivity"))
         }
-
     },[])
 
+    
+
+    // name: "",
+    // localization: {text:" ", coords: { lat:null, lng:null}},
+    // tackle: [{id:0, nombre:""}],
+    // catch: [{id:0 , nombre: "", imageUrl: process.env.PUBLIC_URL+'/assets/placeholderimage.jpg'}],
+    // date: { fInicio: "", fFin: "", hInicio: "", hFin: ""},
+    // meteorology:[{}]
 
     // JSON.parse(window.sessionStorage.getItem('newActivity'))
 

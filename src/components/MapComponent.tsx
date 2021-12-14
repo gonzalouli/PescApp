@@ -18,11 +18,9 @@ interface LocationError{
 interface Coordinates{
 lat: number,
 lng: number,
-date: string;
 }
 
 const MapComponent: React.VFC = () => {
-  const [ coords, setCoords] = useState<Coordinates>()
   const [marker, setMarker] = useState<Coordinates>()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<LocationError>({showError: false})
@@ -37,14 +35,19 @@ const MapComponent: React.VFC = () => {
   const currentPosition = async() => {
     setLoading(true)
     try{
-        const position= await Geolocation.getCurrentPosition();
-        console.log(position)
-        setCoords({lat:position.coords.latitude,lng:position.coords.longitude, date: new Date().toISOString()})
-        setCenter({lat: position.coords.latitude, lng: position.coords.longitude})
-        setMarker({lat:position.coords.latitude,lng:position.coords.longitude, date: new Date().toISOString()})
+        if(JSON.parse(window.sessionStorage.getItem("newActivity"))){
+          const position= await Geolocation.getCurrentPosition();
+          console.log(position)
+          setCenter({lat: position.coords.latitude, lng: position.coords.longitude})
+          setMarker({lat:position.coords.latitude,lng:position.coords.longitude})
 
-        setLoading(false)
-        setError({showError: false, message: undefined,})
+          setLoading(false)
+          setError({showError: false, message: undefined,})
+        }else{
+          const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
+          setCenter({lat: activity.coords.lat, lng: activity.coords.lng})
+          setMarker({lat: activity.coords.lat, lng:activity.coords.lng})
+        }
     } catch (error) {
         const message = error.message.length >0 ? error.message: "No se pudo localizar..."
         setError({showError: true, message})
@@ -60,7 +63,10 @@ const MapComponent: React.VFC = () => {
   const onClick = (e: google.maps.MapMouseEvent) => {
     // avoid directly mutating state
     setClicks(e.latLng);
-    setMarker({lat: e.latLng.lat(), lng: e.latLng.lng(), date: new Date().toISOString()})
+    setMarker({lat: e.latLng.lat(), lng: e.latLng.lng()})
+    const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
+    activity.localization.coords = {lat: e.latLng.lat(), lng: e.latLng.lng(), date: new Date().toISOString()}
+    window.sessionStorage.setItem('newActivity', JSON.stringify(activity))
   };
 
   const onIdle = (m: google.maps.Map) => {
