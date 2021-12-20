@@ -15,7 +15,7 @@ const Home: React.FC = () => {
             {
                 name: "",
                 localization: {},
-                tackle: [{}],
+                tackle: [],
                 catch: [],
                 meteorology:[],
                 date: {}
