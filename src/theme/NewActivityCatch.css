@@ -9,3 +9,20 @@
     margin-top: 10%;
     margin: 5%;
 }
+
+
+.capturas{
+    margin-top: 3%;
+    padding: 0;
+}
+
+.submit{
+    display: flex;
+    flex-direction: column;
+}
+
+.capturasNuevas{
+    text-align: center;
+    display: flex;
+    justify-content: space-between ;
+}

@@ -56,7 +56,7 @@ export default function NewActivityTackle() {
                 <div className="submit buttons">
                     <IonList className="submit buttons">
                         <IonItem >
-                            <IonButton className="save" onClick={()=>{}}>Guardar</IonButton>
+                            <IonButton className="save" routerLink="/my/newActivity">Guardar</IonButton>
                         </IonItem>
                     </IonList>
                 </div>

@@ -16,8 +16,8 @@ const Home: React.FC = () => {
                 name: "",
                 localization: {},
                 tackle: [{}],
-                catch: [{}],
-                meteorology:[{}],
+                catch: [],
+                meteorology:[],
                 date: {}
             }
             window.sessionStorage.setItem("newActivity",JSON.stringify(newActivity))

@@ -1,5 +1,5 @@
 import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonLoading, IonPage, IonRefresher, IonRefresherContent, IonTextarea, IonTitle, IonToast } from '@ionic/react'
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component, useEffect, useRef, useState } from 'react'
 import RefreshComponent from '../components/RefreshComponent'
 import BackButton from '../components/BackButton'
 import 'leaflet-css/dist/leaflet.css';
@@ -17,7 +17,7 @@ import '../theme/NewActivityLocalization.css';
 
 
 function NewActivityLocalization() {
-
+    const ref = useRef(null)
     const [text, setText] = useState(JSON.parse(window.sessionStorage.getItem("newActivity")).localization.text || "")
    
     const handleTextChange = e  =>{
@@ -46,7 +46,7 @@ function NewActivityLocalization() {
                             <IonLabel className="label" position="floating">Descripción</IonLabel>
                             <IonTextarea value={text} onIonChange={handleTextChange}></IonTextarea>
                         </IonItem>
-                        <IonButton className="button-acept">Aceptar</IonButton>
+                        <IonButton className="button-acept" routerLink="/my/newActivity">Aceptar</IonButton>
                     </IonList>
                 </IonContent>
             </IonPage>
