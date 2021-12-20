@@ -36,7 +36,7 @@ function NewActivityLocalization() {
     return (
             <IonPage>
             <IonHeader className="header">
-                <BackButton refer="/my/newActivity" />
+                <BackButton refer="/my/NewActivity" />
                 <IonTitle className='tittle' >Localización</IonTitle>
             </IonHeader>
                 <IonContent>
@@ -46,7 +46,7 @@ function NewActivityLocalization() {
                             <IonLabel className="label" position="floating">Descripción</IonLabel>
                             <IonTextarea value={text} onIonChange={handleTextChange}></IonTextarea>
                         </IonItem>
-                        <IonButton className="button-acept" routerLink="/my/newActivity">Aceptar</IonButton>
+                        <IonButton className="button-acept" href="/my/NewActivity">Aceptar</IonButton>
                     </IonList>
                 </IonContent>
             </IonPage>

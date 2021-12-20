@@ -10,7 +10,7 @@ import '../theme/Home.css'
 const Home: React.FC = () => {
 
     useEffect(()=>{
-        if(JSON.parse(window.sessionStorage.getItem("newActivity"))===null){
+        // if(JSON.parse(window.sessionStorage.getItem("newActivity"))===null){
             const newActivity = 
             {
                 name: "",
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
                 date: {}
             }
             window.sessionStorage.setItem("newActivity",JSON.stringify(newActivity))
-        }
+        // }
 
     },[])   
       
@@ -44,7 +44,7 @@ const Home: React.FC = () => {
             <IonContent >
                <RefreshComponent/>
                 <IonList className="container-home">
-                    <IonButton className="main-button" expand="block" href="my/newActivity">Nueva Actividad</IonButton>
+                    <IonButton className="main-button" expand="block" href="my/NewActivity">Nueva Actividad</IonButton>
                     <IonButton className="main-button"  expand="block">Mis Actividades</IonButton>
                     <IonButton className="main-button"  expand="block">Meteorología</IonButton>
                     <IonButton className="main-button"  expand="block">Especies</IonButton>

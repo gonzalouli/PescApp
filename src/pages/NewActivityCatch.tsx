@@ -1,4 +1,4 @@
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonDatetime, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonTextarea, IonTitle, isPlatform } from '@ionic/react'
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonDatetime, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonPage, IonTextarea, IonTitle, isPlatform } from '@ionic/react'
 import React, { Fragment, useEffect, useRef, useState } from 'react'
 import BackButton from '../components/BackButton'
 import RefreshComponent from '../components/RefreshComponent';
@@ -13,7 +13,7 @@ export default function NewActivityCatch() {
     const [imageUrl, setImageUrl] = useState(process.env.PUBLIC_URL+'/assets/placeholderimage.jpg')
     const [name, setName] = useState("")
     const fileInputRef = useRef<HTMLInputElement>()
-    const [tempactivity,setTempactivity] = useState(JSON.parse(window.sessionStorage.getItem("newActivity")) || [])
+    const [tempactivity,setTempactivity] = useState(JSON.parse(window.sessionStorage.getItem("newActivity")))
 
     const [piece,setPiece] = useState({   
             id:nanoid(),
@@ -22,12 +22,6 @@ export default function NewActivityCatch() {
             description:""
         })
 
-    useEffect(()=>()=>{
-        if(imageUrl.startsWith('blob:')){
-            URL.revokeObjectURL(imageUrl)
-        }
-    }  
-    ,[imageUrl])
 
     const handleFileChange = async (event : React.ChangeEvent<HTMLInputElement>) =>{
         if(event.target.files.length >0){
@@ -47,13 +41,15 @@ export default function NewActivityCatch() {
                 const image = await Camera.getPhoto({
                     quality: 90,
                     allowEditing: true,
-                    resultType: CameraResultType.Uri
+                    resultType: CameraResultType.DataUrl
                 });
-                setImageUrl(image.webPath)
-                setPiece({...piece,imageUrl:image.webPath})
+                console.log(image)
+
+                setImageUrl(image.dataUrl)
+                setPiece({...piece,imageUrl:image.dataUrl})
             }catch(error)
             {
-            console.error('Camera Error:',error.message)
+                console.error('Camera Error:',error.message)
             }
         }else
         {
@@ -81,7 +77,6 @@ export default function NewActivityCatch() {
 
     const saveAndNew= async()=>{
         const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
-        setPiece({...piece,imageUrl:imageUrl})
 
         await activity.catch.push(piece)
         window.sessionStorage.setItem("newActivity",JSON.stringify(activity))
@@ -97,6 +92,16 @@ export default function NewActivityCatch() {
             imageUrl:imageUrl,
             description:description
         })
+    }
+
+    const deletePiece =(id,e)=>
+    {
+        const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
+        console.log(id.id)
+        activity.catch = activity.catch.filter(piece=> piece.id !== id.id)
+        setTempactivity(activity)
+        window.sessionStorage.setItem("newActivity",JSON.stringify(activity))
+
     }
 
 
@@ -142,12 +147,18 @@ export default function NewActivityCatch() {
                     <IonList>
                         { tempactivity.catch.map( item=>{
                             return(
-                                <IonCard key={item.id}>
-                                    <IonCardHeader>
-                                        <IonButton className="delete" />
-                                        <IonCardTitle>{item.name}</IonCardTitle>
+                                <IonCard className="card" key={item.id}>
+                                    <IonCardHeader className="card">
+                                        <IonButton className="delete" onClick={(e)=>deletePiece(item,e)}><svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-trash" width="28" height="28" viewBox="0 0 24 24" strokeWidth="2" stroke="#ff2825" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <line x1="4" y1="7" x2="20" y2="7" />
+                                        <line x1="10" y1="11" x2="10" y2="17" />
+                                        <line x1="14" y1="11" x2="14" y2="17" />
+                                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                        </svg>Borrar</IonButton>
+                                        <IonCardTitle className="card">{item.name}</IonCardTitle>
                                         <img src={item.imageUrl} alt={item.id}/>
-                                        {item.imageUrl}
                                     </IonCardHeader>
                                     <IonCardContent>
                                     {item.description}
