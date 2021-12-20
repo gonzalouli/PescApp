@@ -2,13 +2,15 @@ import { IonButton, IonContent, IonDatetime, IonHeader, IonItem, IonLabel, IonLi
 import React, { useState } from 'react'
 import BackButton from '../components/BackButton'
 import RefreshComponent from '../components/RefreshComponent';
+import '../theme/NewActivityDate.css'
 
 export default function NewActivityDate() {
-    const [fechaInicio, setSelectedInitDate] = useState<string>('');
-    const [fechaFin, setSelectedEndDate] = useState<string>(fechaInicio);
-    const [horaInicio, setHoraInicio] = useState<string>('');
-    const [horaFin, setHoraFin] = useState<string>('');
-    const [state, setState] = useState<boolean>(true)
+    const [fechaInicio, setSelectedInitDate] = useState<string>(JSON.parse(window.sessionStorage.getItem("newActivity")).date.initDate || '');
+    const [fechaFin, setSelectedEndDate] = useState<string>(JSON.parse(window.sessionStorage.getItem("newActivity")).date.endDate || '');
+    const [horaInicio, setHoraInicio] = useState<string>(JSON.parse(window.sessionStorage.getItem("newActivity")).date.initHour || '');
+    const [horaFin, setHoraFin] = useState<string>(JSON.parse(window.sessionStorage.getItem("newActivity")).date.endHour || '');
+    const [state, setState] = useState<boolean>(false)
+
 
     return (
         <IonPage>
@@ -22,33 +24,53 @@ export default function NewActivityDate() {
                 <IonItem>
                     <IonLabel>Fecha inicio</IonLabel>
                     <IonDatetime
-                        displayFormat="DDDD MMM D, YYYY"
+                        displayFormat="YYYY MM DD"
                         value={fechaInicio}
-                        onIonChange={(e) => setSelectedInitDate(e.detail.value!)}
+                        onIonChange={(e) => {
+                            setSelectedInitDate(e.detail.value!)
+                            const activityMod = JSON.parse(window.sessionStorage.getItem("newActivity"))
+                            activityMod.date.initDate = e.detail.value
+                            window.sessionStorage.setItem("newActivity",JSON.stringify(activityMod))
+                        }}
                     ></IonDatetime>
                 </IonItem>
                 <IonItem>
                     <IonLabel>Fecha fin</IonLabel>
                     <IonDatetime
-                        displayFormat="DDDD MMM D, YYYY"
+                        displayFormat="YYYY MM DD"
                         value={fechaFin}
-                        onIonChange={(e) => setSelectedEndDate(e.detail.value!)}
+                        onIonChange={(e) => {
+                            setSelectedEndDate(e.detail.value!)
+                            const activityMod = JSON.parse(window.sessionStorage.getItem("newActivity"))
+                            activityMod.date.endDate = e.detail.value
+                            window.sessionStorage.setItem("newActivity",JSON.stringify(activityMod))
+                        }}
                     ></IonDatetime>
                 </IonItem>
                 <IonItem>
                     <IonLabel>Hora inicio</IonLabel>
                     <IonDatetime
-                        displayFormat="HH"
+                        displayFormat="HH:mm"
                         value={horaInicio}
-                        onIonChange={(e) => setHoraInicio(e.detail.value!)}
+                        onIonChange={(e) => {
+                            setHoraInicio(e.detail.value!)
+                            const activityMod = JSON.parse(window.sessionStorage.getItem("newActivity"))
+                            activityMod.date.initHour = e.detail.value
+                            window.sessionStorage.setItem("newActivity",JSON.stringify(activityMod))
+                        }}
                     ></IonDatetime>
                 </IonItem>
                 <IonItem>
                     <IonLabel>Hora fin</IonLabel>
                     <IonDatetime
-                        displayFormat="HH"
+                        displayFormat="HH:mm"
                         value={horaFin}
-                        onIonChange={(e) => setHoraFin(e.detail.value!)}
+                        onIonChange={(e) => {
+                            setHoraFin(e.detail.value!)
+                            const activityMod = JSON.parse(window.sessionStorage.getItem("newActivity"))
+                            activityMod.date.endHour = e.detail.value
+                            window.sessionStorage.setItem("newActivity",JSON.stringify(activityMod))
+                        }}
                     ></IonDatetime>
             </IonItem>
             {state &&
@@ -57,7 +79,7 @@ export default function NewActivityDate() {
             <div className="submit buttons">
                     <IonList className="submit buttons">
                         <IonItem >
-                            <IonButton className="save" onClick={()=>{}}>Guardar</IonButton>
+                            <IonButton className="save" onClick={()=>{}} href="/my/NewActivity">Guardar</IonButton>
                         </IonItem>
                     </IonList>
                 </div>
