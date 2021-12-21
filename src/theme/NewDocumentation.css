@@ -1,0 +1,38 @@
+.placeholder{
+    margin: 0 auto;
+    width: 70%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.item-container{
+    margin-top: 10%;
+    margin: 5%;
+}
+
+
+.capturas{
+    margin-top: 3%;
+    padding: 0;
+}
+
+.submit{
+    display: flex;
+    flex-direction: column;
+}
+
+.capturasNuevas{
+    text-align: center;
+    display: flex;
+    justify-content: space-between ;
+}
+
+.card{
+    margin:5px;
+}
+
+.buttonPopUp{
+    border: none;
+    background-color: transparent;
+    outline: none;
+}

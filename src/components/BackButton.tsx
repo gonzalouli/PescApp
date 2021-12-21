@@ -1,9 +1,10 @@
-import { IonBackButton, IonButton, IonButtons } from '@ionic/react'
-import React, { useState } from 'react'
+import { IonAlert, IonBackButton, IonButton, IonButtons } from '@ionic/react'
+import React, { useEffect, useState } from 'react'
 import { Redirect } from 'react-router'
 
 export default function BackButton({refer="/"}) {
     
+
     return (
         <IonButtons>
             <IonBackButton defaultHref={refer} color="primary">
@@ -14,5 +15,6 @@ export default function BackButton({refer="/"}) {
                 </svg>
             </IonBackButton>   
         </IonButtons>
+
     )
 }

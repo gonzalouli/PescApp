@@ -1,19 +1,17 @@
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonDatetime, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonPage, IonTextarea, IonTitle, isPlatform } from '@ionic/react'
-import React, { Fragment, useEffect, useRef, useState } from 'react'
+import { Camera, CameraResultType } from '@capacitor/camera'
+import { IonAlert, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonTextarea, IonTitle, isPlatform } from '@ionic/react'
+import { nanoid } from 'nanoid'
+import React, { useRef, useState } from 'react'
 import BackButton from '../components/BackButton'
-import RefreshComponent from '../components/RefreshComponent';
-import { Camera, CameraResultType } from '@capacitor/camera';
-import '../theme/NewActivityCatch.css'
-import { randomBytes } from 'crypto';
-import {nanoid} from 'nanoid'
+import RefreshComponent from '../components/RefreshComponent'
 
-export default function NewActivityCatch() {
+export default function NewDocumentation() {
 
     const [description, setDescription] = useState("")
     const [imageUrl, setImageUrl] = useState(process.env.PUBLIC_URL+'/assets/placeholderimage.jpg')
     const [name, setName] = useState("")
     const fileInputRef = useRef<HTMLInputElement>()
-    const [tempactivity,setTempactivity] = useState(JSON.parse(window.sessionStorage.getItem("newActivity")))
+    const [tempLicense,setTempLicense] = useState(JSON.parse(window.sessionStorage.getItem("license"))|| [])
 
     const [piece,setPiece] = useState({   
             id:nanoid(),
@@ -70,18 +68,18 @@ export default function NewActivityCatch() {
     }
 
     const saveAndBack= async ()=>{
-        const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
-        await activity.catch.push(piece)
-        window.sessionStorage.setItem("newActivity",JSON.stringify(activity))
+        const license = JSON.parse(window.sessionStorage.getItem("license"))
+        await license.push(piece)
+        window.sessionStorage.setItem("license",JSON.stringify(license))
     }
 
     const saveAndNew= async()=>{
-        const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
+        const license = JSON.parse(window.sessionStorage.getItem("license"))
 
-        await activity.catch.push(piece)
-        window.sessionStorage.setItem("newActivity",JSON.stringify(activity))
+        await license.push(piece)
+        window.sessionStorage.setItem("license",JSON.stringify(license))
         
-        setTempactivity(activity)
+        setTempLicense(license)
 
         setName("")
         setImageUrl(process.env.PUBLIC_URL+'/assets/placeholderimage.jpg')
@@ -96,56 +94,55 @@ export default function NewActivityCatch() {
 
     const deletePiece =(id,e)=>
     {
-        const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
-        console.log(id.id)
-        activity.catch = activity.catch.filter(piece=> piece.id !== id.id)
-        setTempactivity(activity)
-        window.sessionStorage.setItem("newActivity",JSON.stringify(activity))
+        let license = JSON.parse(window.sessionStorage.getItem("license"))
+
+        license = license.filter(piece=> piece.id !== id.id)
+        setTempLicense(license)
+        window.sessionStorage.setItem("license",JSON.stringify(license))
 
     }
 
-
-
+    
     return (
-        <IonPage>
+    <IonPage>
         <IonHeader className="header">
-                <BackButton refer="/my/NewActivity" />
-                <IonTitle className='tittle'>Nueva Captura</IonTitle>
+                <BackButton refer="/my/Documentation" /> 
+                <IonTitle className='tittle' >Nueva Doc.</IonTitle>
         </IonHeader>
         <IonContent>
             <RefreshComponent/>
-                <IonList className="content-container">
-                    <IonItem className="item-container">
-                        <IonLabel className="label" position="floating">Nombre de especie</IonLabel>
+            <IonList className="item-container">
+                <IonItem className="item-container">
+                        <IonLabel className="label" position="floating">Nombre</IonLabel>
                         <IonInput className="text" type='text' value={name} 
                             onIonChange={handleName}/>                    
-                    </IonItem>
-                    <IonItem className="item-container">
-                        <input type="file" accept="image/*" onChange={handleFileChange} ref={fileInputRef} hidden></input>
-                        <img className="placeholder" src={imageUrl} alt="" onClick={handlePictureClick}/>
-                    </IonItem>
-                    <IonItem className="description">
-                        <IonLabel className="label" position="floating">Descripción</IonLabel>
-                        <IonTextarea value={description} onIonChange={handleTextChange}></IonTextarea>
-                    </IonItem>
-                </IonList>
+                </IonItem>
+                <IonItem className="item-container">
+                    <input type="file" accept="image/*" onChange={handleFileChange} ref={fileInputRef} hidden></input>
+                    <img className="placeholder" src={imageUrl} alt="" onClick={handlePictureClick}/>
+                </IonItem>
+                <IonItem className="description">
+                    <IonLabel className="label" position="floating">Descripción</IonLabel>
+                    <IonTextarea value={description} onIonChange={handleTextChange}></IonTextarea>
+                </IonItem>
                 <div className="submit buttons">
                     <IonList className="submit buttons">
                         <IonItem >
-                            <IonButton className="save" onClick={saveAndBack} href="/my/NewActivity">Guardar</IonButton>
+                            <IonButton className="save" onClick={saveAndBack} href="/my/Documentation">Guardar</IonButton>
                         </IonItem>
                         <IonItem >
                             <IonButton className="save" onClick={saveAndNew} >Guardar y nuevo</IonButton>
                         </IonItem>
                     </IonList>
                 </div>
-
-                <IonList className="capturas">
+            </IonList>
+        
+            <IonList className="capturas">
                     <IonItem className="capturas">
                         <IonLabel className="capturasNuevas label">Capturas actuales</IonLabel>
                     </IonItem>
                     <IonList>
-                        { tempactivity.catch.map( item=>{
+                        { tempLicense.map( item=>{
                             return(
                                 <IonCard className="card" key={item.id}>
                                     <IonCardHeader className="card">
@@ -170,6 +167,6 @@ export default function NewActivityCatch() {
                     </IonList>
                 </IonList>
         </IonContent>
-        </IonPage>
+    </IonPage>  
     )
 }

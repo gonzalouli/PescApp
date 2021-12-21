@@ -1,0 +1,15 @@
+.miUbicacion{
+    display:flex;
+    align-items: center;
+    margin: 0 auto;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.item{
+    margin-top: 5%;
+}
+
+.map-container{margin-bottom: -6em !important; max-width: 1200px !important; margin: 0 auto;}
+
+.selected{margin-top:10px;}

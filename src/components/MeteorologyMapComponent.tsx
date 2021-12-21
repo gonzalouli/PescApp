@@ -5,6 +5,7 @@ import { isLatLngLiteral } from "@googlemaps/typescript-guards"
 import  React, {useState, useEffect, Fragment} from 'react';
 import { Geolocation } from '@capacitor/geolocation';
 import { IonLoading, IonToast } from "@ionic/react";
+import '../theme/Meteorology.css'
 
 const render = (status: Status) => {
     return <h1>{status}</h1>;
@@ -35,20 +36,20 @@ const MapComponent: React.VFC = () => {
   const currentPosition = async() => {
     setLoading(true)
     try{
-        const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
-        console.log(activity.localization.coords===undefined)
-        if(activity.localization.coords===undefined){
+        const ubication = JSON.parse(window.sessionStorage.getItem("ubication"))
+        console.log(ubication.coords===undefined)
+        if(ubication.coords===undefined){
 
           const position= await Geolocation.getCurrentPosition();
           setCenter({lat: position.coords.latitude, lng: position.coords.longitude})
           setMarker({lat: position.coords.latitude, lng:position.coords.longitude})
-          activity.localization.coords = {lat: position.coords.latitude, lng: position.coords.longitude}
-          window.sessionStorage.setItem('newActivity', JSON.stringify(activity))
+          ubication.coords = {lat: position.coords.latitude, lng: position.coords.longitude}
+          window.sessionStorage.setItem('ubication', JSON.stringify(ubication))
 
         }else{
-          const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
-          setCenter({lat: activity.localization.coords.lat, lng: activity.localization.coords.lng})
-          setMarker({lat: activity.localization.coords.lat, lng: activity.localization.coords.lng})
+          const ubication = JSON.parse(window.sessionStorage.getItem("ubication"))
+          setCenter({lat: ubication.coords.lat, lng: ubication.coords.lng})
+          setMarker({lat: ubication.coords.lat, lng: ubication.coords.lng})
          
         }
 
@@ -70,10 +71,10 @@ const MapComponent: React.VFC = () => {
     // avoid directly mutating state
     setClicks(e.latLng);
     setMarker({lat: e.latLng.lat(), lng: e.latLng.lng()})
-    const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
-    activity.localization.coords = {lat: e.latLng.lat(), lng: e.latLng.lng()}
+    const ubication = JSON.parse(window.sessionStorage.getItem("ubication"))
+    ubication.coords = {lat: e.latLng.lat(), lng: e.latLng.lng()}
 
-    window.sessionStorage.setItem('newActivity', JSON.stringify(activity))
+    window.sessionStorage.setItem('ubication', JSON.stringify(ubication))
   };
 
   const onIdle = (m: google.maps.Map) => {
@@ -87,14 +88,14 @@ const MapComponent: React.VFC = () => {
     <Fragment>
     <IonLoading isOpen={loading} message={"Tomando posición..."} onDidDismiss={()=>{setLoading(false)}}/>
     <IonToast isOpen={error.showError} message={error.message} duration={3000} onDidDismiss={()=>{setError({message: undefined, showError: false})}} />    
-    <div className="map-container" style={{ display: "flex", height: "80%" }}>
+    <div className="map-container" style={{ display: "flex", height: "70%" }}>
       <Wrapper apiKey={"AIzaSyD35fG5wYOtLp68_0XIvZmzz4CJD-YB6mk"} render={render}>
         <Map
           center={center}
           onClick={onClick}
           onIdle={onIdle}
           zoom={zoom}
-          style={{ flexGrow: "1", height: "85%" }}
+          style={{ flexGrow: "1", height: "70%" }}
         >
           {marker!=null ? <Marker position={{lat: marker.lat, lng: marker.lng}} ></Marker> : null}           
         </Map>

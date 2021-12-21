@@ -20,7 +20,10 @@ const Home: React.FC = () => {
                 meteorology:[],
                 date: {}
             }
+            const ubication = {}
             window.sessionStorage.setItem("newActivity",JSON.stringify(newActivity))
+            window.sessionStorage.setItem("ubication",JSON.stringify(ubication))
+
         // }
 
     },[])   
@@ -46,9 +49,9 @@ const Home: React.FC = () => {
                 <IonList className="container-home">
                     <IonButton className="main-button" expand="block" href="my/NewActivity">Nueva Actividad</IonButton>
                     <IonButton className="main-button"  expand="block">Mis Actividades</IonButton>
-                    <IonButton className="main-button"  expand="block">Meteorología</IonButton>
+                    <IonButton className="main-button"  expand="block" href='my/Meteorology'>Meteorología</IonButton>
                     <IonButton className="main-button"  expand="block">Especies</IonButton>
-                    <IonButton className="main-button"  expand="block">Documentación</IonButton>
+                    <IonButton className="main-button"  expand="block" href="my/Documentation">Documentación</IonButton>
                     <IonButton className="main-button"  expand="block">Notificaciones</IonButton>
                 </IonList>
             </IonContent>

@@ -14,6 +14,7 @@ import NewActivityTackle from './pages/NewActivityTackle';
 import MiPerfil from './pages/MiPerfil';
 import ResetPass from './pages/ResetPass';
 import NewActivityLocalization from './pages/NewActivityLocalization'
+import Meteorology from './pages/Meteorology';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -34,7 +35,10 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import NewActivityCatch from './pages/NewActivityCatch';
-;
+import Documentation from './pages/Documentation';
+import NewDocumentation from './pages/NewDocumentation';
+import MyDocumentation from './pages/MyDocumentation';
+
 
 const App: React.FC = () => (
   <IonApp>
@@ -66,6 +70,18 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/my/NewActivity/Catch">
             <NewActivityCatch/>
+        </Route>
+        <Route exact path="/my/Meteorology">
+            <Meteorology/>
+        </Route>
+        <Route exact path="/my/Documentation">
+            <Documentation/>
+        </Route>
+        <Route exact path="/my/Documentation/NewDocumentation">
+            <NewDocumentation/>
+        </Route>
+        <Route exact path="/my/Documentation/MyDocumentation">
+            <MyDocumentation/>
         </Route>
         <Route exact path="/forgotPass">
             <ResetPass/>
