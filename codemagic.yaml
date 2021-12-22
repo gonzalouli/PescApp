@@ -18,6 +18,10 @@ workflows:
       - name: Install npm dependencies for Ionic Capacitor project
         script: |
                     npm install
+      - name: Cypress tests
+        script: |
+                    ionic serve && 
+                    npm cypress run
       - name: Set Android SDK location
         script: |
                     echo "sdk.dir=$ANDROID_SDK_ROOT" > "$FCI_BUILD_DIR/android/local.properties"   
