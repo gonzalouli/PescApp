@@ -12,35 +12,35 @@ const Home: React.FC = () => {
 
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('');
-  const [status, setStatus] = useState({loading: false, error: false});
+  const [status, setStatus] = useState({loading: false, error: true});
   
-  const handleLogin = async ()=>{
-    ///setStatus({loading: true, error:false})
+  // const handleLogin = async ()=>{
+  //   ///setStatus({loading: true, error:false})
 
-    //mandar a backend contrasenia y email
-    // try {
+  //   //mandar a backend contrasenia y email
+  //   // try {
 
-    //   const req = axios.create({
-    //     baseURL: "http://localhost:4444"
-    //     ,
-    //     headers:{'Access-Control-Allow-Origin': '*'} 
-    //   });
+  //   //   const req = axios.create({
+  //   //     baseURL: "http://localhost:4444"
+  //   //     ,
+  //   //     headers:{'Access-Control-Allow-Origin': '*'} 
+  //   //   });
 
-    //   await req.post('/auth',{
-    //     email: email,
-    //     pass: pass
-    //   })
+  //   //   await req.post('/auth',{
+  //   //     email: email,
+  //   //     pass: pass
+  //   //   })
 
-    //   await req.get('/hola')
+  //   //   await req.get('/hola')
       
 
-    //   setStatus({loading: false, error:false})
-    // } catch (error) {
-    //   setStatus({loading: false, error:true})
-    // }
-    // console.log('golla')
-    // return <Redirect to="/home"/>
-  }
+  //   //   setStatus({loading: false, error:false})
+  //   // } catch (error) {
+  //   //   setStatus({loading: false, error:true})
+  //   // }
+  //   // console.log('golla')
+  //   // return <Redirect to="/home"/>
+  // }
  
  
   return (
@@ -54,26 +54,28 @@ const Home: React.FC = () => {
         <IonList className="container" >
           <IonItem>
             <IonLabel className="label" position="stacked">Email</IonLabel>
-            <IonInput className="text" inputmode="email" value={email}  placeholder="Email"
+            <IonInput className="text email" inputmode="email" value={email}  placeholder="Email"
             onIonChange={e=>setEmail(e.detail.value)}/>            
           </IonItem>
           <IonItem>
             <IonLabel className="label" position="stacked">Contraseña</IonLabel>
-            <IonInput className="text" type="password" value={pass} placeholder="Contraseña"
+            <IonInput className="text pass" type="password" value={pass} placeholder="Contraseña"
             minlength={6} maxlength={36} onIonChange={e=>setPass(e.detail.value)}/>            
           </IonItem>
         </IonList>
         {status.error &&
         <div className="error">Error en el inicio de sesion</div>
         }
-        <IonButton className="entrar" expand="block" href="/my/home" onClick={handleLogin}>Entrar</IonButton>
+        <IonButton className="entrar" type="submit" expand="block" href="/my/home" >Entrar</IonButton>
+        {/* onClick={handleLogin} */}
+        
         <IonLoading isOpen={status.loading}></IonLoading>
         <div className="links">
           <IonItem>
-            <IonRouterLink color="primary" routerLink="/forgotPass">Olvidaste la contraseña?</IonRouterLink>
+            <IonRouterLink color="primary" href="/forgotPass">Olvidaste la contraseña?</IonRouterLink>
           </IonItem>
           <IonItem >
-            <IonRouterLink color="primary" routerLink="/register">Registrate aqui</IonRouterLink>
+            <IonRouterLink color="primary" href="/register">Registrate aqui</IonRouterLink>
           </IonItem>
         </div>
 

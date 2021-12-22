@@ -26,7 +26,7 @@ import '../theme/ChangePass.css'
                 <IonRow>
                     <IonCol>
                         <IonItem>
-                            <IonLabel className="label" position="stacked">Contraseña antigua</IonLabel>
+                            <IonLabel className="text" position="floating">Contraseña antigua</IonLabel>
                             <IonInput className="text" type={shownOld ? 'text' : 'password'} value={oldpass} 
                                 onIonChange={e=>setOldPass(e.detail.value)}/>
                         </IonItem>
@@ -46,7 +46,7 @@ import '../theme/ChangePass.css'
                 <IonRow>
                     <IonCol>
                         <IonItem>
-                            <IonLabel className="label" position="stacked">Contraseña nueva</IonLabel>
+                            <IonLabel className="text" position="floating">Contraseña nueva</IonLabel>
                             <IonInput className="text" type={shownNew ? 'text' : 'password'} value={newpass}
                             onIonChange={e=>setNewPass(e.detail.value)}/>
                         </IonItem>
@@ -66,7 +66,7 @@ import '../theme/ChangePass.css'
                 <IonRow>
                     <IonCol>
                         <IonItem>
-                            <IonLabel className="label" position="stacked">Repetir nueva contraseña</IonLabel>
+                            <IonLabel className="text repetir" position="floating">Repetir nueva contraseña</IonLabel>
                             <IonInput className="text" type={shownRepeat ? 'text' : 'password'} value={repeatpass}
                             onIonChange={e=>setRepeatPass(e.detail.value)}/>
                         </IonItem>
