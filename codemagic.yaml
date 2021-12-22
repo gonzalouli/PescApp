@@ -20,7 +20,7 @@ workflows:
                     npm install
       - name: Cypress tests
         script: |
-                    ionic serve && 
+                    ionic serve ||
                     npm cypress run
       - name: Set Android SDK location
         script: |
