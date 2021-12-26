@@ -5,6 +5,8 @@ import { isLatLngLiteral } from "@googlemaps/typescript-guards"
 import  React, {useState, useEffect, Fragment} from 'react';
 import { Geolocation } from '@capacitor/geolocation';
 import { IonLoading, IonToast } from "@ionic/react";
+import axios from "axios";
+import { createSecretKey } from "crypto";
 
 const render = (status: Status) => {
     return <h1>{status}</h1>;
@@ -21,6 +23,7 @@ lng: number,
 }
 
 const MapComponent: React.VFC = () => {
+
   const [marker, setMarker] = useState<Coordinates>()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<LocationError>({showError: false})
@@ -34,26 +37,30 @@ const MapComponent: React.VFC = () => {
 
   const currentPosition = async() => {
     setLoading(true)
+    
     try{
+      
+      const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
+
+      console.log(activity.localization.coords===undefined)
+
+      if(activity.localization.coords===undefined){
+
+        const position= await Geolocation.getCurrentPosition();
+        setCenter({lat: position.coords.latitude, lng: position.coords.longitude})
+        setMarker({lat: position.coords.latitude, lng:position.coords.longitude})
+        activity.localization.coords = {lat: position.coords.latitude, lng: position.coords.longitude}
+        window.sessionStorage.setItem('newActivity', JSON.stringify(activity))
+
+      }else{
         const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
-        console.log(activity.localization.coords===undefined)
-        if(activity.localization.coords===undefined){
+        setCenter({lat: activity.localization.coords.lat, lng: activity.localization.coords.lng})
+        setMarker({lat: activity.localization.coords.lat, lng: activity.localization.coords.lng})
+        
+      }
 
-          const position= await Geolocation.getCurrentPosition();
-          setCenter({lat: position.coords.latitude, lng: position.coords.longitude})
-          setMarker({lat: position.coords.latitude, lng:position.coords.longitude})
-          activity.localization.coords = {lat: position.coords.latitude, lng: position.coords.longitude}
-          window.sessionStorage.setItem('newActivity', JSON.stringify(activity))
-
-        }else{
-          const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
-          setCenter({lat: activity.localization.coords.lat, lng: activity.localization.coords.lng})
-          setMarker({lat: activity.localization.coords.lat, lng: activity.localization.coords.lng})
-         
-        }
-
-        setLoading(false)
-        setError({showError: false, message: undefined,})
+      setLoading(false)
+      setError({showError: false, message: undefined,})
     } catch (error) {
         const message = error.message.length >0 ? error.message: "No se pudo localizar..."
         setError({showError: true, message})
@@ -62,9 +69,11 @@ const MapComponent: React.VFC = () => {
     }
   };
 
-  React.useEffect(()=>{
-      currentPosition()
+  React.useEffect( ()=>{
+    currentPosition()
+    
   },[])
+
 
   const onClick = (e: google.maps.MapMouseEvent) => {
     // avoid directly mutating state
@@ -88,7 +97,7 @@ const MapComponent: React.VFC = () => {
     <IonLoading isOpen={loading} message={"Tomando posición..."} onDidDismiss={()=>{setLoading(false)}}/>
     <IonToast isOpen={error.showError} message={error.message} duration={3000} onDidDismiss={()=>{setError({message: undefined, showError: false})}} />    
     <div className="map-container" style={{ display: "flex", height: "80%" }}>
-      <Wrapper apiKey={"AIzaSyD35fG5wYOtLp68_0XIvZmzz4CJD-YB6mk"} render={render}>
+      <Wrapper apiKey={process.env.REACT_APP_MAPS_KEY} render={render}>
         <Map
           center={center}
           onClick={onClick}

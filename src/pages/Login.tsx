@@ -14,33 +14,28 @@ const Home: React.FC = () => {
   const [pass, setPass] = useState('');
   const [status, setStatus] = useState({loading: false, error: true});
   
-  // const handleLogin = async ()=>{
-  //   ///setStatus({loading: true, error:false})
+  const handleLogin = async ()=>{
+    setStatus({loading: true, error:false})
 
-  //   //mandar a backend contrasenia y email
-  //   // try {
+    try {
 
-  //   //   const req = axios.create({
-  //   //     baseURL: "http://localhost:4444"
-  //   //     ,
-  //   //     headers:{'Access-Control-Allow-Origin': '*'} 
-  //   //   });
+      const req = axios.create({
+        baseURL: process.env.REACT_APP_BACKEND_HOST,
+        headers:{'Access-Control-Allow-Origin': '*'} 
+      });
 
-  //   //   await req.post('/auth',{
-  //   //     email: email,
-  //   //     pass: pass
-  //   //   })
+      await req.post('/fire/auth',{
+        email: email,
+        pass: pass
+      })      
 
-  //   //   await req.get('/hola')
-      
-
-  //   //   setStatus({loading: false, error:false})
-  //   // } catch (error) {
-  //   //   setStatus({loading: false, error:true})
-  //   // }
-  //   // console.log('golla')
-  //   // return <Redirect to="/home"/>
-  // }
+      setStatus({loading: false, error:false})
+    } catch (error) {
+      setStatus({loading: false, error:true})
+    }
+    console.log('golla')
+    return <Redirect to="/home"/>
+  }
  
  
   return (
@@ -66,8 +61,7 @@ const Home: React.FC = () => {
         {status.error &&
         <div className="error">Error en el inicio de sesion</div>
         }
-        <IonButton className="entrar" type="submit" expand="block" href="/my/home" >Entrar</IonButton>
-        {/* onClick={handleLogin} */}
+        <IonButton className="entrar" type="submit" expand="block" onClick={handleLogin} >Entrar</IonButton>
         
         <IonLoading isOpen={status.loading}></IonLoading>
         <div className="links">
