@@ -14,28 +14,9 @@ const Home: React.FC = () => {
   const [pass, setPass] = useState('');
   const [status, setStatus] = useState({loading: false, error: true});
   
-  const handleLogin = async ()=>{
-    setStatus({loading: true, error:false})
-
-    try {
-
-      const req = axios.create({
-        baseURL: process.env.REACT_APP_BACKEND_HOST,
-        headers:{'Access-Control-Allow-Origin': '*'} 
-      });
-
-      await req.post('/fire/auth',{
-        email: email,
-        pass: pass
-      })      
-
-      setStatus({loading: false, error:false})
-    } catch (error) {
-      setStatus({loading: false, error:true})
-    }
-    console.log('golla')
-    return <Redirect to="/home"/>
-  }
+  // const handleLogin = async ()=>{
+    
+  // }
  
  
   return (
@@ -61,7 +42,8 @@ const Home: React.FC = () => {
         {status.error &&
         <div className="error">Error en el inicio de sesion</div>
         }
-        <IonButton className="entrar" type="submit" expand="block" onClick={handleLogin} >Entrar</IonButton>
+        <IonButton className="entrar" type="submit" expand="block" href="/my/home" >Entrar</IonButton>
+        {/* onClick={handleLogin} */}
         
         <IonLoading isOpen={status.loading}></IonLoading>
         <div className="links">

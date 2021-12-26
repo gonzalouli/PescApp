@@ -4,7 +4,7 @@
 const { getTypeParameterOwner } = require("typescript")
 
 
-describe("Carga el login adecuadamente", ()=>{
+describe("Carga el registro adecuadamente", ()=>{
 
     beforeEach(() =>{
         cy.visit('register')
