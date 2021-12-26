@@ -23,6 +23,7 @@ lng: number,
 }
 
 const MapComponent: React.VFC = () => {
+  const [key, setKey] = useState<string>("")
 
   const [marker, setMarker] = useState<Coordinates>()
   const [loading, setLoading] = useState(false)
@@ -69,7 +70,12 @@ const MapComponent: React.VFC = () => {
     }
   };
 
-  React.useEffect( ()=>{
+  React.useEffect( ()=>{ 
+    
+    axios.get(process.env.REACT_APP_BACKEND_HOST+"/keys/googlemapsallowed").then(res =>{
+      setKey(res.headers["google-key"])
+    })
+
     currentPosition()
     
   },[])
@@ -91,13 +97,16 @@ const MapComponent: React.VFC = () => {
     setCenter(m.getCenter()!.toJSON());
   };
 
+  if(key.length === 0){
+    return <></>
+  }
 
   return (
     <Fragment>
     <IonLoading isOpen={loading} message={"Tomando posición..."} onDidDismiss={()=>{setLoading(false)}}/>
     <IonToast isOpen={error.showError} message={error.message} duration={3000} onDidDismiss={()=>{setError({message: undefined, showError: false})}} />    
     <div className="map-container" style={{ display: "flex", height: "80%" }}>
-      <Wrapper apiKey={process.env.REACT_APP_MAPS_KEY} render={render}>
+      <Wrapper apiKey={key} render={render}>
         <Map
           center={center}
           onClick={onClick}

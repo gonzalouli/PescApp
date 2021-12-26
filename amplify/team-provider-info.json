@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pescapp-dev-230816-authRole",
+      "UnauthRoleArn": "arn:aws:iam::859426874794:role/amplify-pescapp-dev-230816-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::859426874794:role/amplify-pescapp-dev-230816-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-pescapp-dev-230816-deployment",
+      "UnauthRoleName": "amplify-pescapp-dev-230816-unauthRole",
+      "StackName": "amplify-pescapp-dev-230816",
+      "StackId": "arn:aws:cloudformation:eu-west-1:859426874794:stack/amplify-pescapp-dev-230816/55138ed0-6698-11ec-bf1c-06f92b29437d",
+      "AmplifyAppId": "dey8n9s5p2s5a"
+    },
+    "categories": {
+      "auth": {
+        "pescappd622dfa2": {}
+      },
+      "function": {
+        "pescapp4172e304": {
+          "deploymentBucketName": "amplify-pescapp-dev-230816-deployment",
+          "s3Key": "amplify-builds/pescapp4172e304-394a7668344b33344277-build.zip"
+        }
+      }
+    }
+  }
+}
