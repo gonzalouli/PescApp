@@ -28,6 +28,7 @@
     "@types/react-dom": "^16.9.10",
     "@types/react-router": "^5.1.11",
     "@types/react-router-dom": "^5.1.7",
+    "aws-amplify": "^4.3.11",
     "axios": "^0.24.0",
     "fast-equals": "^2.0.4",
     "firebaseui": "^6.0.0",
