@@ -23,6 +23,9 @@ export default function NewActivity() {
     JSON.parse(window.sessionStorage.getItem("newActivity")).name || ""
   );
 
+  const [isNewActivityLocalization, setIsNewActivityLocalization] =
+    useState(false);
+
   const handleChange = (e) => {
     const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
     setName(e.target.value);
@@ -37,6 +40,9 @@ export default function NewActivity() {
 
   return (
     <IonPage>
+      {isNewActivityLocalization && (
+        <Redirect to="/my/NewActivity/Localization" push={true} exact={true} />
+      )}
       <IonHeader className="header">
         <BackButton refer="/my/home" />
         <IonTitle className="tittle">Nueva Actividad</IonTitle>
@@ -58,7 +64,7 @@ export default function NewActivity() {
           <IonButton
             className="main-button"
             expand="block"
-            href="/my/NewActivity/Localization"
+            onClick={() => setIsNewActivityLocalization(true)}
           >
             Localización
           </IonButton>

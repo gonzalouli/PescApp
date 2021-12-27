@@ -26,6 +26,7 @@ const Home: React.FC = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [status, setStatus] = useState({ loading: false, error: true });
+  const [isLog, setIsLog] = useState<boolean>(false);
 
   // const handleLogin = async ()=>{
 
@@ -33,6 +34,7 @@ const Home: React.FC = () => {
 
   return (
     <IonPage>
+      {isLog && <Redirect to="/my/home" push={true} exact={true} />}
       <IonHeader>
         <IonToolbar className="ion-align-items-center">
           <IonTitle className="tittle">PescApp</IonTitle>
@@ -74,7 +76,7 @@ const Home: React.FC = () => {
           className="entrar"
           type="submit"
           expand="block"
-          href="/my/home"
+          onClick={() => setIsLog(true)}
         >
           Entrar
         </IonButton>

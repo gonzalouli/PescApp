@@ -11,7 +11,8 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router";
 import LogOutButton from "../components/LogOutButton";
 import MiPerfilButton from "../components/MiPerfilButton";
 import RefreshComponent from "../components/RefreshComponent";
@@ -36,6 +37,8 @@ const Home: React.FC = () => {
     // }
   }, []);
 
+  const [isNewActivity, setIsNewActivity] = useState<boolean>(false);
+
   // name: "",
   // localization: {text:" ", coords: { lat:null, lng:null}},
   // tackle: [{id:0, nombre:""}],
@@ -46,6 +49,9 @@ const Home: React.FC = () => {
   // JSON.parse(window.sessionStorage.getItem('newActivity'))
   return (
     <IonPage>
+      {isNewActivity && (
+        <Redirect to="/my/NewActivity" push={true} exact={true} />
+      )}
       <IonHeader className="header">
         <MiPerfilButton text="Mi Perfil"></MiPerfilButton>
         <LogOutButton></LogOutButton>
@@ -56,7 +62,7 @@ const Home: React.FC = () => {
           <IonButton
             className="main-button"
             expand="block"
-            href="my/NewActivity"
+            onClick={() => setIsNewActivity(true)}
           >
             Nueva Actividad
           </IonButton>
