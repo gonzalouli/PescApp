@@ -1,33 +1,35 @@
 import * as ReactDom from "react-dom";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { createCustomEqual } from "fast-equals";
-import { isLatLngLiteral } from "@googlemaps/typescript-guards"
-import  React, {useState, useEffect, Fragment} from 'react';
-import { Geolocation } from '@capacitor/geolocation';
+import { isLatLngLiteral } from "@googlemaps/typescript-guards";
+import React, { useState, useEffect, Fragment } from "react";
+import { Geolocation } from "@capacitor/geolocation";
 import { IonLoading, IonToast } from "@ionic/react";
 import axios from "axios";
 import { createSecretKey } from "crypto";
 
+import { API } from "aws-amplify";
+
 const render = (status: Status) => {
-    return <h1>{status}</h1>;
+  return <h1>{status}</h1>;
 };
 
-interface LocationError{
+interface LocationError {
   showError: boolean;
-  message?: string
+  message?: string;
 }
 
-interface Coordinates{
-lat: number,
-lng: number,
+interface Coordinates {
+  lat: number;
+  lng: number;
 }
 
 const MapComponent: React.VFC = () => {
-  const [key, setKey] = useState<string>("")
+  const [key, setKey] = useState<string>("");
 
-  const [marker, setMarker] = useState<Coordinates>()
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<LocationError>({showError: false})
+  const [marker, setMarker] = useState<Coordinates>();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<LocationError>({ showError: false });
 
   const [clicks, setClicks] = React.useState<google.maps.LatLng>();
   const [zoom, setZoom] = React.useState(14); // initial zoom
@@ -36,59 +38,80 @@ const MapComponent: React.VFC = () => {
     lng: 0,
   });
 
-  const currentPosition = async() => {
-    setLoading(true)
-    
-    try{
-      
-      const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
+  const currentPosition = async () => {
+    setLoading(true);
 
-      console.log(activity.localization.coords===undefined)
+    try {
+      const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
 
-      if(activity.localization.coords===undefined){
+      console.log(activity.localization.coords === undefined);
 
-        const position= await Geolocation.getCurrentPosition();
-        setCenter({lat: position.coords.latitude, lng: position.coords.longitude})
-        setMarker({lat: position.coords.latitude, lng:position.coords.longitude})
-        activity.localization.coords = {lat: position.coords.latitude, lng: position.coords.longitude}
-        window.sessionStorage.setItem('newActivity', JSON.stringify(activity))
-
-      }else{
-        const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
-        setCenter({lat: activity.localization.coords.lat, lng: activity.localization.coords.lng})
-        setMarker({lat: activity.localization.coords.lat, lng: activity.localization.coords.lng})
-        
+      if (activity.localization.coords === undefined) {
+        const position = await Geolocation.getCurrentPosition();
+        setCenter({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+        setMarker({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+        activity.localization.coords = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        window.sessionStorage.setItem("newActivity", JSON.stringify(activity));
+      } else {
+        const activity = JSON.parse(
+          window.sessionStorage.getItem("newActivity")
+        );
+        setCenter({
+          lat: activity.localization.coords.lat,
+          lng: activity.localization.coords.lng,
+        });
+        setMarker({
+          lat: activity.localization.coords.lat,
+          lng: activity.localization.coords.lng,
+        });
       }
 
-      setLoading(false)
-      setError({showError: false, message: undefined,})
+      setLoading(false);
+      setError({ showError: false, message: undefined });
     } catch (error) {
-        const message = error.message.length >0 ? error.message: "No se pudo localizar..."
-        setError({showError: true, message})
-        setLoading(false)
-
+      const message =
+        error.message.length > 0 ? error.message : "No se pudo localizar...";
+      setError({ showError: true, message });
+      setLoading(false);
     }
   };
 
-  React.useEffect( ()=>{ 
-    
-    axios.get(process.env.REACT_APP_BACKEND_HOST+"/keys/googlemapsallowed").then(res =>{
-      setKey(res.headers["google-key"])
-    })
+  React.useEffect(() => {
+    (async () => {
+      // TODO: change with import API amplify
+      const params = {
+        headers: {},
+        response: true,
+        queryStringParameters: {},
+      };
+      const response = await API.get(
+        "pescapp4172e304",
+        "/keys/googlemapsallowed",
+        params
+      );
+      setKey(response.headers["google-key"]);
+    })();
 
-    currentPosition()
-    
-  },[])
-
+    currentPosition();
+  }, []);
 
   const onClick = (e: google.maps.MapMouseEvent) => {
     // avoid directly mutating state
     setClicks(e.latLng);
-    setMarker({lat: e.latLng.lat(), lng: e.latLng.lng()})
-    const activity = JSON.parse(window.sessionStorage.getItem("newActivity"))
-    activity.localization.coords = {lat: e.latLng.lat(), lng: e.latLng.lng()}
+    setMarker({ lat: e.latLng.lat(), lng: e.latLng.lng() });
+    const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
+    activity.localization.coords = { lat: e.latLng.lat(), lng: e.latLng.lng() };
 
-    window.sessionStorage.setItem('newActivity', JSON.stringify(activity))
+    window.sessionStorage.setItem("newActivity", JSON.stringify(activity));
   };
 
   const onIdle = (m: google.maps.Map) => {
@@ -97,32 +120,45 @@ const MapComponent: React.VFC = () => {
     setCenter(m.getCenter()!.toJSON());
   };
 
-  if(key.length === 0){
-    return <></>
+  if (key.length === 0) {
+    return <></>;
   }
 
   return (
     <Fragment>
-    <IonLoading isOpen={loading} message={"Tomando posición..."} onDidDismiss={()=>{setLoading(false)}}/>
-    <IonToast isOpen={error.showError} message={error.message} duration={3000} onDidDismiss={()=>{setError({message: undefined, showError: false})}} />    
-    <div className="map-container" style={{ display: "flex", height: "80%" }}>
-      <Wrapper apiKey={key} render={render}>
-        <Map
-          center={center}
-          onClick={onClick}
-          onIdle={onIdle}
-          zoom={zoom}
-          style={{ flexGrow: "1", height: "85%" }}
-        >
-          {marker!=null ? <Marker position={{lat: marker.lat, lng: marker.lng}} ></Marker> : null}           
-        </Map>
-      </Wrapper>
-    </div>
+      <IonLoading
+        isOpen={loading}
+        message={"Tomando posición..."}
+        onDidDismiss={() => {
+          setLoading(false);
+        }}
+      />
+      <IonToast
+        isOpen={error.showError}
+        message={error.message}
+        duration={3000}
+        onDidDismiss={() => {
+          setError({ message: undefined, showError: false });
+        }}
+      />
+      <div className="map-container" style={{ display: "flex", height: "80%" }}>
+        <Wrapper apiKey={key} render={render}>
+          <Map
+            center={center}
+            onClick={onClick}
+            onIdle={onIdle}
+            zoom={zoom}
+            style={{ flexGrow: "1", height: "85%" }}
+          >
+            {marker != null ? (
+              <Marker position={{ lat: marker.lat, lng: marker.lng }}></Marker>
+            ) : null}
+          </Map>
+        </Wrapper>
+      </div>
     </Fragment>
   );
 };
-
-
 
 interface MapProps extends google.maps.MapOptions {
   style: { [key: string]: string };
@@ -145,7 +181,6 @@ const Map: React.FC<MapProps> = ({
       setMap(new window.google.maps.Map(ref.current, {}));
     }
   }, [ref, map]);
-
 
   useDeepCompareEffectForMaps(() => {
     if (map) {
@@ -242,6 +277,4 @@ function useDeepCompareEffectForMaps(
   React.useEffect(callback, dependencies.map(useDeepCompareMemoize));
 }
 
-
 export default MapComponent;
-

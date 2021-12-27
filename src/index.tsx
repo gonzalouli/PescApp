@@ -1,20 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import reportWebVitals from "./reportWebVitals";
 
-import { Amplify } from 'aws-amplify';
+import Amplify from "aws-amplify";
 
+import awsExports from "./aws-exports";
 
-import awsExports from './aws-exports';
+if (process.env.REACT_APP_LOCAL && false) {
+  awsExports.API = {
+    endpoints: [
+      {
+        name: "pescapp4172e304",
+        endpoint: "http://localhost:4444",
+      },
+    ],
+  };
+}
+
 Amplify.configure(awsExports);
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
