@@ -8,15 +8,8 @@ import Amplify from "aws-amplify";
 
 import awsExports from "./aws-exports";
 
-if (process.env.REACT_APP_LOCAL && false) {
-  awsExports.API = {
-    endpoints: [
-      {
-        name: "pescapp4172e304",
-        endpoint: "http://localhost:4444",
-      },
-    ],
-  };
+if (process.env.REACT_APP_LOCAL) {
+  awsExports["aws_cloud_logic_custom"][0].endpoint = "http://localhost:4444";
 }
 
 Amplify.configure(awsExports);

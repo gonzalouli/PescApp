@@ -34,5 +34,21 @@
       "service": "Lambda",
       "dependsOn": []
     }
+  },
+  "api": {
+    "api9000aeb3": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "pescapp4172e304",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    }
   }
 }

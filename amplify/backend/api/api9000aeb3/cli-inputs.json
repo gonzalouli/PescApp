@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/pescapp": {
+      "name": "/pescapp",
+      "lambdaFunction": "pescapp4172e304",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

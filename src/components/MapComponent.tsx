@@ -94,7 +94,7 @@ const MapComponent: React.VFC = () => {
         queryStringParameters: {},
       };
       const response = await API.get(
-        "pescapp4172e304",
+        "api9000aeb3",
         "/keys/googlemapsallowed",
         params
       );
