@@ -1,0 +1,17 @@
+{
+  // Use IntelliSense para saber los atributos posibles.
+  // Mantenga el puntero para ver las descripciones de los existentes atributos.
+  // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Server js with local database",
+      "program": "${workspaceFolder}/amplify/backend/function/pescapp4172e304/src/index.js",
+      "args": [".env"],
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "node"
+    }
+  ]
+}

@@ -1,18 +1,14 @@
-import {
-    IonContent,
-    IonPage,
-  } from '@ionic/react';
-  import React from 'react';
+import { IonContent, IonPage } from "@ionic/react";
+import React from "react";
 
-  const NotFoundPage: React.FC = () => {
-    return (
-      <IonPage>
-        <IonContent className="ion-padding">
-          Page not found. Error 404.
-        </IonContent>
-      </IonPage>
-    );
-  };
-  
-  export default NotFoundPage;
-  
+const NotFoundPage: React.FC = () => {
+  return (
+    <IonPage>
+      <IonContent className="ion-padding">
+        Page not found. Error 404.
+      </IonContent>
+    </IonPage>
+  );
+};
+
+export default NotFoundPage;
