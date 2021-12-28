@@ -15,7 +15,7 @@ import {
 } from "@ionic/react";
 import "../theme/Login.css";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 
 interface Props {
@@ -29,10 +29,6 @@ const Home: React.FC = () => {
   const [isLog, setIsLog] = useState<boolean>(false);
   const [isRegister, setIsRegister] = useState<boolean>(false);
   const [isForgotPass, setIsForgotPass] = useState<boolean>(false);
-
-  // const handleLogin = async ()=>{
-
-  // }
 
   return (
     <IonPage>

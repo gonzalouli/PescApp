@@ -13,8 +13,8 @@ import {
   IonRow,
   IonTitle,
 } from "@ionic/react";
-import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router";
 import BackButton from "../components/BackButton";
 import "../theme/Header.css";
 import "../theme/MiPerfil.css";

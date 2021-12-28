@@ -1,11 +1,10 @@
-.container-home{
-    margin-top: 3em;
+.container-home {
+  margin-top: 3em;
 }
 
-.main-button{
-    position: relative;
-    font-weight: bolder;
-    font-size: 25px !important;   
-    margin: 1em;
-    
+.main-button {
+  position: relative;
+  font-weight: bolder;
+  font-size: 25px !important;
+  margin: 1em;
 }

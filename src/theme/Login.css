@@ -1,50 +1,53 @@
-.text{
-    font-size: 130%;
+.text {
+  font-size: 130%;
 }
 
-.form{
-    top: 10%;
-    display: flex;
-    margin: 0 auto;
+.form {
+  top: 10%;
+  display: flex;
+  margin: 0 auto;
 }
 
-.error{
-    position: relative;
-    justify-content: center;
-    margin: 0 auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    max-width: 400px;
-    padding: 10px;
-    background-color: rgba(253, 1, 1, 0.63);
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: bolder;
-    text-align: center;
-    align-items: center
+.error {
+  position: relative;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  max-width: 400px;
+  padding: 10px;
+  background-color: rgba(253, 1, 1, 0.63);
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bolder;
+  text-align: center;
+  align-items: center;
 }
 
-.entrar, .label{
-    font-weight: bolder;
-    font-size: 20%;
-    max-width: 300px;
-    margin: 20px auto;
+.entrar,
+.label {
+  font-weight: bolder;
+  font-size: 20%;
+  max-width: 300px;
+  margin: 20px auto;
 }
 
-.entrar{
-    margin-top: 40px !important;
-
+.entrar {
+  margin-top: 40px !important;
 }
 
-.links{
-    position: relative;
-    margin: 0 auto !important;
-    padding-top: 10px;
-    max-width: 400px;
+.links {
+  position: relative;
+  margin: 0 auto !important;
+  padding-top: 10px;
+  max-width: 400px;
 }
 
-.container{
-    margin: 0 auto;
-    width: 80%;
+.container {
+  margin: 0 auto;
+  width: 80%;
 }
 
+.tittle {
+  padding: 5% !important;
+}

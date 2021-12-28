@@ -7,7 +7,7 @@ export default function BackButton({ refer = "/" }) {
 
   useEffect(() => {
     setBack(false);
-  }, []);
+  }, [back]);
 
   return (
     <>

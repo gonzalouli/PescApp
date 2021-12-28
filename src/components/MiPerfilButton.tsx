@@ -1,6 +1,6 @@
 import { IonButton } from "@ionic/react";
 import React, { Fragment, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router";
 
 export default function MiPerfil({ text }) {
   const [isMyProfile, setIsMyProfile] = useState<boolean>(false);
