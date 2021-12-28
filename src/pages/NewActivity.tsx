@@ -13,7 +13,7 @@ import {
   IonTitle,
 } from "@ionic/react";
 import React, { Fragment, useEffect, useState } from "react";
-import { Redirect } from "react-router";
+import { Redirect } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import RefreshComponent from "../components/RefreshComponent";
 import "../theme/Header.css";

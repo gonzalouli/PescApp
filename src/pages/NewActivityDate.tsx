@@ -114,11 +114,7 @@ export default function NewActivityDate() {
           <div className="submit buttons">
             <IonList className="submit buttons">
               <IonItem>
-                <IonButton
-                  className="save"
-                  onClick={() => {}}
-                  href="/my/NewActivity"
-                >
+                <IonButton className="save" onClick={() => {}}>
                   Guardar
                 </IonButton>
               </IonItem>

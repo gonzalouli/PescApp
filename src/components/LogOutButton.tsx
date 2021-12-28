@@ -1,6 +1,6 @@
 import { IonButton } from "@ionic/react";
 import React, { Fragment, useState } from "react";
-import { Redirect } from "react-router";
+import { Redirect } from "react-router-dom";
 
 export default function LogOutButton() {
   const [logout, setLogout] = useState<boolean>(false);

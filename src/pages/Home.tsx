@@ -13,7 +13,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { Fragment, useEffect, useState } from "react";
-import { Redirect } from "react-router";
+import { Redirect } from "react-router-dom";
 import LogOutButton from "../components/LogOutButton";
 import MiPerfilButton from "../components/MiPerfilButton";
 import RefreshComponent from "../components/RefreshComponent";
@@ -35,7 +35,14 @@ const Home: React.FC = () => {
     window.sessionStorage.setItem("newActivity", JSON.stringify(newActivity));
     window.sessionStorage.setItem("ubication", JSON.stringify(ubication));
     // }
+    return reset();
   }, []);
+
+  const reset = () => {
+    setIsNewActivity(false);
+    setIsMeteorology(false);
+    setIsDocumentation(false);
+  };
 
   const [wait, setWait] = useState<boolean>(true);
   const [isNewActivity, setIsNewActivity] = useState<boolean>(false);

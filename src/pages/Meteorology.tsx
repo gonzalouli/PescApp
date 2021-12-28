@@ -20,6 +20,7 @@ import "../theme/Meteorology.css";
 import MeteorologyMapComponent from "../components/MeteorologyMapComponent";
 import MapComponent from "../components/MapComponent";
 import axios from "axios";
+import "../theme/Header.css";
 
 interface Coordinates {
   lat: number;

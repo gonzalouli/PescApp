@@ -167,11 +167,7 @@ export default function NewActivityCatch() {
         <div className="submit buttons">
           <IonList className="submit buttons">
             <IonItem>
-              <IonButton
-                className="save"
-                onClick={saveAndBack}
-                href="/my/NewActivity"
-              >
+              <IonButton className="save" onClick={saveAndBack}>
                 Guardar
               </IonButton>
             </IonItem>

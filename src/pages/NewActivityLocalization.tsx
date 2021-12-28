@@ -66,9 +66,7 @@ function NewActivityLocalization() {
               onIonChange={handleTextChange}
             ></IonTextarea>
           </IonItem>
-          <IonButton className="button-acept" href="/my/NewActivity">
-            Aceptar
-          </IonButton>
+          <IonButton className="button-acept">Aceptar</IonButton>
         </IonList>
       </IonContent>
     </IonPage>

@@ -1,18 +1,19 @@
-.header{
-    text-align: center;
-    display: flex;
-    justify-content: space-between ;
-    padding: 15px;
-    font-size: 12px !important;
+.header {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  font-size: 12px !important;
 }
 
-.backButton{
-    position: absolute;
-    z-index: 1;
+.backButton {
+  position: absolute;
+  z-index: 1;
 }
 
-.tittle{
-    text-align: center;
-    font-size: 200%;
-    font-weight: bolder;
+.tittle {
+  text-align: center;
+  font-size: 200%;
+  font-weight: bolder;
+  padding-top: 10%;
 }

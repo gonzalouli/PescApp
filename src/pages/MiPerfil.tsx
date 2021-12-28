@@ -14,7 +14,7 @@ import {
   IonTitle,
 } from "@ionic/react";
 import React, { useState } from "react";
-import { Redirect } from "react-router";
+import { Redirect } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import "../theme/Header.css";
 import "../theme/MiPerfil.css";
@@ -92,7 +92,6 @@ const MiPerfil: React.FC = () => {
         <div className="buttons">
           <IonButton
             className="save"
-            href="/my/changePass"
             onClick={() => {
               setChangePass(true);
             }}

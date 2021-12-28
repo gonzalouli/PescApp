@@ -27,6 +27,8 @@ const Home: React.FC = () => {
   const [pass, setPass] = useState("");
   const [status, setStatus] = useState({ loading: false, error: true });
   const [isLog, setIsLog] = useState<boolean>(false);
+  const [isRegister, setIsRegister] = useState<boolean>(false);
+  const [isForgotPass, setIsForgotPass] = useState<boolean>(false);
 
   // const handleLogin = async ()=>{
 
@@ -35,6 +37,9 @@ const Home: React.FC = () => {
   return (
     <IonPage>
       {isLog && <Redirect to="/my/home" push={true} exact={true} />}
+      {isRegister && <Redirect to="/register" push={true} exact={true} />}
+      {isForgotPass && <Redirect to="/forgotPass" push={true} exact={true} />}
+
       <IonHeader>
         <IonToolbar className="ion-align-items-center">
           <IonTitle className="tittle">PescApp</IonTitle>
@@ -85,14 +90,14 @@ const Home: React.FC = () => {
         <IonLoading isOpen={status.loading}></IonLoading>
         <div className="links">
           <IonItem>
-            <IonRouterLink color="primary" href="/forgotPass">
+            <IonButton color="light" onClick={() => setIsForgotPass(true)}>
               Olvidaste la contraseña?
-            </IonRouterLink>
+            </IonButton>
           </IonItem>
           <IonItem>
-            <IonRouterLink color="primary" href="/register">
+            <IonButton color="light" onClick={() => setIsRegister(true)}>
               Registrate aqui
-            </IonRouterLink>
+            </IonButton>
           </IonItem>
         </div>
       </IonContent>
