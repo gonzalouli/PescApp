@@ -5,13 +5,14 @@ import {
   IonHeader,
   IonIcon,
   IonList,
+  IonLoading,
   IonPage,
   IonRefresher,
   IonRefresherContent,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Redirect } from "react-router";
 import LogOutButton from "../components/LogOutButton";
 import MiPerfilButton from "../components/MiPerfilButton";
@@ -33,11 +34,13 @@ const Home: React.FC = () => {
     const ubication = {};
     window.sessionStorage.setItem("newActivity", JSON.stringify(newActivity));
     window.sessionStorage.setItem("ubication", JSON.stringify(ubication));
-
     // }
   }, []);
 
+  const [wait, setWait] = useState<boolean>(true);
   const [isNewActivity, setIsNewActivity] = useState<boolean>(false);
+  const [isMeteorology, setIsMeteorology] = useState<boolean>(false);
+  const [isDocumentation, setIsDocumentation] = useState<boolean>(false);
 
   // name: "",
   // localization: {text:" ", coords: { lat:null, lng:null}},
@@ -49,48 +52,72 @@ const Home: React.FC = () => {
   // JSON.parse(window.sessionStorage.getItem('newActivity'))
   return (
     <IonPage>
+      {wait && (
+        <IonLoading
+          cssClass="my-custom-class"
+          isOpen={wait}
+          onDidDismiss={() => setWait(false)}
+          message={"Cargando..."}
+          duration={100}
+        />
+      )}
       {isNewActivity && (
         <Redirect to="/my/NewActivity" push={true} exact={true} />
       )}
-      <IonHeader className="header">
-        <MiPerfilButton text="Mi Perfil"></MiPerfilButton>
-        <LogOutButton></LogOutButton>
-      </IonHeader>
-      <IonContent>
-        <RefreshComponent />
-        <IonList className="container-home">
-          <IonButton
-            className="main-button"
-            expand="block"
-            onClick={() => setIsNewActivity(true)}
-          >
-            Nueva Actividad
-          </IonButton>
-          <IonButton className="main-button" expand="block">
-            Mis Actividades
-          </IonButton>
-          <IonButton
-            className="main-button"
-            expand="block"
-            href="my/Meteorology"
-          >
-            Meteorología
-          </IonButton>
-          <IonButton className="main-button" expand="block">
-            Especies
-          </IonButton>
-          <IonButton
-            className="main-button"
-            expand="block"
-            href="my/Documentation"
-          >
-            Documentación
-          </IonButton>
-          <IonButton className="main-button" expand="block">
-            Notificaciones
-          </IonButton>
-        </IonList>
-      </IonContent>
+      {isMeteorology && (
+        <Redirect to="/my/Meteorology" push={true} exact={true} />
+      )}
+      {isDocumentation && (
+        <Redirect to="/my/Documentation" push={true} exact={true} />
+      )}
+
+      {!wait && (
+        <Fragment>
+          <IonHeader className="header">
+            <MiPerfilButton text="Mi Perfil"></MiPerfilButton>
+            <LogOutButton></LogOutButton>
+          </IonHeader>
+          <IonContent>
+            <RefreshComponent />
+            <IonList className="container-home">
+              <IonButton
+                className="main-button"
+                expand="block"
+                onClick={() => setIsNewActivity(true)}
+              >
+                Nueva Actividad
+              </IonButton>
+              <IonButton className="main-button" expand="block">
+                Mis Actividades
+              </IonButton>
+              <IonButton
+                className="main-button"
+                expand="block"
+                onClick={() => {
+                  setIsMeteorology(true);
+                }}
+              >
+                Meteorología
+              </IonButton>
+              <IonButton className="main-button" expand="block">
+                Especies
+              </IonButton>
+              <IonButton
+                className="main-button"
+                expand="block"
+                onClick={() => {
+                  setIsDocumentation(true);
+                }}
+              >
+                Documentación
+              </IonButton>
+              <IonButton className="main-button" expand="block">
+                Notificaciones
+              </IonButton>
+            </IonList>
+          </IonContent>
+        </Fragment>
+      )}
     </IonPage>
   );
 };

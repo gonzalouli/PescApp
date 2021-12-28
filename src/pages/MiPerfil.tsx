@@ -14,6 +14,7 @@ import {
   IonTitle,
 } from "@ionic/react";
 import React, { useState } from "react";
+import { Redirect } from "react-router";
 import BackButton from "../components/BackButton";
 import "../theme/Header.css";
 import "../theme/MiPerfil.css";
@@ -23,9 +24,13 @@ const MiPerfil: React.FC = () => {
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [dni, setDni] = useState("");
+  const [changePass, setChangePass] = useState<boolean>(false);
 
   return (
     <IonPage>
+      {changePass && (
+        <Redirect to="/my/Documentation" push={true} exact={true} />
+      )}
       <IonHeader className="header">
         <BackButton refer="/my/home" />
         <IonTitle className="tittle">Mi Perfil</IonTitle>
@@ -85,7 +90,13 @@ const MiPerfil: React.FC = () => {
           </IonItem>
         </IonList>
         <div className="buttons">
-          <IonButton className="save" href="/my/changePass">
+          <IonButton
+            className="save"
+            href="/my/changePass"
+            onClick={() => {
+              setChangePass(true);
+            }}
+          >
             Cambiar contraseña
           </IonButton>
         </div>

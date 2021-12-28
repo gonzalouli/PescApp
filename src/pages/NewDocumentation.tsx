@@ -162,11 +162,7 @@ export default function NewDocumentation() {
           <div className="submit buttons">
             <IonList className="submit buttons">
               <IonItem>
-                <IonButton
-                  className="save"
-                  onClick={saveAndBack}
-                  href="/my/Documentation"
-                >
+                <IonButton className="save" onClick={saveAndBack}>
                   Guardar
                 </IonButton>
               </IonItem>

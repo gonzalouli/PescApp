@@ -9,7 +9,8 @@ import {
   IonPage,
   IonTitle,
 } from "@ionic/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router";
 import BackButton from "../components/BackButton";
 import RefreshComponent from "../components/RefreshComponent";
 
@@ -23,8 +24,25 @@ export default function Documentation() {
     // }
   }, []);
 
+  const [isNewDocumentation, setIsNewDocumentation] = useState<boolean>(false);
+  const [isMyDocumentation, setIsMyDocumentation] = useState<boolean>(false);
+
   return (
     <IonPage>
+      {isNewDocumentation && (
+        <Redirect
+          to="/my/Documentation/NewDocumentation"
+          push={true}
+          exact={true}
+        />
+      )}
+      {isMyDocumentation && (
+        <Redirect
+          to="/my/Documentation/MyDocumentation"
+          push={true}
+          exact={true}
+        />
+      )}
       <IonHeader className="header">
         <BackButton refer="/my/home" />
         <IonTitle className="tittle">Documentación</IonTitle>
@@ -35,14 +53,18 @@ export default function Documentation() {
           <IonButton
             className="main-button"
             expand="block"
-            href="/my/Documentation/NewDocumentation"
+            onClick={() => {
+              setIsNewDocumentation(true);
+            }}
           >
             Nueva
           </IonButton>
           <IonButton
             className="main-button"
             expand="block"
-            href="/my/Documentation/MyDocumentation"
+            onClick={() => {
+              setIsMyDocumentation(true);
+            }}
           >
             Mi Documentacion
           </IonButton>
