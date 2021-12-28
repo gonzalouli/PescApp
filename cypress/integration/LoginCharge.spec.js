@@ -1,43 +1,50 @@
 /// <reference types="cypress" />
 /// <reference types="cypress-xpath" />
 
-const { getTypeParameterOwner } = require("typescript")
+const { getTypeParameterOwner } = require("typescript");
 
+describe("Carga el login adecuadamente", () => {
+  beforeEach(() => {
+    cy.visit("login");
+  });
 
-describe("Carga el login adecuadamente", ()=>{
+  it("Carga la pagina login", () => {
+    cy.contains("ion-title", "PescApp");
+  });
 
-    beforeEach(() =>{
-        cy.visit('login')
-    })
+  it("Podemos recuperar contraseña", () => {
+    cy.get("ion-button").contains("Olvidaste la contraseña?");
+  });
 
-    it('Carga la pagina login', ()=>{
-        cy.contains('ion-title', 'PescApp')
-    })
+  it("Podemos ir a la recuperacion de contraseña", () => {
+    cy.xpath(
+      '//*[@id="root"]/ion-app/div/ion-content/ion-list[2]/ion-item[1]/ion-button'
+    ).click();
 
-    it('Podemos recuperar contraseña', () => {
-        cy.get('.links').get('ion-router-link').contains('Olvidaste la contraseña?')
-    });
+    cy.location().should((loc) => expect(loc.pathname).to.eq("/forgotPass"));
+  });
 
-    it("Podemos ir al registro",()=>{
-        cy.get('.links').get('ion-router-link').last().shadow().find('a').click({force: true});
-    })
+  it("Podemos ir al registro", () => {
+    cy.xpath(
+      '//*[@id="root"]/ion-app/div/ion-content/ion-list[2]/ion-item[2]/ion-button'
+    ).click({ force: true });
+    cy.location().should((loc) => expect(loc.pathname).to.eq("/register"));
+  });
 
-    it('Se puede estableder usuario y password', () => {
-        // cy.get('[placeholder="Email"]').type('email@email.com')        
-        // cy.get('[placeholder="Contraseña"]').last().type('contraseña')
-        //Podemos escribir user y pass
-        cy.get('.form').get('.email').type('email@email.com') 
-        cy.get('.form').get('.pass').last().type('contraseña')
-        //Podemos ver el error (si escribimos mal algun campo)
-        cy.get('.form').get('.error').should('contain' ,'Error en el inicio de sesion')
-        //los conduce a la siguiente pagina
-        cy.get('ion-button').get('.entrar').shadow().find('a').click({force: true});
-        
-        //se dirige a la pagina home
-        cy.location().should((loc)=>expect(loc.pathname).to.eq('/my/home'))
-    });
+  it("Se puede estableder usuario y password", () => {
+    // cy.get('[placeholder="Email"]').type('email@email.com')
+    // cy.get('[placeholder="Contraseña"]').last().type('contraseña')
+    //Podemos escribir user y pass
+    cy.get(".form").get(".email").type("email@email.com");
+    cy.get(".form").get(".pass").last().type("contraseña");
+    //Podemos ver el error (si escribimos mal algun campo)
+    cy.get(".form")
+      .get(".error")
+      .should("contain", "Error en el inicio de sesion");
+    //los conduce a la siguiente pagina
+    cy.get("ion-button").get(".entrar").click({ force: true });
 
-    
-
-})
-
+    //se dirige a la pagina home
+    cy.location().should((loc) => expect(loc.pathname).to.eq("/my/home"));
+  });
+});

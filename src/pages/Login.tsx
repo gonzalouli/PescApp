@@ -84,7 +84,7 @@ const Home: React.FC = () => {
         {/* onClick={handleLogin} */}
 
         <IonLoading isOpen={status.loading}></IonLoading>
-        <div className="links">
+        <IonList className="links">
           <IonItem>
             <IonButton color="light" onClick={() => setIsForgotPass(true)}>
               Olvidaste la contraseña?
@@ -95,7 +95,7 @@ const Home: React.FC = () => {
               Registrate aqui
             </IonButton>
           </IonItem>
-        </div>
+        </IonList>
       </IonContent>
     </IonPage>
   );
