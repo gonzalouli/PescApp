@@ -9,6 +9,8 @@ const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
 const awsServerlessExpressMiddleware = require("aws-serverless-express/middleware");
+const dotenv = require("dotenv");
+dotenv.config();
 
 // declare a new express app
 const app = express();
@@ -45,7 +47,15 @@ app.use(
 );
 
 const keys = require("./routes/keys");
+const activities = require("./routes/activity");
 app.use("/keys", keys);
+app.use("/activities", activities);
+
+const sequelize = require("./database/sequelize");
+require("./database/models/models");
+(async () => {
+  await sequelize.sync();
+})();
 
 app.listen(4444, function () {
   console.log("App started");
