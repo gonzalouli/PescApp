@@ -28,9 +28,7 @@ const MiPerfil: React.FC = () => {
 
   return (
     <IonPage>
-      {changePass && (
-        <Redirect to="/my/Documentation" push={true} exact={true} />
-      )}
+      {changePass && <Redirect to="/my/changePass" push={true} exact={true} />}
       <IonHeader className="header">
         <BackButton refer="/my/home" />
         <IonTitle className="tittle">Mi Perfil</IonTitle>

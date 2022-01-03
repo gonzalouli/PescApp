@@ -43,7 +43,7 @@ const Home: React.FC = () => {
       </IonHeader>
       <IonContent className="form">
         <IonList className="container">
-          <IonItem>
+          <IonItem className="item-container">
             <IonLabel className="label" position="stacked">
               Email
             </IonLabel>
@@ -55,7 +55,7 @@ const Home: React.FC = () => {
               onIonChange={(e) => setEmail(e.detail.value)}
             />
           </IonItem>
-          <IonItem>
+          <IonItem className="item-container">
             <IonLabel className="label" position="stacked">
               Contraseña
             </IonLabel>
@@ -86,12 +86,20 @@ const Home: React.FC = () => {
         <IonLoading isOpen={status.loading}></IonLoading>
         <IonList className="links">
           <IonItem>
-            <IonButton color="light" onClick={() => setIsForgotPass(true)}>
+            <IonButton
+              className="button"
+              color="light"
+              onClick={() => setIsForgotPass(true)}
+            >
               Olvidaste la contraseña?
             </IonButton>
           </IonItem>
           <IonItem>
-            <IonButton color="light" onClick={() => setIsRegister(true)}>
+            <IonButton
+              className="button"
+              color="light"
+              onClick={() => setIsRegister(true)}
+            >
               Registrate aqui
             </IonButton>
           </IonItem>

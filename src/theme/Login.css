@@ -1,9 +1,9 @@
 .text {
-  font-size: 130%;
+  font-size: 120%;
 }
 
 .form {
-  top: 10%;
+  top: 5%;
   display: flex;
   margin: 0 auto;
 }
@@ -14,7 +14,7 @@
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 10px;
-  max-width: 400px;
+  max-width: 300px;
   padding: 10px;
   background-color: rgba(253, 1, 1, 0.63);
   border-radius: 10px;
@@ -37,17 +37,25 @@
 }
 
 .links {
-  position: relative;
-  margin: 0 auto !important;
-  padding-top: 10px;
+  display: flex;
+  flex-direction: column !important;
+  align-items: center;
+  justify-content: center;
+  margin: 5% auto !important;
   max-width: 400px;
 }
 
 .container {
-  margin: 0 auto;
   width: 80%;
 }
 
 .tittle {
   padding: 5% !important;
+}
+.item-container {
+  margin: auto !important;
+}
+
+.button {
+  size: small !important;
 }

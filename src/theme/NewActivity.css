@@ -1,13 +1,17 @@
-.label{
-    font-size: 130% !important;
+.label {
+  font-size: 130% !important;
 }
 
-.container{
-    margin-top: 5% !important;
+.container {
+  margin-top: 5% !important;
 }
 
-.dates{
-    margin: 0 auto !important;
-    width: 60%;
-    margin-top: 20% !important;
+.dates {
+  margin: 0 auto !important;
+  width: 60%;
+  margin-top: 20% !important;
+}
+
+.submit {
+  padding-bottom: 10%;
 }

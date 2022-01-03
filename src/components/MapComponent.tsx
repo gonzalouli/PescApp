@@ -99,6 +99,7 @@ const MapComponent: React.VFC = () => {
         params
       );
       setKey(response.headers["google-key"]);
+      console.log(key)
     })();
 
     currentPosition();
