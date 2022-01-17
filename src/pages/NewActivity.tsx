@@ -107,11 +107,9 @@ export default function NewActivity() {
             </IonButton>
           </IonList>
           <div className="submit buttons">
-            <IonItem>
-              <IonButton className="save" onClick={sendNewActivity}>
-                Guardar
-              </IonButton>
-            </IonItem>
+            <IonButton className="save" onClick={sendNewActivity}>
+              Guardar
+            </IonButton>
           </div>
         </IonContent>
       </Fragment>
