@@ -21,6 +21,7 @@ import { nanoid } from "nanoid";
 import React, { useRef, useState } from "react";
 import BackButton from "../components/BackButton";
 import RefreshComponent from "../components/RefreshComponent";
+import "../theme/NewDocumentation.css";
 
 export default function NewDocumentation() {
   const [description, setDescription] = useState("");
@@ -123,8 +124,8 @@ export default function NewDocumentation() {
       </IonHeader>
       <IonContent>
         <RefreshComponent />
-        <IonList className="item-container">
-          <IonItem className="item-container">
+        <IonList className="form-container">
+          <IonItem>
             <IonLabel className="label" position="floating">
               Nombre
             </IonLabel>
@@ -135,7 +136,8 @@ export default function NewDocumentation() {
               onIonChange={handleName}
             />
           </IonItem>
-          <IonItem className="item-container">
+
+          <IonItem className="image">
             <input
               type="file"
               accept="image/*"
@@ -143,13 +145,10 @@ export default function NewDocumentation() {
               ref={fileInputRef}
               hidden
             ></input>
-            <img
-              className="placeholder"
-              src={imageUrl}
-              alt=""
-              onClick={handlePictureClick}
-            />
+
+            <img src={imageUrl} alt="" onClick={handlePictureClick} />
           </IonItem>
+
           <IonItem className="description">
             <IonLabel className="label" position="floating">
               Descripción
@@ -159,19 +158,17 @@ export default function NewDocumentation() {
               onIonChange={handleTextChange}
             ></IonTextarea>
           </IonItem>
-          <div className="submit buttons">
-            <IonList className="submit buttons">
-              <IonItem>
-                <IonButton className="save" onClick={saveAndBack}>
-                  Guardar
-                </IonButton>
-              </IonItem>
-              <IonItem>
-                <IonButton className="save" onClick={saveAndNew}>
-                  Guardar y nuevo
-                </IonButton>
-              </IonItem>
-            </IonList>
+          <div className="buttons">
+            <IonItem>
+              <IonButton className="save" onClick={saveAndBack}>
+                Guardar
+              </IonButton>
+            </IonItem>
+            <IonItem>
+              <IonButton className="save" onClick={saveAndNew}>
+                Guardar y nuevo
+              </IonButton>
+            </IonItem>
           </div>
         </IonList>
 
@@ -211,10 +208,14 @@ export default function NewDocumentation() {
                       </svg>
                       Borrar
                     </IonButton>
-                    <IonCardTitle className="card">{item.name}</IonCardTitle>
-                    <img src={item.imageUrl} alt={item.id} />
+                    <IonCardTitle className="name">{item.name}</IonCardTitle>
+                    <div className="card-img">
+                      <img src={item.imageUrl} alt={item.id} />
+                    </div>
                   </IonCardHeader>
-                  <IonCardContent>{item.description}</IonCardContent>
+                  <IonCardContent className="card-desc">
+                    {item.description}
+                  </IonCardContent>
                 </IonCard>
               );
             })}

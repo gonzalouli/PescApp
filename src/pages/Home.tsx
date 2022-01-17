@@ -65,8 +65,10 @@ const Home: React.FC = () => {
       )}
 
       <IonHeader className="header">
-        <MiPerfilButton text="Mi Perfil"></MiPerfilButton>
-        <LogOutButton></LogOutButton>
+        <div className="profile">
+          <MiPerfilButton text="Mi Perfil"></MiPerfilButton>
+          <LogOutButton></LogOutButton>
+        </div>
       </IonHeader>
       <IonContent>
         <RefreshComponent />

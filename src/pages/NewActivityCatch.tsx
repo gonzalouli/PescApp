@@ -25,6 +25,7 @@ import { Camera, CameraResultType } from "@capacitor/camera";
 import "../theme/NewActivityCatch.css";
 import { randomBytes } from "crypto";
 import { nanoid } from "nanoid";
+import "../theme/NewDocumentation.css";
 
 export default function NewActivityCatch() {
   const [description, setDescription] = useState("");
@@ -34,7 +35,7 @@ export default function NewActivityCatch() {
   const [name, setName] = useState("");
   const fileInputRef = useRef<HTMLInputElement>();
   const [tempactivity, setTempactivity] = useState(
-    JSON.parse(window.sessionStorage.getItem("newActivity"))
+    JSON.parse(window.sessionStorage.getItem("newActivity")) || []
   );
 
   const [piece, setPiece] = useState({
@@ -127,10 +128,10 @@ export default function NewActivityCatch() {
       </IonHeader>
       <IonContent>
         <RefreshComponent />
-        <IonList className="content-container">
-          <IonItem className="item-container">
+        <IonList className="form-container">
+          <IonItem>
             <IonLabel className="label" position="floating">
-              Nombre de especie
+              Nombre
             </IonLabel>
             <IonInput
               className="text"
@@ -139,7 +140,8 @@ export default function NewActivityCatch() {
               onIonChange={handleName}
             />
           </IonItem>
-          <IonItem className="item-container">
+
+          <IonItem className="image">
             <input
               type="file"
               accept="image/*"
@@ -147,13 +149,10 @@ export default function NewActivityCatch() {
               ref={fileInputRef}
               hidden
             ></input>
-            <img
-              className="placeholder"
-              src={imageUrl}
-              alt=""
-              onClick={handlePictureClick}
-            />
+
+            <img src={imageUrl} alt="" onClick={handlePictureClick} />
           </IonItem>
+
           <IonItem className="description">
             <IonLabel className="label" position="floating">
               Descripción
@@ -163,9 +162,7 @@ export default function NewActivityCatch() {
               onIonChange={handleTextChange}
             ></IonTextarea>
           </IonItem>
-        </IonList>
-        <div className="submit buttons">
-          <IonList className="submit buttons">
+          <div className="buttons">
             <IonItem>
               <IonButton className="save" onClick={saveAndBack}>
                 Guardar
@@ -176,8 +173,8 @@ export default function NewActivityCatch() {
                 Guardar y nuevo
               </IonButton>
             </IonItem>
-          </IonList>
-        </div>
+          </div>
+        </IonList>
 
         <IonList className="capturas">
           <IonItem className="capturas">

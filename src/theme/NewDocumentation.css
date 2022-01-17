@@ -1,38 +1,64 @@
-.placeholder{
-    margin: 0 auto;
-    width: 70%;
-    height: 100%;
-    cursor: pointer;
+.placeholder {
+  cursor: pointer;
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
 }
 
-.item-container{
-    margin-top: 10%;
-    margin: 5%;
+.image {
+  margin: 3vh auto;
+  text-align: center;
+  align-items: center;
 }
 
-
-.capturas{
-    margin-top: 3%;
-    padding: 0;
+.description {
+  margin-top: 0px;
 }
 
-.submit{
-    display: flex;
-    flex-direction: column;
+.capturas {
+  margin-top: 3%;
+  padding: 0;
 }
 
-.capturasNuevas{
-    text-align: center;
-    display: flex;
-    justify-content: space-between ;
+.submit {
+  display: flex;
+  flex-direction: column;
 }
 
-.card{
-    margin:5px;
+.save {
+  margin: 0 auto;
 }
 
-.buttonPopUp{
-    border: none;
-    background-color: transparent;
-    outline: none;
+.capturasNuevas {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  margin: 5px;
+}
+
+.card-img {
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonPopUp {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.name {
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.card-desc {
+  font-size: 130%;
+  text-align: center;
 }

@@ -8,3 +8,9 @@
   font-size: 25px !important;
   margin: 1em;
 }
+
+.profile {
+  justify-content: space-between;
+  margin: auto;
+  text-align: center;
+}

@@ -1,23 +1,23 @@
-
-
-.formItem{
-    margin: 0 auto;
+.formItem {
+  margin: 0 auto;
+  padding: 0 auto;
+  display: initial;
 }
 
-.buttons{
-    display:flex;
-    align-items: center;
-    margin-top: 5% !important;
-    flex-direction: row;
-    justify-content: center;
-    
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 2% !important;
+  flex-direction: row;
+  justify-content: center;
 }
 
-.container{
-    margin: 0 auto;
-    width: 80%;
+.container {
+  margin: 0 auto;
+  width: 80%;
+  margin-top: 3vh !important;
 }
 
-.save{
-    height: 40px;
+.save {
+  height: 40px;
 }
