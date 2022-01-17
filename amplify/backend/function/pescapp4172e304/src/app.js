@@ -48,8 +48,10 @@ app.use(
 
 const keys = require("./routes/keys");
 const activities = require("./routes/activity");
+const register = require("./routes/register");
 app.use("/keys", keys);
 app.use("/activities", activities);
+app.use("/register", register);
 
 const sequelize = require("./database/sequelize");
 require("./database/models/models");

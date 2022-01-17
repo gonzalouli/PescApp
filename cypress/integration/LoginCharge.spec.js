@@ -1,8 +1,6 @@
 /// <reference types="cypress" />
 /// <reference types="cypress-xpath" />
 
-const { getTypeParameterOwner } = require("typescript");
-
 describe("Carga el login adecuadamente", () => {
   beforeEach(() => {
     cy.visit("login");

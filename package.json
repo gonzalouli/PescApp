@@ -67,7 +67,8 @@
     "start": "ionic serve",
     "build": "ionic build",
     "test": "cypress run",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -83,7 +84,7 @@
   "devDependencies": {
     "@capacitor/cli": "^3.3.1",
     "@types/leaflet": "^1.7.6",
-    "cypress": "^9.2.0",
+    "cypress": "^9.2.1",
     "cypress-xpath": "^1.6.2"
   },
   "description": "An Ionic project"

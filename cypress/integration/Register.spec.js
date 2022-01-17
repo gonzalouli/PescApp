@@ -54,10 +54,6 @@ describe("Carga el registro adecuadamente", () => {
       '//*[@id="root"]/ion-app/div/ion-content/ion-grid/ion-row[5]/button'
     ).click();
 
-    cy.get(".error").should(
-      "contain",
-      "Error en el registro, compruebe sus datos"
-    );
     cy.wait(3000);
 
     //se ocultan

@@ -6,10 +6,7 @@ import {
   IonItem,
   IonLabel,
   IonList,
-  IonLoading,
   IonPage,
-  IonRefresher,
-  IonRefresherContent,
   IonTitle,
 } from "@ionic/react";
 import React, { Fragment, useEffect, useState } from "react";
@@ -21,10 +18,11 @@ import "../theme/NewActivity.css";
 
 export default function NewActivity() {
   const [name, setName] = useState(
-    JSON.parse(window.sessionStorage.getItem("newActivity")).name || ""
+    JSON.parse(window.sessionStorage.getItem("newActivity"))?.name || ""
   );
 
   const handleChange = (e) => {
+    e.preventDefault();
     const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
     setName(e.target.value);
     activity.name = name;

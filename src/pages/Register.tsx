@@ -12,6 +12,7 @@ import {
   IonRow,
   IonTitle,
 } from "@ionic/react";
+import axios from "axios";
 import React, { useState } from "react";
 import BackButton from "../components/BackButton";
 import "../theme/Register.css";
@@ -24,10 +25,24 @@ export default function Register() {
   const [shownNew, setShownNew] = useState(false);
   const [shownRepeat, setShownRepeat] = useState(false);
 
-  const [status, setStatus] = useState({ loading: false, error: true });
+  const [status, setStatus] = useState({ loading: false, error: false });
 
   const switchShownNew = () => setShownNew(!shownNew);
   const switchShownRepeat = () => setShownRepeat(!shownRepeat);
+
+  const handleRegister = async () => {
+    axios
+      .post("/register/new", {
+        name,
+        surname,
+        email,
+        newpass,
+        repeatpass,
+      })
+      .then((res) => {
+        setStatus({ loading: false, error: res.data.status });
+      });
+  };
 
   return (
     <IonPage>
@@ -197,7 +212,7 @@ export default function Register() {
           )}
         </IonGrid>
         <div className="submit buttons">
-          <IonButton className="save" onClick={() => {}}>
+          <IonButton className="save" onClick={handleRegister}>
             Registrarse
           </IonButton>
         </div>
