@@ -10,7 +10,7 @@
 }
 
 .profile {
-  justify-content: space-between;
-  margin: auto;
-  text-align: center;
+  display: flex;
+  margin: 0 auto;
+  padding: 2%;
 }

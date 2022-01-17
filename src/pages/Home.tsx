@@ -64,12 +64,13 @@ const Home: React.FC = () => {
         <Redirect to="/my/Documentation" push={true} exact={true} />
       )}
 
-      <IonHeader className="header">
-        <div className="profile">
+      <div className="profile">
+        <IonHeader className="header">
           <MiPerfilButton text="Mi Perfil"></MiPerfilButton>
           <LogOutButton></LogOutButton>
-        </div>
-      </IonHeader>
+        </IonHeader>
+      </div>
+
       <IonContent>
         <RefreshComponent />
         <IonList className="container-home">

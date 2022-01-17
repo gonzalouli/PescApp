@@ -51,6 +51,7 @@
 
 .tittle {
   padding: 5% !important;
+  align-items: center;
 }
 .item-container {
   margin: auto !important;

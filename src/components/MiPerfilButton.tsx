@@ -1,6 +1,7 @@
 import { IonButton } from "@ionic/react";
 import React, { Fragment, useState } from "react";
 import { Redirect } from "react-router";
+import "../theme/Home.css";
 
 export default function MiPerfil({ text }) {
   const [isMyProfile, setIsMyProfile] = useState<boolean>(false);
@@ -10,6 +11,7 @@ export default function MiPerfil({ text }) {
       {isMyProfile && <Redirect to="/my/profile" push={true} exact={true} />}
 
       <IonButton
+        className="miperfilbutton"
         onClick={() => {
           setIsMyProfile(true);
         }}

@@ -1,6 +1,7 @@
 import { IonButton } from "@ionic/react";
 import React, { Fragment, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
+import "../theme/Home.css";
 
 export default function LogOutButton() {
   const [logout, setLogout] = useState<boolean>(false);
@@ -16,7 +17,7 @@ export default function LogOutButton() {
   return (
     <Fragment>
       {logout && <Redirect to="/login" push={true} exact={true} />}
-      <IonButton onClick={() => handleLogOut()}>
+      <IonButton className="logoutbutton" onClick={() => handleLogOut()}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="icon icon-tabler icon-tabler-logout"
