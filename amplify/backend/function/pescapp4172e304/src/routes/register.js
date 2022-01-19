@@ -3,45 +3,41 @@ const express = require("express");
 const register = express.Router();
 const Amplify = require("aws-amplify");
 
-register.post("/new", async (req, res) => {
-  const mailReg = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+const AWS = require("aws-sdk");
 
-  const { name, surname, email, newpass, repeatpass } = req.body;
+register.post("/confirm", async (req, res) => {
+  const AWS_REGION = "eu-west-1";
+  const AWS_COGNITO_USER_POOL_ID = "eu-west-1_lIa28Qaxw";
 
-  if (name === "" || surname === "")
-    return res.json({
-      error: true,
-      msg: "El nombre y apellido no deben de estar vacíos",
-    });
-  if (newpass !== repeatpass)
-    return res.json({ error: true, msg: "Las contraseñas deben coincidir" });
+  const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider(
+    {
+      apiVersion: "latest",
+      region: AWS_REGION,
+    }
+  );
 
-  if (newpass.length < 8)
-    return res.json({
-      error: true,
-      msg: "La contraseña debe de tener al menos 8 carácteres",
-    });
+  const confirmParams = {
+    UserPoolId: AWS_COGNITO_USER_POOL_ID,
+    Username: req.body.username,
+  };
 
-  if (!mailReg.test(email))
-    return res.json({ error: true, msg: "El email debe de ser valido" });
-  //email = cognito username
   try {
-    const signUpRes = await Amplify.signUp({
-      email,
-      newpass,
-      attribute: {
-        name: name,
-        surname: surname,
-      },
-    });
-  } catch (error) {
-    return res.json({ error: true, msg: error.msg, cognito: error });
-  }
+    const result = await cognitoidentityserviceprovider
+      .adminConfirmSignUp(confirmParams)
+      .promise();
 
-  return res.json({
-    error: false,
-    msg: "Verifique su correo electrónico para completar el registro",
-  });
+    return res.json({
+      error: false,
+      msg: "Todo ok",
+      data: result,
+    });
+  } catch (err) {
+    return res.json({
+      error: true,
+      msg: "Error",
+      data: {},
+    });
+  }
 });
 
 module.exports = register;
