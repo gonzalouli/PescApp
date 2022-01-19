@@ -72,7 +72,7 @@ const Home: React.FC = () => {
       </div>
 
       <IonContent>
-        <RefreshComponent />
+        <RefreshComponent goto="/home" />
         <IonList className="container-home">
           <IonButton
             className="main-button"

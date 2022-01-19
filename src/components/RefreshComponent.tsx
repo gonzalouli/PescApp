@@ -1,13 +1,14 @@
 import { IonRefresher, IonRefresherContent } from "@ionic/react";
 import React from "react";
 import { RefresherEventDetail } from "@ionic/core";
+import { Redirect } from "react-router";
 
-export default function RefreshComponent() {
+export default function RefreshComponent(goto) {
   function doRefresh(event: CustomEvent<RefresherEventDetail>) {
     setTimeout(() => {
-      window.location.reload();
+      <Redirect to={goto} push={true} exact={true} />;
       event.detail.complete();
-    }, 2000);
+    }, 1000);
   }
   return (
     <IonRefresher

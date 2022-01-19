@@ -7,7 +7,6 @@ import {
   IonInput,
   IonItem,
   IonLabel,
-  IonList,
   IonPage,
   IonRow,
   IonTitle,
