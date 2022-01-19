@@ -165,7 +165,7 @@ export default function NewDocumentation() {
               </IonButton>
             </IonItem>
             <IonItem>
-              <IonButton className="save" onClick={saveAndNew}>
+              <IonButton className="saveAndNew" onClick={saveAndNew}>
                 Guardar y nuevo
               </IonButton>
             </IonItem>

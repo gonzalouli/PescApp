@@ -169,7 +169,7 @@ export default function NewActivityCatch() {
               </IonButton>
             </IonItem>
             <IonItem>
-              <IonButton className="save" onClick={saveAndNew}>
+              <IonButton className="saveAndNew" onClick={saveAndNew}>
                 Guardar y nuevo
               </IonButton>
             </IonItem>

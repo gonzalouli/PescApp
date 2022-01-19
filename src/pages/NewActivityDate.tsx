@@ -41,6 +41,7 @@ export default function NewActivityDate() {
           <IonItem>
             <IonLabel>Fecha inicio</IonLabel>
             <IonDatetime
+              className="fechaIni"
               displayFormat="YYYY MM DD"
               value={fechaInicio}
               onIonChange={(e) => {
@@ -59,6 +60,7 @@ export default function NewActivityDate() {
           <IonItem>
             <IonLabel>Fecha fin</IonLabel>
             <IonDatetime
+              className="fechaFin"
               displayFormat="YYYY MM DD"
               value={fechaFin}
               onIonChange={(e) => {
@@ -77,6 +79,7 @@ export default function NewActivityDate() {
           <IonItem>
             <IonLabel>Hora inicio</IonLabel>
             <IonDatetime
+              className="horaIni"
               displayFormat="HH:mm"
               value={horaInicio}
               onIonChange={(e) => {
@@ -95,6 +98,7 @@ export default function NewActivityDate() {
           <IonItem>
             <IonLabel>Hora fin</IonLabel>
             <IonDatetime
+              className="horaFin"
               displayFormat="HH:mm"
               value={horaFin}
               onIonChange={(e) => {
