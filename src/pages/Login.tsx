@@ -26,7 +26,7 @@ interface Props {
 const Home: React.FC = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [status, setStatus] = useState({ loading: false, error: true });
+  const [status, setStatus] = useState({ loading: false, error: false });
   const [isLog, setIsLog] = useState<boolean>(false);
   const [isRegister, setIsRegister] = useState<boolean>(false);
   const [isForgotPass, setIsForgotPass] = useState<boolean>(false);
@@ -38,6 +38,7 @@ const Home: React.FC = () => {
       await API.get("api9000aeb3", "/keys/googlemapsallowed", {});
     } catch (error) {
       console.error(error);
+      setStatus({ loading: false, error: true });
     }
   };
   //

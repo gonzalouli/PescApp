@@ -9,3 +9,11 @@
   margin: 0 auto;
   max-width: 200px;
 }
+
+.codeMsg {
+  font-size: 150%;
+  text-align: center;
+}
+.codeEmail {
+  text-align: center;
+}

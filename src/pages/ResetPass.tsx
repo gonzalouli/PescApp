@@ -15,6 +15,7 @@ import React, { useEffect, useState } from "react";
 import BackButton from "../components/BackButton";
 import { Auth } from "aws-amplify";
 import "../theme/ResetPass.css";
+import { Redirect } from "react-router";
 
 export default function ResetPass() {
   const [email, setEmail] = useState("");
@@ -28,6 +29,9 @@ export default function ResetPass() {
     error: false,
     msg: "",
   });
+  const [verifiedmsg, setVerifiedmsg] = useState(false);
+  const [verified, setVerified] = useState(false);
+
   const switchShownNew = () => setShownNew(!shownNew);
   const switchShownRepeat = () => setShownRepeat(!shownRepeat);
 
@@ -54,7 +58,19 @@ export default function ResetPass() {
         });
         return;
       }
-      await Auth.forgotPasswordSubmit(email, code, newpass);
+      await Auth.forgotPasswordSubmit(email, code, newpass)
+        .then(() => {
+          setVerifiedmsg(true);
+          setTimeout(() => {
+            setVerified(true);
+          }, 2000);
+        })
+        .catch(() => {
+          setStatus({
+            error: true,
+            msg: "Codigo erróneo",
+          });
+        });
     } catch (error) {
       console.error(error);
     }
@@ -62,39 +78,43 @@ export default function ResetPass() {
 
   return (
     <IonPage>
+      {verified && <Redirect to="/login" push={true} exact={true} />}
+
       <IonHeader className="header">
         <BackButton refer="/login" />
         <IonTitle className="tittle"></IonTitle>
       </IonHeader>
       <IonContent>
-        <IonList>
-          <IonItem>
-            <IonLabel className="label" position="stacked">
-              Introduzca el email de su cuenta
-            </IonLabel>
-            <IonLabel className="label" position="floating">
-              Email
-            </IonLabel>
-            <IonInput
-              className="emailRecover"
-              type="email"
-              value={email}
-              placeholder="Email de recuperacion"
-              onIonChange={(e) => setEmail(e.detail.value)}
-            />
-          </IonItem>
-          <IonButton
-            className="entrar"
-            onClick={handleChangePass}
-            expand="block"
-          >
-            Enviar
-          </IonButton>
-        </IonList>
+        {!putcode && (
+          <IonList>
+            <IonItem>
+              <IonLabel className="label" position="stacked">
+                Introduzca el email de su cuenta
+              </IonLabel>
+              <IonLabel className="label" position="floating">
+                Email
+              </IonLabel>
+              <IonInput
+                className="emailRecover"
+                type="email"
+                value={email}
+                placeholder="Email de recuperacion"
+                onIonChange={(e) => setEmail(e.detail.value)}
+              />
+            </IonItem>
+            <IonButton
+              className="entrar"
+              onClick={handleChangePass}
+              expand="block"
+            >
+              Enviar
+            </IonButton>
+          </IonList>
+        )}
         {putcode && (
           <IonList>
-            <IonItem className="codeMsg">
-              <IonLabel color="danger">
+            <IonItem className="codeEmail label">
+              <IonLabel className="ion-text-wrap" color="danger">
                 Se ha enviado un codigo a su correo
               </IonLabel>
             </IonItem>
@@ -217,14 +237,21 @@ export default function ResetPass() {
                 )}
               </button>
             </IonRow>
+            {verifiedmsg && (
+              <IonItem className="codeMsg">
+                <IonLabel color="primary">Contraseña establecida</IonLabel>
+              </IonItem>
+            )}
             {status.error && (
               <IonItem className="codeMsg">
                 <IonLabel color="danger">{status.msg}</IonLabel>
               </IonItem>
             )}
-            <IonButton className="save" onClick={handleRecoverPass}>
-              Aceptar
-            </IonButton>
+            {!verifiedmsg && (
+              <IonButton className="save" onClick={handleRecoverPass}>
+                Aceptar
+              </IonButton>
+            )}
           </IonList>
         )}
       </IonContent>
