@@ -27,8 +27,8 @@ app.use(function (req, res, next) {
 //agrega router
 app.use(
   cors({
-    credentials: true,
-    origin: true,
+    // credentials: true,
+    // origin: true,
     exposedHeaders: ["Google-Key"],
   })
 );

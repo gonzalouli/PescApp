@@ -11,9 +11,16 @@ import {
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import BackButton from "../components/BackButton";
+import { Auth } from "aws-amplify";
 
 export default function ResetPass() {
   const [email, setEmail] = useState("");
+
+  const handleChangePass = () => {
+    try {
+      Auth.forgotPassword(email);
+    } catch (error) {}
+  };
 
   return (
     <IonPage>
@@ -35,7 +42,11 @@ export default function ResetPass() {
               onIonChange={(e) => setEmail(e.detail.value)}
             />
           </IonItem>
-          <IonButton className="entrar" type="submit" expand="block">
+          <IonButton
+            className="entrar"
+            onClick={handleChangePass}
+            expand="block"
+          >
             Enviar
           </IonButton>
         </IonList>
