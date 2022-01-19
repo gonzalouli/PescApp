@@ -5,10 +5,10 @@ import { Redirect } from "react-router";
 
 export default function RefreshComponent(goto) {
   function doRefresh(event: CustomEvent<RefresherEventDetail>) {
-    setTimeout(() => {
-      <Redirect to={goto} push={true} exact={true} />;
-      event.detail.complete();
-    }, 1000);
+    // setTimeout(() => {
+    //   <Redirect to={goto} push={true} exact={true} />;
+    //   event.detail.complete();
+    // }, 1000);
   }
   return (
     <IonRefresher

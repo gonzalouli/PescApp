@@ -123,7 +123,7 @@ export default function NewDocumentation() {
         <IonTitle className="tittle">Nueva Doc.</IonTitle>
       </IonHeader>
       <IonContent>
-        <RefreshComponent />
+        {/* <RefreshComponent /> */}
         <IonList className="form-container">
           <IonItem>
             <IonLabel className="label" position="floating">

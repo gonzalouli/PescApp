@@ -60,7 +60,7 @@ export default function NewActivityTackle() {
         <IonTitle className="tittle">Equipo utilizado</IonTitle>
       </IonHeader>
       <IonContent>
-        <RefreshComponent />
+        {/* <RefreshComponent /> */}
         <IonLabel className="labelNombre">Nombre</IonLabel>
         <IonItem>
           <form className="formTackle" onSubmit={addItem}>

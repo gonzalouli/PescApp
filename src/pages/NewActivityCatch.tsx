@@ -127,7 +127,7 @@ export default function NewActivityCatch() {
         <IonTitle className="tittle">Nueva Captura</IonTitle>
       </IonHeader>
       <IonContent>
-        <RefreshComponent />
+        {/* <RefreshComponent /> */}
         <IonList className="form-container">
           <IonItem>
             <IonLabel className="label" position="floating">

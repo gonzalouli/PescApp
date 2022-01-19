@@ -62,7 +62,7 @@ export default function NewActivity() {
           <IonTitle className="tittle">Nueva Actividad</IonTitle>
         </IonHeader>
         <IonContent>
-          <RefreshComponent />
+          {/* <RefreshComponent /> */}
           <IonList className="container">
             <IonItem className="name">
               <IonLabel className="label" position="floating">

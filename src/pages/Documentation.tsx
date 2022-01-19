@@ -48,7 +48,7 @@ export default function Documentation() {
         <IonTitle className="tittle">Documentación</IonTitle>
       </IonHeader>
       <IonContent>
-        <RefreshComponent />
+        {/* <RefreshComponent /> */}
         <IonList className="container">
           <IonButton
             className="main-button"

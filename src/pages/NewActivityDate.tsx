@@ -36,7 +36,7 @@ export default function NewActivityDate() {
         <IonTitle className="tittle">Nueva Fecha</IonTitle>
       </IonHeader>
       <IonContent>
-        <RefreshComponent />
+        {/* <RefreshComponent /> */}
         <IonList className="form-content">
           <IonItem>
             <IonLabel>Fecha inicio</IonLabel>
