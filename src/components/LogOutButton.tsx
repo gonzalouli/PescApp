@@ -2,12 +2,18 @@ import { IonButton } from "@ionic/react";
 import React, { Fragment, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import "../theme/Home.css";
+import { Auth } from "aws-amplify";
 
 export default function LogOutButton() {
   const [logout, setLogout] = useState<boolean>(false);
 
-  const handleLogOut = () => {
-    setLogout(true);
+  const handleLogOut = async () => {
+    try {
+      await Auth.signOut();
+      setLogout(true);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   useEffect(() => {

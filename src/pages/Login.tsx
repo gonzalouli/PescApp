@@ -8,8 +8,6 @@ import {
   IonList,
   IonLoading,
   IonPage,
-  IonRouterLink,
-  IonText,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -17,6 +15,9 @@ import "../theme/Login.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
+import { Auth } from "aws-amplify";
+import { CognitoUser } from "amazon-cognito-identity-js";
+import { API } from "aws-amplify";
 
 interface Props {
   onLogin: () => void;
@@ -30,6 +31,16 @@ const Home: React.FC = () => {
   const [isRegister, setIsRegister] = useState<boolean>(false);
   const [isForgotPass, setIsForgotPass] = useState<boolean>(false);
 
+  const handleLogin = async () => {
+    try {
+      const user: CognitoUser = await Auth.signIn(email, pass);
+      setIsLog(true);
+      await API.get("api9000aeb3", "/keys/googlemapsallowed", {});
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  //
   return (
     <IonPage>
       {isLog && <Redirect to="/my/home" push={true} exact={true} />}
@@ -77,11 +88,10 @@ const Home: React.FC = () => {
           className="entrar"
           type="submit"
           expand="block"
-          onClick={() => setIsLog(true)}
+          onClick={handleLogin}
         >
           Entrar
         </IonButton>
-        {/* onClick={handleLogin} */}
 
         <IonLoading isOpen={status.loading}></IonLoading>
         <IonList className="links">

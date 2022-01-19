@@ -1,7 +1,6 @@
 describe("Se puede establecer una actividad correctamente", () => {
   const date = new Date();
 
-  date.setHours(date.getHours() + 1);
   const nowDate = date.toISOString();
 
   beforeEach(() => {

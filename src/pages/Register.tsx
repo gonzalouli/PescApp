@@ -15,6 +15,12 @@ import axios from "axios";
 import React, { useState } from "react";
 import BackButton from "../components/BackButton";
 import "../theme/Register.css";
+
+import { Auth } from "aws-amplify";
+import { SignUpParams } from "@aws-amplify/auth";
+import { ISignUpResult } from "amazon-cognito-identity-js";
+import { API } from "aws-amplify";
+
 export default function Register() {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
@@ -30,17 +36,54 @@ export default function Register() {
   const switchShownRepeat = () => setShownRepeat(!shownRepeat);
 
   const handleRegister = async () => {
-    axios
-      .post("/register/new", {
-        name,
-        surname,
-        email,
-        newpass,
-        repeatpass,
-      })
-      .then((res) => {
-        setStatus({ loading: false, error: res.data.status });
-      });
+    //   if (name === "" || surname === "")
+    //   return res.json({
+    //     error: true,
+    //     msg: "El nombre y apellido no deben de estar vacíos",
+    //   });
+    // if (newpass !== repeatpass)
+    //   return res.json({ error: true, msg: "Las contraseñas deben coincidir" });
+
+    // if (newpass.length < 8)
+    //   return res.json({
+    //     error: true,
+    //     msg: "La contraseña debe de tener al menos 8 carácteres",
+    //   });
+
+    // if (!mailReg.test(email))
+    //   return res.json({ error: true, msg: "El email debe de ser valido" });
+    // //email = cognito username
+    const data: SignUpParams = {
+      username: email,
+      password: newpass,
+      attributes: {
+        "custom:name": name,
+        "custom:surname": surname,
+      },
+    };
+    try {
+      const res: ISignUpResult = await Auth.signUp(data);
+      /* const {
+        user, // CognitoUser
+        userConfirmed, // boolean
+        userSub, // string
+        codeDeliveryDetails, // CodeDeliveryDetails
+      } = res; */
+      // await Auth.changePassword(user, newpass, newpass);
+    } catch (error) {
+      console.error(error);
+    }
+    try {
+      const init = {
+        body: {
+          username: email,
+        },
+        queryStringParameters: {},
+      };
+      await API.post("api9000aeb3", "/register/confirm", init);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
