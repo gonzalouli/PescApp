@@ -30,29 +30,40 @@ export default function Register() {
   const [shownNew, setShownNew] = useState(false);
   const [shownRepeat, setShownRepeat] = useState(false);
 
-  const [status, setStatus] = useState({ loading: false, error: false });
+  const [status, setStatus] = useState({
+    error: false,
+    msg: "",
+  });
 
   const switchShownNew = () => setShownNew(!shownNew);
   const switchShownRepeat = () => setShownRepeat(!shownRepeat);
 
   const handleRegister = async () => {
-    //   if (name === "" || surname === "")
-    //   return res.json({
-    //     error: true,
-    //     msg: "El nombre y apellido no deben de estar vacíos",
-    //   });
-    // if (newpass !== repeatpass)
-    //   return res.json({ error: true, msg: "Las contraseñas deben coincidir" });
+    const mailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (name === "" || surname === "") {
+      setStatus({
+        error: true,
+        msg: "El nombre y apellido no deben de estar vacíos",
+      });
+      return;
+    }
+    if (!mailReg.test(email)) {
+      setStatus({ error: true, msg: "El email debe de ser valido" });
+      return;
+    }
+    if (newpass !== repeatpass) {
+      setStatus({ error: true, msg: "Las contraseñas deben coincidir" });
+      return;
+    }
+    if (newpass.length < 8) {
+      setStatus({
+        error: true,
+        msg: "La contraseña debe de tener al menos 8 carácteres",
+      });
+      return;
+    }
 
-    // if (newpass.length < 8)
-    //   return res.json({
-    //     error: true,
-    //     msg: "La contraseña debe de tener al menos 8 carácteres",
-    //   });
-
-    // if (!mailReg.test(email))
-    //   return res.json({ error: true, msg: "El email debe de ser valido" });
-    // //email = cognito username
+    //email = cognito username
     const data: SignUpParams = {
       username: email,
       password: newpass,
@@ -247,11 +258,7 @@ export default function Register() {
               )}
             </button>
           </IonRow>
-          {status.error && (
-            <div className="error">
-              Error en el registro, compruebe sus datos
-            </div>
-          )}
+          {status.error && <div className="error">{status.msg}</div>}
         </IonGrid>
         <div className="submit buttons">
           <IonButton className="save" onClick={handleRegister}>
