@@ -23,6 +23,7 @@ import { Geolocation } from "@capacitor/geolocation";
 import "leaflet/dist/leaflet.css";
 import "../theme/NewActivityLocalization.css";
 import MapComponent from "../components/MapComponent";
+import { Redirect } from "react-router";
 
 /* initialize() is important for iOS,
   Android doesn't need any initialization.
@@ -36,6 +37,7 @@ function NewActivityLocalization() {
     JSON.parse(window.sessionStorage.getItem("newActivity")).localization
       .text || ""
   );
+  const [isConfirmed, setIsConfirmed] = useState(false);
 
   const handleTextChange = (e) => {
     const activityMod = JSON.parse(
@@ -50,6 +52,9 @@ function NewActivityLocalization() {
 
   return (
     <IonPage>
+      {isConfirmed && (
+        <Redirect to="/my/NewActivity" push={true} exact={true} />
+      )}
       <IonHeader className="header">
         <BackButton refer="/my/NewActivity" />
         <IonTitle className="tittle">Localización</IonTitle>
@@ -66,7 +71,12 @@ function NewActivityLocalization() {
               onIonChange={handleTextChange}
             ></IonTextarea>
           </IonItem>
-          <IonButton className="button-acept">Aceptar</IonButton>
+          <IonButton
+            className="button-acept"
+            onClick={() => setIsConfirmed(true)}
+          >
+            Aceptar
+          </IonButton>
         </IonList>
       </IonContent>
     </IonPage>

@@ -10,6 +10,7 @@ import {
   IonTitle,
 } from "@ionic/react";
 import React, { useState } from "react";
+import { Redirect } from "react-router";
 import BackButton from "../components/BackButton";
 import RefreshComponent from "../components/RefreshComponent";
 import "../theme/NewActivityDate.css";
@@ -28,9 +29,13 @@ export default function NewActivityDate() {
     JSON.parse(window.sessionStorage.getItem("newActivity")).date.endHour || ""
   );
   const [state, setState] = useState<boolean>(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
 
   return (
     <IonPage>
+      {isConfirmed && (
+        <Redirect to="/my/NewActivity" push={true} exact={true} />
+      )}
       <IonHeader className="header">
         <BackButton refer="/my/newActivity" />
         <IonTitle className="tittle">Nueva Fecha</IonTitle>
@@ -118,7 +123,12 @@ export default function NewActivityDate() {
           <div className="submit buttons">
             <IonList className="submit buttons">
               <IonItem>
-                <IonButton className="save" onClick={() => {}}>
+                <IonButton
+                  className="save"
+                  onClick={() => {
+                    setIsConfirmed(true);
+                  }}
+                >
                   Guardar
                 </IonButton>
               </IonItem>

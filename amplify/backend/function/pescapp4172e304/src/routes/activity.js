@@ -8,4 +8,10 @@ activity.get("/", async (req, res) => {
   return res.json(activities);
 });
 
+activity.post("/insertActivity", async (req, res) => {
+  const [name, date, localization, tackle, catches] = req.body;
+
+  Activity.create();
+});
+
 module.exports = activity;

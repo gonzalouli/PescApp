@@ -89,14 +89,14 @@ export default function NewActivityCatch() {
 
   const saveAndBack = async () => {
     const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
-    await activity.catch.push(piece);
+    await activity.catches.push(piece);
     window.sessionStorage.setItem("newActivity", JSON.stringify(activity));
   };
 
   const saveAndNew = async () => {
     const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
 
-    await activity.catch.push(piece);
+    await activity.catches.push(piece);
     window.sessionStorage.setItem("newActivity", JSON.stringify(activity));
 
     setTempactivity(activity);
@@ -115,7 +115,7 @@ export default function NewActivityCatch() {
   const deletePiece = (id, e) => {
     const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
     console.log(id.id);
-    activity.catch = activity.catch.filter((piece) => piece.id !== id.id);
+    activity.catches = activity.catches.filter((piece) => piece.id !== id.id);
     setTempactivity(activity);
     window.sessionStorage.setItem("newActivity", JSON.stringify(activity));
   };
@@ -183,7 +183,7 @@ export default function NewActivityCatch() {
             </IonLabel>
           </IonItem>
           <IonList>
-            {tempactivity.catch.map((item) => {
+            {tempactivity.catches.map((item) => {
               return (
                 <IonCard className="card" key={item.id}>
                   <IonCardHeader className="card">

@@ -13,21 +13,24 @@ Activity.init(
     },
     UserId: {
       type: DataTypes.STRING,
-      primaryKey: true,
     },
     name: DataTypes.STRING,
     localization: {
       coords: {
-        latitude: DataTypes.FLOAT,
-        longitude: DataTypes.FLOAT,
+        lat: DataTypes.FLOAT,
+        lng: DataTypes.FLOAT,
       },
-      description: DataTypes.STRING,
+      text: DataTypes.STRING,
     },
-    tackle: DataTypes.ARRAY(DataTypes.STRING),
-    catch: DataTypes.ARRAY({
+    tackle: DataTypes.ARRAY({
+      id: DataTypes.STRING,
+      name: DataTypes.STRING,
+    }),
+    catches: DataTypes.ARRAY({
+      id: DataTypes.STRING,
       name: DataTypes.STRING,
       description: DataTypes.STRING,
-      image: DataTypes.STRING,
+      imageUrl: DataTypes.STRING,
     }),
     meteorology: DataTypes.ARRAY({
       hour: DataTypes.DATE,

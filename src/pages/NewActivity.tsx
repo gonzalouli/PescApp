@@ -31,6 +31,7 @@ export default function NewActivity() {
 
   const sendNewActivity = () => {
     //end sending information
+
     window.sessionStorage.removeItem("newActivity");
   };
 
@@ -65,7 +66,7 @@ export default function NewActivity() {
           {/* <RefreshComponent /> */}
           <IonList className="container">
             <IonItem className="name">
-              <IonLabel className="label" position="floating">
+              <IonLabel className="label" position="stacked">
                 Nombre
               </IonLabel>
               <IonInput
