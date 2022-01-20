@@ -102,7 +102,7 @@ const Home: React.FC = () => {
               color="light"
               onClick={() => setIsForgotPass(true)}
             >
-              Olvidaste la contraseña?
+              ¿Olvidaste la contraseña?
             </IonButton>
           </IonItem>
           <IonItem>

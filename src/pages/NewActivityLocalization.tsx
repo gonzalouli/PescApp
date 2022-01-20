@@ -45,7 +45,6 @@ function NewActivityLocalization() {
     );
     setText(e.target.value);
     activityMod.localization.text = text;
-    console.log(e.target.value);
 
     window.sessionStorage.setItem("newActivity", JSON.stringify(activityMod));
   };

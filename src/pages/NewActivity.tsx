@@ -15,6 +15,7 @@ import BackButton from "../components/BackButton";
 import RefreshComponent from "../components/RefreshComponent";
 import "../theme/Header.css";
 import "../theme/NewActivity.css";
+import { API, Auth } from "aws-amplify";
 
 export default function NewActivity() {
   const [name, setName] = useState(
@@ -29,8 +30,34 @@ export default function NewActivity() {
     window.sessionStorage.setItem("newActivity", JSON.stringify(activity));
   };
 
-  const sendNewActivity = () => {
+  const sendNewActivity = async () => {
     //end sending information
+    try {
+      await Auth.currentAuthenticatedUser()
+        .then(async (data) => {
+          const activity = JSON.parse(
+            window.sessionStorage.getItem("newActivity")
+          );
+          API.post("api9000aeb3", "/insertActivity", {
+            ActivityData: {
+              UserId: data.attributes.userName,
+              activity,
+            },
+            UserDataKey: data.attributes.userDataKey,
+          })
+            .then(() => {
+              return "SUSCEED";
+            })
+            .catch(() => {
+              return "ERROR";
+            });
+        })
+        .catch(() => {
+          Auth.signOut();
+        });
+    } catch (e) {
+      console.error(e);
+    }
 
     window.sessionStorage.removeItem("newActivity");
   };

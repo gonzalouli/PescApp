@@ -35,6 +35,7 @@ const MiPerfil: React.FC = () => {
   useEffect(() => {
     !changed &&
       Auth.currentAuthenticatedUser().then((data) => {
+        console.log(data);
         setName(
           data.attributes["custom:name"].replace(/\b\w/g, function (l) {
             return l.toUpperCase();

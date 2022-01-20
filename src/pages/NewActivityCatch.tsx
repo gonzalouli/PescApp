@@ -26,6 +26,7 @@ import "../theme/NewActivityCatch.css";
 import { randomBytes } from "crypto";
 import { nanoid } from "nanoid";
 import "../theme/NewDocumentation.css";
+import { Redirect } from "react-router";
 
 export default function NewActivityCatch() {
   const [description, setDescription] = useState("");
@@ -37,6 +38,7 @@ export default function NewActivityCatch() {
   const [tempactivity, setTempactivity] = useState(
     JSON.parse(window.sessionStorage.getItem("newActivity")) || []
   );
+  const [isConfirmed, setIsConfirmed] = useState(false);
 
   const [piece, setPiece] = useState({
     id: nanoid(),
@@ -91,6 +93,7 @@ export default function NewActivityCatch() {
     const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
     await activity.catches.push(piece);
     window.sessionStorage.setItem("newActivity", JSON.stringify(activity));
+    setIsConfirmed(true);
   };
 
   const saveAndNew = async () => {
@@ -122,6 +125,9 @@ export default function NewActivityCatch() {
 
   return (
     <IonPage>
+      {isConfirmed && (
+        <Redirect to="/my/NewActivity" push={true} exact={true} />
+      )}
       <IonHeader className="header">
         <BackButton refer="/my/NewActivity" />
         <IonTitle className="tittle">Nueva Captura</IonTitle>

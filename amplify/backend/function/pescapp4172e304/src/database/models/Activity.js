@@ -1,6 +1,11 @@
 const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../sequelize");
+const Localization = require("./Localization");
+const Dates = require("./Dates");
+const Tackle = require("./Tackle");
+const Catches = require("./Catches");
+const Meteorology = require("./Meteorology");
 
 class Activity extends Model {}
 
@@ -15,35 +20,11 @@ Activity.init(
       type: DataTypes.STRING,
     },
     name: DataTypes.STRING,
-    localization: {
-      coords: {
-        lat: DataTypes.FLOAT,
-        lng: DataTypes.FLOAT,
-      },
-      text: DataTypes.STRING,
-    },
-    tackle: DataTypes.ARRAY({
-      id: DataTypes.STRING,
-      name: DataTypes.STRING,
-    }),
-    catches: DataTypes.ARRAY({
-      id: DataTypes.STRING,
-      name: DataTypes.STRING,
-      description: DataTypes.STRING,
-      imageUrl: DataTypes.STRING,
-    }),
-    meteorology: DataTypes.ARRAY({
-      hour: DataTypes.DATE,
-      wind: DataTypes.INTEGER,
-      marea: DataTypes.INTEGER,
-      temp: DataTypes.INTEGER,
-    }),
-    date: {
-      initDate: DataTypes.DATE,
-      endDate: DataTypes.DATE,
-      initHour: DataTypes.DATE,
-      endHour: DataTypes.DATE,
-    },
+    localization: Localization,
+    tackle: DataTypes.ARRAY(Tackle),
+    catches: DataTypes.ARRAY(Catches),
+    meteorology: DataTypes.ARRAY(Meteorology),
+    date: Dates,
   },
   {
     sequelize,
