@@ -118,7 +118,7 @@ export default function Register() {
         .catch(() => {
           setStatus({
             error: true,
-            msg: "Codigo erróneo",
+            msg: "Código erróneo",
           });
         });
     } catch (error) {
@@ -315,12 +315,12 @@ export default function Register() {
           <IonList>
             <IonItem className="codeEmail label">
               <IonLabel className="ion-text-wrap" color="danger">
-                Se ha enviado un codigo a su correo
+                Se ha enviado un código a su correo
               </IonLabel>
             </IonItem>
             <IonItem className="confirmCode">
               <IonLabel className="label" position="floating">
-                Introduzca su codigo
+                Introduzca su código
               </IonLabel>
               <IonInput
                 className="text"

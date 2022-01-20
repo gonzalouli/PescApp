@@ -34,6 +34,7 @@ const MapComponent: React.VFC = () => {
   const [clicks, setClicks] = React.useState<google.maps.LatLng>();
   const [zoom, setZoom] = React.useState(14); // initial zoom
   const [center, setCenter] = React.useState<google.maps.LatLngLiteral>({
+    //LatLngLiteral
     lat: 0,
     lng: 0,
   });
@@ -99,7 +100,7 @@ const MapComponent: React.VFC = () => {
         params
       );
       setKey(response.headers["google-key"]);
-      console.log(key)
+      console.log(key);
     })();
 
     currentPosition();

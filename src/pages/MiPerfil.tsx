@@ -18,13 +18,54 @@ import { Redirect } from "react-router";
 import BackButton from "../components/BackButton";
 import "../theme/Header.css";
 import "../theme/MiPerfil.css";
+import { Auth } from "aws-amplify";
 
 const MiPerfil: React.FC = () => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
-  const [dni, setDni] = useState("");
   const [changePass, setChangePass] = useState<boolean>(false);
+  const [verifiedmsg, setVerifiedmsg] = useState(false);
+
+  const [status, setStatus] = useState({
+    error: false,
+    msg: "",
+  });
+  useEffect(() => {
+    Auth.currentAuthenticatedUser().then((data) => {
+      setName(
+        data.attributes["custom:name"].replace(/\b\w/g, function (l) {
+          return l.toUpperCase();
+        })
+      );
+      setSurname(
+        data.attributes["custom:surname"].replace(/\b\w/g, function (l) {
+          return l.toUpperCase();
+        })
+      );
+      setEmail(data.attributes["email"]);
+    });
+  });
+
+  const handleChangeData = async () => {
+    try {
+      await Auth.currentAuthenticatedUser()
+        .then(async (user) => {
+          await Auth.updateUserAttributes(user, {
+            "custom:name": name,
+            "custom:surname": surname,
+          }).then(() => {
+            setVerifiedmsg(true);
+          });
+        })
+        .catch(() => {
+          setStatus({
+            error: true,
+            msg: "No se pudo cambiar los datos, intentelo mas tarde...",
+          });
+        });
+    } catch (error) {}
+  };
 
   return (
     <IonPage>
@@ -34,9 +75,9 @@ const MiPerfil: React.FC = () => {
         <IonTitle className="tittle">Mi Perfil</IonTitle>
       </IonHeader>
       <IonContent>
-        <IonList className="container">
+        {/* <IonList className="container">
           <IonItem>IMAGEN</IonItem>
-        </IonList>
+        </IonList> */}
         <IonList className="container">
           <IonItem className="formItem ">
             <IonLabel className="label" position="stacked">
@@ -46,7 +87,6 @@ const MiPerfil: React.FC = () => {
               className="text"
               type="text"
               value={name}
-              placeholder={name}
               onIonChange={(e) => setName(e.detail.value)}
             />
           </IonItem>
@@ -58,38 +98,25 @@ const MiPerfil: React.FC = () => {
               className="text"
               type="text"
               value={surname}
-              placeholder={surname}
               onIonChange={(e) => setSurname(e.detail.value)}
             />
           </IonItem>
           <IonItem className="formItem">
-            <IonLabel className="label" position="stacked">
+            <IonLabel className="label" position="floating">
               Email
             </IonLabel>
-            <IonInput
-              className="text"
-              type="text"
-              value={email}
+            <IonLabel
+              className="label mail"
               placeholder={email}
-              onIonChange={(e) => setEmail(e.detail.value)}
-            />
-          </IonItem>
-          <IonItem className="formItem">
-            <IonLabel className="label" position="stacked">
-              DNI
+              position="stacked"
+            >
+              {email}
             </IonLabel>
-            <IonInput
-              className="text"
-              type="text"
-              value={dni}
-              placeholder={dni}
-              onIonChange={(e) => setDni(e.detail.value)}
-            />
           </IonItem>
         </IonList>
         <div className="buttons">
           <IonButton
-            className="save"
+            className="save ion-text-wrap"
             onClick={() => {
               setChangePass(true);
             }}
@@ -98,8 +125,22 @@ const MiPerfil: React.FC = () => {
           </IonButton>
         </div>
         <div className="buttons">
-          <IonButton className="save">Guardar</IonButton>
+          <IonButton className="save" onClick={handleChangeData}>
+            Guardar
+          </IonButton>
         </div>
+        {status.error && (
+          <IonItem className="codeMsg">
+            <IonLabel className="ion-text-wrap" color="danger">
+              {status.msg}
+            </IonLabel>
+          </IonItem>
+        )}
+        {verifiedmsg && (
+          <IonItem className="codeMsg">
+            <IonLabel color="primary">Datos establecidos</IonLabel>
+          </IonItem>
+        )}
       </IonContent>
     </IonPage>
   );

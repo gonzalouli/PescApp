@@ -21,3 +21,9 @@
 .save {
   height: 40px;
 }
+
+.mail {
+  display: flex;
+  margin-bottom: 2vh !important;
+  margin-top: 2vh !important;
+}

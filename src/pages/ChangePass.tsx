@@ -18,6 +18,10 @@ import React, { useState } from "react";
 import BackButton from "../components/BackButton";
 import "../theme/Header.css";
 import "../theme/ChangePass.css";
+import { Auth } from "aws-amplify";
+import { SignUpParams } from "@aws-amplify/auth";
+import { Redirect } from "react-router";
+
 const ChangePass: React.FC = () => {
   const [oldpass, setOldPass] = useState("");
   const [newpass, setNewPass] = useState("");
@@ -25,13 +29,62 @@ const ChangePass: React.FC = () => {
   const [shownOld, setShownOld] = useState(false);
   const [shownNew, setShownNew] = useState(false);
   const [shownRepeat, setShownRepeat] = useState(false);
+  const [verifiedmsg, setVerifiedmsg] = useState(false);
+  const [verified, setVerified] = useState(false);
+
+  const [status, setStatus] = useState({
+    error: false,
+    msg: "",
+  });
 
   const switchShownOld = () => setShownOld(!shownOld);
   const switchShownNew = () => setShownNew(!shownNew);
   const switchShownRepeat = () => setShownRepeat(!shownRepeat);
 
+  const handleChangePass = async () => {
+    try {
+      if (newpass !== repeatpass) {
+        setStatus({ error: true, msg: "Las contraseñas deben coincidir" });
+        return;
+      }
+      if (newpass.length < 8) {
+        setStatus({
+          error: true,
+          msg: "La contraseña debe de tener al menos 8 carácteres",
+        });
+        return;
+      }
+      await Auth.currentAuthenticatedUser()
+        .then(
+          async (user) =>
+            await Auth.changePassword(user, oldpass, newpass)
+              .then(() => {
+                setVerifiedmsg(true);
+                setTimeout(() => {
+                  setVerified(true);
+                }, 2000);
+              })
+              .catch((err) => {
+                setStatus({
+                  error: true,
+                  msg: "La antigua contraseña es incorrecta",
+                });
+              })
+        )
+        .catch(() => {
+          setStatus({
+            error: true,
+            msg: "Se produjo un error, intentelo mas tarde...",
+          });
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <IonPage>
+      {verified && <Redirect to="/my/profile" push={true} exact={true} />}
       <IonHeader className="header">
         <BackButton refer="/my/profile" />
       </IonHeader>
@@ -200,14 +253,22 @@ const ChangePass: React.FC = () => {
             </button>
           </IonRow>
         </IonGrid>
+        {verifiedmsg && (
+          <IonItem className="codeMsg">
+            <IonLabel color="primary">Contraseña establecida</IonLabel>
+          </IonItem>
+        )}
+        {status.error && (
+          <IonItem className="codeMsg">
+            <IonLabel className="ion-text-wrap" color="danger">
+              {status.msg}
+            </IonLabel>
+          </IonItem>
+        )}
         <div className="submit buttons">
-          <IonList className="submit buttons">
-            <IonItem>
-              <IonButton className="save" onClick={() => {}}>
-                Guardar
-              </IonButton>
-            </IonItem>
-          </IonList>
+          <IonButton className="save" onClick={handleChangePass}>
+            Guardar
+          </IonButton>
         </div>
       </IonContent>
     </IonPage>
