@@ -26,25 +26,27 @@ const MiPerfil: React.FC = () => {
   const [email, setEmail] = useState("");
   const [changePass, setChangePass] = useState<boolean>(false);
   const [verifiedmsg, setVerifiedmsg] = useState(false);
+  const [changed, setChanged] = useState(false);
 
   const [status, setStatus] = useState({
     error: false,
     msg: "",
   });
   useEffect(() => {
-    Auth.currentAuthenticatedUser().then((data) => {
-      setName(
-        data.attributes["custom:name"].replace(/\b\w/g, function (l) {
-          return l.toUpperCase();
-        })
-      );
-      setSurname(
-        data.attributes["custom:surname"].replace(/\b\w/g, function (l) {
-          return l.toUpperCase();
-        })
-      );
-      setEmail(data.attributes["email"]);
-    });
+    !changed &&
+      Auth.currentAuthenticatedUser().then((data) => {
+        setName(
+          data.attributes["custom:name"].replace(/\b\w/g, function (l) {
+            return l.toUpperCase();
+          })
+        );
+        setSurname(
+          data.attributes["custom:surname"].replace(/\b\w/g, function (l) {
+            return l.toUpperCase();
+          })
+        );
+        setEmail(data.attributes["email"]);
+      });
   });
 
   const handleChangeData = async () => {
@@ -87,7 +89,10 @@ const MiPerfil: React.FC = () => {
               className="text"
               type="text"
               value={name}
-              onIonChange={(e) => setName(e.detail.value)}
+              onIonChange={(e) => {
+                setChanged(true);
+                setName(e.detail.value);
+              }}
             />
           </IonItem>
           <IonItem className="formItem">
@@ -98,7 +103,10 @@ const MiPerfil: React.FC = () => {
               className="text"
               type="text"
               value={surname}
-              onIonChange={(e) => setSurname(e.detail.value)}
+              onIonChange={(e) => {
+                setChanged(true);
+                setSurname(e.detail.value);
+              }}
             />
           </IonItem>
           <IonItem className="formItem">
