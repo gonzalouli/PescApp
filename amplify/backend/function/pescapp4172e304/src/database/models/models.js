@@ -1,3 +1,3 @@
-const Activity = require("./Activity");
+const Activity = require("./Activity/Activity");
 
 module.exports = [Activity];

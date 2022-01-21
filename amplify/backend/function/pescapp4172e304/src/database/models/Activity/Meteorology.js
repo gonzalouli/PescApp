@@ -8,7 +8,7 @@ class Meteorology extends Model {}
 
 Meteorology.init(
   {
-    MeteorologyId: {
+    Id: {
       type: DataTypes.BIGINT,
       autoIncrement: true,
       primaryKey: true,

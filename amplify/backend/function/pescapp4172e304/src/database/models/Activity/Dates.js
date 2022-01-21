@@ -6,7 +6,7 @@ class Dates extends Model {}
 
 Dates.init(
   {
-    DatesId: {
+    Id: {
       type: DataTypes.BIGINT,
       autoIncrement: true,
       primaryKey: true,

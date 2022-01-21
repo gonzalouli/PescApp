@@ -8,7 +8,7 @@ class Localization extends Model {}
 
 Localization.init(
   {
-    LocalizationId: {
+    Id: {
       type: DataTypes.BIGINT,
       autoIncrement: true,
       primaryKey: true,

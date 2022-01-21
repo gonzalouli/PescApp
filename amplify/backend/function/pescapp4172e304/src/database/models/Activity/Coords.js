@@ -6,7 +6,7 @@ class Coords extends Model {}
 
 Coords.init(
   {
-    CoordsId: {
+    Id: {
       type: DataTypes.STRING,
       primaryKey: true,
     },

@@ -6,7 +6,7 @@ class Catches extends Model {}
 
 Catches.init(
   {
-    id: { type: DataTypes.STRING, primaryKey: true },
+    Id: { type: DataTypes.STRING, primaryKey: true },
     name: { type: DataTypes.STRING },
     description: { type: DataTypes.STRING },
     imageUrl: { type: DataTypes.STRING },

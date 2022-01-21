@@ -75,6 +75,8 @@ const App: React.FC = () => {
           <Route exact={true} path="/register">
             <Register />
           </Route>
+          <Redirect exact={true} path="/" to="/login" />
+
           {isLogged && (
             <Fragment>
               <Route exact={true} path="/my/home">
@@ -115,9 +117,6 @@ const App: React.FC = () => {
               </Route>
             </Fragment>
           )}
-
-          <Redirect exact={true} path="/" to="/login" />
-
           <Route>
             <NotFoundPage />
           </Route>

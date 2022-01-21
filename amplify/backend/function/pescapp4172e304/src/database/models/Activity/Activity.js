@@ -11,7 +11,7 @@ class Activity extends Model {}
 
 Activity.init(
   {
-    id: {
+    Id: {
       type: DataTypes.BIGINT,
       autoIncrement: true,
       primaryKey: true,
