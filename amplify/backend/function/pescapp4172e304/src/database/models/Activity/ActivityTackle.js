@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require("../sequelize");
+const sequelize = require("../../sequelize");
 const Activity = require("./Activity");
 const Tackle = require("./Tackle");
 

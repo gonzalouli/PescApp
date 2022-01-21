@@ -1,16 +1,16 @@
 const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require("../sequelize");
+const sequelize = require("../../sequelize");
 
 class Tackle extends Model {}
 
 Tackle.init(
   {
-    id: {
+    TackleId: {
       type: DataTypes.STRING,
       primaryKey: true,
     },
-    name: DataTypes.STRING,
+    name: { type: DataTypes.STRING },
   },
   {
     sequelize,

@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require("../sequelize");
+const sequelize = require("../../sequelize");
 
 class Document extends Model {}
 
@@ -14,9 +14,6 @@ Document.init(
     UserId: {
       type: DataTypes.STRING,
     },
-    name: DataTypes.STRING,
-    description: DataTypes.String,
-    images: DataTypes.ARRAY(DataTypes.STRING),
   },
   {
     sequelize,

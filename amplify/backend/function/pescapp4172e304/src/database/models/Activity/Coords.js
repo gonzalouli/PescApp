@@ -1,17 +1,17 @@
 const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require("../sequelize");
+const sequelize = require("../../sequelize");
 
 class Coords extends Model {}
 
 Coords.init(
   {
-    LocalizationId: {
+    CoordsId: {
       type: DataTypes.STRING,
       primaryKey: true,
     },
-    lat: DataTypes.FLOAT,
-    lng: DataTypes.FLOAT,
+    lat: { type: DataTypes.FLOAT },
+    lng: { type: DataTypes.FLOAT },
   },
   {
     sequelize,

@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require("../sequelize");
-const Activity = require("./Activity");
+const sequelize = require("../../sequelize");
+const Activity = require("./Activity/Activity");
 const Meteorology = require("./Meteorology");
 
 class ActivityMeteorology extends Model {}

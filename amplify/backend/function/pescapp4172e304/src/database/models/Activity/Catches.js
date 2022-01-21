@@ -1,15 +1,15 @@
 const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require("../sequelize");
+const sequelize = require("../../sequelize");
 
 class Catches extends Model {}
 
 Catches.init(
   {
     id: { type: DataTypes.STRING, primaryKey: true },
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    imageUrl: DataTypes.STRING,
+    name: { type: DataTypes.STRING },
+    description: { type: DataTypes.STRING },
+    imageUrl: { type: DataTypes.STRING },
   },
   {
     sequelize,

@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require("../sequelize");
+const sequelize = require("../../sequelize");
 
 const Coords = require("./Coords");
 
@@ -8,8 +8,13 @@ class Localization extends Model {}
 
 Localization.init(
   {
-    coords: Coords,
-    text: DataTypes.STRING,
+    LocalizationId: {
+      type: DataTypes.BIGINT,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+
+    text: { type: DataTypes.STRING },
   },
   {
     sequelize,

@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require("../sequelize");
+const sequelize = require("../../sequelize");
 
 const Coords = require("./Coords");
 
@@ -8,10 +8,15 @@ class Meteorology extends Model {}
 
 Meteorology.init(
   {
-    hour: DataTypes.DATE,
-    wind: DataTypes.INTEGER,
-    marea: DataTypes.INTEGER,
-    temp: DataTypes.INTEGER,
+    MeteorologyId: {
+      type: DataTypes.BIGINT,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    hour: { type: DataTypes.DATE },
+    wind: { tye: DataTypes.INTEGER },
+    marea: { type: DataTypes.INTEGER },
+    temp: { type: DataTypes.INTEGER },
   },
   {
     sequelize,
