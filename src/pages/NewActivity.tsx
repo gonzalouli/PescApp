@@ -40,7 +40,7 @@ export default function NewActivity() {
           );
           API.post("api9000aeb3", "/insertActivity", {
             ActivityData: {
-              UserId: data.attributes.userName,
+              UserIdCognito: data.attributes.userName,
               activity,
             },
             UserDataKey: data.attributes.userDataKey,

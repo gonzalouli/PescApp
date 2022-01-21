@@ -2,10 +2,10 @@ const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../sequelize");
 const Localization = require("./Localization");
-const Dates = require("./Dates");
-const Tackle = require("./Tackle");
-const Catches = require("./Catches");
-const Meteorology = require("./Meteorology");
+// const Dates = require("./Dates");
+// const Tackle = require("./Tackle");
+// const Catches = require("./Catches");
+// const Meteorology = require("./Meteorology");
 
 class Activity extends Model {}
 
@@ -16,12 +16,11 @@ Activity.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    UserId: {
+    UserIdCognito: {
       type: DataTypes.STRING,
     },
-    name: DataTypes.STRING,
-    catches: DataTypes.ARRAY(Catches),
-    meteorology: DataTypes.ARRAY(Meteorology),
+    name: { type: DataTypes.STRING },
+    // meteorology: DataTypes.ARRAY(Meteorology),
   },
   {
     sequelize,
@@ -33,6 +32,6 @@ Activity.init(
 );
 
 Activity.belongsTo(Localization);
-Activity.belongsTo(Dates);
+// Activity.belongsTo(Dates);
 
 module.exports = Activity;

@@ -99,7 +99,6 @@ export default function Register() {
         },
         queryStringParameters: {},
       };
-      await API.post("api9000aeb3", "/register/confirm", init);
     } catch (error) {
       console.error(error);
     }
@@ -108,7 +107,7 @@ export default function Register() {
 
   const handleValidate = async () => {
     try {
-      Auth.confirmSignUp(email, code)
+      await Auth.confirmSignUp(email, code)
         .then(() => {
           setVerifiedmsg(true);
           setTimeout(() => {

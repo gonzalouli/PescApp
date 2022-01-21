@@ -12,6 +12,15 @@
       "args": [".env"],
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Reset Database",
+      "program": "${workspaceFolder}/amplify/backend/function/pescapp4172e304/src/database/restDatabase.js",
+      "args": [".env"],
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "node"
     }
   ]
 }

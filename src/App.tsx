@@ -38,64 +38,88 @@ import NewActivityCatch from "./pages/NewActivityCatch";
 import Documentation from "./pages/Documentation";
 import NewDocumentation from "./pages/NewDocumentation";
 import MyDocumentation from "./pages/MyDocumentation";
+import { Auth } from "aws-amplify";
+import { Fragment, useEffect, useState } from "react";
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <Switch>
-        <Route exact={true} path="/login">
-          <Login />
-        </Route>
-        <Route exact={true} path="/my/home">
-          <Home />
-        </Route>
-        <Route exact={true} path="/my/profile">
-          <MiPerfil />
-        </Route>
-        <Route exact={true} path="/my/changePass">
-          <ChangePass />
-        </Route>
-        <Route exact={true} path="/my/NewActivity">
-          <NewActivity />
-        </Route>
-        <Route exact={true} path="/my/NewActivity/Date">
-          <NewActivityDate />
-        </Route>
-        <Route exact={true} path="/my/NewActivity/Tackle">
-          <NewActivityTackle />
-        </Route>
-        <Route exact={true} path="/my/NewActivity/Localization">
-          <NewActivityLocalization />
-        </Route>
-        <Route exact={true} path="/my/NewActivity/Catch">
-          <NewActivityCatch />
-        </Route>
-        <Route exact={true} path="/my/Meteorology">
-          <Meteorology />
-        </Route>
-        <Route exact={true} path="/my/Documentation">
-          <Documentation />
-        </Route>
-        <Route exact={true} path="/my/Documentation/NewDocumentation">
-          <NewDocumentation />
-        </Route>
-        <Route exact={true} path="/my/Documentation/MyDocumentation">
-          <MyDocumentation />
-        </Route>
-        <Route exact={true} path="/forgotPass">
-          <ResetPass />
-        </Route>
-        <Route exact={true} path="/register">
-          <Register />
-        </Route>
-        <Redirect exact={true} path="/" to="/login" />
+const App: React.FC = () => {
+  const [isLog, setIsLog] = useState(false);
 
-        <Route>
-          <NotFoundPage />
-        </Route>
-      </Switch>
-    </IonReactRouter>
-  </IonApp>
-);
+  const checkauth = async () => {
+    try {
+      await Auth.currentAuthenticatedUser();
+      setIsLog(true);
+    } catch (error) {
+      setIsLog(false);
+    }
+  };
+
+  useEffect(() => {
+    checkauth();
+    setInterval(checkauth, 7200000);
+  }, []);
+
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <Switch>
+          <Route exact={true} path="/login">
+            <Login />
+          </Route>
+          {isLog && (
+            <Fragment>
+              <Route exact={true} path="/my/home">
+                <Home />
+              </Route>
+              <Route exact={true} path="/my/profile">
+                <MiPerfil />
+              </Route>
+              <Route exact={true} path="/my/changePass">
+                <ChangePass />
+              </Route>
+              <Route exact={true} path="/my/NewActivity">
+                <NewActivity />
+              </Route>
+              <Route exact={true} path="/my/NewActivity/Date">
+                <NewActivityDate />
+              </Route>
+              <Route exact={true} path="/my/NewActivity/Tackle">
+                <NewActivityTackle />
+              </Route>
+              <Route exact={true} path="/my/NewActivity/Localization">
+                <NewActivityLocalization />
+              </Route>
+              <Route exact={true} path="/my/NewActivity/Catch">
+                <NewActivityCatch />
+              </Route>
+              <Route exact={true} path="/my/Meteorology">
+                <Meteorology />
+              </Route>
+              <Route exact={true} path="/my/Documentation">
+                <Documentation />
+              </Route>
+              <Route exact={true} path="/my/Documentation/NewDocumentation">
+                <NewDocumentation />
+              </Route>
+              <Route exact={true} path="/my/Documentation/MyDocumentation">
+                <MyDocumentation />
+              </Route>
+            </Fragment>
+          )}
+          <Route exact={true} path="/forgotPass">
+            <ResetPass />
+          </Route>
+          <Route exact={true} path="/register">
+            <Register />
+          </Route>
+          <Redirect exact={true} path="/" to="/login" />
+
+          <Route>
+            <NotFoundPage />
+          </Route>
+        </Switch>
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;
