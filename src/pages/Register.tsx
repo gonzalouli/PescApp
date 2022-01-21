@@ -8,6 +8,7 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonLoading,
   IonPage,
   IonRow,
   IonTitle,
@@ -39,7 +40,7 @@ export default function Register() {
     error: false,
     msg: "",
   });
-
+  const [showLoading, setShowLoading] = useState(false);
   const [verified, setVerified] = useState(false);
   const [verifiedmsg, setVerifiedmsg] = useState(false);
 
@@ -82,6 +83,7 @@ export default function Register() {
     };
     try {
       const res: ISignUpResult = await Auth.signUp(data);
+      setPutCode(true);
       /* const {
         user, // CognitoUser
         userConfirmed, // boolean
@@ -91,18 +93,22 @@ export default function Register() {
       // await Auth.changePassword(user, newpass, newpass);
     } catch (error) {
       console.error(error);
+      setStatus({
+        error: true,
+        msg: "Algo ha fallado, intentelo mas tarde",
+      });
     }
-    try {
-      const init = {
-        body: {
-          username: email,
-        },
-        queryStringParameters: {},
-      };
-    } catch (error) {
-      console.error(error);
-    }
-    setPutCode(true);
+    // try {
+    //   const init = {
+    //     body: {
+    //       username: email,
+    //     },
+    //     queryStringParameters: {},
+    //   };
+    // } catch (error) {
+    //   console.error(error);
+    // }
+    setShowLoading(false);
   };
 
   const handleValidate = async () => {
@@ -133,6 +139,13 @@ export default function Register() {
         <IonTitle className="tittle">Nuevo usuario</IonTitle>
       </IonHeader>
       <IonContent>
+        <IonLoading
+          cssClass="my-custom-class"
+          isOpen={showLoading}
+          onDidDismiss={() => setShowLoading(false)}
+          message={"Por favor, espere..."}
+          duration={3000}
+        />
         {!putcode && (
           <Fragment>
             <IonGrid className="grid-fixed">
@@ -292,7 +305,13 @@ export default function Register() {
               {status.error && <div className="error">{status.msg}</div>}
             </IonGrid>
             <div className="submit buttons">
-              <IonButton className="save" onClick={handleRegister}>
+              <IonButton
+                className="save"
+                onClick={() => {
+                  setShowLoading(true);
+                  handleRegister();
+                }}
+              >
                 Registrarse
               </IonButton>
             </div>
