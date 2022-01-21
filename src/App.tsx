@@ -43,11 +43,11 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <Switch>
-        <Route exact={true} path="/my/home">
-          <Home />
-        </Route>
         <Route exact={true} path="/login">
           <Login />
+        </Route>
+        <Route exact={true} path="/my/home">
+          <Home />
         </Route>
         <Route exact={true} path="/my/profile">
           <MiPerfil />

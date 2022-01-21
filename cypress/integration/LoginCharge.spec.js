@@ -34,7 +34,7 @@ describe("Carga el login adecuadamente", () => {
     // cy.get('[placeholder="Contraseña"]').last().type('contraseña')
     //Podemos escribir user y pass
     cy.get(".form").get(".email").type("email@email.com");
-    cy.get(".form").get(".pass").last().type("contraseña");
+    cy.get(".form").get(".pass").last().type("test1234");
     //Podemos ver el error (si escribimos mal algun campo)
 
     //los conduce a la siguiente pagina

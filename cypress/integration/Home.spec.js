@@ -17,10 +17,10 @@ describe("Carga el home adecuadamente", () => {
 
   it("Mi perfil path", () => {
     //MiPerfil
-    cy.xpath('//*[@id="root"]/ion-app/div/div/ion-header/ion-button[1]').click({
-      force: true,
+    cy.on("uncaught:exception", (err, runnable) => {
+      cy.get(".miperfilbutton").click({ multiple: true });
+      // cy.location().should((loc) => expect(loc.pathname).to.eq("/my/profile"));
     });
-    cy.location().should((loc) => expect(loc.pathname).to.eq("/my/profile"));
   });
 
   it("Logout path", () => {

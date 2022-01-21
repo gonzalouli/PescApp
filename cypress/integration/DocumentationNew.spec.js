@@ -1,4 +1,4 @@
-describe("Se puede establecer acciones de nuwva documentacion", () => {
+describe("Se puede establecer acciones de nueva documentacion", () => {
   beforeEach(() => {
     cy.visit("my/home");
     cy.visit("my/Documentation");
