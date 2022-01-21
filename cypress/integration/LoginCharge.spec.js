@@ -36,9 +36,7 @@ describe("Carga el login adecuadamente", () => {
     cy.get(".form").get(".email").type("email@email.com");
     cy.get(".form").get(".pass").last().type("contraseña");
     //Podemos ver el error (si escribimos mal algun campo)
-    cy.get(".form")
-      .get(".error")
-      .should("contain", "Error en el inicio de sesion");
+
     //los conduce a la siguiente pagina
     cy.get("ion-button").get(".entrar").click({ force: true });
 
