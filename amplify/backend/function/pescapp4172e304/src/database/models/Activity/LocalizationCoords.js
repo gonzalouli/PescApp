@@ -8,7 +8,11 @@ const Localization = require("./Localization");
 class LocalizationCoords extends Model {}
 
 LocalizationCoords.init(
-  {},
+  {
+    id: { type: DataTypes.BIGINT, autoIncrement: true, primaryKey: true },
+    LocalizationId: { type: DataTypes.BIGINT },
+    CoordsId: { type: DataTypes.STRING },
+  },
   {
     sequelize,
     modelName: "LocalizationCoords",

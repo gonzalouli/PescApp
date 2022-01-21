@@ -2,8 +2,6 @@ const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../../sequelize");
 
-const Coords = require("./Coords");
-
 class Localization extends Model {}
 
 Localization.init(

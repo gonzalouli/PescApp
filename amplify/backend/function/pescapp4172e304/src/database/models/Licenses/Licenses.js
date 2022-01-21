@@ -2,9 +2,9 @@ const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../../sequelize");
 
-class Document extends Model {}
+class Licenses extends Model {}
 
-Document.init(
+Licenses.init(
   {
     id: {
       type: DataTypes.BIGINT,
@@ -17,11 +17,11 @@ Document.init(
   },
   {
     sequelize,
-    modelName: "Document",
+    modelName: "Licenses",
     freezeTableName: true,
-    tableName: "Document",
+    tableName: "Licenses",
     timestamps: true,
   }
 );
 
-module.exports = Document;
+module.exports = Licenses;

@@ -1,13 +1,17 @@
 const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../../sequelize");
-const Activity = require("./Activity/Activity");
+const Activity = require("./Activity");
 const Meteorology = require("./Meteorology");
 
 class ActivityMeteorology extends Model {}
 
 ActivityMeteorology.init(
-  {},
+  {
+    id: { type: DataTypes.BIGINT, autoIncrement: true, primaryKey: true },
+    ActivityId: { type: DataTypes.BIGINT },
+    MeteorologyId: { type: DataTypes.BIGINT },
+  },
   {
     sequelize,
     modelName: "ActivityMeteorology",

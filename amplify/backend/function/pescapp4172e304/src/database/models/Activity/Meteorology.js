@@ -2,8 +2,6 @@ const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../../sequelize");
 
-const Coords = require("./Coords");
-
 class Meteorology extends Model {}
 
 Meteorology.init(
