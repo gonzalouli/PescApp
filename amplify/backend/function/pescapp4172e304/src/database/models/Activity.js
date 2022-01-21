@@ -2,7 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../sequelize");
 const Localization = require("./Localization");
-// const Dates = require("./Dates");
+const Dates = require("./Dates");
 // const Tackle = require("./Tackle");
 // const Catches = require("./Catches");
 // const Meteorology = require("./Meteorology");
@@ -32,6 +32,6 @@ Activity.init(
 );
 
 Activity.belongsTo(Localization);
-// Activity.belongsTo(Dates);
+Activity.belongsTo(Dates);
 
 module.exports = Activity;

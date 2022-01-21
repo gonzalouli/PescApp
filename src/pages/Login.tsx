@@ -30,6 +30,7 @@ const Home: React.FC = () => {
   const [isLog, setIsLog] = useState<boolean>(false);
   const [isRegister, setIsRegister] = useState<boolean>(false);
   const [isForgotPass, setIsForgotPass] = useState<boolean>(false);
+  const [showLoading, setShowLoading] = useState(false);
 
   const handleLogin = async () => {
     try {
@@ -40,6 +41,7 @@ const Home: React.FC = () => {
       console.error(error);
       setStatus({ loading: false, error: true });
     }
+    setShowLoading(false);
   };
   //
   return (
@@ -54,6 +56,13 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="form">
+        <IonLoading
+          cssClass="my-custom-class"
+          isOpen={showLoading}
+          onDidDismiss={() => setShowLoading(false)}
+          message={"Por favor, espere..."}
+          duration={3000}
+        />
         <IonList className="container">
           <IonItem className="item-container">
             <IonLabel className="label" position="stacked">
@@ -89,7 +98,10 @@ const Home: React.FC = () => {
           className="entrar"
           type="submit"
           expand="block"
-          onClick={handleLogin}
+          onClick={() => {
+            setShowLoading(true);
+            handleLogin();
+          }}
         >
           Entrar
         </IonButton>
