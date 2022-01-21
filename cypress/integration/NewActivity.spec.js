@@ -24,14 +24,15 @@ describe("Se puede establecer una actividad correctamente", () => {
 
   it("Equipo path", () => {
     //Equipo
+    cy.on("uncaught:exception", (err, runnable) => {
+      cy.xpath(
+        '//*[@id="root"]/ion-app/div/ion-content/ion-list/ion-button[2]'
+      ).click();
 
-    cy.xpath(
-      '//*[@id="root"]/ion-app/div/ion-content/ion-list/ion-button[2]'
-    ).click();
-
-    cy.location().should((loc) =>
-      expect(loc.pathname).to.eq("/my/NewActivity/Tackle")
-    );
+      cy.location().should((loc) =>
+        expect(loc.pathname).to.eq("/my/NewActivity/Tackle")
+      );
+    });
   });
 
   it("Capturas path", () => {

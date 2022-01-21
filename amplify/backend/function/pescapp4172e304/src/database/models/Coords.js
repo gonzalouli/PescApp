@@ -6,7 +6,7 @@ class Coords extends Model {}
 
 Coords.init(
   {
-    ActivityId: {
+    LocalizationId: {
       type: DataTypes.STRING,
       primaryKey: true,
     },

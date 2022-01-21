@@ -20,11 +20,8 @@ Activity.init(
       type: DataTypes.STRING,
     },
     name: DataTypes.STRING,
-    localization: Localization,
-    tackle: DataTypes.ARRAY(Tackle),
     catches: DataTypes.ARRAY(Catches),
     meteorology: DataTypes.ARRAY(Meteorology),
-    date: Dates,
   },
   {
     sequelize,
@@ -34,5 +31,8 @@ Activity.init(
     timestamps: true,
   }
 );
+
+Activity.belongsTo(Localization);
+Activity.belongsTo(Dates);
 
 module.exports = Activity;
