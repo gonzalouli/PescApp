@@ -52,6 +52,10 @@ const App: React.FC = () => {
       setIsLog(false);
     }
   };
+  const isLogged = async () => {
+    await checkauth();
+    return isLog;
+  };
 
   useEffect(() => {
     checkauth();
@@ -65,7 +69,13 @@ const App: React.FC = () => {
           <Route exact={true} path="/login">
             <Login />
           </Route>
-          {isLog && (
+          <Route exact={true} path="/forgotPass">
+            <ResetPass />
+          </Route>
+          <Route exact={true} path="/register">
+            <Register />
+          </Route>
+          {isLogged && (
             <Fragment>
               <Route exact={true} path="/my/home">
                 <Home />
@@ -105,12 +115,7 @@ const App: React.FC = () => {
               </Route>
             </Fragment>
           )}
-          <Route exact={true} path="/forgotPass">
-            <ResetPass />
-          </Route>
-          <Route exact={true} path="/register">
-            <Register />
-          </Route>
+
           <Redirect exact={true} path="/" to="/login" />
 
           <Route>
