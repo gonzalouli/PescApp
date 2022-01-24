@@ -8,8 +8,4 @@ keys.get("/googlemapsallowed", async (req, res) => {
   return res.json({});
 });
 
-keys.get("/", async (req, res) => {
-  return res.json({ Hola: "Amigo" });
-});
-
 module.exports = keys;

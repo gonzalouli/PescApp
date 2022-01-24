@@ -1,5 +1,4 @@
 export const ResetLS = () => {
-  console.log(localStorage.getItem("newActivity"));
   if (JSON.parse(window.sessionStorage.getItem("newActivity")) === null) {
     const newActivity = {
       name: "",

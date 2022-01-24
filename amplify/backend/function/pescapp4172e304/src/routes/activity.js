@@ -6,7 +6,7 @@ const Activity = require("../database/models/Activity/Activity");
 
 activity.get("/", async (req, res) => {
   const activities = await Activity.findAll();
-  return res.json(activities);
+  return res.json("hola");
 });
 
 activity.post("/insertActivity", async (req, res) => {

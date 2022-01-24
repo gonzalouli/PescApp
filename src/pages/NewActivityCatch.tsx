@@ -192,10 +192,10 @@ export default function NewActivityCatch() {
               Capturas actuales
             </IonLabel>
           </IonItem>
-          <IonList>
+          <IonList className="listaElementos">
             {tempactivity.catches.map((item) => {
               return (
-                <IonCard className="card" key={item.id}>
+                <IonCard className="card capturasNuevas" key={item.id}>
                   <IonCardHeader className="card">
                     <IonButton
                       className="delete"
@@ -223,9 +223,12 @@ export default function NewActivityCatch() {
                       Borrar
                     </IonButton>
                     <IonCardTitle className="card">{item.name}</IonCardTitle>
+                    <IonCardContent className="label">
+                      {" "}
+                      {item.description}
+                    </IonCardContent>
                     <img src={item.imageUrl} alt={item.id} />
                   </IonCardHeader>
-                  <IonCardContent>{item.description}</IonCardContent>
                 </IonCard>
               );
             })}

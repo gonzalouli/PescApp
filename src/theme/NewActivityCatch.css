@@ -1,32 +1,32 @@
-.placeholder{
-    margin: 0 auto;
-    width: 70%;
-    height: 100%;
-    cursor: pointer;
+.placeholder {
+  margin: 0 auto;
+  width: 70%;
+  height: 100%;
+  cursor: pointer;
 }
 
-.item-container{
-    margin-top: 10%;
-    margin: 5%;
+.item-container {
+  margin-top: 10%;
+  margin: 5%;
 }
 
-
-.capturas{
-    margin-top: 3%;
-    padding: 0;
+.capturas {
+  margin-top: 3%;
+  padding: 0;
 }
 
-.submit{
-    display: flex;
-    flex-direction: column;
+.submit {
+  display: flex;
+  flex-direction: column;
 }
 
-.capturasNuevas{
-    text-align: center;
-    display: flex;
-    justify-content: space-between ;
+.capturasNuevas {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
 }
 
-.card{
-    margin:5px;
+.card {
+  margin: 0 auto !important;
+  margin-top: 10px !important;
 }

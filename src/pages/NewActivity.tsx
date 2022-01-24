@@ -43,19 +43,24 @@ export default function NewActivity() {
           const activity = JSON.parse(
             window.sessionStorage.getItem("newActivity")
           );
+          // API.post("api9000aeb3", "/activities/insertActivity", {
+          //   ActivityData: {
+          //     UserIdCognito: data.attributes.userName,
+          //     activity,
+          //   },
+          //   UserDataKey: data.attributes.userDataKey,
+          // })
+          //   .then(() => {
+          //     return "OK";
+          //   })
+          //   .catch(() => {
+          //     return "ERROR";
+          //   });
           API.post("api9000aeb3", "/activities/insertActivity", {
-            ActivityData: {
-              UserIdCognito: data.attributes.userName,
-              activity,
-            },
-            UserDataKey: data.attributes.userDataKey,
+            adios: { Adios: "adios" },
           })
-            .then(() => {
-              return "OK";
-            })
-            .catch(() => {
-              return "ERROR";
-            });
+            .then((d) => console.log(d))
+            .catch((err) => console.error(err));
         })
         .catch(() => {
           Auth.signOut();
@@ -65,7 +70,7 @@ export default function NewActivity() {
       console.error(e);
     }
 
-    window.sessionStorage.removeItem("newActivity");
+    // window.sessionStorage.removeItem("newActivity");
   };
 
   const [isNewActivityLocalization, setIsNewActivityLocalization] =
