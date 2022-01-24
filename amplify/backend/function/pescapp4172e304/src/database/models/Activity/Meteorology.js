@@ -12,7 +12,7 @@ Meteorology.init(
       primaryKey: true,
     },
     hour: { type: DataTypes.DATE },
-    wind: { tye: DataTypes.INTEGER },
+    wind: { type: DataTypes.INTEGER },
     marea: { type: DataTypes.INTEGER },
     temp: { type: DataTypes.INTEGER },
   },

@@ -33,6 +33,19 @@ import { Redirect } from "react-router";
 
 function NewActivityLocalization() {
   const ref = useRef(null);
+
+  useEffect(() => {
+    const newAct = JSON.parse(window.sessionStorage.getItem("newActivity"));
+    const recoverAct = {
+      ...newAct,
+      localization: {},
+    };
+    if (
+      JSON.parse(window.sessionStorage.getItem("newActivity")).localization ==
+      null
+    )
+      window.sessionStorage.setItem("newActivity", JSON.stringify(recoverAct));
+  });
   const [text, setText] = useState(
     JSON.parse(window.sessionStorage.getItem("newActivity")).localization
       .text || ""

@@ -21,7 +21,7 @@ ActivityCatches.init(
   }
 );
 
-ActivityCatches.belongTo(Activity);
-ActivityCatches.belongTo(Catches);
+ActivityCatches.belongsTo(Activity);
+ActivityCatches.belongsTo(Catches);
 
 module.exports = ActivityCatches;

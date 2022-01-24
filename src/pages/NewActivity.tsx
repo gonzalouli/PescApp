@@ -38,7 +38,7 @@ export default function NewActivity() {
           const activity = JSON.parse(
             window.sessionStorage.getItem("newActivity")
           );
-          API.post("api9000aeb3", "/insertActivity", {
+          API.post("api9000aeb3", "/activities/insertActivity", {
             ActivityData: {
               UserIdCognito: data.attributes.userName,
               activity,

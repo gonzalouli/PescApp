@@ -71,7 +71,10 @@ export default function NewActivityTackle() {
               value={itemName}
               onChange={(e) => setItemName(e.target.value)}
             ></input>
-            <IonButton onClick={addItem} class="buttonAdd">
+            <IonButton
+              onClick={(e) => (itemName != "" ? addItem(e) : null)}
+              class="buttonAdd"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="icon icon-tabler icon-tabler-circle-plus"

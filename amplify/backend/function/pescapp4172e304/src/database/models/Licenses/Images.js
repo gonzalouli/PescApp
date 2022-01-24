@@ -11,7 +11,7 @@ Images.init(
       primaryKey: true,
     },
     name: { type: DataTypes.STRING },
-    description: { type: DataTypes.String },
+    description: { type: DataTypes.STRING },
     imageUrl: { type: DataTypes.STRING },
   },
   {
