@@ -38,36 +38,22 @@ export default function NewActivity() {
   const sendNewActivity = async () => {
     //end sending information
     try {
-      await Auth.currentAuthenticatedUser()
-        .then(async (data) => {
-          const activity = JSON.parse(
-            window.sessionStorage.getItem("newActivity")
-          );
-          // API.post("api9000aeb3", "/activities/insertActivity", {
-          //   ActivityData: {
-          //     UserIdCognito: data.attributes.userName,
-          //     activity,
-          //   },
-          //   UserDataKey: data.attributes.userDataKey,
-          // })
-          //   .then(() => {
-          //     return "OK";
-          //   })
-          //   .catch(() => {
-          //     return "ERROR";
-          //   });
-          API.post("api9000aeb3", "/activities/insertActivity", {
-            adios: { Adios: "adios" },
-          })
-            .then((d) => console.log(d))
-            .catch((err) => console.error(err));
-        })
-        .catch(() => {
-          Auth.signOut();
-          <Redirect to="/login" />;
-        });
-    } catch (e) {
-      console.error(e);
+      const data = await Auth.currentAuthenticatedUser();
+
+      const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
+      // await API.get("api9000aeb3", "/activities", {}).then((res) =>
+      //   console.log(res)
+      // );
+      await API.post("api9000aeb3", "/activities/insertActivity", {
+        ActivityData: {
+          UserIdCognito: data.attributes.userName,
+          activity,
+        },
+        UserDataKey: data.attributes.userDataKey,
+      });
+    } catch (err) {
+      Auth.signOut();
+      <Redirect to="/login" />;
     }
 
     // window.sessionStorage.removeItem("newActivity");
@@ -104,8 +90,8 @@ export default function NewActivity() {
           {/* <RefreshComponent /> */}
           <IonList className="container">
             <IonItem className="name">
-              <IonLabel className="label" position="stacked">
-                Nombre
+              <IonLabel className="label" position="fixed">
+                Nombre:
               </IonLabel>
               <IonInput
                 className="text"

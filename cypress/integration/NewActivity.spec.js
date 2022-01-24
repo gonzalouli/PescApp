@@ -37,25 +37,27 @@ describe("Se puede establecer una actividad correctamente", () => {
 
   it("Capturas path", () => {
     //Capturas
+    cy.on("uncaught:exception", (err, runnable) => {
+      cy.xpath(
+        '//*[@id="root"]/ion-app/div/ion-content/ion-list/ion-button[3]'
+      ).click();
 
-    cy.xpath(
-      '//*[@id="root"]/ion-app/div/ion-content/ion-list/ion-button[3]'
-    ).click();
-
-    cy.location().should((loc) =>
-      expect(loc.pathname).to.eq("/my/NewActivity/Catch")
-    );
+      cy.location().should((loc) =>
+        expect(loc.pathname).to.eq("/my/NewActivity/Catch")
+      );
+    });
   });
 
   it("Fechas path", () => {
     //Fechas
+    cy.on("uncaught:exception", (err, runnable) => {
+      cy.xpath(
+        '//*[@id="root"]/ion-app/div/ion-content/ion-list/ion-button[4]'
+      ).click();
 
-    cy.xpath(
-      '//*[@id="root"]/ion-app/div/ion-content/ion-list/ion-button[4]'
-    ).click();
-
-    cy.location().should((loc) =>
-      expect(loc.pathname).to.eq("/my/NewActivity/Date")
-    );
+      cy.location().should((loc) =>
+        expect(loc.pathname).to.eq("/my/NewActivity/Date")
+      );
+    });
   });
 });

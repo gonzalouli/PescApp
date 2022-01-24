@@ -10,7 +10,7 @@ activity.get("/", async (req, res) => {
 });
 
 activity.post("/insertActivity", async (req, res) => {
-  const [name, date, localization, tackle, catches] = req.body;
+  const { name, date, localization, tackle, catches } = req.body;
   console.log(req.body);
   //entidades separadas, juntas en tabla intermedia
   // const catchesSeq = await Catches.create();

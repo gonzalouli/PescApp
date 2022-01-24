@@ -40,17 +40,17 @@ describe("Se puede establecer una actividad correctamente", () => {
     cy.get("ion-picker-column").click({ multiple: true });
     cy.xpath('//*[@id="ion-overlay-1"]/div[2]/div[1]/div[2]/button').click();
 
-    const hora = `${nowDate.slice(11, 16)}`;
+    const hora = `${nowDate.slice(11, 14)}`;
 
-    cy.get(".horaIni").shadow().first().should("have.text", hora);
+    cy.get(".horaIni").shadow().first().should("contains.text", hora);
   });
   it("Agregamos hora fin y coincide", () => {
     cy.get(".horaFin").click();
     cy.get("ion-picker-column").click({ multiple: true });
     cy.xpath('//*[@id="ion-overlay-1"]/div[2]/div[1]/div[2]/button').click();
 
-    const hora = `${nowDate.slice(11, 16)}`;
+    const hora = `${nowDate.slice(11, 14)}`;
 
-    cy.get(".horaFin").shadow().first().should("have.text", hora);
+    cy.get(".horaFin").shadow().first().should("contains.text", hora);
   });
 });
