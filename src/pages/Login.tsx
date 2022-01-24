@@ -36,7 +36,6 @@ const Home: React.FC = () => {
     try {
       const user: CognitoUser = await Auth.signIn(email, pass);
       setIsLog(true);
-      await API.get("api9000aeb3", "/keys/googlemapsallowed", {});
     } catch (error) {
       console.error(error);
       setStatus({ loading: false, error: true });

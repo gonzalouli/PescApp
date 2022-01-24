@@ -18,12 +18,16 @@ import {
   isPlatform,
 } from "@ionic/react";
 import { nanoid } from "nanoid";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BackButton from "../components/BackButton";
 import RefreshComponent from "../components/RefreshComponent";
 import "../theme/NewDocumentation.css";
+import { ResetLS } from "../utils/ResetLocalStorage";
 
 export default function NewDocumentation() {
+  useEffect(() => {
+    ResetLS();
+  }, []);
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState(
     process.env.PUBLIC_URL + "/assets/placeholderimage.jpg"

@@ -16,11 +16,16 @@ import RefreshComponent from "../components/RefreshComponent";
 import "../theme/Header.css";
 import "../theme/NewActivity.css";
 import { API, Auth } from "aws-amplify";
+import { ResetLS } from "../utils/ResetLocalStorage";
 
 export default function NewActivity() {
   const [name, setName] = useState(
     JSON.parse(window.sessionStorage.getItem("newActivity"))?.name || ""
   );
+
+  useEffect(() => {
+    ResetLS();
+  }, []);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -46,7 +51,7 @@ export default function NewActivity() {
             UserDataKey: data.attributes.userDataKey,
           })
             .then(() => {
-              return "SUSCEED";
+              return "OK";
             })
             .catch(() => {
               return "ERROR";
@@ -54,6 +59,7 @@ export default function NewActivity() {
         })
         .catch(() => {
           Auth.signOut();
+          <Redirect to="/login" />;
         });
     } catch (e) {
       console.error(e);

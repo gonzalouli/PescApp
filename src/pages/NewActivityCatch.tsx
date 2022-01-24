@@ -27,8 +27,12 @@ import { randomBytes } from "crypto";
 import { nanoid } from "nanoid";
 import "../theme/NewDocumentation.css";
 import { Redirect } from "react-router";
+import { ResetLS } from "../utils/ResetLocalStorage";
 
 export default function NewActivityCatch() {
+  useEffect(() => {
+    ResetLS();
+  }, []);
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState(
     process.env.PUBLIC_URL + "/assets/placeholderimage.jpg"

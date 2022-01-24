@@ -24,6 +24,7 @@ import "leaflet/dist/leaflet.css";
 import "../theme/NewActivityLocalization.css";
 import MapComponent from "../components/MapComponent";
 import { Redirect } from "react-router";
+import { ResetLS } from "../utils/ResetLocalStorage";
 
 /* initialize() is important for iOS,
   Android doesn't need any initialization.
@@ -35,16 +36,7 @@ function NewActivityLocalization() {
   const ref = useRef(null);
 
   useEffect(() => {
-    const newAct = JSON.parse(window.sessionStorage.getItem("newActivity"));
-    const recoverAct = {
-      ...newAct,
-      localization: {},
-    };
-    if (
-      JSON.parse(window.sessionStorage.getItem("newActivity")).localization ==
-      null
-    )
-      window.sessionStorage.setItem("newActivity", JSON.stringify(recoverAct));
+    ResetLS();
   });
   const [text, setText] = useState(
     JSON.parse(window.sessionStorage.getItem("newActivity")).localization

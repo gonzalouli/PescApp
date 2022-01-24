@@ -9,13 +9,18 @@ import {
   IonPage,
   IonTitle,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router";
 import BackButton from "../components/BackButton";
 import RefreshComponent from "../components/RefreshComponent";
 import "../theme/NewActivityDate.css";
+import { ResetLS } from "../utils/ResetLocalStorage";
 
 export default function NewActivityDate() {
+  useEffect(() => {
+    ResetLS();
+  }, []);
+
   const [fechaInicio, setSelectedInitDate] = useState<string>(
     JSON.parse(window.sessionStorage.getItem("newActivity")).date.initDate || ""
   );

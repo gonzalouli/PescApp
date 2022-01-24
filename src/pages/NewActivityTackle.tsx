@@ -12,12 +12,16 @@ import {
   IonTitle,
 } from "@ionic/react";
 import { nanoid } from "nanoid";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BackButton from "../components/BackButton";
 import RefreshComponent from "../components/RefreshComponent";
 import "../theme/NewActivityTackle.css";
+import { ResetLS } from "../utils/ResetLocalStorage";
 
 export default function NewActivityTackle() {
+  useEffect(() => {
+    ResetLS();
+  }, []);
   const [items, setItems] = useState(
     JSON.parse(window.sessionStorage.getItem("newActivity")).tackle || []
   );
