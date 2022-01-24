@@ -2,42 +2,41 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const register = express.Router();
 const Amplify = require("aws-amplify");
-
 const AWS = require("aws-sdk");
 
-register.post("/confirm", async (req, res) => {
-  const AWS_REGION = "eu-west-1";
-  const AWS_COGNITO_USER_POOL_ID = "eu-west-1_lIa28Qaxw";
+const {
+  CognitoIdentityServiceProvider,
+} = require("./services/CognitoServiceProvider");
+const {
+  CognitoAdminConfirmSignUp,
+} = require("./services/CognitoAdminConfirmSignUp");
 
-  const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider(
-    {
-      apiVersion: "latest",
-      region: AWS_REGION,
-    }
-  );
+///Confirmar un usuario a manita
+register.post("/confirm", async (req, res) => {
+  const cognitoidentityserviceprovider = await CognitoIdentityServiceProvider();
 
   const confirmParams = {
-    UserPoolId: AWS_COGNITO_USER_POOL_ID,
+    UserPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
     Username: req.body.username,
   };
 
-  try {
-    const result = await cognitoidentityserviceprovider
-      .adminConfirmSignUp(confirmParams)
-      .promise();
+  const result = await CognitoAdminConfirmSignUp(
+    cognitoidentityserviceprovider,
+    confirmParams
+  );
 
+  if (result === true)
     return res.json({
       error: false,
       msg: "Todo ok",
       data: result,
     });
-  } catch (err) {
+  else
     return res.json({
       error: true,
       msg: "Error",
-      data: {},
+      data: result,
     });
-  }
 });
 
 module.exports = register;

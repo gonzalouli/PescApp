@@ -21,6 +21,14 @@
       "args": [".env"],
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "node"
+    },
+    {
+      "name": "Launch Frontend in Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:8100/",
+      "sourceMaps": true,
+      "webRoot": "${workspaceFolder}"
     }
   ]
 }
