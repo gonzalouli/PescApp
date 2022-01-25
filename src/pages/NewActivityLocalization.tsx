@@ -45,13 +45,17 @@ function NewActivityLocalization() {
   const [isConfirmed, setIsConfirmed] = useState(false);
 
   const handleTextChange = (e) => {
-    const activityMod = JSON.parse(
-      window.sessionStorage.getItem("newActivity")
-    );
-    setText(e.target.value);
-    activityMod.localization.text = text;
+    try {
+      const activityMod = JSON.parse(
+        window.sessionStorage.getItem("newActivity")
+      );
+      setText(e.target.value);
+      activityMod.localization.text = text;
 
-    window.sessionStorage.setItem("newActivity", JSON.stringify(activityMod));
+      window.sessionStorage.setItem("newActivity", JSON.stringify(activityMod));
+    } catch (error) {
+      <Redirect to="/my/home" push={true} exact={true} />;
+    }
   };
 
   return (

@@ -10,7 +10,7 @@ ActivityCatches.init(
   {
     id: { type: DataTypes.BIGINT, autoIncrement: true, primaryKey: true },
     ActivityId: { type: DataTypes.BIGINT },
-    CatchesId: { type: DataTypes.STRING },
+    CatcheId: { type: DataTypes.STRING },
   },
   {
     sequelize,

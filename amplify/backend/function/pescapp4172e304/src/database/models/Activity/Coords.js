@@ -7,8 +7,9 @@ class Coords extends Model {}
 Coords.init(
   {
     Id: {
-      type: DataTypes.STRING,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     lat: { type: DataTypes.FLOAT },
     lng: { type: DataTypes.FLOAT },

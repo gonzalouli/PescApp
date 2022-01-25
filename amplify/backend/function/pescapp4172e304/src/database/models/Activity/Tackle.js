@@ -6,7 +6,7 @@ class Tackle extends Model {}
 
 Tackle.init(
   {
-    TackleId: {
+    Id: {
       type: DataTypes.STRING,
       primaryKey: true,
     },

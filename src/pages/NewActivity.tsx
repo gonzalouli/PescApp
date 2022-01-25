@@ -39,17 +39,17 @@ export default function NewActivity() {
     //end sending information
     try {
       const data = await Auth.currentAuthenticatedUser();
-
+      console.log(data.username);
       const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
       // await API.get("api9000aeb3", "/activities", {}).then((res) =>
       //   console.log(res)
       // );
       await API.post("api9000aeb3", "/activities/insertActivity", {
-        ActivityData: {
-          UserIdCognito: data.attributes.userName,
+        body: {
+          UserIdCognito: data.username,
           activity,
+          UserDataKey: data.userDataKey,
         },
-        UserDataKey: data.attributes.userDataKey,
       });
     } catch (err) {
       Auth.signOut();

@@ -62,10 +62,21 @@ app.use("/activities", activities);
 app.use("/register", register);
 
 const sequelize = require("./database/sequelize");
+// const { CodeStarNotifications } = require("aws-sdk");
 require("./database/models/models");
 (async () => {
-  await sequelize.sync();
+  await sequelize
+    .sync()
+    .then(() => {
+      console.log("DB sincronizada");
+    })
+    .catch((e) => {
+      console.error(e);
+    });
 })();
+
+const ResetCodes = require("./database/services/ResetCodes");
+ResetCodes();
 
 app.listen(4444, function () {
   console.log("App started");
