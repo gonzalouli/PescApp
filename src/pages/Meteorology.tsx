@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import {
   IonButton,
   IonContent,
@@ -8,6 +8,7 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonLoading,
   IonPage,
   IonRefresher,
   IonRefresherContent,
@@ -19,9 +20,10 @@ import { Geolocation } from "@capacitor/geolocation";
 import "../theme/Meteorology.css";
 import MeteorologyMapComponent from "../components/MeteorologyMapComponent";
 import MapComponent from "../components/MapComponent";
-import axios from "axios";
+import ShowMeteorology from "../components/ShowMeteorology";
 import "../theme/Header.css";
 import { API, Auth } from "aws-amplify";
+import moment from "moment";
 
 interface Coordinates {
   lat: number;
@@ -29,13 +31,18 @@ interface Coordinates {
 }
 
 export default function Meteorology() {
+  const minDate = moment().format("YYYY-MM-DD");
+  const maxDate = moment().add(6, "d").format("YYYY-MM-DD");
+  const [selectedDate, setSelectedDate] = useState(minDate);
   const [name, setName] = useState("");
-  const [date, setDate] = useState(new Date().toISOString());
   const [MiUbicacion, setMiUbicacion] = useState(false);
   const [status, setStatus] = useState({
-    message: "error al ver el municipio",
-    error: true,
+    message: "",
+    error: false,
   });
+  const [showLoading, setShowLoading] = useState(false);
+  const [haveMeteorology, setHaveMeteorology] = useState(false);
+  const [response, setResponse] = useState({});
 
   const handleChangeName = (e) => {
     e.preventDefault();
@@ -58,6 +65,8 @@ export default function Meteorology() {
   };
 
   const searchMeteorology = async () => {
+    setShowLoading(true);
+
     const coords = JSON.parse(
       window.sessionStorage.getItem("ubication")
     ).coords;
@@ -65,15 +74,32 @@ export default function Meteorology() {
     const lng = coords.lng;
     const data = { lat, lng };
 
-    const response = await API.post(
-      "api9000aeb3",
-      "/meteorology/getMeteorology",
-      {
+    if (name === "") {
+      const res = await API.post("api9000aeb3", "/meteorology/getMeteorology", {
         body: {
           data,
         },
+      });
+      if (res.error) {
+        setStatus(res);
+      } else {
+        setResponse(res);
+        setHaveMeteorology(true);
       }
-    );
+    } else {
+      const res = await API.post("api9000aeb3", "/meteorology/getMeteorology", {
+        body: {
+          name,
+        },
+      });
+      if (res.error) {
+        setStatus(res);
+      } else {
+        setResponse(res);
+        setHaveMeteorology(true);
+      }
+    }
+    setShowLoading(false);
   };
 
   return (
@@ -83,37 +109,62 @@ export default function Meteorology() {
         <IonTitle className="tittle">Meteorología</IonTitle>
       </IonHeader>
       <IonContent>
-        <IonList className="container">
-          <IonButton className="button miUbicacion" onClick={miUbicacion}>
-            Mi ubicación
-          </IonButton>
-          {MiUbicacion && (
-            <IonItem>
-              <IonLabel className="selected">
-                Ubicacion actual seleccionada
-              </IonLabel>
+        <IonLoading
+          cssClass="my-custom-class"
+          isOpen={showLoading}
+          message={"Por favor, espere..."}
+          duration={4000}
+        />
+        {!haveMeteorology && (
+          <Fragment>
+            <IonList className="container">
+              <IonButton className="button miUbicacion" onClick={miUbicacion}>
+                Mi ubicación
+              </IonButton>
+              {MiUbicacion && (
+                <IonItem>
+                  <IonLabel className="label  selected">
+                    Ubicación actual seleccionada
+                  </IonLabel>
+                </IonItem>
+              )}
+              <IonItem className="label selectUbication">
+                <IonLabel>Selecciona ubicación</IonLabel>
+              </IonItem>
+            </IonList>
+            <MeteorologyMapComponent />
+
+            <IonItem className="writeOption">
+              <IonLabel className="label">O escríbelo:</IonLabel>
+              <IonInput
+                className="text"
+                type="text"
+                value={name}
+                onIonChange={handleChangeName}
+              />
             </IonItem>
-          )}
-          <IonItem className="label">
-            <IonLabel>Selecciona ubicación</IonLabel>
-          </IonItem>
-        </IonList>
-        <MeteorologyMapComponent />
-
-        <IonItem className="writeOption">
-          <IonLabel className="label">O escribelo:</IonLabel>
-          <IonInput
-            className="text"
-            type="text"
-            value={name}
-            onIonChange={handleChangeName}
-          />
-        </IonItem>
-        {status.error && <div className="error">{status.message}</div>}
-
-        <IonButton className="save" onClick={searchMeteorology}>
-          Buscar
-        </IonButton>
+            {status.error && <div className="error">{status.message}</div>}
+            <IonItem className="writeOption">
+              <IonLabel className="label">Fechas disponibles: </IonLabel>
+              <IonDatetime
+                min={minDate}
+                max={maxDate}
+                value={selectedDate}
+                defaultValue={minDate}
+                onIonChange={(e) => {
+                  setSelectedDate(e.detail.value);
+                }}
+                displayFormat="YYYY-MM-DD"
+              ></IonDatetime>
+            </IonItem>
+            <IonButton className="save" onClick={searchMeteorology}>
+              Buscar
+            </IonButton>
+          </Fragment>
+        )}
+        {haveMeteorology && (
+          <ShowMeteorology props={{ response, selectedDate }} />
+        )}
       </IonContent>
     </IonPage>
   );

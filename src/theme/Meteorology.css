@@ -27,3 +27,13 @@
   align-items: center;
   max-width: 500px;
 }
+
+.selectUbication {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.save {
+  margin-bottom: 5vh !important;
+}

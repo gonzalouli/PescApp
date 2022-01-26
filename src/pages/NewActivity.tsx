@@ -90,8 +90,8 @@ export default function NewActivity() {
           {/* <RefreshComponent /> */}
           <IonList className="container">
             <IonItem className="name">
-              <IonLabel className="label" position="fixed">
-                Nombre:
+              <IonLabel className="label nameLabel" position="floating">
+                Nombre
               </IonLabel>
               <IonInput
                 className="text"
