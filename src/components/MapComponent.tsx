@@ -5,8 +5,6 @@ import { isLatLngLiteral } from "@googlemaps/typescript-guards";
 import React, { useState, useEffect, Fragment } from "react";
 import { Geolocation } from "@capacitor/geolocation";
 import { IonLoading, IonToast } from "@ionic/react";
-import axios from "axios";
-import { createSecretKey } from "crypto";
 
 import { API } from "aws-amplify";
 
@@ -44,9 +42,6 @@ const MapComponent: React.VFC = () => {
 
     try {
       const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
-
-      console.log(activity.localization.coords === undefined);
-
       if (activity.localization.coords === undefined) {
         const position = await Geolocation.getCurrentPosition();
         setCenter({
@@ -100,7 +95,6 @@ const MapComponent: React.VFC = () => {
         params
       );
       setKey(response.headers["google-key"]);
-      console.log(key);
     })();
 
     currentPosition();

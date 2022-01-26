@@ -8,12 +8,12 @@ const ResetCodes = async () => {
   const json = await axios.get(
     "https://www.el-tiempo.net/api/json/v2/municipios"
   );
-  console.log(json);
+  // console.log(json);
 
   let i = 0;
   json.data.forEach(async (mun) => {
     try {
-      console.log(i++);
+      // console.log(i++);
       const munSeq = await MunCods.create({
         CODIGOINE: mun.CODIGOINE,
         ID_REL: mun.ID_REL,

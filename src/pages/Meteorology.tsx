@@ -21,6 +21,7 @@ import MeteorologyMapComponent from "../components/MeteorologyMapComponent";
 import MapComponent from "../components/MapComponent";
 import axios from "axios";
 import "../theme/Header.css";
+import { API, Auth } from "aws-amplify";
 
 interface Coordinates {
   lat: number;
@@ -28,8 +29,18 @@ interface Coordinates {
 }
 
 export default function Meteorology() {
+  const [name, setName] = useState("");
   const [date, setDate] = useState(new Date().toISOString());
   const [MiUbicacion, setMiUbicacion] = useState(false);
+  const [status, setStatus] = useState({
+    message: "error al ver el municipio",
+    error: true,
+  });
+
+  const handleChangeName = (e) => {
+    e.preventDefault();
+    setName(e.target.value);
+  };
 
   const miUbicacion = async () => {
     const position = await Geolocation.getCurrentPosition();
@@ -46,14 +57,23 @@ export default function Meteorology() {
     }, 2000);
   };
 
-  const searchMeteorology = () => {
-    // const coords = JSON.parse(window.sessionStorage.getItem("ubication")).coords
-    // const lat = coords.lat.toFixed(2)
-    // const lng = coords.lng.toFixed(2)
-    // const dateToSend = JSON.parse(window.sessionStorage.getItem("ubication")).date
-    // console.log("realizando consulta")
-    // // axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&type=hour&start={dateToSend}&appid=50e8e2818ca388308c0616ddc6f32c94`).then(resp => console.log(resp))
-    //llamar al backend
+  const searchMeteorology = async () => {
+    const coords = JSON.parse(
+      window.sessionStorage.getItem("ubication")
+    ).coords;
+    const lat = coords.lat;
+    const lng = coords.lng;
+    const data = { lat, lng };
+
+    const response = await API.post(
+      "api9000aeb3",
+      "/meteorology/getMeteorology",
+      {
+        body: {
+          data,
+        },
+      }
+    );
   };
 
   return (
@@ -79,34 +99,21 @@ export default function Meteorology() {
           </IonItem>
         </IonList>
         <MeteorologyMapComponent />
-        <IonItem>
-          <IonLabel>Fecha</IonLabel>
-          <IonDatetime
-            displayFormat="YYYY MM DD"
-            value={date}
-            onIonChange={(e) => {
-              setDate(e.detail.value!);
-              const ubication = JSON.parse(
-                window.sessionStorage.getItem("ubication")
-              );
-              ubication.date = date;
-              window.sessionStorage.setItem(
-                "ubication",
-                JSON.stringify(ubication)
-              );
-            }}
-          ></IonDatetime>
-        </IonItem>
 
-        <div className="submit buttons">
-          <IonList className="submit buttons">
-            <IonItem>
-              <IonButton className="save" onClick={searchMeteorology}>
-                Buscar
-              </IonButton>
-            </IonItem>
-          </IonList>
-        </div>
+        <IonItem className="writeOption">
+          <IonLabel className="label">O escribelo:</IonLabel>
+          <IonInput
+            className="text"
+            type="text"
+            value={name}
+            onIonChange={handleChangeName}
+          />
+        </IonItem>
+        {status.error && <div className="error">{status.message}</div>}
+
+        <IonButton className="save" onClick={searchMeteorology}>
+          Buscar
+        </IonButton>
       </IonContent>
     </IonPage>
   );

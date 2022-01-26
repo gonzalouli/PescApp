@@ -6,6 +6,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Geolocation } from "@capacitor/geolocation";
 import { IonLoading, IonToast } from "@ionic/react";
 import "../theme/Meteorology.css";
+import { API } from "aws-amplify";
 
 const render = (status: Status) => {
   return <h1>{status}</h1>;
@@ -22,6 +23,8 @@ interface Coordinates {
 }
 
 const MapComponent: React.VFC = () => {
+  const [key, setKey] = useState<string>("");
+
   const [marker, setMarker] = useState<Coordinates>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<LocationError>({ showError: false });
@@ -37,7 +40,6 @@ const MapComponent: React.VFC = () => {
     setLoading(true);
     try {
       const ubication = JSON.parse(window.sessionStorage.getItem("ubication"));
-      console.log(ubication.coords === undefined);
       if (ubication.coords === undefined) {
         const position = await Geolocation.getCurrentPosition();
         setCenter({
@@ -72,6 +74,21 @@ const MapComponent: React.VFC = () => {
   };
 
   React.useEffect(() => {
+    (async () => {
+      // TODO: change with import API amplify
+      const params = {
+        headers: {},
+        response: true,
+        queryStringParameters: {},
+      };
+      const response = await API.get(
+        "api9000aeb3",
+        "/keys/googlemapsallowed",
+        params
+      );
+      setKey(response.headers["google-key"]);
+    })();
+
     currentPosition();
   }, []);
 
@@ -86,10 +103,12 @@ const MapComponent: React.VFC = () => {
   };
 
   const onIdle = (m: google.maps.Map) => {
-    console.log("onIdle");
     setZoom(m.getZoom()!);
     setCenter(m.getCenter()!.toJSON());
   };
+  if (key.length === 0) {
+    return <></>;
+  }
 
   return (
     <Fragment>
@@ -109,7 +128,7 @@ const MapComponent: React.VFC = () => {
         }}
       />
       <div className="map-container" style={{ display: "flex", height: "70%" }}>
-        <Wrapper apiKey={""} render={render}>
+        <Wrapper apiKey={key} render={render}>
           <Map
             center={center}
             onClick={onClick}
