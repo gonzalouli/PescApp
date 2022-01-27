@@ -75,8 +75,8 @@ require("./database/models/models");
     .catch((e) => {
       console.error(e);
     });
-  const ResetCodes = require("./database/services/ResetCodes");
-  await ResetCodes();
+  // const ResetCodes = require("./database/services/ResetCodes");
+  // await ResetCodes();
 })();
 
 app.listen(4444, function () {

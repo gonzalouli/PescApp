@@ -1,0 +1,28 @@
+.place {
+  text-align: center;
+  display: flex;
+  margin: 0 auto;
+}
+.placeItem {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.grid {
+  max-width: 1300px;
+}
+
+.topItem {
+  margin-left: 0 auto !important;
+  text-align: center;
+}
+
+.otrosDatos {
+  display: flex;
+  text-align: center;
+  margin-top: 5vh;
+}
+
+.nextHours {
+  text-align: center;
+}

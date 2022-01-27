@@ -32,7 +32,7 @@ interface Coordinates {
 
 export default function Meteorology() {
   const minDate = moment().format("YYYY-MM-DD");
-  const maxDate = moment().add(6, "d").format("YYYY-MM-DD");
+  const maxDate = moment().add(7, "d").format("YYYY-MM-DD");
   const [selectedDate, setSelectedDate] = useState(minDate);
   const [name, setName] = useState("");
   const [MiUbicacion, setMiUbicacion] = useState(false);

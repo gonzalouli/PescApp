@@ -4,48 +4,29 @@ const GeocodingFromLatLng = require("./services/GeocodingFromLatLng");
 const MeteorologyPlace = require("./services/MeteorologyPlace");
 
 meteorology.post("/getMeteorology", async (req, res) => {
+  // const data = await GeocodingFromLatLng("PuertoReal");
   if (req.body.name !== undefined) {
-    let results = { place: req.body.name };
-    const meteorology = await MeteorologyPlace(results);
+    const coords = await GeocodingFromLatLng(req.body.name);
+
+    const meteorology = await MeteorologyPlace(coords.lat, coords.lng);
+    // console.log(meteorology.place.data);
     if (meteorology != null) {
-      res.send(meteorology);
+      res.json(meteorology.place.data);
     } else {
-      res.json({ error: true, message: "Fuera de servicio" });
+      res.json({ error: true, message: "Localizacion no encontrada" });
     }
   } else {
-    const { lat, lng } = req.body.data;
-    const data = await GeocodingFromLatLng(lat, lng);
+    const meteorology = await MeteorologyPlace(
+      req.body.data.lat,
+      req.body.data.lng
+    );
 
-    if (data != null) {
-      let place = data.data.plus_code.compound_code.toString();
-
-      place = await tansformToPlace(place);
-
-      const results = {
-        place,
-        data,
-      };
-
-      const meteorology = await MeteorologyPlace(results).then((res) => res);
-
-      if (meteorology !== null) {
-        res.send(meteorology);
-      } else {
-        res.json({ error: true, message: "El lugar no se encuentra" });
-      }
+    if (meteorology !== null) {
+      res.json(meteorology.place.data);
     } else {
-      res.json({ error: true, message: "Fuera de servicio" });
+      res.json({ error: true, message: "Localizacion no encontrada" });
     }
   }
 });
-
-const tansformToPlace = (place) => {
-  let init = 0,
-    end = 0;
-  init = place.indexOf(" ");
-  end = place.lastIndexOf(", ");
-  place = place.slice(init + 1, end);
-  return place;
-};
 
 module.exports = meteorology;
