@@ -11,6 +11,7 @@ Localization.init(
       autoIncrement: true,
       primaryKey: true,
     },
+    ActivityId: { type: DataTypes.BIGINT },
 
     text: { type: DataTypes.STRING },
   },

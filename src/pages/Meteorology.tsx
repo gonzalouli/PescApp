@@ -123,7 +123,7 @@ export default function Meteorology() {
               </IonButton>
               {MiUbicacion && (
                 <IonItem>
-                  <IonLabel className="label  selected">
+                  <IonLabel className="label ion-text-wrap  selected">
                     Ubicación actual seleccionada
                   </IonLabel>
                 </IonItem>

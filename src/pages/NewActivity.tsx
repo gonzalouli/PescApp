@@ -38,8 +38,12 @@ export default function NewActivity() {
   const sendNewActivity = async () => {
     //end sending information
     try {
+      console.log("data...");
+
       const data = await Auth.currentAuthenticatedUser();
       console.log(data.username);
+
+      // console.log(data.username);
       const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
       // await API.get("api9000aeb3", "/activities", {}).then((res) =>
       //   console.log(res)
@@ -51,9 +55,8 @@ export default function NewActivity() {
           UserDataKey: data.userDataKey,
         },
       });
-    } catch (err) {
-      Auth.signOut();
-      <Redirect to="/login" />;
+    } catch (error) {
+      console.error(error);
     }
 
     // window.sessionStorage.removeItem("newActivity");

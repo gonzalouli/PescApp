@@ -65,7 +65,7 @@ export default function NewDocumentation() {
           allowEditing: true,
           resultType: CameraResultType.DataUrl,
         });
-        console.log(image);
+        // console.log(image);
 
         setImageUrl(image.dataUrl);
         setPiece({ ...piece, imageUrl: image.dataUrl });

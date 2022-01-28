@@ -102,6 +102,7 @@ export default function Tide() {
             <IonLabel className="label">Fechas disponibles: </IonLabel>
             <IonDatetime
               value={selectedDate}
+              // max={moment("YYYY-MM-DD").add(1, "year").toString()}
               defaultValue={minDate}
               onIonChange={(e) => {
                 setSelectedDate(e.detail.value);

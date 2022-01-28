@@ -71,7 +71,6 @@ export default function NewActivityCatch() {
           allowEditing: true,
           resultType: CameraResultType.DataUrl,
         });
-        console.log(image);
 
         setImageUrl(image.dataUrl);
         setPiece({ ...piece, imageUrl: image.dataUrl });
@@ -101,22 +100,24 @@ export default function NewActivityCatch() {
   };
 
   const saveAndNew = async () => {
-    const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
+    if (imageUrl != process.env.PUBLIC_URL + "/assets/placeholderimage.jpg") {
+      const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
 
-    await activity.catches.push(piece);
-    window.sessionStorage.setItem("newActivity", JSON.stringify(activity));
+      await activity.catches.push(piece);
+      window.sessionStorage.setItem("newActivity", JSON.stringify(activity));
 
-    setTempactivity(activity);
+      setTempactivity(activity);
 
-    setName("");
-    setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
-    setDescription("");
-    setPiece({
-      id: nanoid(),
-      name: name,
-      imageUrl: imageUrl,
-      description: description,
-    });
+      setName("");
+      setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
+      setDescription("");
+      setPiece({
+        id: nanoid(),
+        name: name,
+        imageUrl: imageUrl,
+        description: description,
+      });
+    }
   };
 
   const deletePiece = (id, e) => {
@@ -222,10 +223,11 @@ export default function NewActivityCatch() {
                       </svg>
                       Borrar
                     </IonButton>
-                    <IonCardTitle className="card">{item.name}</IonCardTitle>
-                    <IonCardContent className="label">
-                      {" "}
-                      {item.description}
+                    <IonCardTitle className="card ion-text-wrap">
+                      {item.name}
+                    </IonCardTitle>
+                    <IonCardContent className="label ion-text-wrap">
+                      Descripción: {item.description}
                     </IonCardContent>
                     <img src={item.imageUrl} alt={item.id} />
                   </IonCardHeader>

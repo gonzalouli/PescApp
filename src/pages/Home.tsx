@@ -28,7 +28,6 @@ const Home: React.FC = () => {
       localization: {},
       tackle: [],
       catches: [],
-      meteorology: [],
       date: {},
     };
     const ubication = {};
@@ -93,7 +92,7 @@ const Home: React.FC = () => {
               setIsMeteorology(true);
             }}
           >
-            Tiempo y Marea
+            Tiempo y Mareas
           </IonButton>
           <IonButton className="main-button" expand="block">
             Especies

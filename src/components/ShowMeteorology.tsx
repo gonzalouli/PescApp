@@ -26,8 +26,8 @@ export default function ShowMeteorology(props) {
 
   useEffect(() => {
     // console.log(props);
-    console.log(meteorology);
-    console.log(index);
+    // console.log(meteorology);
+    // console.log(index);
     // console.log(meteorology.daily[index].temp.day);
     let finded = false;
     if (index === 1) {

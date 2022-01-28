@@ -21,7 +21,7 @@ export default function MereorologyOrTide() {
       {isTidePage && <Redirect to="/my/Tide" push={true} exact={true} />}
       <IonHeader className="header">
         <BackButton refer="/my/home" />
-        <IonTitle className="tittle">Tiempo y Marea</IonTitle>
+        <IonTitle className="tittle">Tiempo y Mareas</IonTitle>
       </IonHeader>
       <IonContent>
         <IonButton

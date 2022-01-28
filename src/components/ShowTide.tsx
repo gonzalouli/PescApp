@@ -15,8 +15,8 @@ export default function ShowTide(props) {
   const [marea, setMarea] = useState(datos.datos.marea);
 
   useEffect(() => {
-    console.log(datos.puerto);
-    console.log(marea);
+    // console.log(datos.puerto);
+    // console.log(marea);
   }, [datos, marea]);
 
   return (
