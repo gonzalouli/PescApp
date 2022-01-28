@@ -233,12 +233,12 @@ export default function ShowMeteorology(props) {
           </IonGrid>
         </Fragment>
       )}
-      {meteorology.alerts.length !== 0 && (
+      {meteorology.alerts !== undefined && (
         <IonTitle size="large" className="label error">
           Alertas
         </IonTitle>
       )}
-      {meteorology.alerts.length !== 0 &&
+      {meteorology.alerts !== undefined &&
         meteorology.alerts.map((d) => {
           return (
             <IonRow>

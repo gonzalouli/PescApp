@@ -20,7 +20,6 @@ Activity.init(
       type: DataTypes.STRING,
     },
     name: { type: DataTypes.STRING },
-    // meteorology: DataTypes.ARRAY(Meteorology),
   },
   {
     sequelize,
@@ -35,6 +34,5 @@ Activity.belongsTo(Localization);
 Activity.belongsTo(Dates);
 Activity.belongsTo(Tackle);
 Activity.belongsTo(Catches);
-Activity.belongsTo(Meteorology);
 
 module.exports = Activity;
