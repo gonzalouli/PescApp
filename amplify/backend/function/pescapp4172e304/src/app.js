@@ -57,11 +57,13 @@ const keys = require("./routes/keys");
 const activities = require("./routes/activity");
 const register = require("./routes/register");
 const meteorology = require("./routes/meteorology");
+const ports = require("./routes/ports");
 
 app.use("/keys", keys);
 app.use("/activities", activities);
 app.use("/register", register);
 app.use("/meteorology", meteorology);
+app.use("/ports", ports);
 
 const sequelize = require("./database/sequelize");
 // const { CodeStarNotifications } = require("aws-sdk");
@@ -75,8 +77,8 @@ require("./database/models/models");
     .catch((e) => {
       console.error(e);
     });
-  // const ResetCodes = require("./database/services/ResetCodes");
-  // await ResetCodes();
+  const ResetCodes = require("./database/services/ResetCodes");
+  await ResetCodes();
 })();
 
 app.listen(4444, function () {

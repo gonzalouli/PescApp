@@ -105,7 +105,7 @@ export default function Meteorology() {
   return (
     <IonPage>
       <IonHeader className="header">
-        <BackButton refer="/my/home" />
+        <BackButton refer="/my/MeteorologyOrTide" />
         <IonTitle className="tittle">Meteorología</IonTitle>
       </IonHeader>
       <IonContent>

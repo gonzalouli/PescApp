@@ -1,5 +1,4 @@
 const axios = require("axios");
-const MunCods = require("../../database/models/Geography/MunCods");
 
 module.exports = async function MeteorologyPlace(lat, lng) {
   try {

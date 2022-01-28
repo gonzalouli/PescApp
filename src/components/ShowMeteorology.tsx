@@ -13,18 +13,41 @@ import {
 import React, { Fragment, useEffect, useState } from "react";
 import moment from "moment";
 import "../theme/ShowMeteorology.css";
+import { Redirect } from "react-router";
 
 export default function ShowMeteorology(props) {
-  const meteorology = props.props.response;
+  const [meteorology, setMeteorology] = useState(props.props.response);
+  const [hourly, setHourly] = useState(props.props.response.hourly);
+
   const [date, setDate] = useState(moment(props.props.selectedDate));
   const nowDate = moment().format("YYYY-MM-DD");
   const [index, setIndex] = useState(date.diff(nowDate, "days"));
+  const [dataTransformed, setDataTransformed] = useState(false);
 
   useEffect(() => {
-    console.log(props);
+    // console.log(props);
     console.log(meteorology);
     console.log(index);
-    console.log(meteorology.daily[index].temp.day);
+    // console.log(meteorology.daily[index].temp.day);
+    let finded = false;
+    if (index === 1) {
+      for (let i = 0; i < hourly.length && !finded; i++) {
+        if (toHourFormated(hourly[i].dt) === "0:00") {
+          setHourly(hourly.slice(i, hourly.length));
+          finded = true;
+        }
+      }
+    }
+    if (index === 0) {
+      for (let i = 0; i < hourly.length && !finded; i++) {
+        if (toHourFormated(hourly[i].dt) === "0:00") {
+          setHourly(hourly.slice(0, i));
+          finded = true;
+        }
+      }
+    }
+    console.log(hourly);
+    setDataTransformed(true);
   }, []);
 
   const toDegree = (g) => {
@@ -56,7 +79,7 @@ export default function ShowMeteorology(props) {
   };
   const toHourFormated = (time) => {
     const date = new Date(time * 1000);
-    return date.getHours() + ":00";
+    return date.getUTCHours() + ":00";
   };
 
   return (
@@ -161,7 +184,7 @@ export default function ShowMeteorology(props) {
         <Fragment>
           <IonItem>
             <IonLabel className="label ion-text-wrap nextHours">
-              Tiempo del día actual y posterior
+              Datos por hora
             </IonLabel>
           </IonItem>
 
@@ -174,9 +197,9 @@ export default function ShowMeteorology(props) {
                 <IonCol className="topItem label">°C</IonCol>
               </IonItemDivider>
             </IonRow>
-            {meteorology.hourly.map((hour) => {
+            {hourly.map((hour) => {
               return (
-                <IonRow className="grid-row">
+                <IonRow className="grid-row" key={hour.id}>
                   <IonItemDivider className="itemDivider">
                     <IonCol className="topItem label">
                       {toHourFormated(hour.dt)}

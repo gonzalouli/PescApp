@@ -58,7 +58,7 @@ const Home: React.FC = () => {
         <Redirect to="/my/NewActivity" push={true} exact={true} />
       )}
       {isMeteorology && (
-        <Redirect to="/my/Meteorology" push={true} exact={true} />
+        <Redirect to="/my/MeteorologyOrTide" push={true} exact={true} />
       )}
       {isDocumentation && (
         <Redirect to="/my/Documentation" push={true} exact={true} />
@@ -93,7 +93,7 @@ const Home: React.FC = () => {
               setIsMeteorology(true);
             }}
           >
-            Meteorología
+            Tiempo y Marea
           </IonButton>
           <IonButton className="main-button" expand="block">
             Especies

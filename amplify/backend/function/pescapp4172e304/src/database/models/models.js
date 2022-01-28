@@ -12,7 +12,7 @@ const Tackle = require("./Activity/Tackle");
 const Licenses = require("./Licenses/Licenses");
 const LicenseImages = require("./Licenses/LicenseImages");
 const Images = require("./Licenses/Images");
-const MunCods = require("./Geography/MunCods");
+const Ports = require("./Ports/Ports");
 
 module.exports = [
   Activity,
@@ -29,5 +29,5 @@ module.exports = [
   Licenses,
   LicenseImages,
   Images,
-  MunCods,
+  Ports,
 ];

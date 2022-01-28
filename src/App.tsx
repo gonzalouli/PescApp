@@ -15,6 +15,7 @@ import MiPerfil from "./pages/MiPerfil";
 import ResetPass from "./pages/ResetPass";
 import NewActivityLocalization from "./pages/NewActivityLocalization";
 import Meteorology from "./pages/Meteorology";
+import MeteorologyOrTide from "./pages/MereorologyOrTide";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -40,6 +41,7 @@ import NewDocumentation from "./pages/NewDocumentation";
 import MyDocumentation from "./pages/MyDocumentation";
 import { Auth } from "aws-amplify";
 import { Fragment, useEffect, useState } from "react";
+import Tide from "./pages/Tide";
 
 const App: React.FC = () => {
   const [isLog, setIsLog] = useState(false);
@@ -105,6 +107,12 @@ const App: React.FC = () => {
               </Route>
               <Route exact={true} path="/my/Meteorology">
                 <Meteorology />
+              </Route>
+              <Route exact={true} path="/my/Tide">
+                <Tide />
+              </Route>
+              <Route exact={true} path="/my/MeteorologyOrTide">
+                <MeteorologyOrTide />
               </Route>
               <Route exact={true} path="/my/Documentation">
                 <Documentation />
