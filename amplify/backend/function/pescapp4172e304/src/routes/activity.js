@@ -4,12 +4,15 @@ const activity = express.Router();
 const CreateActivity = require("./services/CreateActivity");
 
 activity.post("/insertActivity", async (req, res) => {
-  try {
-    await CreateActivity(req.body);
-    res.status(200).json({});
-  } catch (error) {
-    console.error(error);
-  }
+  const result = await CreateActivity(req.body);
+  if (result != false)
+    res.json({ success: true, message: "Actividad Introducida" });
+  else
+    res.json({
+      error: true,
+      message:
+        "Ha habido un error al introducir la actividad, contacte con el administrador...",
+    });
 });
 
 module.exports = activity;

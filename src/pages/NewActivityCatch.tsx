@@ -96,9 +96,6 @@ export default function NewActivityCatch() {
   };
 
   const saveAndBack = async () => {
-    const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
-    await activity.catches.push(piece);
-    window.sessionStorage.setItem("newActivity", JSON.stringify(activity));
     setIsConfirmed(true);
   };
 
@@ -178,13 +175,6 @@ export default function NewActivityCatch() {
           </IonItem>
           <IonGrid>
             <IonRow>
-              <IonCol>
-                <IonItem>
-                  <IonButton className="save" onClick={saveAndBack}>
-                    Guardar
-                  </IonButton>
-                </IonItem>
-              </IonCol>
               <IonCol>
                 <IonItem>
                   <IonButton className="save label" onClick={saveAndNew}>

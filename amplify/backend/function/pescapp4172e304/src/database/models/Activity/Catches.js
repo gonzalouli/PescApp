@@ -9,7 +9,7 @@ Catches.init(
     Id: { type: DataTypes.STRING, primaryKey: true },
     name: { type: DataTypes.STRING },
     description: { type: DataTypes.STRING },
-    imageUrl: { type: DataTypes.STRING },
+    imageUrl: { type: DataTypes.TEXT },
   },
   {
     sequelize,

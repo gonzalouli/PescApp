@@ -22,7 +22,10 @@ export default function NewActivity() {
   const [name, setName] = useState(
     JSON.parse(window.sessionStorage.getItem("newActivity"))?.name || ""
   );
-
+  const [button, setButton] = useState(true);
+  const [error, setError] = useState({ error: false, message: "" });
+  const [success, setSuccess] = useState({ success: false, message: "" });
+  const [toHome, setToHome] = useState(false);
   useEffect(() => {
     ResetLS();
   }, []);
@@ -37,29 +40,30 @@ export default function NewActivity() {
 
   const sendNewActivity = async () => {
     //end sending information
+    setButton(false);
     try {
-      console.log("data...");
-
       const data = await Auth.currentAuthenticatedUser();
-      console.log(data.username);
 
-      // console.log(data.username);
       const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
-      // await API.get("api9000aeb3", "/activities", {}).then((res) =>
-      //   console.log(res)
-      // );
-      await API.post("api9000aeb3", "/activities/insertActivity", {
-        body: {
-          UserIdCognito: data.username,
-          activity,
-          UserDataKey: data.userDataKey,
-        },
-      });
-    } catch (error) {
-      console.error(error);
-    }
 
-    // window.sessionStorage.removeItem("newActivity");
+      const result = await API.post(
+        "api9000aeb3",
+        "/activities/insertActivity",
+        {
+          body: {
+            UserIdCognito: data.username,
+            activity,
+            UserDataKey: data.userDataKey,
+          },
+        }
+      );
+
+      if (result.error == true) setError(result);
+      else setSuccess(result);
+      setTimeout(() => {
+        setToHome(true);
+      }, 3000);
+    } catch (error) {}
   };
 
   const [isNewActivityLocalization, setIsNewActivityLocalization] =
@@ -83,6 +87,7 @@ export default function NewActivity() {
       {isNewActivityDate && (
         <Redirect to="/my/NewActivity/Date" push={true} exact={true} />
       )}
+      {toHome && <Redirect to="/my/home" push={true} exact={true} />}
 
       <Fragment>
         <IonHeader className="header">
@@ -132,8 +137,21 @@ export default function NewActivity() {
               Fecha
             </IonButton>
           </IonList>
+          {error.error == true && (
+            <IonItem>
+              <IonLabel className="error ion-text-wrap">
+                {error.message}
+              </IonLabel>
+            </IonItem>
+          )}
+          {success.success === true && (
+            <IonItem>
+              <IonLabel className="success label">{success.message}</IonLabel>
+            </IonItem>
+          )}
+
           <div className="submit buttons">
-            <IonButton className="save" onClick={sendNewActivity}>
+            <IonButton className="save" onClick={button && sendNewActivity}>
               Guardar
             </IonButton>
           </div>

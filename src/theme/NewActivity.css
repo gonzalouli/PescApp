@@ -21,3 +21,9 @@
   margin: 0 auto !important;
   text-align: center !important;
 }
+
+.success {
+  display: flex;
+  text-align: center !important;
+  margin: 0 auto !important;
+}
