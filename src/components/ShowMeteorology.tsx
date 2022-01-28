@@ -196,16 +196,20 @@ export default function ShowMeteorology(props) {
         </Fragment>
       )}
 
-      <IonTitle size="large" className="label error">
-        Alertas
-      </IonTitle>
-      {meteorology.alerts.map((d) => {
-        return (
-          <IonRow>
-            <IonLabel className="label ion-text-wrap">{d.description}</IonLabel>
-          </IonRow>
-        );
-      })}
+      {meteorology.alerts !== undefined && (
+          <IonTitle size="large" className="label error">
+            Alertas
+          </IonTitle>
+        ) &&
+        meteorology.alerts.map((d) => {
+          return (
+            <IonRow>
+              <IonLabel className="label ion-text-wrap">
+                {d.description}
+              </IonLabel>
+            </IonRow>
+          );
+        })}
       <IonItem>
         <IonLabel className="refer ion-text-wrap">
           Por: Agencia Estatal de Meteorología - AEMET. Gobierno de España{" "}

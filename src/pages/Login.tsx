@@ -129,24 +129,20 @@ const Home: React.FC = () => {
 
         <IonLoading isOpen={status.loading}></IonLoading>
         <IonList className="links">
-          <IonItem>
-            <IonButton
-              className="button"
-              color="light"
-              onClick={() => setIsForgotPass(true)}
-            >
-              ¿Olvidaste tu contraseña?
-            </IonButton>
-          </IonItem>
-          <IonItem>
-            <IonButton
-              className="button"
-              color="light"
-              onClick={() => setIsRegister(true)}
-            >
-              Registrate aqui
-            </IonButton>
-          </IonItem>
+          <IonButton
+            className="button"
+            color="light"
+            onClick={() => setIsForgotPass(true)}
+          >
+            ¿Olvidaste tu contraseña?
+          </IonButton>
+          <IonButton
+            className="button"
+            color="light"
+            onClick={() => setIsRegister(true)}
+          >
+            Registrate aqui
+          </IonButton>
         </IonList>
       </IonContent>
     </IonPage>
