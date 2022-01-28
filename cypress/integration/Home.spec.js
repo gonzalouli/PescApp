@@ -6,7 +6,7 @@ describe("Carga el home adecuadamente", () => {
   it("Estan todas las opciones", () => {
     cy.get(".container-home").get(".main-button").contains("Nueva Actividad");
     cy.get(".container-home").get(".main-button").contains("Mis Actividades");
-    cy.get(".container-home").get(".main-button").contains("Meteorología");
+    cy.get(".container-home").get(".main-button").contains("Tiempo y Mareas");
     cy.get(".container-home").get(".main-button").contains("Especies");
     cy.get(".container-home").get(".main-button").contains("Documentación");
     cy.get(".container-home").get(".main-button").contains("Notificaciones");
@@ -61,7 +61,7 @@ describe("Carga el home adecuadamente", () => {
       force: true,
     });
     cy.location().should((loc) =>
-      expect(loc.pathname).to.eq("/my/Meteorology")
+      expect(loc.pathname).to.eq("/my/MeteorologyOrTide")
     );
 
     //Meteorologia

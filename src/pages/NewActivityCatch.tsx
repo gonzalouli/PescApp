@@ -5,8 +5,10 @@ import {
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
+  IonCol,
   IonContent,
   IonDatetime,
+  IonGrid,
   IonHeader,
   IonIcon,
   IonInput,
@@ -14,6 +16,7 @@ import {
   IonLabel,
   IonList,
   IonPage,
+  IonRow,
   IonTextarea,
   IonTitle,
   isPlatform,
@@ -173,18 +176,24 @@ export default function NewActivityCatch() {
               onIonChange={handleTextChange}
             ></IonTextarea>
           </IonItem>
-          <div className="buttons">
-            <IonItem>
-              <IonButton className="save" onClick={saveAndBack}>
-                Guardar
-              </IonButton>
-            </IonItem>
-            <IonItem>
-              <IonButton className="saveAndNew" onClick={saveAndNew}>
-                Añadir
-              </IonButton>
-            </IonItem>
-          </div>
+          <IonGrid>
+            <IonRow>
+              <IonCol>
+                <IonItem>
+                  <IonButton className="save" onClick={saveAndBack}>
+                    Guardar
+                  </IonButton>
+                </IonItem>
+              </IonCol>
+              <IonCol>
+                <IonItem>
+                  <IonButton className="save label" onClick={saveAndNew}>
+                    Añadir
+                  </IonButton>
+                </IonItem>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
         </IonList>
 
         <IonList className="capturas">

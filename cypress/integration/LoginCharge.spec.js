@@ -11,12 +11,12 @@ describe("Carga el login adecuadamente", () => {
   });
 
   it("Podemos recuperar contraseña", () => {
-    cy.get("ion-button").contains("Olvidaste la contraseña?");
+    cy.get("ion-button").contains("¿Olvidaste tu contraseña?");
   });
 
   it("Podemos ir a la recuperacion de contraseña", () => {
     cy.xpath(
-      '//*[@id="root"]/ion-app/div/ion-content/ion-list[2]/ion-item[1]/ion-button'
+      '//*[@id="root"]/ion-app/div/ion-content/ion-list[2]/ion-button[1]'
     ).click();
 
     cy.location().should((loc) => expect(loc.pathname).to.eq("/forgotPass"));
@@ -24,7 +24,7 @@ describe("Carga el login adecuadamente", () => {
 
   it("Podemos ir al registro", () => {
     cy.xpath(
-      '//*[@id="root"]/ion-app/div/ion-content/ion-list[2]/ion-item[2]/ion-button'
+      '//*[@id="root"]/ion-app/div/ion-content/ion-list[2]/ion-button[2]'
     ).click({ force: true });
     cy.location().should((loc) => expect(loc.pathname).to.eq("/register"));
   });
