@@ -49,14 +49,23 @@
   width: 80%;
 }
 
-.tittle {
-  padding: 5% !important;
-  align-items: center;
-}
 .item-container {
   margin: auto !important;
 }
 
 .button {
   size: small !important;
+}
+
+.encabezado {
+  display: flex;
+  justify-content: center !important;
+  align-items: center;
+}
+
+.logoImagen {
+  display: flex;
+  z-index: 1;
+  margin-top: 4vh !important;
+  margin-bottom: 3vh !important;
 }

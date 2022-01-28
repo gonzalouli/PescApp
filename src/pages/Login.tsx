@@ -1,6 +1,8 @@
 import {
   IonButton,
+  IonCol,
   IonContent,
+  IonGrid,
   IonHeader,
   IonInput,
   IonItem,
@@ -8,6 +10,7 @@ import {
   IonList,
   IonLoading,
   IonPage,
+  IonRow,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -49,9 +52,28 @@ const Home: React.FC = () => {
       {isRegister && <Redirect to="/register" push={true} exact={true} />}
       {isForgotPass && <Redirect to="/forgotPass" push={true} exact={true} />}
 
-      <IonHeader>
+      <IonHeader className="ion-header">
         <IonToolbar className="ion-align-items-center">
-          <IonTitle className="tittle">PescApp</IonTitle>
+          <div className="encabezado">
+            <IonGrid className="encabezado">
+              <IonRow>
+                <IonCol>
+                  <img
+                    className="logoImagen"
+                    alt="logo"
+                    width="60"
+                    height="70"
+                    src={`${process.env.PUBLIC_URL}/logo.png`}
+                  />
+                </IonCol>
+                <IonCol>
+                  <IonTitle color="primary" className="tittle">
+                    PescApp
+                  </IonTitle>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
+          </div>
         </IonToolbar>
       </IonHeader>
       <IonContent className="form">
