@@ -22,8 +22,11 @@ import "../theme/Tide.css";
 export default function Tide() {
   const [showLoading, setShowLoading] = useState(false);
   const [haveTide, setHaveTide] = useState(false);
-  const minDate = moment().format("YYYY-MM-DD");
-  const [selectedDate, setSelectedDate] = useState(minDate);
+  const maxDate = moment().add(1, "year").year() + "-12-31";
+  const minDate = moment().subtract(2, "year").year() + "-01-01";
+
+  const date = moment().format("YYYY-MM-DD");
+  const [selectedDate, setSelectedDate] = useState(date);
   const [selectedPort, setSelectedPort] = useState("");
   const [status, setStatus] = useState({ error: false, message: "" });
   const [ports, setPorts] = useState([]);
@@ -71,8 +74,6 @@ export default function Tide() {
         />
 
         <Fragment>
-          {status.error && <div className="error">{status.message}</div>}
-
           <IonItem>
             <IonLabel className="label" position="stacked">
               Puerto
@@ -102,8 +103,9 @@ export default function Tide() {
             <IonLabel className="label">Fechas disponibles: </IonLabel>
             <IonDatetime
               value={selectedDate}
-              // max={moment("YYYY-MM-DD").add(1, "year").toString()}
-              defaultValue={minDate}
+              max={maxDate}
+              min={minDate}
+              defaultValue={date}
               onIonChange={(e) => {
                 setSelectedDate(e.detail.value);
               }}
