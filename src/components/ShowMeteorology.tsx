@@ -130,26 +130,31 @@ export default function ShowMeteorology(props) {
             </IonCol>
           </IonItemDivider>
         </IonGrid>
+        <IonItem>
+          <IonLabel className="label ion-text-wrap nextHours">
+            Datos de ambiente
+          </IonLabel>
+        </IonItem>
         <IonGrid className="grid">
           <IonRow className="grid-row">
             <IonItemDivider className="itemDivider">
-              <IonCol className="topItem label">Salida de la luna</IonCol>
-              <IonCol className="topItem label">Puesta de la luna</IonCol>
-              <IonCol className="topItem label">Salida del sol</IonCol>
-              <IonCol className="topItem label">Puesta de Sol</IonCol>
+              <IonCol className="topItem label text">Salida de la luna</IonCol>
+              <IonCol className="topItem label text">Puesta de la luna</IonCol>
+              <IonCol className="topItem label text">Salida del sol</IonCol>
+              <IonCol className="topItem label text">Puesta de Sol</IonCol>
             </IonItemDivider>
           </IonRow>
           <IonItemDivider className="itemDivider">
-            <IonCol className="topItem label">
+            <IonCol className="topItem data">
               {toDateFormated(meteorology.daily[index].moonrise)}
             </IonCol>
-            <IonCol className="topItem label">
+            <IonCol className="topItem data">
               {toDateFormated(meteorology.daily[index].moonset)}
             </IonCol>
-            <IonCol className="topItem label">
+            <IonCol className="topItem data">
               {toDateFormated(meteorology.daily[index].sunrise)}
             </IonCol>
-            <IonCol className="topItem label">
+            <IonCol className="topItem data">
               {toDateFormated(meteorology.daily[index].sunset)}
             </IonCol>
           </IonItemDivider>
@@ -157,23 +162,25 @@ export default function ShowMeteorology(props) {
         <IonGrid className="grid">
           <IonRow className="grid-row">
             <IonItemDivider className="itemDivider">
-              <IonCol className="topItem label">Humedad </IonCol>
-              <IonCol className="topItem label">Presión</IonCol>
-              <IonCol className="topItem label">Factor UVI</IonCol>
-              <IonCol className="topItem label">Ráfaga máxima de viento</IonCol>
+              <IonCol className="topItem label text">Humedad </IonCol>
+              <IonCol className="topItem label text">Presión</IonCol>
+              <IonCol className="topItem label text">Factor UVI</IonCol>
+              <IonCol className="topItem label text">
+                Ráfaga máxima de viento
+              </IonCol>
             </IonItemDivider>
           </IonRow>
           <IonItemDivider className="itemDivider">
-            <IonCol className="topItem label">
+            <IonCol className="topItem data">
               {meteorology.daily[index].humidity} %
             </IonCol>
-            <IonCol className="topItem label">
+            <IonCol className="topItem data">
               {meteorology.daily[index].pressure} hPa
             </IonCol>
-            <IonCol className="topItem label">
+            <IonCol className="topItem data">
               {meteorology.daily[index].uvi}
             </IonCol>
-            <IonCol className="topItem label">
+            <IonCol className="topItem data">
               {meteorology.daily[index].wind_gust} Nudos
             </IonCol>
           </IonItemDivider>
@@ -191,24 +198,32 @@ export default function ShowMeteorology(props) {
           <IonGrid className="grid-row">
             <IonRow className="grid-row">
               <IonItemDivider className="itemDivider">
-                <IonCol className="topItem label">Hora</IonCol>
-                <IonCol className="topItem label">Velocidad viento</IonCol>
-                <IonCol className="topItem label">Ráfaga maxima</IonCol>
-                <IonCol className="topItem label">°C</IonCol>
+                <IonCol color="secondary" className="topItem label">
+                  Hora
+                </IonCol>
+                <IonCol color="secondary" className="topItem label">
+                  Velocidad viento
+                </IonCol>
+                <IonCol color="secondary" className="topItem label">
+                  Ráfaga maxima
+                </IonCol>
+                <IonCol color="secondary" className="topItem label">
+                  °C
+                </IonCol>
               </IonItemDivider>
             </IonRow>
             {hourly.map((hour) => {
               return (
                 <IonRow className="grid-row" key={hour.id}>
                   <IonItemDivider className="itemDivider">
-                    <IonCol className="topItem label">
+                    <IonCol className="topItem data">
                       {toHourFormated(hour.dt)}
                     </IonCol>
-                    <IonCol className="topItem label">
+                    <IonCol className="topItem data">
                       {hour.wind_speed} a {toDegree(hour.wind_deg)}
                     </IonCol>
-                    <IonCol className="topItem label">{hour.wind_gust}</IonCol>
-                    <IonCol className="topItem label">
+                    <IonCol className="topItem data">{hour.wind_gust}</IonCol>
+                    <IonCol className="topItem data">
                       {hour.temp.toFixed(0) - 273}
                     </IonCol>
                   </IonItemDivider>
@@ -218,12 +233,12 @@ export default function ShowMeteorology(props) {
           </IonGrid>
         </Fragment>
       )}
-
-      {meteorology.alerts !== undefined && (
-          <IonTitle size="large" className="label error">
-            Alertas
-          </IonTitle>
-        ) &&
+      {meteorology.alerts.length !== 0 && (
+        <IonTitle size="large" className="label error">
+          Alertas
+        </IonTitle>
+      )}
+      {meteorology.alerts.length !== 0 &&
         meteorology.alerts.map((d) => {
           return (
             <IonRow>

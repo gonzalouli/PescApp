@@ -26,3 +26,13 @@
 .nextHours {
   text-align: center;
 }
+
+.label {
+  color: white;
+}
+
+.data {
+  color: white;
+  font-weight: bold;
+  font-size: 100% !important;
+}

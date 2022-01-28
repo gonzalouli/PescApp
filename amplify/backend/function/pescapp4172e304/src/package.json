@@ -20,7 +20,8 @@
     "http": "^0.0.1-security",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
-    "sequelize": "^7.0.0-alpha.3"
+    "sequelize": "^7.0.0-alpha.3",
+    "moment": "^2.29.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

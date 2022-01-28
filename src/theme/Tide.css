@@ -1,3 +1,7 @@
 .alert-radio-label {
   width: 130% !important;
 }
+.writeOption {
+  display: flex;
+  margin-top: 3vh !important;
+}
