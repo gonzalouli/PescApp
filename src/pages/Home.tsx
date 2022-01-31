@@ -39,6 +39,7 @@ const Home: React.FC = () => {
   const [isNewActivity, setIsNewActivity] = useState<boolean>(false);
   const [isMeteorology, setIsMeteorology] = useState<boolean>(false);
   const [isDocumentation, setIsDocumentation] = useState<boolean>(false);
+  const [isMyActivity, setIsMyActivity] = useState<boolean>(false);
 
   const [wait, setWait] = useState<boolean>(true);
 
@@ -62,7 +63,9 @@ const Home: React.FC = () => {
       {isDocumentation && (
         <Redirect to="/my/Documentation" push={true} exact={true} />
       )}
-
+      {isMyActivity && (
+        <Redirect to="/my/MyActivity" push={true} exact={true} />
+      )}
       <div className="profile">
         <IonHeader className="header">
           <MiPerfilButton text="Mi Perfil"></MiPerfilButton>
@@ -82,7 +85,13 @@ const Home: React.FC = () => {
           >
             Nueva Actividad
           </IonButton>
-          <IonButton className="main-button" expand="block">
+          <IonButton
+            className="main-button"
+            expand="block"
+            onClick={() => {
+              setIsMyActivity(true);
+            }}
+          >
             Mis Actividades
           </IonButton>
           <IonButton

@@ -1,0 +1,26 @@
+.item {
+  display: flex;
+  margin: 0 auto;
+  color: white !important;
+}
+
+.grid {
+  align-items: center !important;
+  text-align: center;
+}
+
+.itemDivider {
+  text-align: center;
+}
+.row {
+  display: flex;
+  margin: 0 auto !important;
+}
+
+.button {
+  padding: 0 auto;
+}
+
+.topItem {
+  font-size: 100% !important;
+}

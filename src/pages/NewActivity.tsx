@@ -26,8 +26,15 @@ export default function NewActivity() {
   const [error, setError] = useState({ error: false, message: "" });
   const [success, setSuccess] = useState({ success: false, message: "" });
   const [toHome, setToHome] = useState(false);
+  const [logOut, setLogOut] = useState(false);
+
   useEffect(() => {
     ResetLS();
+    try {
+      Auth.currentAuthenticatedUser();
+    } catch (error) {
+      setLogOut(true);
+    }
   }, []);
 
   const handleChange = (e) => {
@@ -88,7 +95,7 @@ export default function NewActivity() {
         <Redirect to="/my/NewActivity/Date" push={true} exact={true} />
       )}
       {toHome && <Redirect to="/my/home" push={true} exact={true} />}
-
+      {logOut && <Redirect to="/" push={true} exact={true} />}
       <Fragment>
         <IonHeader className="header">
           <BackButton refer="/my/home" />

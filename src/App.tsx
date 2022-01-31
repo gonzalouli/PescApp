@@ -42,6 +42,8 @@ import MyDocumentation from "./pages/MyDocumentation";
 import { Auth } from "aws-amplify";
 import { Fragment, useEffect, useState } from "react";
 import Tide from "./pages/Tide";
+import MyActivity from "./pages/MyActivity";
+import MyActivityWithId from "./pages/MyActivityWithId";
 
 const App: React.FC = () => {
   const [isLog, setIsLog] = useState(false);
@@ -90,8 +92,14 @@ const App: React.FC = () => {
               <Route exact={true} path="/my/changePass">
                 <ChangePass />
               </Route>
-              <Route exact={true} path="/my/NewActivity">
-                <NewActivity />
+              <Route exact={true} path="/my/MyActivity">
+                <MyActivity />
+              </Route>
+              <Route exact={true} path="/my/MyActivity">
+                <MyActivity />
+              </Route>
+              <Route exact={true} path="/my/MyActivityWithId">
+                <MyActivityWithId />
               </Route>
               <Route exact={true} path="/my/NewActivity/Date">
                 <NewActivityDate />

@@ -5,19 +5,30 @@ import {
   IonPage,
   IonTitle,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router";
 import BackButton from "../components/BackButton";
+import { Auth } from "aws-amplify";
 
 export default function MereorologyOrTide() {
   const [isMeteorologyPage, setIsMeteorologyPage] = useState(false);
   const [isTidePage, setIsTidePage] = useState(false);
+  const [logOut, setLogOut] = useState(false);
+
+  useEffect(() => {
+    try {
+      Auth.currentAuthenticatedUser();
+    } catch (error) {
+      setLogOut(true);
+    }
+  }, []);
 
   return (
     <IonPage>
       {isMeteorologyPage && (
         <Redirect to="/my/Meteorology" push={true} exact={true} />
       )}
+      {logOut && <Redirect to="/" push={true} exact={true} />}
       {isTidePage && <Redirect to="/my/Tide" push={true} exact={true} />}
       <IonHeader className="header">
         <BackButton refer="/my/home" />
