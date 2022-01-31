@@ -86,7 +86,7 @@ export default function MyActivityWithId() {
       {ready && (
         <Fragment>
           <IonHeader className="header">
-            <BackButton refer="/my/home" />
+            <BackButton refer="/my/MyActivity" />
             <IonTitle className="tittle">Actividad</IonTitle>
           </IonHeader>
           <IonContent>
@@ -215,15 +215,47 @@ export default function MyActivityWithId() {
             />
             {""}
             <IonGrid className="grid-row-two">
-              {
-                <IonRow className="localization-row">
-                  <IonItemDivider className="itemDivider">
-                    <IonText className="label  ion-text-wrap">
-                      {result.localization.text}
-                    </IonText>
-                  </IonItemDivider>
-                </IonRow>
-              }
+              <IonRow className="localization-row">
+                <IonItemDivider className="itemDivider">
+                  <IonText className="label  ion-text-wrap">
+                    {result.localization.text}
+                  </IonText>
+                </IonItemDivider>
+              </IonRow>
+              <IonRow className="row">
+                <IonItemDivider className="itemDivider">
+                  <IonItem>
+                    <IonLabel className="label">Capturas </IonLabel>
+                  </IonItem>
+                </IonItemDivider>
+              </IonRow>
+              {result.catches.map((item) => {
+                return (
+                  <Fragment>
+                    <IonRow className="row">
+                      <IonCol>
+                        <IonItemDivider className="itemDivider">
+                          <IonLabel className="label">{item.name}</IonLabel>
+                        </IonItemDivider>
+                      </IonCol>
+                    </IonRow>
+                    <IonRow className="row">
+                      <img alt={item.Id} src={item.imageUrl} />
+                    </IonRow>
+                    <IonRow>
+                      <IonCol>
+                        <IonItemDivider className="itemDivider">
+                          <IonText className="ion-text-wrap description">
+                            <IonLabel className="label">
+                              {item.description}
+                            </IonLabel>
+                          </IonText>
+                        </IonItemDivider>
+                      </IonCol>
+                    </IonRow>
+                  </Fragment>
+                );
+              })}
             </IonGrid>
             {error.error === true && (
               <IonItem>
