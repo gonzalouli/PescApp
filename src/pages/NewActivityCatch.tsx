@@ -77,6 +77,7 @@ export default function NewActivityCatch() {
 
         setImageUrl(image.dataUrl);
         setPiece({ ...piece, imageUrl: image.dataUrl });
+        console.log(piece);
       } catch (error) {
         console.error("Camera Error:", error.message);
       }

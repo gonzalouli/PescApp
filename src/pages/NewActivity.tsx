@@ -59,7 +59,6 @@ export default function NewActivity() {
           body: {
             UserIdCognito: data.username,
             activity,
-            UserDataKey: data.userDataKey,
           },
         }
       );
