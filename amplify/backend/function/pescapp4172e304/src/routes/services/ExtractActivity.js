@@ -10,15 +10,7 @@ const {
   Tackle,
 } = require("../../database/models/models");
 
-const GetActivityWithId = async (data) => {
-  const activity = {
-    catches: [],
-    date: {},
-    localization: {},
-    name: "",
-    tackle: [],
-  };
-
+const ExtractActivity = async (activity, data) => {
   try {
     const activityWithId = await Activity.findByPk(data.ActivityId);
 
@@ -86,4 +78,4 @@ const GetActivityWithId = async (data) => {
   }
 };
 
-module.exports = GetActivityWithId;
+module.exports = ExtractActivity;

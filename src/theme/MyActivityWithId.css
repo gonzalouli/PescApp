@@ -1,0 +1,10 @@
+.row {
+  align-items: center;
+  text-align: center;
+  display: flex;
+}
+
+.localization-row {
+  display: flex;
+  margin-top: 4vh;
+}

@@ -35,6 +35,10 @@ const Home: React.FC = () => {
   const [isForgotPass, setIsForgotPass] = useState<boolean>(false);
   const [showLoading, setShowLoading] = useState(false);
 
+  useEffect(() => {
+    Auth.signOut();
+  }, []);
+
   const handleLogin = async () => {
     try {
       const user: CognitoUser = await Auth.signIn(email, pass);

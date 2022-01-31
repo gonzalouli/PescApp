@@ -46,7 +46,6 @@ export default function NewActivity() {
   };
 
   const sendNewActivity = async () => {
-    //end sending information
     setButton(false);
     try {
       const data = await Auth.currentAuthenticatedUser();

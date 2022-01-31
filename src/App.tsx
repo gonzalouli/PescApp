@@ -92,8 +92,8 @@ const App: React.FC = () => {
               <Route exact={true} path="/my/changePass">
                 <ChangePass />
               </Route>
-              <Route exact={true} path="/my/MyActivity">
-                <MyActivity />
+              <Route exact={true} path="/my/NewActivity">
+                <NewActivity />
               </Route>
               <Route exact={true} path="/my/MyActivity">
                 <MyActivity />

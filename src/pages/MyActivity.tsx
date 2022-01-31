@@ -64,8 +64,13 @@ export default function MyActivity() {
     }
   };
 
+  const setActivityIdToSession = async (id) => {
+    sessionStorage.setItem("id", id);
+  };
+
   const handleShowActivity = async (activity) => {
-    window.localStorage.setItem("id", activity.Id);
+    console.log(activity);
+    await setActivityIdToSession(activity);
     setSelectedActivity(true);
   };
 
@@ -90,27 +95,27 @@ export default function MyActivity() {
                 <IonCol className="topItem label">Borrar</IonCol>
               </IonItemDivider>
             </IonRow>
-            {result.map((e) => {
+            {result.map((act) => {
               return (
                 <IonRow
-                  className="grid"
-                  onClick={(e) => {
-                    handleShowActivity(e);
+                  className="row"
+                  onClick={() => {
+                    handleShowActivity(act.Id);
                   }}
                 >
                   <IonItemDivider className="itemDivider">
+                    <IonCol className="item  ">
+                      <div className="item">{act.name}</div>
+                    </IonCol>
                     <IonCol className="item ">
-                      <div className="item">{e.name}</div>
+                      <div className="item">{act.createdAt.slice(0, 10)}</div>
                     </IonCol>
-                    <IonCol className="item">
-                      <div className="item">{e.createdAt.slice(0, 10)}</div>
-                    </IonCol>
-                    <IonCol className="button">
+                    <IonCol className="button item">
                       <IonButton fill="clear" color="transparent">
                         <UpdateSprite />
                       </IonButton>
                     </IonCol>
-                    <IonCol className="button">
+                    <IonCol className="button item">
                       <IonButton fill="clear" color="transparent">
                         <DeleteSprite />
                       </IonButton>

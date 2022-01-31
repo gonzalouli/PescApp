@@ -35,15 +35,15 @@ activity.post("/getAllActivities", async (req, res) => {
 activity.post("/getActivityWithId", async (req, res) => {
   // console.log(req.body);
 
-  const activities = await GetActivityWithId(req.body);
-
-  if (activities == null || activities.length == 0) {
+  const result = await GetActivityWithId(req.body);
+  console.log(result);
+  if (result == null || result.length == 0) {
     res.json({
       error: true,
       message: "Usted no tiene esta actividad",
     });
   } else {
-    res.json(activities);
+    res.json(result);
   }
 });
 

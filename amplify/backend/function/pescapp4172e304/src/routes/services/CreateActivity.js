@@ -14,7 +14,7 @@ const {
 
 const CreateActivity = async (data) => {
   try {
-    const { name, date, localization, tackle, catches } = data.activity;
+    let { name, date, localization, tackle, catches } = data.activity;
     const UserIdCognito = data.UserIdCognito;
     // //Crear activida, para luego insertarle tablas intermedias
     const activitySeq = await Activity.create({
@@ -22,6 +22,8 @@ const CreateActivity = async (data) => {
       name,
     });
     //Localizacion
+    localization = await checkLocalization(localization);
+
     const coordsSeq = await Coords.create({
       lat: localization.coords.lat,
       lng: localization.coords.lng,
@@ -71,6 +73,15 @@ const CreateActivity = async (data) => {
     console.error(error);
     return false;
   }
+};
+
+const checkLocalization = async (localization) => {
+  if (localization.coords === undefined) {
+    localization.coords = {};
+    localization.coords.lat = 0.0;
+    localization.coords.lng = 0.0;
+  }
+  return localization;
 };
 
 module.exports = CreateActivity;

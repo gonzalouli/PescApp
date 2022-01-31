@@ -17,10 +17,14 @@ import { Redirect } from "react-router";
 import LogOutButton from "../components/LogOutButton";
 import MiPerfilButton from "../components/MiPerfilButton";
 import RefreshComponent from "../components/RefreshComponent";
+import { API, Auth } from "aws-amplify";
+
 import "../theme/Header.css";
 import "../theme/Home.css";
 
 const Home: React.FC = () => {
+  const [logOut, setLogOut] = useState(false);
+
   useEffect(() => {
     // if(JSON.parse(window.sessionStorage.getItem("newActivity"))===null){
     const newActivity = {
@@ -34,6 +38,12 @@ const Home: React.FC = () => {
     window.sessionStorage.setItem("newActivity", JSON.stringify(newActivity));
     window.sessionStorage.setItem("ubication", JSON.stringify(ubication));
     // }
+    if (
+      Auth.currentAuthenticatedUser() == null ||
+      Auth.currentAuthenticatedUser() === undefined
+    ) {
+      setLogOut(true);
+    }
   }, []);
 
   const [isNewActivity, setIsNewActivity] = useState<boolean>(false);
@@ -66,6 +76,8 @@ const Home: React.FC = () => {
       {isMyActivity && (
         <Redirect to="/my/MyActivity" push={true} exact={true} />
       )}
+      {logOut && <Redirect to="/" push={true} exact={true} />}
+
       <div className="profile">
         <IonHeader className="header">
           <MiPerfilButton text="Mi Perfil"></MiPerfilButton>
