@@ -21,6 +21,7 @@
 
 .button {
   padding: 0 auto;
+  z-index: 3;
 }
 
 .topItem {

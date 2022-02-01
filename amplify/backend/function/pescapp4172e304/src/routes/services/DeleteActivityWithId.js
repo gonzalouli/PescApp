@@ -10,12 +10,11 @@ const {
   Tackle,
 } = require("../../database/models/models");
 
-const ExtractActivity = async (activity, data) => {
+const DeleteActivityWithId = async (data) => {
   try {
     const activityWithId = await Activity.findByPk(data.ActivityId);
 
-    activity.name = activityWithId.name;
-
+    //#############Borrado de coords, localizacioncoords, y localizacion
     const localizationWithId = await Localization.findOne({
       where: { activityId: activityWithId.LocalizationId },
     });
@@ -28,33 +27,35 @@ const ExtractActivity = async (activity, data) => {
         Id: localizationCoordsWithId.CoordsId,
       },
     });
+    await coordsWithId.destroy();
+    await localizationCoordsWithId.destroy();
+    await localizationWithId.destroy();
 
-    activity.localization.text = localizationWithId.text;
-    activity.localization.coords = {};
-    activity.localization.coords.lat = coordsWithId.lat;
-    activity.localization.coords.lng = coordsWithId.lng;
+    //#############Borrado de fecha
 
     const dateWithId = await Dates.findOne({
       where: { id: activityWithId.DateId },
     });
 
-    activity.date.endDate = dateWithId.endDate;
-    activity.date.initDate = dateWithId.initDate;
-    activity.date.endHour = dateWithId.endHour;
-    activity.date.initHour = dateWithId.initHour;
+    await dateWithId.destroy();
 
+    //#############Borrado de equipo
     const activityTackleWithId = await ActivityTackle.findAll({
       where: {
         ActivityId: activityWithId.Id,
       },
     });
+
     activityTackleWithId.forEach(async (element) => {
       const tackleWithId = await Tackle.findOne({
         where: { Id: element.TackleId },
       });
-      activity.tackle.push(tackleWithId.name);
+      await tackleWithId.destroy();
     });
 
+    await ActivityTackle.destroy({ where: { ActivityId: activityWithId.Id } });
+
+    //#############Borrado de capturas
     const activityCatchesWithId = await ActivityCatches.findAll({
       where: {
         ActivityId: activityWithId.Id,
@@ -67,15 +68,18 @@ const ExtractActivity = async (activity, data) => {
           Id: item.CatchId,
         },
       });
-
-      activity.catches.push(catchWithId.dataValues);
+      await catchWithId.destroy();
     });
 
-    return activity;
+    await ActivityCatches.destroy({ where: { ActivityId: activityWithId.Id } });
+
+    //#############Borrado de actividad
+    await activityWithId.destroy();
+
+    return true;
   } catch (error) {
-    console.error(error);
-    return null;
+    return false;
   }
 };
 
-module.exports = ExtractActivity;
+module.exports = DeleteActivityWithId;

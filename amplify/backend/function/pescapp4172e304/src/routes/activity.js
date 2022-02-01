@@ -4,6 +4,7 @@ const activity = express.Router();
 const CreateActivity = require("./services/CreateActivity");
 const GetActivities = require("./services/GetActivities");
 const GetActivityWithId = require("./services/GetActivityWithId");
+const DeleteActivityWithId = require("./services/DeleteActivityWithId");
 
 activity.post("/insertActivity", async (req, res) => {
   const result = await CreateActivity(req.body);
@@ -41,6 +42,21 @@ activity.post("/getActivityWithId", async (req, res) => {
     res.json({
       error: true,
       message: "Usted no tiene esta actividad",
+    });
+  } else {
+    res.json(result);
+  }
+});
+
+activity.delete("/deleteActivityWithId", async (req, res) => {
+  // console.log(req.body);
+
+  const result = await DeleteActivityWithId(req.body);
+  console.log(result);
+  if (result == false) {
+    res.json({
+      error: true,
+      message: "La actividad no se pudo borrar, intentelo mas tarde...",
     });
   } else {
     res.json(result);

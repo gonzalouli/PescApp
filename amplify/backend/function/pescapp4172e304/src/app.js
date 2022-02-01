@@ -43,15 +43,22 @@ app.options("*", cors());
 
 app.use(
   express.json({
-    limit: "102400mb",
+    limit: "10240000mb",
     extended: true,
   })
 );
 app.use(
   express.urlencoded({
     extended: true,
-    limit: "102400mb",
+    limit: "10240000mb",
     parameterLimit: 50000000,
+  })
+);
+
+app.use(
+  express.text({
+    extended: true,
+    limit: "10240000mb",
   })
 );
 

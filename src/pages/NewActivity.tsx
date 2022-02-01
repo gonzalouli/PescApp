@@ -46,29 +46,36 @@ export default function NewActivity() {
   };
 
   const sendNewActivity = async () => {
-    setButton(false);
-    try {
-      const data = await Auth.currentAuthenticatedUser();
+    if (name !== "") {
+      setButton(false);
+      try {
+        const data = await Auth.currentAuthenticatedUser();
 
-      const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
+        const activity = JSON.parse(
+          window.sessionStorage.getItem("newActivity")
+        );
 
-      const result = await API.post(
-        "api9000aeb3",
-        "/activities/insertActivity",
-        {
-          body: {
-            UserIdCognito: data.username,
-            activity,
-          },
-        }
-      );
+        const result = await API.post(
+          "api9000aeb3",
+          "/activities/insertActivity",
+          {
+            body: {
+              UserIdCognito: data.username,
+              activity,
+            },
+          }
+        );
 
-      if (result.error == true) setError(result);
-      else setSuccess(result);
-      setTimeout(() => {
-        setToHome(true);
-      }, 3000);
-    } catch (error) {}
+        if (result.error == true) setError(result);
+        else setSuccess(result);
+        setTimeout(() => {
+          setToHome(true);
+        }, 3000);
+      } catch (error) {}
+      setButton(true);
+    } else {
+      setError({ error: true, message: "La actividad requiere un nombre" });
+    }
   };
 
   const [isNewActivityLocalization, setIsNewActivityLocalization] =
