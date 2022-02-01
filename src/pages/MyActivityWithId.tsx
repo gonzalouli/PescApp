@@ -100,7 +100,7 @@ export default function MyActivityWithId() {
               </IonRow>
               <IonRow className="row">
                 <IonItemDivider className="itemDivider">
-                  <IonLabel className="label">{result.name} </IonLabel>
+                  <IonLabel className="label">{result?.name} </IonLabel>
                 </IonItemDivider>
               </IonRow>
               <IonRow className="row">
@@ -110,7 +110,7 @@ export default function MyActivityWithId() {
                   </IonItem>
                 </IonItemDivider>
               </IonRow>
-              {result.tackle.map((item) => {
+              {result.tackle?.map((item) => {
                 return (
                   <IonRow className="row">
                     <IonItemDivider className="itemDivider">
@@ -141,14 +141,14 @@ export default function MyActivityWithId() {
                 <IonCol>
                   <IonItemDivider className="itemDivider">
                     <IonLabel className="label">
-                      {result.date.initDate.slice(0, 10)}
+                      {result.date?.initDate?.slice(0, 10)}
                     </IonLabel>
                   </IonItemDivider>
                 </IonCol>
                 <IonCol>
                   <IonItemDivider className="itemDivider">
                     <IonLabel className="label">
-                      {result.date.endDate.slice(0, 10)}
+                      {result.date?.endDate?.slice(0, 10)}
                     </IonLabel>
                   </IonItemDivider>
                 </IonCol>
@@ -173,14 +173,14 @@ export default function MyActivityWithId() {
                 <IonCol>
                   <IonItemDivider className="itemDivider">
                     <IonLabel className="label">
-                      {result.date.endDate.slice(11, 16)}
+                      {result.date?.endDate?.slice(11, 16)}
                     </IonLabel>
                   </IonItemDivider>
                 </IonCol>
                 <IonCol>
                   <IonItemDivider className="itemDivider">
                     <IonLabel className="label">
-                      {result.date.initDate.slice(11, 16)}
+                      {result.date?.initDate?.slice(11, 16)}
                     </IonLabel>
                   </IonItemDivider>
                 </IonCol>
@@ -196,22 +196,22 @@ export default function MyActivityWithId() {
                 <IonCol>
                   <IonItemDivider className="itemDivider">
                     <IonLabel className="label">
-                      Lat: {result.localization.coords.lat}
+                      Lat: {result.localization?.coords?.lat}
                     </IonLabel>
                   </IonItemDivider>
                 </IonCol>
                 <IonCol>
                   <IonItemDivider className="itemDivider">
                     <IonLabel className="label">
-                      Lng: {result.localization.coords.lng}
+                      Lng: {result.localization?.coords?.lng}
                     </IonLabel>
                   </IonItemDivider>
                 </IonCol>
               </IonRow>
             </IonGrid>
             <ShowMapComponent
-              lat={result.localization.coords.lat}
-              lng={result.localization.coords.lng}
+              lat={result.localization?.coords?.lat}
+              lng={result.localization?.coords?.lng}
             />
             {""}
             <IonGrid className="grid-row-two">
@@ -235,19 +235,19 @@ export default function MyActivityWithId() {
                     <IonRow className="row">
                       <IonCol>
                         <IonItemDivider className="itemDivider">
-                          <IonLabel className="label">{item.name}</IonLabel>
+                          <IonLabel className="label">{item?.name}</IonLabel>
                         </IonItemDivider>
                       </IonCol>
                     </IonRow>
                     <IonRow className="row">
-                      <img alt={item.Id} src={item.imageUrl} />
+                      <img alt={item.Id} src={item?.imageUrl} />
                     </IonRow>
                     <IonRow>
                       <IonCol>
                         <IonItemDivider className="itemDivider">
                           <IonText className="ion-text-wrap description">
                             <IonLabel className="label">
-                              {item.description}
+                              {item?.description}
                             </IonLabel>
                           </IonText>
                         </IonItemDivider>

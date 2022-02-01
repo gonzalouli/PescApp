@@ -31,6 +31,7 @@ import { nanoid } from "nanoid";
 import "../theme/NewDocumentation.css";
 import { Redirect } from "react-router";
 import { ResetLS } from "../utils/ResetLocalStorage";
+import { getDataUrl } from "../utils/get-data-url";
 
 export default function NewActivityCatch() {
   useEffect(() => {
@@ -59,9 +60,14 @@ export default function NewActivityCatch() {
   ) => {
     if (event.target.files.length > 0) {
       const file = event.target.files.item(0);
-      const imageUrl = URL.createObjectURL(file);
-      setImageUrl(imageUrl);
-      setPiece({ ...piece, imageUrl: imageUrl });
+      const imgUrl: string | ArrayBuffer = await getDataUrl(file);
+
+      if (typeof imgUrl === "object") {
+        setImageUrl(String.fromCharCode.apply(null, new Uint16Array(imgUrl)));
+      } else if (typeof imgUrl === "string") {
+        setImageUrl(imgUrl);
+      }
+      setPiece({ ...piece, imageUrl });
     }
   };
 

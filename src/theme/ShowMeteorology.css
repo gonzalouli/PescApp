@@ -27,12 +27,12 @@
   text-align: center;
 }
 
-.label {
+/* .label {
   color: white;
-}
+} */
 
 .data {
-  color: white;
+  /* color: white; */
   font-weight: bold;
   font-size: 100% !important;
 }

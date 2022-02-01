@@ -30,6 +30,7 @@ export default function MyActivity() {
 
   const [selectedActivity, setSelectedActivity] = useState(false);
   const [deletedActivity, setDeleteActivity] = useState(false);
+  const [EditActivity, setEditActivity] = useState(false);
 
   const [present] = useIonAlert();
 
@@ -121,8 +122,11 @@ export default function MyActivity() {
       {selectedActivity && (
         <Redirect to="/my/MyActivityWithId" push={true} exact={true} />
       )}
-      {selectedActivity && (
+      {/* {selectedActivity && (
         <Redirect to="/my/MyActivity" push={true} exact={true} />
+      )} */}
+      {EditActivity && (
+        <Redirect to="/my/EditActivity" push={true} exact={true} />
       )}
       <Fragment>
         <IonHeader className="header">
@@ -163,7 +167,14 @@ export default function MyActivity() {
                         <div className="item">{act.createdAt.slice(0, 10)}</div>
                       </IonCol>
                       <IonCol className="button item">
-                        <IonButton fill="clear" color="transparent">
+                        <IonButton
+                          fill="clear"
+                          color="transparent"
+                          onClick={() => {
+                            sessionStorage.setItem("IdToEdit", act.Id);
+                            setEditActivity(true);
+                          }}
+                        >
                           <UpdateSprite />
                         </IonButton>
                       </IonCol>
@@ -182,11 +193,12 @@ export default function MyActivity() {
                                   text: "Aceptar",
                                   handler: (d) => {
                                     handleDeleteActivity(act.Id);
+                                    setToast(true);
                                   },
                                 },
                               ],
 
-                              onDidDismiss: (e) => setToast(true),
+                              onDidDismiss: (e) => {},
                             });
                           }}
                         >
