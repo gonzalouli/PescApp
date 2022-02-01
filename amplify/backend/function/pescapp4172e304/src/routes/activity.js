@@ -1,5 +1,4 @@
 const express = require("express");
-const { isCatchClause } = require("typescript");
 const activity = express.Router();
 const CreateActivity = require("./services/CreateActivity");
 const GetActivities = require("./services/GetActivities");
@@ -8,7 +7,7 @@ const DeleteActivityWithId = require("./services/DeleteActivityWithId");
 
 activity.post("/insertActivity", async (req, res) => {
   const result = await CreateActivity(req.body);
-  if (result != false)
+  if (result !== false)
     res.json({ success: true, message: "Actividad Introducida" });
   else
     res.json({
@@ -23,7 +22,7 @@ activity.post("/getAllActivities", async (req, res) => {
 
   const activities = await GetActivities(req.body);
 
-  if (activities == null || activities.length == 0) {
+  if (activities === null || activities.length === 0) {
     res.json({
       error: true,
       message: "Usted no tiene aun ninguna actividad",
@@ -38,7 +37,7 @@ activity.post("/getActivityWithId", async (req, res) => {
 
   const result = await GetActivityWithId(req.body);
   console.log(result);
-  if (result == null || result.length == 0) {
+  if (result === null || result.length === 0) {
     res.json({
       error: true,
       message: "Usted no tiene esta actividad",
@@ -53,13 +52,13 @@ activity.delete("/deleteActivityWithId", async (req, res) => {
 
   const result = await DeleteActivityWithId(req.body);
   console.log(result);
-  if (result == false) {
+  if (result === false) {
     res.json({
       error: true,
       message: "La actividad no se pudo borrar, intentelo mas tarde...",
     });
   } else {
-    res.json(result);
+    res.json({ success: true, message: "La actividad ha sido borrada" });
   }
 });
 

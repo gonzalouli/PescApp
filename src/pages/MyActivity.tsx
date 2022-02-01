@@ -7,10 +7,10 @@ import {
   IonItem,
   IonItemDivider,
   IonLabel,
-  IonList,
   IonPage,
   IonRow,
   IonTitle,
+  IonToast,
   useIonAlert,
 } from "@ionic/react";
 import React, { Fragment, useEffect, useState } from "react";
@@ -24,8 +24,9 @@ import DeleteSprite from "../components/DeleteSprite";
 export default function MyActivity() {
   const [logOut, setLogOut] = useState(false);
   const [error, setError] = useState({ error: false, message: "" });
+  const [success, setSuccess] = useState({ success: false, message: "" });
+  const [toast, setToast] = useState(false);
   const [result, setResult] = useState([]);
-  const [dataEmpty, setDataEmpty] = useState(false);
 
   const [selectedActivity, setSelectedActivity] = useState(false);
   const [deletedActivity, setDeleteActivity] = useState(false);
@@ -38,7 +39,7 @@ export default function MyActivity() {
 
   const getData = async () => {
     const aux = await getActivities(await isAuth());
-    if (aux == null || aux.length == 0 || aux == undefined) {
+    if (aux === null || aux.length === 0 || aux === undefined) {
       setError(aux);
     } else setResult(aux);
   };
@@ -89,7 +90,7 @@ export default function MyActivity() {
     try {
       const CognitoUser = await isAuth();
 
-      const result = await API.del(
+      const res = await API.del(
         "api9000aeb3",
         "/activities/deleteActivityWithId",
         {
@@ -99,6 +100,17 @@ export default function MyActivity() {
           },
         }
       );
+
+      if (res.error === true) {
+        setError(res);
+        return;
+      } else {
+        setSuccess(res);
+        setTimeout(() => {
+          setToast(false);
+        }, 3000);
+      }
+
       setDeleteActivity(true);
     } catch (error) {}
   };
@@ -118,6 +130,8 @@ export default function MyActivity() {
           <IonTitle className="tittle">Mis Actividades</IonTitle>
         </IonHeader>
         <IonContent>
+          <IonToast isOpen={toast} message={success.message} />
+
           <IonGrid className="grid-row">
             <IonRow className="row">
               <IonItemDivider className="itemDivider">
@@ -172,7 +186,7 @@ export default function MyActivity() {
                                 },
                               ],
 
-                              onDidDismiss: (e) => console.log("did dismiss"),
+                              onDidDismiss: (e) => setToast(true),
                             });
                           }}
                         >

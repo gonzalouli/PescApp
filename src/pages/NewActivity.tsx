@@ -12,7 +12,6 @@ import {
 import React, { Fragment, useEffect, useState } from "react";
 import { Redirect } from "react-router";
 import BackButton from "../components/BackButton";
-import RefreshComponent from "../components/RefreshComponent";
 import "../theme/Header.css";
 import "../theme/NewActivity.css";
 import { API, Auth } from "aws-amplify";
@@ -66,11 +65,11 @@ export default function NewActivity() {
           }
         );
 
-        if (result.error == true) setError(result);
+        if (result.error === true) setError(result);
         else setSuccess(result);
         setTimeout(() => {
           setToHome(true);
-        }, 3000);
+        }, 2000);
       } catch (error) {}
       setButton(true);
     } else {
@@ -149,7 +148,7 @@ export default function NewActivity() {
               Fecha
             </IonButton>
           </IonList>
-          {error.error == true && (
+          {error.error === true && (
             <IonItem>
               <IonLabel className="error ion-text-wrap">
                 {error.message}

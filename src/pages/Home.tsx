@@ -1,23 +1,15 @@
-import { RefresherEventDetail } from "@ionic/core";
 import {
   IonButton,
   IonContent,
   IonHeader,
-  IonIcon,
   IonList,
-  IonLoading,
   IonPage,
-  IonRefresher,
-  IonRefresherContent,
-  IonTitle,
-  IonToolbar,
 } from "@ionic/react";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router";
 import LogOutButton from "../components/LogOutButton";
 import MiPerfilButton from "../components/MiPerfilButton";
-import RefreshComponent from "../components/RefreshComponent";
-import { API, Auth } from "aws-amplify";
+import { Auth } from "aws-amplify";
 
 import "../theme/Header.css";
 import "../theme/Home.css";
@@ -50,8 +42,6 @@ const Home: React.FC = () => {
   const [isMeteorology, setIsMeteorology] = useState<boolean>(false);
   const [isDocumentation, setIsDocumentation] = useState<boolean>(false);
   const [isMyActivity, setIsMyActivity] = useState<boolean>(false);
-
-  const [wait, setWait] = useState<boolean>(true);
 
   // if (wait) {
   //   return (
