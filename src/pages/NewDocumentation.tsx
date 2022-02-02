@@ -119,7 +119,7 @@ export default function NewDocumentation() {
 
   const handleName = (e) => {
     setName(e.target.value);
-    setPiece({ ...piece, name: name });
+    setPiece({ ...piece, name: e.target.value });
   };
 
   const saveAndBack = async () => {
@@ -150,21 +150,22 @@ export default function NewDocumentation() {
 
   const saveAndNew = async () => {
     const license = JSON.parse(window.sessionStorage.getItem("license"));
+    if (imageUrl != process.env.PUBLIC_URL + "/assets/placeholderimage.jpg") {
+      await license.push(piece);
+      window.sessionStorage.setItem("license", JSON.stringify(license));
+      setTempLicense(license);
 
-    await license.push(piece);
-    window.sessionStorage.setItem("license", JSON.stringify(license));
+      setPiece({
+        id: nanoid(),
+        name: name,
+        imageUrl: imageUrl,
+        description: description,
+      });
 
-    setTempLicense(license);
-
-    setName("");
-    setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
-    setDescription("");
-    setPiece({
-      id: nanoid(),
-      name: name,
-      imageUrl: imageUrl,
-      description: description,
-    });
+      setName("");
+      setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
+      setDescription("");
+    }
   };
 
   const deletePiece = (id, e) => {

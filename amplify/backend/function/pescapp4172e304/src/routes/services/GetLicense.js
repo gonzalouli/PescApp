@@ -5,7 +5,6 @@ const { Auth } = require("aws-amplify");
 
 const GetLicense = async (data) => {
   try {
-    console.log(data.CognitoUser);
     const licenses = [];
     const licenseSeq = await Licenses.findAll({
       where: { UserId: data.CognitoUser },
@@ -21,7 +20,6 @@ const GetLicense = async (data) => {
       });
       licenses.push(imagesSeq.dataValues);
     }
-    console.log(licenses);
     return licenses;
   } catch (error) {
     console.error(error);

@@ -46,6 +46,7 @@ export default function MyDocumentation() {
   useEffect(() => {
     try {
       getData();
+      setDeleteDocumentation(false);
     } catch (error) {}
   }, [deletedDocumentation]);
 

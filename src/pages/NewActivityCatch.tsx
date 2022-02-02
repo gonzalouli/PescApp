@@ -94,12 +94,12 @@ export default function NewActivityCatch() {
 
   const handleTextChange = (e) => {
     setDescription(e.target.value);
-    setPiece({ ...piece, description: description });
+    setPiece({ ...piece, description: e.target.value });
   };
 
   const handleName = (e) => {
     setName(e.target.value);
-    setPiece({ ...piece, name: name });
+    setPiece({ ...piece, name: e.target.value });
   };
 
   const saveAndBack = async () => {
@@ -124,12 +124,12 @@ export default function NewActivityCatch() {
         imageUrl: imageUrl,
         description: description,
       });
+      console.log(piece);
     }
   };
 
   const deletePiece = (id, e) => {
     const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
-    console.log(id.id);
     activity.catches = activity.catches.filter((piece) => piece.id !== id.id);
     setTempactivity(activity);
     window.sessionStorage.setItem("newActivity", JSON.stringify(activity));
