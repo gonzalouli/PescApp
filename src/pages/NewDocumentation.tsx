@@ -134,11 +134,17 @@ export default function NewDocumentation() {
           License: JSON.parse(window.sessionStorage.getItem("license")),
         },
       });
-      if (res.error === null) {
-        setSuccess(res);
-        window.sessionStorage.removeItem("license");
+
+      if (res.error === true) {
+        setError(res);
+        return;
+      }
+      setSuccess(res);
+      window.sessionStorage.removeItem("license");
+
+      setTimeout(() => {
         setBack(true);
-      } else if (res.error === true) setError(res);
+      }, 1500);
     } catch (error) {}
   };
 

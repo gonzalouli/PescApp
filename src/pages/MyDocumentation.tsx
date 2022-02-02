@@ -47,7 +47,7 @@ export default function MyDocumentation() {
     try {
       getData();
     } catch (error) {}
-  }, []);
+  }, [deletedDocumentation]);
 
   const getData = async () => {
     try {
@@ -73,6 +73,17 @@ export default function MyDocumentation() {
 
   const handleDeleteDocumentation = async (id) => {
     try {
+      const CognitoUser = await isAuth();
+
+      const aux = await API.del("api9000aeb3", "/licenses/deleteLicense", {
+        body: {
+          CognitoUser: CognitoUser.username,
+          id: id,
+        },
+      });
+      if (aux.error != null) {
+        setError(aux);
+      } else setDeleteDocumentation(true);
     } catch (error) {}
   };
 

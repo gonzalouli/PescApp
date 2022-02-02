@@ -2,6 +2,7 @@ const express = require("express");
 const licenses = express.Router();
 const CreateLicense = require("./services/CreateLicense");
 const GetLicense = require("./services/GetLicense");
+const DeleteLicense = require("./services/DeleteLicense");
 
 licenses.post("/createLicense", async (req, res) => {
   const result = await CreateLicense(req.body);
@@ -24,6 +25,21 @@ licenses.post("/getLicense", async (req, res) => {
     });
   } else {
     res.send(result);
+  }
+});
+
+licenses.delete("/deleteLicense", async (req, res) => {
+  const result = await DeleteLicense(req.body);
+  if (result == null) {
+    res.json({
+      error: true,
+      message: "Error al eliminar la documentación",
+    });
+  } else {
+    res.json({
+      success: true,
+      message: "Documentación eliminada",
+    });
   }
 });
 

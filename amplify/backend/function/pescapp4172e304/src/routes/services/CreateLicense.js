@@ -1,7 +1,6 @@
 const Licenses = require("../../database/models/Licenses/Licenses");
 const LicenseImages = require("../../database/models/Licenses/LicenseImages");
 const Images = require("../../database/models/Licenses/Images");
-const { Auth } = require("aws-amplify");
 
 const CreateLicense = async (data) => {
   try {
