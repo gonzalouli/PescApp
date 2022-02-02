@@ -4,6 +4,7 @@ const CreateActivity = require("./services/CreateActivity");
 const GetActivities = require("./services/GetActivities");
 const GetActivityWithId = require("./services/GetActivityWithId");
 const DeleteActivityWithId = require("./services/DeleteActivityWithId");
+const EditActivityWithId = require("./services/EditActivityWithId");
 
 activity.post("/insertActivity", async (req, res) => {
   const result = await CreateActivity(req.body);
@@ -36,7 +37,6 @@ activity.post("/getActivityWithId", async (req, res) => {
   // console.log(req.body);
 
   const result = await GetActivityWithId(req.body);
-  console.log(result);
   if (result === null || result.length === 0) {
     res.json({
       error: true,
@@ -59,6 +59,20 @@ activity.delete("/deleteActivityWithId", async (req, res) => {
     });
   } else {
     res.json({ success: true, message: "La actividad ha sido borrada" });
+  }
+});
+
+activity.patch("/editActivityWithId", async (req, res) => {
+  await DeleteActivityWithId(req.body);
+  const result = await CreateActivity(req.body);
+
+  if (result === false) {
+    res.json({
+      error: true,
+      message: "La actividad no se pudo editar, intentelo mas tarde...",
+    });
+  } else {
+    res.json({ success: true, message: "La actividad ha sido editada" });
   }
 });
 

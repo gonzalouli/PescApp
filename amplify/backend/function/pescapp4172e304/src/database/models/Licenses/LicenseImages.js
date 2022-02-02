@@ -21,7 +21,4 @@ LicensesImages.init(
   }
 );
 
-LicensesImages.belongsTo(License);
-LicensesImages.belongsTo(Images);
-
 module.exports = LicensesImages;

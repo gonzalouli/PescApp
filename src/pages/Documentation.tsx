@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router";
 import BackButton from "../components/BackButton";
 import RefreshComponent from "../components/RefreshComponent";
+import "../theme/Documentation.css";
 
 export default function Documentation() {
   useEffect(() => {
@@ -60,7 +61,7 @@ export default function Documentation() {
             Nueva
           </IonButton>
           <IonButton
-            className="main-button"
+            className="main-button my-doc ion-text-wrap"
             expand="block"
             onClick={() => {
               setIsMyDocumentation(true);

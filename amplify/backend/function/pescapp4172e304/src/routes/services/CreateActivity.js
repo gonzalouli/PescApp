@@ -39,31 +39,31 @@ const CreateActivity = async (data) => {
     // ///Capturas
     for (const c of catches) {
       const catchesSeq = await Catches.create({
-        Id: c.id,
+        Id: c.id || c.Id,
         name: c.name,
         description: c.description,
         imageUrl: c.imageUrl,
       });
       const activityCatchesSeq = await ActivityCatches.create({
         ActivityId: activitySeq.Id,
-        CatchId: c.id,
+        CatchId: c.id || c.Id,
       });
     }
     for (const t of tackle) {
       const tackleSeq = await Tackle.create({
-        Id: t.id,
+        Id: t.id || t.Id,
         name: t.name,
       });
       const activityTackleSeq = await ActivityTackle.create({
         ActivityId: activitySeq.Id,
-        TackleId: t.id,
+        TackleId: t.id || t.Id,
       });
     }
     const datesSeq = await Dates.create({
-      initDate: date.initDate,
-      endDate: date.endDate,
-      initHour: date.initHour,
-      endHour: date.endHour,
+      initDate: date?.initDate,
+      endDate: date?.endDate,
+      initHour: date?.initHour,
+      endHour: date?.endHour,
     });
     await activitySeq.update({
       LocalizationId: localizationSeq.Id,

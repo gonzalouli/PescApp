@@ -12,7 +12,7 @@ Images.init(
     },
     name: { type: DataTypes.STRING },
     description: { type: DataTypes.STRING },
-    imageUrl: { type: DataTypes.STRING },
+    imageUrl: { type: DataTypes.TEXT("long") },
   },
   {
     sequelize,

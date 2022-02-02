@@ -46,6 +46,9 @@ import MyActivity from "./pages/MyActivity";
 import MyActivityWithId from "./pages/MyActivityWithId";
 import EditActivity from "./pages/EditActivity";
 import EditActivityLocalization from "./pages/EditActivityLocalization";
+import EditActivityTackle from "./pages/EditActivityTackle";
+import EditActivityCatch from "./pages/EditActivityCatch";
+import EditActivityDate from "./pages/EditActivityDate";
 
 const App: React.FC = () => {
   const [isLog, setIsLog] = useState(false);
@@ -122,17 +125,15 @@ const App: React.FC = () => {
               <Route exact={true} path="/my/EditActivity/Localization">
                 <EditActivityLocalization />
               </Route>
-              {/* <Route exact={true} path="/my/EditActivity/Date">
-                <EditActivityDate />
-              </Route>
               <Route exact={true} path="/my/EditActivity/Tackle">
                 <EditActivityTackle />
               </Route>
-              
+              <Route exact={true} path="/my/EditActivity/Date">
+                <EditActivityDate />
+              </Route>
               <Route exact={true} path="/my/EditActivity/Catch">
                 <EditActivityCatch />
-              </Route> */}
-
+              </Route>
               <Route exact={true} path="/my/Meteorology">
                 <Meteorology />
               </Route>

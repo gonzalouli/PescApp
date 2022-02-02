@@ -105,9 +105,7 @@ const Home: React.FC = () => {
           >
             Tiempo y Mareas
           </IonButton>
-          <IonButton className="main-button" expand="block">
-            Especies
-          </IonButton>
+
           <IonButton
             className="main-button"
             expand="block"

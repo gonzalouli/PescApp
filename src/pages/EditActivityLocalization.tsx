@@ -14,17 +14,14 @@ import {
   IonTitle,
   IonToast,
 } from "@ionic/react";
-import React, { Component, useEffect, useRef, useState } from "react";
-import RefreshComponent from "../components/RefreshComponent";
+import { Component, useEffect, useRef, useState } from "react";
 import BackButton from "../components/BackButton";
 import "leaflet-css/dist/leaflet.css";
-import { Geolocation } from "@capacitor/geolocation";
 
 import "leaflet/dist/leaflet.css";
 import "../theme/NewActivityLocalization.css";
-import MapComponent from "../components/MapComponent";
 import { Redirect } from "react-router";
-import { ResetLS } from "../utils/ResetLocalStorage";
+import EditMapComponent from "../components/EditMapComponent";
 
 /* initialize() is important for iOS,
     Android doesn't need any initialization.
@@ -66,7 +63,7 @@ function EditActivityLocalization() {
         <IonTitle className="tittle">Editar Localización</IonTitle>
       </IonHeader>
       <IonContent>
-        <MapComponent />
+        <EditMapComponent />
         <IonList className="form-container">
           <IonItem className="description">
             <IonLabel className="label" position="floating">

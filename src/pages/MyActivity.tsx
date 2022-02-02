@@ -36,11 +36,21 @@ export default function MyActivity() {
 
   useEffect(() => {
     getData();
+    sessionStorage.removeItem("editActivity");
   }, [deletedActivity]);
 
   const getData = async () => {
     const aux = await getActivities(await isAuth());
-    if (aux === null || aux.length === 0 || aux === undefined) {
+    if (aux === null || aux?.length === 0) {
+      setError(aux);
+    } else setResult(aux);
+  };
+
+  const getToEdit = async (id) => {
+    const aux = await getActivity(await isAuth(), id);
+    setEditActivity(true);
+
+    if (aux === null || aux?.length === 0) {
       setError(aux);
     } else setResult(aux);
   };
@@ -74,6 +84,29 @@ export default function MyActivity() {
     } catch (error) {
       console.error(error);
       setError({ error: true, message: "Error consulte al adrministrador" });
+    }
+  };
+
+  const chargeSessionStorage = async (res) => {
+    sessionStorage.setItem("editActivity", JSON.stringify(res));
+  };
+
+  const getActivity = async (CognitoUser, ActivityId) => {
+    try {
+      const res = await API.post(
+        "api9000aeb3",
+        "/activities/getActivityWithId",
+        {
+          body: {
+            CognitoUser: CognitoUser,
+            ActivityId: ActivityId,
+          },
+        }
+      );
+      await chargeSessionStorage(res);
+      return res;
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -134,7 +167,7 @@ export default function MyActivity() {
           <IonTitle className="tittle">Mis Actividades</IonTitle>
         </IonHeader>
         <IonContent>
-          <IonToast isOpen={toast} message={success.message} />
+          <IonToast isOpen={toast} message="Actividad borrada" />
 
           <IonGrid className="grid-row">
             <IonRow className="row">
@@ -172,7 +205,7 @@ export default function MyActivity() {
                           color="transparent"
                           onClick={() => {
                             sessionStorage.setItem("IdToEdit", act.Id);
-                            setEditActivity(true);
+                            getToEdit(act.Id);
                           }}
                         >
                           <UpdateSprite />

@@ -1,49 +1,40 @@
-import { Camera, CameraResultType } from "@capacitor/camera";
 import {
-  IonAlert,
   IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
+  IonCardSubtitle,
   IonCardTitle,
+  IonCol,
   IonContent,
+  IonDatetime,
+  IonGrid,
   IonHeader,
+  IonIcon,
   IonInput,
   IonItem,
   IonLabel,
   IonList,
   IonPage,
-  IonSelect,
-  IonSelectOption,
+  IonRow,
   IonTextarea,
   IonTitle,
   isPlatform,
 } from "@ionic/react";
-import { nanoid } from "nanoid";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import BackButton from "../components/BackButton";
+import RefreshComponent from "../components/RefreshComponent";
+import { Camera, CameraResultType } from "@capacitor/camera";
+import "../theme/NewActivityCatch.css";
+import { randomBytes } from "crypto";
+import { nanoid } from "nanoid";
 import "../theme/NewDocumentation.css";
-import { getDataUrl } from "../utils/get-data-url";
-import { ResetLS } from "../utils/ResetLocalStorage";
-import { API, Auth } from "aws-amplify";
 import { Redirect } from "react-router";
+import { ResetLS } from "../utils/ResetLocalStorage";
+import { getDataUrl } from "../utils/get-data-url";
 
-export default function NewDocumentation() {
-  useEffect(() => {
-    ResetLS();
-    try {
-      const CognitoUser = isAuth();
-      if (CognitoUser == null) {
-        Auth.signOut();
-        setLogOut(true);
-      }
-    } catch (error) {
-      Auth.signOut();
-      setLogOut(true);
-    }
-  }, []);
-  const [logOut, setLogOut] = useState(false);
-  const [back, setBack] = useState(false);
+export default function EditActivityCatch() {
+  useEffect(() => {}, []);
 
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState(
@@ -51,21 +42,10 @@ export default function NewDocumentation() {
   );
   const [name, setName] = useState("");
   const fileInputRef = useRef<HTMLInputElement>();
-  const [tempLicense, setTempLicense] = useState(
-    JSON.parse(window.sessionStorage.getItem("license")) || []
+  const [tempactivity, setTempactivity] = useState(
+    JSON.parse(window.sessionStorage.getItem("editActivity")) || []
   );
-  const [error, setError] = useState({ error: false, message: "" });
-  const [success, setSuccess] = useState({ success: false, message: "" });
-
-  const isAuth = async () => {
-    try {
-      return await Auth.currentAuthenticatedUser();
-    } catch (error) {
-      setLogOut(true);
-      console.error("Ususario no loggeado: " + error.message);
-      return null;
-    }
-  };
+  const [isConfirmed, setIsConfirmed] = useState(false);
 
   const [piece, setPiece] = useState({
     id: nanoid(),
@@ -99,10 +79,10 @@ export default function NewDocumentation() {
           allowEditing: true,
           resultType: CameraResultType.DataUrl,
         });
-        // console.log(image);
 
         setImageUrl(image.dataUrl);
         setPiece({ ...piece, imageUrl: image.dataUrl });
+        console.log(piece);
       } catch (error) {
         console.error("Camera Error:", error.message);
       }
@@ -112,9 +92,8 @@ export default function NewDocumentation() {
   };
 
   const handleTextChange = (e) => {
-    e.preventDefault();
-    setDescription(e.detail.value);
-    setPiece({ ...piece, description: e.detail.value });
+    setDescription(e.target.value);
+    setPiece({ ...piece, description: description });
   };
 
   const handleName = (e) => {
@@ -123,60 +102,47 @@ export default function NewDocumentation() {
   };
 
   const saveAndBack = async () => {
-    // const license = JSON.parse(window.sessionStorage.getItem("license"));
-    // await license.push(piece);
-    // window.sessionStorage.setItem("license", JSON.stringify(license));
-    try {
-      const CognitoUser = await isAuth();
-      const res = await API.post("api9000aeb3", "/licenses/createLicense", {
-        body: {
-          CognitoUser: CognitoUser.username,
-          License: JSON.parse(window.sessionStorage.getItem("license")),
-        },
-      });
-      if (res.error === null) {
-        setSuccess(res);
-        window.sessionStorage.removeItem("license");
-        setBack(true);
-      } else if (res.error === true) setError(res);
-    } catch (error) {}
+    setIsConfirmed(true);
   };
 
   const saveAndNew = async () => {
-    const license = JSON.parse(window.sessionStorage.getItem("license"));
+    if (imageUrl != process.env.PUBLIC_URL + "/assets/placeholderimage.jpg") {
+      const activity = JSON.parse(
+        window.sessionStorage.getItem("editActivity")
+      );
 
-    await license.push(piece);
-    window.sessionStorage.setItem("license", JSON.stringify(license));
+      await activity.catches.push(piece);
+      window.sessionStorage.setItem("editActivity", JSON.stringify(activity));
 
-    setTempLicense(license);
+      setTempactivity(activity);
 
-    setName("");
-    setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
-    setDescription("");
-    setPiece({
-      id: nanoid(),
-      name: name,
-      imageUrl: imageUrl,
-      description: description,
-    });
+      setName("");
+      setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
+      setDescription("");
+      setPiece({
+        id: nanoid(),
+        name: name,
+        imageUrl: imageUrl,
+        description: description,
+      });
+    }
   };
 
   const deletePiece = (id, e) => {
-    let license = JSON.parse(window.sessionStorage.getItem("license"));
-
-    license = license.filter((piece) => piece.id !== id.id);
-    setTempLicense(license);
-    window.sessionStorage.setItem("license", JSON.stringify(license));
+    const activity = JSON.parse(window.sessionStorage.getItem("editActivity"));
+    activity.catches = activity.catches.filter((piece) => piece.Id !== id.Id);
+    setTempactivity(activity);
+    window.sessionStorage.setItem("editActivity", JSON.stringify(activity));
   };
 
   return (
     <IonPage>
-      {logOut && <Redirect to="/" push={true} exact={true} />}
-      {back && <Redirect to="/my/Documentation" push={true} exact={true} />}
-
+      {isConfirmed && (
+        <Redirect to="/my/EditActivity" push={true} exact={true} />
+      )}
       <IonHeader className="header">
-        <BackButton refer="/my/Documentation" />
-        <IonTitle className="tittle">Nueva Doc.</IonTitle>
+        <BackButton refer="/my/EditActivity" />
+        <IonTitle className="tittle">Editar Capturas</IonTitle>
       </IonHeader>
       <IonContent>
         {/* <RefreshComponent /> */}
@@ -206,45 +172,25 @@ export default function NewDocumentation() {
           </IonItem>
 
           <IonItem className="description">
-            <IonLabel
-              position="floating"
-              className="label
-            "
-            >
-              Lado
+            <IonLabel className="label" position="floating">
+              Descripción
             </IonLabel>
-            <IonSelect
+            <IonTextarea
               value={description}
-              okText="Okay"
-              cancelText="Cancelar"
-              onIonChange={(e) => {
-                handleTextChange(e);
-              }}
-            >
-              <IonSelectOption value="Reverso">Reverso</IonSelectOption>
-              <IonSelectOption value="Anverso">Anverso</IonSelectOption>
-            </IonSelect>
+              onIonChange={handleTextChange}
+            ></IonTextarea>
           </IonItem>
-          {error.error === true && (
-            <IonItem>
-              <IonLabel className="error ion-text-wrap">
-                {error.message}
-              </IonLabel>
-            </IonItem>
-          )}
-          {success.success === true && (
-            <IonItem>
-              <IonLabel className="success label">{success.message}</IonLabel>
-            </IonItem>
-          )}
-
-          <IonButton className="save" onClick={saveAndNew}>
-            Añadir
-          </IonButton>
-
-          <IonButton className="save" onClick={saveAndBack}>
-            Guardar
-          </IonButton>
+          <IonGrid>
+            <IonRow>
+              <IonCol>
+                <IonItem>
+                  <IonButton className="save label" onClick={saveAndNew}>
+                    Añadir
+                  </IonButton>
+                </IonItem>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
         </IonList>
 
         <IonList className="capturas">
@@ -253,10 +199,10 @@ export default function NewDocumentation() {
               Capturas actuales
             </IonLabel>
           </IonItem>
-          <IonList>
-            {tempLicense.map((item) => {
+          <IonList className="listaElementos">
+            {tempactivity.catches.map((item) => {
               return (
-                <IonCard className="card" key={item.id}>
+                <IonCard className="card capturasNuevas" key={item.id}>
                   <IonCardHeader className="card">
                     <IonButton
                       className="delete"
@@ -283,14 +229,14 @@ export default function NewDocumentation() {
                       </svg>
                       Borrar
                     </IonButton>
-                    <IonCardTitle className="name">{item.name}</IonCardTitle>
-                    <div className="card-img">
-                      <img src={item.imageUrl} alt={item.id} />
-                    </div>
+                    <IonCardTitle className="card ion-text-wrap">
+                      {item.name}
+                    </IonCardTitle>
+                    <IonCardContent className="label ion-text-wrap">
+                      Descripción: {item.description}
+                    </IonCardContent>
+                    <img src={item.imageUrl} alt={item.id} />
                   </IonCardHeader>
-                  <IonCardContent className="card-desc">
-                    {item.description}
-                  </IonCardContent>
                 </IonCard>
               );
             })}

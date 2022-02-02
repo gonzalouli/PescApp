@@ -42,7 +42,7 @@ const GetActivityWithId = async (data) => {
       const tackleWithId = await Tackle.findOne({
         where: { Id: element.TackleId },
       });
-      activity.tackle.push(tackleWithId.name);
+      activity.tackle.push(tackleWithId);
     });
 
     const activityCatchesWithId = await ActivityCatches.findAll({

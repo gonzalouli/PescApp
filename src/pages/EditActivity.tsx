@@ -19,54 +19,55 @@ import { ResetLS } from "../utils/ResetLocalStorage";
 
 export default function NewActivity() {
   const [name, setName] = useState(
-    JSON.parse(window.sessionStorage.getItem("editActivity"))?.name || ""
+    JSON.parse(window.sessionStorage.getItem("editActivity")).name
   );
-  const [button, setButton] = useState(true);
   const [error, setError] = useState({ error: false, message: "" });
   const [success, setSuccess] = useState({ success: false, message: "" });
-  const [toHome, setToHome] = useState(false);
+  const [MyActivity, setMyActivity] = useState(false);
   const [logOut, setLogOut] = useState(false);
 
-  const isAuth = async () => {
-    try {
-      return await Auth.currentAuthenticatedUser();
-    } catch (error) {
-      setLogOut(true);
-      console.error("Ususario no loggeado: " + error.message);
-      return null;
-    }
-  };
+  // const isAuth = async () => {
+  //   try {
+  //     return await Auth.currentAuthenticatedUser();
+  //   } catch (error) {
+  //     setLogOut(true);
+  //     console.error("Ususario no loggeado: " + error.message);
+  //     return null;
+  //   }
+  // };
 
   useEffect(() => {
-    try {
-      const res = getActivity(isAuth(), sessionStorage.getItem("IdToEdit"));
-    } catch (error) {
-      setLogOut(true);
-    }
+    // if (sessionStorage.getItem("editActivity") == null) {
+    //   try {
+    //     const res = getActivity(isAuth(), sessionStorage.getItem("IdToEdit"));
+    //   } catch (error) {
+    //     setLogOut(true);
+    //   }
+    // }
   }, []);
 
-  const getActivity = async (CognitoUser, ActivityId) => {
-    try {
-      const res = await API.post(
-        "api9000aeb3",
-        "/activities/getActivityWithId",
-        {
-          body: {
-            CognitoUser: CognitoUser,
-            ActivityId: ActivityId,
-          },
-        }
-      );
-      if (res.error) {
-        setError(res);
-      }
-      console.log(res);
-      sessionStorage.setItem("editActivity", JSON.stringify(res));
-      return res;
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const getActivity = async (CognitoUser, ActivityId) => {
+  //   try {
+  //     const res = await API.post(
+  //       "api9000aeb3",
+  //       "/activities/getActivityWithId",
+  //       {
+  //         body: {
+  //           CognitoUser: CognitoUser,
+  //           ActivityId: ActivityId,
+  //         },
+  //       }
+  //     );
+  //     if (res.error) {
+  //       setError(res);
+  //     }
+  //     console.log(res);
+  //     sessionStorage.setItem("editActivity", JSON.stringify(res));
+  //     return res;
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -76,38 +77,37 @@ export default function NewActivity() {
     window.sessionStorage.setItem("editActivity", JSON.stringify(activity));
   };
 
-  // const sendNewActivity = async () => {
-  //   if (name !== "") {
-  //     setButton(false);
-  //     try {
-  //       const data = await Auth.currentAuthenticatedUser();
+  const sendEditActivity = async () => {
+    if (name !== "") {
+      try {
+        const data = await Auth.currentAuthenticatedUser();
+        const id = sessionStorage.getItem("IdToEdit");
+        const activity = JSON.parse(
+          window.sessionStorage.getItem("editActivity")
+        );
 
-  //       const activity = JSON.parse(
-  //         window.sessionStorage.getItem("newActivity")
-  //       );
+        const result = await API.patch(
+          "api9000aeb3",
+          "/activities/editActivityWithId",
+          {
+            body: {
+              UserIdCognito: data.username,
+              activity,
+              ActivityId: id,
+            },
+          }
+        );
 
-  //       const result = await API.post(
-  //         "api9000aeb3",
-  //         "/activities/insertActivity",
-  //         {
-  //           body: {
-  //             UserIdCognito: data.username,
-  //             activity,
-  //           },
-  //         }
-  //       );
-
-  //       if (result.error === true) setError(result);
-  //       else setSuccess(result);
-  //       setTimeout(() => {
-  //         setToHome(true);
-  //       }, 2000);
-  //     } catch (error) {}
-  //     setButton(true);
-  //   } else {
-  //     setError({ error: true, message: "La actividad requiere un nombre" });
-  //   }
-  // };
+        if (result.error === true) setError(result);
+        else setSuccess(result);
+        setTimeout(() => {
+          setMyActivity(true);
+        }, 2000);
+      } catch (error) {}
+    } else {
+      setError({ error: true, message: "La actividad requiere un nombre" });
+    }
+  };
 
   const [isEditActivityLocalization, setIsEditActivityLocalization] =
     useState(false);
@@ -129,7 +129,7 @@ export default function NewActivity() {
       {isEditActivityDate && (
         <Redirect to="/my/EditActivity/Date" push={true} exact={true} />
       )}
-      {toHome && <Redirect to="/my/home" push={true} exact={true} />}
+      {MyActivity && <Redirect to="/my/MyActivity" push={true} exact={true} />}
       {logOut && <Redirect to="/" push={true} exact={true} />}
       <Fragment>
         <IonHeader className="header">
@@ -193,9 +193,9 @@ export default function NewActivity() {
           )}
 
           <div className="submit buttons">
-            {/* <IonButton className="save" onClick={button && sendNewActivity}>
-              Guardar
-            </IonButton> */}
+            <IonButton className="save" onClick={sendEditActivity}>
+              Editar
+            </IonButton>
           </div>
         </IonContent>
       </Fragment>

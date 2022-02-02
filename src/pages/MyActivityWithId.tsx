@@ -115,7 +115,7 @@ export default function MyActivityWithId() {
                   <IonRow className="row">
                     <IonItemDivider className="itemDivider">
                       <IonLabel key={item} className="label">
-                        {item}
+                        {item.name}
                       </IonLabel>
                     </IonItemDivider>
                   </IonRow>
