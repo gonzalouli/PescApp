@@ -83,7 +83,7 @@ export default function MyActivity() {
       return res;
     } catch (error) {
       console.error(error);
-      setError({ error: true, message: "Error consulte al adrministrador" });
+      setError({ error: true, message: "Error consulte al administrador" });
     }
   };
 
