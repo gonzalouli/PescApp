@@ -1,5 +1,18 @@
 describe("Carga el home adecuadamente", () => {
   beforeEach(() => {
+    cy.visit("/login");
+    // cy.get('[placeholder="Email"]').type('email@email.com')
+    // cy.get('[placeholder="Contraseña"]').last().type('contraseña')
+    //Podemos escribir user y pass
+    cy.get(".form").get(".email").type("email@email.com");
+    cy.get(".form").get(".pass").last().type("test1234");
+    //Podemos ver el error (si escribimos mal algun campo)
+
+    //los conduce a la siguiente pagina
+    cy.get("ion-button").get(".entrar").click({ force: true });
+
+    //se dirige a la pagina home
+    cy.location().should((loc) => expect(loc.pathname).to.eq("/my/home"));
     cy.visit("my/home");
   });
 
@@ -7,7 +20,6 @@ describe("Carga el home adecuadamente", () => {
     cy.get(".container-home").get(".main-button").contains("Nueva Actividad");
     cy.get(".container-home").get(".main-button").contains("Mis Actividades");
     cy.get(".container-home").get(".main-button").contains("Tiempo y Mareas");
-    cy.get(".container-home").get(".main-button").contains("Especies");
     cy.get(".container-home").get(".main-button").contains("Documentación");
     cy.get(".container-home").get(".main-button").contains("Notificaciones");
 
@@ -78,23 +90,23 @@ describe("Carga el home adecuadamente", () => {
     //Meteorologia
     cy.visit("my/home");
     cy.xpath(
-      '//*[@id="root"]/ion-app/div/ion-content/ion-list/ion-button[5]'
+      '//*[@id="root"]/ion-app/div/ion-content/ion-list/ion-button[3]'
     ).click({
       force: true,
     });
     cy.location().should((loc) =>
-      expect(loc.pathname).to.eq("/my/Documentation")
+      expect(loc.pathname).to.eq("/my/MeteorologyOrTide")
     );
 
     //Notificaciones
     cy.visit("my/home");
     cy.xpath(
-      '//*[@id="root"]/ion-app/div/ion-content/ion-list/ion-button[6]'
+      '//*[@id="root"]/ion-app/div/ion-content/ion-list/ion-button[5]'
     ).click({
       force: true,
     });
-    // cy.location().should((loc) =>
-    //   expect(loc.pathname).to.eq("/my/Notifications")
-    // );
+    cy.location().should((loc) =>
+      expect(loc.pathname).to.eq("/my/Notifications")
+    );
   });
 });
