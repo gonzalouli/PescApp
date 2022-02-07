@@ -10,6 +10,8 @@ import awsExports from "./aws-exports";
 import { Capacitor } from "@capacitor/core";
 
 Amplify.configure(awsExports);
+console.log(process.env.REACT_APP_LOCAL);
+console.log(process.env.REACT_APP_BACKEND_HOST);
 
 ReactDOM.render(
   <React.StrictMode>
