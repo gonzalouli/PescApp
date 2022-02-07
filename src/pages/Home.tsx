@@ -42,6 +42,7 @@ const Home: React.FC = () => {
   const [isMeteorology, setIsMeteorology] = useState<boolean>(false);
   const [isDocumentation, setIsDocumentation] = useState<boolean>(false);
   const [isMyActivity, setIsMyActivity] = useState<boolean>(false);
+  const [isSpecies, setIsSpecies] = useState<boolean>(false);
 
   // if (wait) {
   //   return (
@@ -66,6 +67,7 @@ const Home: React.FC = () => {
       {isMyActivity && (
         <Redirect to="/my/MyActivity" push={true} exact={true} />
       )}
+      {isSpecies && <Redirect to="/my/Species" push={true} exact={true} />}
       {logOut && <Redirect to="/" push={true} exact={true} />}
 
       <div className="profile">
@@ -105,7 +107,15 @@ const Home: React.FC = () => {
           >
             Tiempo y Mareas
           </IonButton>
-
+          <IonButton
+            className="main-button"
+            expand="block"
+            onClick={() => {
+              setIsSpecies(true);
+            }}
+          >
+            Especies
+          </IonButton>
           <IonButton
             className="main-button"
             expand="block"

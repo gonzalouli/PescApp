@@ -49,6 +49,7 @@ import EditActivityLocalization from "./pages/EditActivityLocalization";
 import EditActivityTackle from "./pages/EditActivityTackle";
 import EditActivityCatch from "./pages/EditActivityCatch";
 import EditActivityDate from "./pages/EditActivityDate";
+import Species from "./pages/Species";
 
 const App: React.FC = () => {
   const [isLog, setIsLog] = useState(false);
@@ -151,6 +152,9 @@ const App: React.FC = () => {
               </Route>
               <Route exact={true} path="/my/Documentation/MyDocumentation">
                 <MyDocumentation />
+              </Route>
+              <Route exact={true} path="/my/Species">
+                <Species />
               </Route>
             </Fragment>
           )}

@@ -1,0 +1,9 @@
+.visor {
+  width: 100%;
+  height: 80%;
+  overflow: scroll;
+}
+
+.reader {
+  width: 90%;
+}
