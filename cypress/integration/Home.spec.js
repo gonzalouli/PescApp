@@ -99,14 +99,14 @@ describe("Carga el home adecuadamente", () => {
     );
 
     //Notificaciones
-    cy.visit("my/home");
-    cy.xpath(
-      '//*[@id="root"]/ion-app/div/ion-content/ion-list/ion-button[5]'
-    ).click({
-      force: true,
-    });
-    cy.location().should((loc) =>
-      expect(loc.pathname).to.eq("/my/Notifications")
-    );
+    // cy.visit("my/home");
+    // cy.xpath(
+    //   '//*[@id="root"]/ion-app/div/ion-content/ion-list/ion-button[5]'
+    // ).click({
+    //   force: true,
+    // });
+    // cy.location().should((loc) =>
+    //   expect(loc.pathname).to.eq("/my/Notifications")
+    // );
   });
 });
