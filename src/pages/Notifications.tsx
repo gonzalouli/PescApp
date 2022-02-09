@@ -126,6 +126,9 @@ export default function Notifications() {
               selectedTide,
               selectedHeightTide,
               selectedWind,
+              NotificationToken: window.localStorage.getItem(
+                "pushNotificationToken"
+              ),
             },
           }
         );

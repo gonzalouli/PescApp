@@ -1,0 +1,25 @@
+const admin = require("firebase-admin");
+const firebaseConfig = require("../../../firebase");
+
+admin.initializeApp({
+  credential: admin.credential.cert(firebaseConfig),
+});
+
+const sendNotification = async (usersToNotificate) => {
+  let responses = [];
+
+  usersToNotificate.forEach(async (userNotificate) => {
+    const message = {
+      notification: userNotificate.notificationMessage,
+    };
+
+    responses.push(
+      await admin.messaging().sendToDevice(userNotificate.idUser, message, {
+        priority: "high",
+        timeToLive: 60 * 60 * 24,
+      })
+    );
+  });
+};
+
+module.exports = sendNotification;

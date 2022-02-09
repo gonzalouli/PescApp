@@ -3,19 +3,30 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
+import { initializeFirebase, askPermissionNotification } from "./firebase";
 
 import Amplify from "aws-amplify";
 
 import awsExports from "./aws-exports";
 import { Capacitor } from "@capacitor/core";
 
-// if (process.env.REACT_APP_LOCAL) {
-//   awsExports.aws_cloud_logic_custom[0].endpoint = Capacitor.isNativePlatform()
-//     ? "http://10.0.2.2:4444"
-//     : "http://localhost:4444";
-// }
+if (process.env.REACT_APP_LOCAL) {
+  awsExports.aws_cloud_logic_custom[0].endpoint = Capacitor.isNativePlatform()
+    ? "http://10.0.2.2:4444"
+    : "http://localhost:4444";
+}
+console.log(process.env.REACT_APP_LOCAL);
+console.log(process.env.REACT_APP_BACKEND_HOST);
+console.log(process.env.DATABASE_HOST);
+console.log(process.env.GOOGLE_KEY);
 
 Amplify.configure(awsExports);
+
+// (async () => {
+//   const firebase = initializeFirebase();
+//   const token = await askPermissionNotification(firebase);
+//   localStorage.setItem("pushNotificationToken", token);
+// })();
 
 ReactDOM.render(
   <React.StrictMode>
