@@ -11,6 +11,7 @@ const Licenses = require("./Licenses/Licenses");
 const LicenseImages = require("./Licenses/LicenseImages");
 const Images = require("./Licenses/Images");
 const Ports = require("./Ports/Ports");
+const Notifications = require("./Notifications/Notifications");
 
 module.exports = {
   Activity,
@@ -26,4 +27,5 @@ module.exports = {
   LicenseImages,
   Images,
   Ports,
+  Notifications,
 };

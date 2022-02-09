@@ -68,6 +68,7 @@ const register = require("./routes/register");
 const meteorology = require("./routes/meteorology");
 const ports = require("./routes/ports");
 const licenses = require("./routes/licenses");
+const notifications = require("./routes/notifications");
 
 app.use("/keys", keys);
 app.use("/activities", activities);
@@ -75,6 +76,7 @@ app.use("/register", register);
 app.use("/meteorology", meteorology);
 app.use("/ports", ports);
 app.use("/licenses", licenses);
+app.use("/notifications", notifications);
 
 const sequelize = require("./database/sequelize");
 // const { CodeStarNotifications } = require("aws-sdk");

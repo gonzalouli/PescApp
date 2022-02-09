@@ -43,6 +43,7 @@ const Home: React.FC = () => {
   const [isDocumentation, setIsDocumentation] = useState<boolean>(false);
   const [isMyActivity, setIsMyActivity] = useState<boolean>(false);
   const [isSpecies, setIsSpecies] = useState<boolean>(false);
+  const [isNotification, setIsNotification] = useState<boolean>(false);
 
   // if (wait) {
   //   return (
@@ -66,6 +67,9 @@ const Home: React.FC = () => {
       )}
       {isMyActivity && (
         <Redirect to="/my/MyActivity" push={true} exact={true} />
+      )}
+      {isNotification && (
+        <Redirect to="/my/Notifications" push={true} exact={true} />
       )}
       {isSpecies && <Redirect to="/my/Species" push={true} exact={true} />}
       {logOut && <Redirect to="/" push={true} exact={true} />}
@@ -125,7 +129,11 @@ const Home: React.FC = () => {
           >
             Documentación
           </IonButton>
-          <IonButton className="main-button" expand="block">
+          <IonButton
+            className="main-button"
+            expand="block"
+            onClick={() => setIsNotification(true)}
+          >
             Notificaciones
           </IonButton>
         </IonList>

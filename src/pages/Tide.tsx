@@ -87,7 +87,7 @@ export default function Tide() {
               {ports.map((e) => {
                 return (
                   <IonSelectOption
-                    className="options ion-text-wrap"
+                    className="options ion-text-wrap label"
                     value={e.id}
                     key={e.id}
                   >

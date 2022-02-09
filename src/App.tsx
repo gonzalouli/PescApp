@@ -50,6 +50,7 @@ import EditActivityTackle from "./pages/EditActivityTackle";
 import EditActivityCatch from "./pages/EditActivityCatch";
 import EditActivityDate from "./pages/EditActivityDate";
 import Species from "./pages/Species";
+import Notifications from "./pages/Notifications";
 
 const App: React.FC = () => {
   const [isLog, setIsLog] = useState(false);
@@ -155,6 +156,9 @@ const App: React.FC = () => {
               </Route>
               <Route exact={true} path="/my/Species">
                 <Species />
+              </Route>
+              <Route exact={true} path="/my/Notifications">
+                <Notifications />
               </Route>
             </Fragment>
           )}
