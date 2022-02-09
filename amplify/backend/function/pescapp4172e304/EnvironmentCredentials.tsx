@@ -1,4 +1,4 @@
-export const EnvironmentCredentials = {
+const EnvironmentCredentials = {
   DATABASE_NAME: "pescapp",
   DATABASE_USERNAME: "pescapp",
   DATABASE_PASSWORD: "administrador",
@@ -15,3 +15,5 @@ export const EnvironmentCredentials = {
   REACT_APP_BACKEND_HOST: "http://localhost:4444",
   REACT_APP_BACKEND_HOST_ANDROID: "http://10.0.2.2:4444",
 };
+
+module.exports = EnvironmentCredentials;
