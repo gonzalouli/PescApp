@@ -7,6 +7,7 @@ See the License for the specific language governing permissions and limitations 
 */
 if (process.env.ENVIRONMENT === "develop") console.warn = () => {};
 
+const Amplify = require("aws-amplify");
 const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
