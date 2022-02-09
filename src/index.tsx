@@ -14,10 +14,6 @@ if (process.env.REACT_APP_LOCAL) {
     ? "http://10.0.2.2:4444"
     : "http://localhost:4444";
 }
-console.log(process.env.REACT_APP_LOCAL);
-console.log(process.env.REACT_APP_BACKEND_HOST);
-console.log(process.env.DATABASE_HOST);
-console.log(process.env.GOOGLE_KEY);
 
 Amplify.configure(awsExports);
 

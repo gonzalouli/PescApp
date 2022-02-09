@@ -16,7 +16,8 @@ register.post("/confirm", async (req, res) => {
   const cognitoidentityserviceprovider = await CognitoIdentityServiceProvider();
 
   const confirmParams = {
-    UserPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
+    // UserPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
+    UserPoolId: process.env.COGNITO_USER_POOL_ID,
     Username: req.body.username,
   };
 
