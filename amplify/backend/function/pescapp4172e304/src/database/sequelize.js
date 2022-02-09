@@ -27,7 +27,9 @@ dotenv.config();
 // );
 
 let dialectOptions = {};
-if (EnvironmentCredentials.ENVIRONMENT === "production") {
+if (
+  EnvironmentCredentials.EnvironmentCredentials.ENVIRONMENT === "production"
+) {
   dialectOptions = {
     ssl: {
       require: true,
