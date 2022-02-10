@@ -10,7 +10,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "aws-amplify": "^4.3.14",
     "aws-sdk": "^2.1059.0",
     "aws-serverless-express": "^3.3.5",
     "axios": "^0.25.0",
