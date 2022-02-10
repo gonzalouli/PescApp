@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 const dotenv = require("dotenv");
-const EnvironmentCredentials = require("../../EnvironmentCredentials");
+const EnvironmentCredentials = require("../EnvironmentCredentials.json");
 
 dotenv.config();
 
@@ -27,9 +27,7 @@ dotenv.config();
 // );
 
 let dialectOptions = {};
-if (
-  EnvironmentCredentials.EnvironmentCredentials.ENVIRONMENT === "production"
-) {
+if (EnvironmentCredentials.ENVIRONMENT === "production") {
   dialectOptions = {
     ssl: {
       require: true,
@@ -39,16 +37,14 @@ if (
 }
 
 const sequelize = new Sequelize(
-  EnvironmentCredentials.EnvironmentCredentials.DATABASE_NAME,
-  EnvironmentCredentials.EnvironmentCredentials.DATABASE_USERNAME,
-  EnvironmentCredentials.EnvironmentCredentials.DATABASE_PASSWORD,
+  EnvironmentCredentials.DATABASE_NAME,
+  EnvironmentCredentials.DATABASE_USERNAME,
+  EnvironmentCredentials.DATABASE_PASSWORD,
   {
-    host: EnvironmentCredentials.EnvironmentCredentials.DATABASE_HOST,
-    dialect: EnvironmentCredentials.EnvironmentCredentials.DATABASE_DIALECT,
+    host: EnvironmentCredentials.DATABASE_HOST,
+    dialect: EnvironmentCredentials.DATABASE_DIALECT,
     dialectOptions: dialectOptions,
-    logging:
-      EnvironmentCredentials.EnvironmentCredentials.ENVIRONMENT ===
-      "production",
+    logging: EnvironmentCredentials.ENVIRONMENT === "production",
   }
 );
 

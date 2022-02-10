@@ -74,7 +74,7 @@ export default function Tide() {
         />
 
         <Fragment>
-          <IonItem>
+          <IonItem className="selectPuerto">
             <IonLabel className="label" position="stacked">
               Puerto
             </IonLabel>

@@ -2,8 +2,8 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const register = express.Router();
 const Amplify = require("aws-amplify");
-const AWS = require("aws-sdk");
-const EnvironmentCredentials = require("../../EnvironmentCredentials");
+// const AWS = require("aws-sdk");
+const EnvironmentCredentials = require("../EnvironmentCredentials.json");
 
 const {
   CognitoIdentityServiceProvider,
@@ -18,8 +18,7 @@ register.post("/confirm", async (req, res) => {
 
   const confirmParams = {
     // UserPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
-    UserPoolId:
-      EnvironmentCredentials.EnvironmentCredentials.COGNITO_USER_POOL_ID,
+    UserPoolId: EnvironmentCredentials.COGNITO_USER_POOL_ID,
     Username: req.body.username,
   };
 
