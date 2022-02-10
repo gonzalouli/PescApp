@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "937853490512",
+    "project_id": "pesc-app-8f7f1",
+    "storage_bucket": "pesc-app-8f7f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:937853490512:android:e4a16554cabef2c03e4855",
+        "android_client_info": {
+          "package_name": "com.android.pescapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "937853490512-1n5jbvau98v2vpg7cfd6gb0jrlogog4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGsUEhwjFHw_kAqCv_SRIO38CZRJg4B_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "937853490512-1n5jbvau98v2vpg7cfd6gb0jrlogog4r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

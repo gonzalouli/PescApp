@@ -3,6 +3,7 @@ const ports = express.Router();
 const Ports = require("../database/models/Ports/Ports");
 const GetTidefromPort = require("./services/GetTideFromPort");
 
+// TODO: if endpoint give error, not send 200 with object error, send 404 with object error
 ports.get("/getPorts", async (req, res) => {
   const allPorts = [];
 
@@ -14,7 +15,9 @@ ports.get("/getPorts", async (req, res) => {
     });
     return res.json(allPorts);
   } catch (err) {
-    return res.json({ error: true, message: "No se encontraron puertos" });
+    return res
+      .status(404)
+      .json({ error: true, message: "No se encontraron puertos" });
   }
 });
 

@@ -5,21 +5,23 @@ admin.initializeApp({
   credential: admin.credential.cert(firebaseConfig),
 });
 
-const sendNotification = async (usersToNotificate) => {
+const sendNotification = async (usersToNotificate = []) => {
   let responses = [];
 
-  usersToNotificate.forEach(async (userNotificate) => {
+  for (const userToNotificate of usersToNotificate) {
+    const { notificationMessage, tokenFirebase } = userToNotificate;
+
     const message = {
-      notification: userNotificate.notificationMessage,
+      notification: notificationMessage,
     };
 
     responses.push(
-      await admin.messaging().sendToDevice(userNotificate.idUser, message, {
+      await admin.messaging().sendToDevice(tokenFirebase, message, {
         priority: "high",
         timeToLive: 60 * 60 * 24,
       })
     );
-  });
+  }
 };
 
 module.exports = sendNotification;

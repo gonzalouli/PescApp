@@ -15,6 +15,7 @@ import {
   IonSelectOption,
   IonText,
   IonTitle,
+  isPlatform,
   useIonAlert,
 } from "@ionic/react";
 import { API, Auth } from "aws-amplify";
@@ -39,6 +40,7 @@ export default function Notifications() {
   const [notifications, setNotifications] = useState([]);
   const [toast, setToast] = useState(false);
   const [present] = useIonAlert();
+  const [movile, setMovile] = useState(false);
 
   const [deletedNotification, setDeleteNotification] = useState(false);
   const [insertedNotification, setInsertedNotification] = useState(false);
@@ -68,6 +70,9 @@ export default function Notifications() {
   }
 
   useEffect(() => {
+    if (isPlatform("android") || isPlatform("ios")) {
+      setMovile(true);
+    }
     setDeleteNotification(false);
     setInsertedNotification(false);
     async function fetchApi() {
@@ -194,92 +199,96 @@ export default function Notifications() {
         <IonTitle className="tittle">Notificaciones</IonTitle>
       </IonHeader>
       <IonContent>
-        <IonList>
-          <IonItem className="selectItem">
-            <IonLabel className="label" position="stacked">
-              Puerto
-            </IonLabel>
-            <IonSelect
-              interface="action-sheet"
-              okText="Aceptar"
-              cancelText="Cancelar"
-              onIonChange={(e) => {
-                setSelectedPort(e.detail.value);
-              }}
-            >
-              {ports.map((e) => {
-                return (
-                  <IonSelectOption
-                    className="options ion-text-wrap label"
-                    value={e.id}
-                    key={e.id}
-                  >
-                    <IonLabel className="ion-text-wrap">
-                      {e.description}
-                    </IonLabel>
-                  </IonSelectOption>
-                );
-              })}
-            </IonSelect>
-          </IonItem>
-          <IonItem className="selectItem">
-            <IonLabel className="label" position="stacked">
-              Marea
-            </IonLabel>
-            <IonSelect
-              interface="action-sheet"
-              okText="Aceptar"
-              cancelText="Cancelar"
-              onIonChange={(e) => setSelectedTide(e.detail.value)}
-            >
-              <IonSelectOption
-                className="options ion-text-wrap label"
-                value="Bajamar"
+        {movile && (
+          <IonList>
+            <IonItem className="selectItem">
+              <IonLabel className="label" position="stacked">
+                Puerto
+              </IonLabel>
+              <IonSelect
+                interface="action-sheet"
+                okText="Aceptar"
+                cancelText="Cancelar"
+                onIonChange={(e) => {
+                  setSelectedPort(e.detail.value);
+                }}
               >
-                <IonLabel className="label">Bajamar</IonLabel>
-              </IonSelectOption>
-              <IonSelectOption
-                className="options ion-text-wrap label"
-                value="Pleamar"
+                {ports.map((e) => {
+                  return (
+                    <IonSelectOption
+                      className="options ion-text-wrap label"
+                      value={e.id}
+                      key={e.id}
+                    >
+                      <IonLabel className="ion-text-wrap">
+                        {e.description}
+                      </IonLabel>
+                    </IonSelectOption>
+                  );
+                })}
+              </IonSelect>
+            </IonItem>
+            <IonItem className="selectItem">
+              <IonLabel className="label" position="stacked">
+                Marea
+              </IonLabel>
+              <IonSelect
+                interface="action-sheet"
+                okText="Aceptar"
+                cancelText="Cancelar"
+                onIonChange={(e) => setSelectedTide(e.detail.value)}
               >
-                <IonLabel className="label">Pleamar</IonLabel>
-              </IonSelectOption>
-            </IonSelect>
-          </IonItem>
-          <IonItem className="inputelement">
-            <IonLabel className="label alturaMarea">Altura de marea</IonLabel>
-            <IonInput
-              className="label input"
-              inputmode="decimal"
-              min="0"
-              placeholder="0"
-              type="number"
-              onIonChange={(e) => setSelectedHeightTide(Number(e.detail.value))}
-            ></IonInput>
-          </IonItem>
-          <IonItem className="inputelement">
-            <IonLabel className="label alturaMarea ion-text-wrap">
-              Velocidad del viento (nudos)
-            </IonLabel>
-            <IonInput
-              className="label input"
-              inputmode="decimal"
-              min="0"
-              placeholder="0"
-              type="number"
-              onIonChange={(e) => setSelectedWind(Number(e.detail.value))}
-            ></IonInput>
-          </IonItem>
+                <IonSelectOption
+                  className="options ion-text-wrap label"
+                  value="Bajamar"
+                >
+                  <IonLabel className="label">Bajamar</IonLabel>
+                </IonSelectOption>
+                <IonSelectOption
+                  className="options ion-text-wrap label"
+                  value="Pleamar"
+                >
+                  <IonLabel className="label">Pleamar</IonLabel>
+                </IonSelectOption>
+              </IonSelect>
+            </IonItem>
+            <IonItem className="inputelement">
+              <IonLabel className="label alturaMarea">Altura de marea</IonLabel>
+              <IonInput
+                className="label input"
+                inputmode="decimal"
+                min="0"
+                placeholder="0"
+                type="number"
+                onIonChange={(e) =>
+                  setSelectedHeightTide(Number(e.detail.value))
+                }
+              ></IonInput>
+            </IonItem>
+            <IonItem className="inputelement">
+              <IonLabel className="label alturaMarea ion-text-wrap">
+                Velocidad del viento (nudos)
+              </IonLabel>
+              <IonInput
+                className="label input"
+                inputmode="decimal"
+                min="0"
+                placeholder="0"
+                type="number"
+                onIonChange={(e) => setSelectedWind(Number(e.detail.value))}
+              ></IonInput>
+            </IonItem>
 
-          {status.error && <div className="error">{status.message}</div>}
+            {status.error && <div className="error">{status.message}</div>}
 
-          <IonButton
-            className="label button"
-            onClick={sendNotificationToDatabase}
-          >
-            Enviar
-          </IonButton>
-        </IonList>
+            <IonButton
+              className="label button"
+              onClick={sendNotificationToDatabase}
+            >
+              Enviar
+            </IonButton>
+          </IonList>
+        )}
         <IonItem>
           <IonLabel className="label aviso">Mis notificaciones</IonLabel>
         </IonItem>
