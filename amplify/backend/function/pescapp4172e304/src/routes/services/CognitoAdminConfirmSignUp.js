@@ -1,4 +1,3 @@
-const Amplify = require("aws-amplify");
 const CognitoAdminConfirmSignUp = async (
   cognitoidentityserviceprovider,
   confirmParams

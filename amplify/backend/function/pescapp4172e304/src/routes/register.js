@@ -1,7 +1,6 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 const register = express.Router();
-const Amplify = require("aws-amplify");
 // const AWS = require("aws-sdk");
 const EnvironmentCredentials = require("../EnvironmentCredentials.json");
 

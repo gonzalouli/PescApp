@@ -1,5 +1,3 @@
-const Amplify = require("aws-amplify");
-
 const AWS = require("aws-sdk");
 const EnvironmentCredentials = require("../../EnvironmentCredentials.json");
 
