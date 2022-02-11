@@ -18,7 +18,7 @@
       "function": {
         "pescapp4172e304": {
           "deploymentBucketName": "amplify-pescapp-dev-230816-deployment",
-          "s3Key": "amplify-builds/pescapp4172e304-712b615550594a583670-build.zip"
+          "s3Key": "amplify-builds/pescapp4172e304-5558526b795959475966-build.zip"
         }
       }
     }
