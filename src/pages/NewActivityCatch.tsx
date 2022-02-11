@@ -63,11 +63,16 @@ export default function NewActivityCatch() {
       const imgUrl: string | ArrayBuffer = await getDataUrl(file);
 
       if (typeof imgUrl === "object") {
-        setImageUrl(String.fromCharCode.apply(null, new Uint16Array(imgUrl)));
+        // setImageUrl(String.fromCharCode.apply(null, new Uint16Array(imgUrl)));
+        setPiece({
+          ...piece,
+          imageUrl: String.fromCharCode.apply(null, new Uint16Array(imgUrl)),
+        });
       } else if (typeof imgUrl === "string") {
-        setImageUrl(imgUrl);
+        // setImageUrl(imgUrl);
+        setPiece({ ...piece, imageUrl: imgUrl });
       }
-      setPiece({ ...piece, imageUrl });
+      // setPiece({ ...piece, imageUrl });
     }
   };
 
@@ -83,7 +88,6 @@ export default function NewActivityCatch() {
 
         setImageUrl(image.dataUrl);
         setPiece({ ...piece, imageUrl: image.dataUrl });
-        console.log(piece);
       } catch (error) {
         console.error("Camera Error:", error.message);
       }
@@ -107,7 +111,10 @@ export default function NewActivityCatch() {
   };
 
   const saveAndNew = async () => {
-    if (imageUrl != process.env.PUBLIC_URL + "/assets/placeholderimage.jpg") {
+    if (
+      piece.imageUrl !=
+      process.env.PUBLIC_URL + "/assets/placeholderimage.jpg"
+    ) {
       const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
 
       await activity.catches.push(piece);
@@ -168,7 +175,7 @@ export default function NewActivityCatch() {
               hidden
             ></input>
 
-            <img src={imageUrl} alt="" onClick={handlePictureClick} />
+            <img src={piece.imageUrl} alt="" onClick={handlePictureClick} />
           </IonItem>
 
           <IonItem className="description">

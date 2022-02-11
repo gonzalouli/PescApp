@@ -9,6 +9,7 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonLoading,
   IonPage,
   IonRow,
   IonSelect,
@@ -41,6 +42,7 @@ export default function Notifications() {
   const [toast, setToast] = useState(false);
   const [present] = useIonAlert();
   const [movile, setMovile] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [deletedNotification, setDeleteNotification] = useState(false);
   const [insertedNotification, setInsertedNotification] = useState(false);
@@ -102,6 +104,7 @@ export default function Notifications() {
     }
     fetchApi();
     fetchNotifications();
+    setLoading(false);
   }, [deletedNotification, insertedNotification]);
 
   const isAuth = async () => {
@@ -197,6 +200,15 @@ export default function Notifications() {
         <IonTitle className="tittle">Notificaciones</IonTitle>
       </IonHeader>
       <IonContent>
+        <IonLoading isOpen={loading}></IonLoading>
+        {!movile && (
+          <IonItem>
+            <IonText color="danger" className="label ion-text-center">
+              Insercción de solo disponibles en la versión móvil
+            </IonText>
+          </IonItem>
+        )}
+
         {movile && (
           <IonList>
             <IonItem className="selectItem">

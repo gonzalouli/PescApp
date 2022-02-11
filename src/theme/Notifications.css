@@ -40,7 +40,7 @@
 .button {
   display: flex;
   align-items: center;
-  bottom: 20px;
+  bottom: 0px;
 }
 
 .success {

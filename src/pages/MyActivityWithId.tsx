@@ -240,7 +240,11 @@ export default function MyActivityWithId() {
                       </IonCol>
                     </IonRow>
                     <IonRow className="row">
-                      <img alt={item.Id} src={item?.imageUrl} />
+                      <IonCol>
+                        <IonItemDivider className="itemDivider">
+                          <img alt={item.Id} src={item?.imageUrl} />
+                        </IonItemDivider>
+                      </IonCol>
                     </IonRow>
                     <IonRow>
                       <IonCol>

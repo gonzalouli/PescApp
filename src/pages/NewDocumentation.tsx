@@ -80,13 +80,19 @@ export default function NewDocumentation() {
     if (event.target.files.length > 0) {
       const file = event.target.files.item(0);
       const imgUrl: string | ArrayBuffer = await getDataUrl(file);
-
+      console.log(imgUrl);
       if (typeof imgUrl === "object") {
-        setImageUrl(String.fromCharCode.apply(null, new Uint16Array(imgUrl)));
+        setPiece({
+          ...piece,
+          imageUrl: String.fromCharCode.apply(null, new Uint16Array(imgUrl)),
+        });
+        // setImageUrl(String.fromCharCode.apply(null, new Uint16Array(imgUrl)));
       } else if (typeof imgUrl === "string") {
-        setImageUrl(imgUrl);
+        // setImageUrl(imgUrl);
+        setPiece({ ...piece, imageUrl: imgUrl });
       }
-      setPiece({ ...piece, imageUrl });
+
+      // setPiece({ ...piece, imageUrl });
     }
   };
 
@@ -150,7 +156,10 @@ export default function NewDocumentation() {
 
   const saveAndNew = async () => {
     const license = JSON.parse(window.sessionStorage.getItem("license"));
-    if (imageUrl != process.env.PUBLIC_URL + "/assets/placeholderimage.jpg") {
+    if (
+      piece.imageUrl !=
+      process.env.PUBLIC_URL + "/assets/placeholderimage.jpg"
+    ) {
       await license.push(piece);
       window.sessionStorage.setItem("license", JSON.stringify(license));
       setTempLicense(license);
@@ -209,7 +218,14 @@ export default function NewDocumentation() {
               hidden
             ></input>
 
-            <img src={imageUrl} alt="" onClick={handlePictureClick} />
+            <img
+              src={piece.imageUrl}
+              alt=""
+              onClick={handlePictureClick}
+              defaultValue={
+                process.env.PUBLIC_URL + "/assets/placeholderimage.jpg"
+              }
+            />
           </IonItem>
 
           <IonItem className="description">
