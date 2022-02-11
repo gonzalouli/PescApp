@@ -12,6 +12,7 @@ import {
   IonItemDivider,
   IonLabel,
   IonList,
+  IonLoading,
   IonPage,
   IonRow,
   IonText,
@@ -32,7 +33,7 @@ export default function MyDocumentation() {
   const [present] = useIonAlert();
   const [toast, setToast] = useState(false);
   const [deletedDocumentation, setDeleteDocumentation] = useState(false);
-
+  const [showLoading, setShowLoading] = useState(false);
   const isAuth = async () => {
     try {
       return await Auth.currentAuthenticatedUser();
@@ -45,8 +46,10 @@ export default function MyDocumentation() {
 
   useEffect(() => {
     try {
+      setShowLoading(true);
       getData();
       setDeleteDocumentation(false);
+      setShowLoading(false);
     } catch (error) {}
   }, [deletedDocumentation]);
 
@@ -97,6 +100,12 @@ export default function MyDocumentation() {
         <IonTitle className="tittle">Mi Documentacion</IonTitle>
       </IonHeader>
       <IonContent>
+        <IonLoading
+          cssClass="my-custom-class"
+          isOpen={showLoading}
+          message={"Por favor, espere..."}
+          duration={5000}
+        />
         <IonGrid>
           {!success.success &&
             !error.error &&

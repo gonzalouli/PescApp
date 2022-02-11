@@ -80,7 +80,6 @@ export default function NewDocumentation() {
     if (event.target.files.length > 0) {
       const file = event.target.files.item(0);
       const imgUrl: string | ArrayBuffer = await getDataUrl(file);
-      console.log(imgUrl);
       if (typeof imgUrl === "object") {
         setPiece({
           ...piece,

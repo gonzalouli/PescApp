@@ -32,10 +32,11 @@ export default function MyActivity() {
   const [selectedActivity, setSelectedActivity] = useState(false);
   const [deletedActivity, setDeleteActivity] = useState(false);
   const [EditActivity, setEditActivity] = useState(false);
-  const [showLoading, setShowLoading] = useState(true);
+  const [showLoading, setShowLoading] = useState(false);
   const [present] = useIonAlert();
 
   useEffect(() => {
+    setShowLoading(true);
     getData();
     sessionStorage.removeItem("editActivity");
     setShowLoading(false);

@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 android {
+    signingConfigs {
+        debug {
+            storeFile file('/home/gonzalouli/Documentos/Keys/android-local-release.jks')
+          storePassword 'ytrewq'
+          keyAlias 'local-release'
+          keyPassword 'qwerty'
+        }
+    }
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.gonzalouli.pescapp"

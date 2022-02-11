@@ -131,7 +131,6 @@ export default function NewActivityCatch() {
         imageUrl: imageUrl,
         description: description,
       });
-      console.log(piece);
     }
   };
 
