@@ -1,4 +1,4 @@
-package com.pescapp;
+package com.gonzalouli.pescapp;
 
 import com.getcapacitor.BridgeActivity;
 import com.hemangkumar.capacitorgooglemaps.CapacitorGoogleMaps;

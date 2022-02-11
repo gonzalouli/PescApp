@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:937853490512:android:e4a16554cabef2c03e4855",
+        "mobilesdk_app_id": "1:937853490512:android:029e55d14624b7f23e4855",
         "android_client_info": {
-          "package_name": "com.android.pescapp"
+          "package_name": "com.gonzalouli.pescapp"
         }
       },
       "oauth_client": [

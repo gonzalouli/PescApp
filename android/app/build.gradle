@@ -3,7 +3,7 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.pescapp"
+        applicationId "com.gonzalouli.pescapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
