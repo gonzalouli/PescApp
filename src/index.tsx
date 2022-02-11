@@ -18,12 +18,6 @@ import { Capacitor } from "@capacitor/core";
 
 Amplify.configure(awsExports);
 
-// (async () => {
-//   const firebase = initializeFirebase();
-//   const token = await askPermissionNotification(firebase);
-//   localStorage.setItem("pushNotificationToken", token);
-// })();
-
 ReactDOM.render(
   <React.StrictMode>
     <App />
