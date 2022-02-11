@@ -18,9 +18,10 @@
   margin: 0 auto !important;
 }
 
-.button {
+.buttonMuActivities {
   padding: 0 auto;
   z-index: 3;
+  top: 0px;
 }
 
 .topItem {

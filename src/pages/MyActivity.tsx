@@ -217,7 +217,7 @@ export default function MyActivity() {
                           <UpdateSprite />
                         </IonButton>
                       </IonCol>
-                      <IonCol className="button item">
+                      <IonCol className="buttonMuActivities item">
                         <IonButton
                           fill="clear"
                           color="transparent"

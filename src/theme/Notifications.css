@@ -27,6 +27,7 @@
 .button {
   align-items: center;
   display: flex;
+  bottom: 20px !important;
 }
 
 .grid {
