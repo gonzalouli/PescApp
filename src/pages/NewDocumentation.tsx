@@ -132,18 +132,22 @@ export default function NewDocumentation() {
     // await license.push(piece);
     // window.sessionStorage.setItem("license", JSON.stringify(license));
     try {
+      const licenses = JSON.parse(window.sessionStorage.getItem("license"));
       const CognitoUser = await isAuth();
-      const res = await API.post("api9000aeb3", "/licenses/createLicense", {
-        body: {
-          CognitoUser: CognitoUser.username,
-          License: JSON.parse(window.sessionStorage.getItem("license")),
-        },
-      });
-
-      if (res.error === true) {
-        setError(res);
-        return;
+      let res;
+      for (const li of licenses) {
+        res = await API.post("api9000aeb3", "/licenses/createLicense", {
+          body: {
+            CognitoUser: CognitoUser.username,
+            License: li,
+          },
+        });
+        if (res.error === true) {
+          setError(res);
+          return;
+        }
       }
+
       setSuccess(res);
       window.sessionStorage.removeItem("license");
 
@@ -180,12 +184,14 @@ export default function NewDocumentation() {
     }
   };
 
-  const deletePiece = (id, e) => {
+  const deletePiece = async (id) => {
+    let aux = [];
     let license = JSON.parse(window.sessionStorage.getItem("license"));
 
-    license = license.filter((piece) => piece.id !== id.id);
-    setTempLicense(license);
-    window.sessionStorage.setItem("license", JSON.stringify(license));
+    aux = license.filter((piece) => piece.id !== id.id);
+
+    setTempLicense(aux);
+    window.sessionStorage.setItem("license", JSON.stringify(aux));
   };
 
   return (
@@ -286,7 +292,7 @@ export default function NewDocumentation() {
                   <IonCardHeader className="card">
                     <IonButton
                       className="delete"
-                      onClick={(e) => deletePiece(item, e)}
+                      onClick={() => deletePiece(item)}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

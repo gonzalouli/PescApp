@@ -6,15 +6,33 @@ const CreateLicense = async (data) => {
   try {
     const { CognitoUser, License } = data;
 
-    for (const l of License) {
-      const { id, name, description, imageUrl } = l;
+    if (License.length > 1) {
+      for (const l of License) {
+        const { id, name, description, imageUrl } = l;
+        const licenseSeq = await Licenses.create({
+          UserId: CognitoUser,
+        });
+
+        const licenseImageSeq = await LicenseImages.create({
+          LicenseId: licenseSeq.id,
+          ImagesId: l.id,
+        });
+        const imagesSeq = await Images.create({
+          id: id,
+          name: name,
+          description: description,
+          imageUrl: imageUrl,
+        });
+      }
+    } else {
+      const { id, name, description, imageUrl } = License;
       const licenseSeq = await Licenses.create({
         UserId: CognitoUser,
       });
 
       const licenseImageSeq = await LicenseImages.create({
         LicenseId: licenseSeq.id,
-        ImagesId: l.id,
+        ImagesId: id,
       });
       const imagesSeq = await Images.create({
         id: id,
