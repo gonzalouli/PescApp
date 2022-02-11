@@ -13,9 +13,12 @@ module.exports = async function GetTideFromPort(date, port) {
       .format("YYYYMMDD")
       .toString();
 
+    console.log(port + " fecha:" + dateFormatted);
+
     const dayTide = await axios.get(
       `https://ideihm.covam.es/api-ihm/getmarea?request=gettide&id=${port}&format=json&date=${dateFormatted}`
     );
+    console.log(dayTide);
     return dayTide.data;
   } catch (error) {
     console.error(error);

@@ -1,3 +1,14 @@
 .my-doc {
   height: 100%;
 }
+
+.imageFromBackend {
+  max-width: 600px;
+  max-height: 600px;
+  display: flex;
+  margin: 0 auto;
+}
+
+.button {
+  top: 0vh !important;
+}

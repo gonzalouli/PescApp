@@ -66,6 +66,6 @@
 .logoImagen {
   display: flex;
   z-index: 1;
-  margin-top: 4vh !important;
-  margin-bottom: 3vh !important;
+  margin-top: 1vh !important;
+  margin-bottom: 2vh !important;
 }

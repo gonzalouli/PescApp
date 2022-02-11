@@ -10,8 +10,8 @@ Images.init(
       type: DataTypes.STRING,
       primaryKey: true,
     },
-    name: { type: DataTypes.STRING },
-    description: { type: DataTypes.STRING },
+    name: { type: DataTypes.STRING, defaultValue: "" },
+    description: { type: DataTypes.STRING, defaultValue: "" },
     imageUrl: { type: DataTypes.TEXT("long") },
   },
   {

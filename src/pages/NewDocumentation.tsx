@@ -172,6 +172,10 @@ export default function NewDocumentation() {
 
       setName("");
       setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
+      setPiece({
+        ...piece,
+        imageUrl: process.env.PUBLIC_URL + "/assets/placeholderimage.jpg",
+      });
       setDescription("");
     }
   };

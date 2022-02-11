@@ -24,6 +24,7 @@ import { Redirect } from "react-router";
 import BackButton from "../components/BackButton";
 import { API, Auth } from "aws-amplify";
 import DeleteSprite from "../components/DeleteSprite";
+import "../theme/Documentation.css";
 
 export default function MyDocumentation() {
   const [result, setResult] = useState([]);
@@ -67,7 +68,6 @@ export default function MyDocumentation() {
         setError(aux);
       } else setResult(aux);
 
-      console.log(aux);
       setResult(aux);
       return aux;
     } catch (error) {
@@ -120,9 +120,13 @@ export default function MyDocumentation() {
                     </IonCol>
                   </IonRow>
                   <IonRow className="row">
-                    <img alt={item.Id} src={item?.imageUrl} />
+                    <img
+                      alt={item.Id}
+                      src={item?.imageUrl}
+                      className="imageFromBackend"
+                    />
                   </IonRow>
-                  <IonRow>
+                  <IonRow className="row">
                     <IonCol>
                       <IonItemDivider className="itemDivider">
                         <IonText className="ion-text-wrap description">
