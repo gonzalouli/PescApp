@@ -239,13 +239,6 @@ export default function MyActivityWithId() {
                         </IonItemDivider>
                       </IonCol>
                     </IonRow>
-                    <IonRow className="row">
-                      <IonCol>
-                        <IonItemDivider className="itemDivider">
-                          <img alt={item.Id} src={item?.imageUrl} />
-                        </IonItemDivider>
-                      </IonCol>
-                    </IonRow>
                     <IonRow>
                       <IonCol>
                         <IonItemDivider className="itemDivider">
@@ -254,6 +247,17 @@ export default function MyActivityWithId() {
                               {item?.description}
                             </IonLabel>
                           </IonText>
+                        </IonItemDivider>
+                      </IonCol>
+                    </IonRow>
+                    <IonRow className="row">
+                      <IonCol>
+                        <IonItemDivider className="itemDivider">
+                          <img
+                            className="image"
+                            alt={item.Id}
+                            src={item?.imageUrl}
+                          />
                         </IonItemDivider>
                       </IonCol>
                     </IonRow>

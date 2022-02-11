@@ -7,6 +7,7 @@ import {
   IonItem,
   IonItemDivider,
   IonLabel,
+  IonLoading,
   IonPage,
   IonRow,
   IonTitle,
@@ -31,12 +32,13 @@ export default function MyActivity() {
   const [selectedActivity, setSelectedActivity] = useState(false);
   const [deletedActivity, setDeleteActivity] = useState(false);
   const [EditActivity, setEditActivity] = useState(false);
-
+  const [showLoading, setShowLoading] = useState(true);
   const [present] = useIonAlert();
 
   useEffect(() => {
     getData();
     sessionStorage.removeItem("editActivity");
+    setShowLoading(false);
   }, [deletedActivity]);
 
   const getData = async () => {
@@ -168,7 +170,11 @@ export default function MyActivity() {
         </IonHeader>
         <IonContent>
           <IonToast isOpen={toast} message="Actividad borrada" />
-
+          <IonLoading
+            cssClass="my-custom-class"
+            isOpen={showLoading}
+            message={"Por favor, espere..."}
+          />
           <IonGrid className="grid-row">
             <IonRow className="row">
               <IonItemDivider className="itemDivider">

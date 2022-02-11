@@ -73,7 +73,7 @@ export default function NewActivity() {
     e.preventDefault();
     const activity = JSON.parse(window.sessionStorage.getItem("editActivity"));
     setName(e.target.value);
-    activity.name = name;
+    activity.name = e.target.value;
     window.sessionStorage.setItem("editActivity", JSON.stringify(activity));
   };
 

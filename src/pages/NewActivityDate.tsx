@@ -124,22 +124,22 @@ export default function NewActivityDate() {
               }}
             ></IonDatetime>
           </IonItem>
-          {state && <div className="error">Existe un error en las fechas</div>}
-          <div className="submit buttons">
-            <IonList className="submit buttons">
-              <IonItem>
-                <IonButton
-                  className="save"
-                  onClick={() => {
-                    setIsConfirmed(true);
-                  }}
-                >
-                  Guardar
-                </IonButton>
-              </IonItem>
-            </IonList>
-          </div>
         </IonList>
+        {state && <div className="error">Existe un error en las fechas</div>}
+        <div className="submit buttons">
+          <IonList className="submit buttons">
+            <IonItem>
+              <IonButton
+                className="save"
+                onClick={() => {
+                  setIsConfirmed(true);
+                }}
+              >
+                Guardar
+              </IonButton>
+            </IonItem>
+          </IonList>
+        </div>
       </IonContent>
     </IonPage>
   );
