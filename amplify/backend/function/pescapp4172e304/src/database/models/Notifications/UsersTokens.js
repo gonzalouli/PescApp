@@ -12,7 +12,7 @@ UsersTokens.init(
       primaryKey: true,
     },
     CognitoUser: { type: DataTypes.STRING },
-    NotificationToken: { type: DataTypes.TEXT, unique: true },
+    NotificationToken: { type: DataTypes.STRING, unique: true },
   },
   {
     sequelize,
