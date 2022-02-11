@@ -80,6 +80,8 @@ app.use("/licenses", licenses);
 app.use("/notifications", notifications);
 
 const sequelize = require("./database/sequelize");
+//posible error
+await sequelize();
 // const { CodeStarNotifications } = require("aws-sdk");
 require("./database/models/models");
 (async () => {
