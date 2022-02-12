@@ -53,9 +53,9 @@ export default function MyDocumentation() {
   }, [deletedDocumentation]);
 
   const getData = async () => {
-    setShowLoading(true);
-
     try {
+      setShowLoading(true);
+
       const CognitoUser = await isAuth();
 
       const aux = await API.post("api9000aeb3", "/licenses/getLicense", {
@@ -67,13 +67,13 @@ export default function MyDocumentation() {
       if (aux.error) {
         setError(aux);
       } else setResult(aux);
+      setShowLoading(false);
 
       setResult(aux);
       return aux;
     } catch (error) {
       setError({ error: true, message: "Error en el sistema" });
     }
-    setShowLoading(false);
   };
 
   const handleDeleteDocumentation = async (id) => {
@@ -107,9 +107,8 @@ export default function MyDocumentation() {
           message={"Por favor, espere..."}
         />
         <IonGrid>
-          {!success.success &&
-            !error.error &&
-            result.map((item) => {
+          {!error.error &&
+            result?.map((item) => {
               return (
                 <Fragment>
                   <IonRow className="row">
