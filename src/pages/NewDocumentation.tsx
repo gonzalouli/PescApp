@@ -12,6 +12,7 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonLoading,
   IonPage,
   IonSelect,
   IonSelectOption,
@@ -57,7 +58,7 @@ export default function NewDocumentation() {
   );
   const [error, setError] = useState({ error: false, message: "" });
   const [success, setSuccess] = useState({ success: false, message: "" });
-
+  const [showLoading, setShowLoading] = useState(false);
   const isAuth = async () => {
     try {
       return await Auth.currentAuthenticatedUser();
@@ -71,7 +72,7 @@ export default function NewDocumentation() {
   const [piece, setPiece] = useState({
     id: "",
     name: "",
-    imageUrl: imageUrl,
+    imageUrl: process.env.PUBLIC_URL + "/assets/placeholderimage.jpg",
     description: "",
   });
 
@@ -85,11 +86,26 @@ export default function NewDocumentation() {
         setPiece({
           ...piece,
           imageUrl: String.fromCharCode.apply(null, new Uint16Array(imgUrl)),
+          id: sha256(
+            name +
+              new Date().toString() +
+              description +
+              piece.imageUrl.slice(50, 65)
+          ),
         });
         // setImageUrl(String.fromCharCode.apply(null, new Uint16Array(imgUrl)));
       } else if (typeof imgUrl === "string") {
         // setImageUrl(imgUrl);
-        setPiece({ ...piece, imageUrl: imgUrl });
+        setPiece({
+          ...piece,
+          imageUrl: imgUrl,
+          id: sha256(
+            name +
+              new Date().toString() +
+              description +
+              piece.imageUrl.slice(50, 65)
+          ),
+        });
       }
 
       // setPiece({ ...piece, imageUrl });
@@ -98,7 +114,7 @@ export default function NewDocumentation() {
 
   const handlePictureClick = async () => {
     //for right platforms
-    if (isPlatform("android") || isPlatform("ios")) {
+    if (isPlatform("android") || isPlatform("ios") || isPlatform("mobile")) {
       try {
         const image = await Camera.getPhoto({
           quality: 90,
@@ -108,23 +124,22 @@ export default function NewDocumentation() {
         // console.log(image);
 
         setImageUrl(image.dataUrl);
-        setPiece({ ...piece, imageUrl: image.dataUrl });
+        setPiece({
+          ...piece,
+          imageUrl: image.dataUrl,
+          id: sha256(
+            name +
+              new Date().toString() +
+              description +
+              piece.imageUrl.slice(50, 65)
+          ),
+        });
       } catch (error) {
         console.error("Camera Error:", error.message);
       }
     } else {
       fileInputRef.current.click();
     }
-
-    setPiece({
-      ...piece,
-      id: sha256(
-        name +
-          new Date().toString() +
-          description +
-          piece.imageUrl.slice(50, 65)
-      ),
-    });
   };
 
   const handleTextChange = (e) => {
@@ -139,6 +154,7 @@ export default function NewDocumentation() {
   };
 
   const saveAndBack = async () => {
+    setShowLoading(true);
     // const license = JSON.parse(window.sessionStorage.getItem("license"));
     // await license.push(piece);
     // window.sessionStorage.setItem("license", JSON.stringify(license));
@@ -161,7 +177,7 @@ export default function NewDocumentation() {
 
       setSuccess(res);
       window.sessionStorage.removeItem("license");
-
+      setShowLoading(false);
       setTimeout(() => {
         setBack(true);
       }, 1500);
@@ -170,29 +186,22 @@ export default function NewDocumentation() {
 
   const saveAndNew = async () => {
     const license = JSON.parse(window.sessionStorage.getItem("license"));
-    if (
-      piece.imageUrl !=
-      process.env.PUBLIC_URL + "/assets/placeholderimage.jpg"
-    ) {
-      await license.push(piece);
-      window.sessionStorage.setItem("license", JSON.stringify(license));
-      setTempLicense(license);
 
-      setPiece({
-        id: "",
-        name: name,
-        imageUrl: imageUrl,
-        description: description,
-      });
-      console.log(piece.id);
-      setName("");
-      setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
-      setPiece({
-        ...piece,
-        imageUrl: process.env.PUBLIC_URL + "/assets/placeholderimage.jpg",
-      });
-      setDescription("");
-    }
+    await license.push(piece);
+    window.sessionStorage.setItem("license", JSON.stringify(license));
+    setTempLicense(license);
+
+    setPiece({
+      id: "",
+      name: "",
+      imageUrl: process.env.PUBLIC_URL + "/assets/placeholderimage.jpg",
+      description: "",
+    });
+
+    setName("");
+    setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
+
+    setDescription("");
   };
 
   const deletePiece = async (id) => {
@@ -216,6 +225,11 @@ export default function NewDocumentation() {
       </IonHeader>
       <IonContent>
         {/* <RefreshComponent /> */}
+        <IonLoading
+          cssClass="my-custom-class"
+          isOpen={showLoading}
+          message={"Por favor, espere..."}
+        />
         <IonList className="form-container">
           <IonItem>
             <IonLabel className="label" position="floating">
@@ -297,7 +311,7 @@ export default function NewDocumentation() {
             </IonLabel>
           </IonItem>
           <IonList>
-            {tempLicense.map((item) => {
+            {tempLicense?.map((item) => {
               return (
                 <IonCard className="card" key={item.id}>
                   <IonCardHeader className="card">

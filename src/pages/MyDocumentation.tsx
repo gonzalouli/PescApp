@@ -47,14 +47,14 @@ export default function MyDocumentation() {
 
   useEffect(() => {
     try {
-      setShowLoading(true);
       getData();
       setDeleteDocumentation(false);
-      setShowLoading(false);
     } catch (error) {}
   }, [deletedDocumentation]);
 
   const getData = async () => {
+    setShowLoading(true);
+
     try {
       const CognitoUser = await isAuth();
 
@@ -73,6 +73,7 @@ export default function MyDocumentation() {
     } catch (error) {
       setError({ error: true, message: "Error en el sistema" });
     }
+    setShowLoading(false);
   };
 
   const handleDeleteDocumentation = async (id) => {
@@ -104,7 +105,6 @@ export default function MyDocumentation() {
           cssClass="my-custom-class"
           isOpen={showLoading}
           message={"Por favor, espere..."}
-          duration={5000}
         />
         <IonGrid>
           {!success.success &&
