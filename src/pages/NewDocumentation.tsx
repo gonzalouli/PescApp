@@ -116,10 +116,15 @@ export default function NewDocumentation() {
       fileInputRef.current.click();
     }
 
-    const key = sha256(
-      name + new Date().toString() + description + piece.imageUrl.slice(50, 65)
-    );
-    setPiece({ ...piece, id: key });
+    setPiece({
+      ...piece,
+      id: sha256(
+        name +
+          new Date().toString() +
+          description +
+          piece.imageUrl.slice(50, 65)
+      ),
+    });
   };
 
   const handleTextChange = (e) => {
