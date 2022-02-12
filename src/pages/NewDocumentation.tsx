@@ -19,7 +19,8 @@ import {
   IonTitle,
   isPlatform,
 } from "@ionic/react";
-import { nanoid } from "nanoid";
+import { sha256 } from "js-sha256";
+
 import React, { useEffect, useRef, useState } from "react";
 import BackButton from "../components/BackButton";
 import "../theme/NewDocumentation.css";
@@ -68,7 +69,7 @@ export default function NewDocumentation() {
   };
 
   const [piece, setPiece] = useState({
-    id: nanoid(),
+    id: "",
     name: "",
     imageUrl: imageUrl,
     description: "",
@@ -114,6 +115,11 @@ export default function NewDocumentation() {
     } else {
       fileInputRef.current.click();
     }
+
+    const key = sha256(
+      name + new Date().toString() + description + piece.imageUrl.slice(50, 65)
+    );
+    setPiece({ ...piece, id: key });
   };
 
   const handleTextChange = (e) => {
@@ -168,12 +174,12 @@ export default function NewDocumentation() {
       setTempLicense(license);
 
       setPiece({
-        id: nanoid(),
+        id: "",
         name: name,
         imageUrl: imageUrl,
         description: description,
       });
-
+      console.log(piece.id);
       setName("");
       setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
       setPiece({

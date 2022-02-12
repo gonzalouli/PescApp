@@ -17,6 +17,7 @@ import BackButton from "../components/BackButton";
 import RefreshComponent from "../components/RefreshComponent";
 import "../theme/NewActivityTackle.css";
 import { ResetLS } from "../utils/ResetLocalStorage";
+import { sha256 } from "js-sha256";
 
 export default function NewActivityTackle() {
   useEffect(() => {
@@ -32,7 +33,7 @@ export default function NewActivityTackle() {
     setItems([
       ...items,
       {
-        id: nanoid(),
+        id: sha256(itemName + new Date().toString()),
         name: itemName,
       },
     ]);
@@ -41,7 +42,7 @@ export default function NewActivityTackle() {
       window.sessionStorage.getItem("newActivity")
     );
     activityMod.tackle.push({
-      id: nanoid(),
+      id: sha256(itemName + new Date().toString()),
       name: itemName,
     });
     window.sessionStorage.setItem("newActivity", JSON.stringify(activityMod));

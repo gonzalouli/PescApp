@@ -27,11 +27,11 @@ import RefreshComponent from "../components/RefreshComponent";
 import { Camera, CameraResultType } from "@capacitor/camera";
 import "../theme/NewActivityCatch.css";
 import { randomBytes } from "crypto";
-import { nanoid } from "nanoid";
 import "../theme/NewDocumentation.css";
 import { Redirect } from "react-router";
 import { ResetLS } from "../utils/ResetLocalStorage";
 import { getDataUrl } from "../utils/get-data-url";
+import { sha256 } from "js-sha256";
 
 export default function NewActivityCatch() {
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function NewActivityCatch() {
   const [isConfirmed, setIsConfirmed] = useState(false);
 
   const [piece, setPiece] = useState({
-    id: nanoid(),
+    id: "",
     name: "",
     imageUrl: imageUrl,
     description: "",
@@ -94,6 +94,11 @@ export default function NewActivityCatch() {
     } else {
       fileInputRef.current.click();
     }
+
+    const key = sha256(
+      name + new Date().toString() + description + piece.imageUrl.slice(50, 65)
+    );
+    setPiece({ ...piece, id: key });
   };
 
   const handleTextChange = (e) => {
@@ -126,7 +131,7 @@ export default function NewActivityCatch() {
       setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
       setDescription("");
       setPiece({
-        id: nanoid(),
+        id: "",
         name: name,
         imageUrl: imageUrl,
         description: description,
