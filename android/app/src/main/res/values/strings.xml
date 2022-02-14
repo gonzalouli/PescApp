@@ -3,5 +3,5 @@
     <string name="app_name">PescApp</string>
     <string name="title_activity_main">PescApp</string>
     <string name="package_name">com.gonzalouli.pescapp</string>
-    <string name="custom_url_scheme">com.pescapp</string>
+    <string name="custom_url_scheme">com.gonzalouli.pescapp</string>
 </resources>

@@ -34,24 +34,27 @@ import { getDataUrl } from "../utils/get-data-url";
 import { sha256 } from "js-sha256";
 
 export default function NewActivityCatch() {
+  const [tempactivity, setTempactivity] = useState(
+    JSON.parse(window.sessionStorage.getItem("newActivity")) || []
+  );
+  const [savedPhoto, setSavedPhoto] = useState(false);
+
   useEffect(() => {
     ResetLS();
-  }, []);
+  }, [tempactivity.catches]);
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState(
     process.env.PUBLIC_URL + "/assets/placeholderimage.jpg"
   );
   const [name, setName] = useState("");
   const fileInputRef = useRef<HTMLInputElement>();
-  const [tempactivity, setTempactivity] = useState(
-    JSON.parse(window.sessionStorage.getItem("newActivity")) || []
-  );
+
   const [isConfirmed, setIsConfirmed] = useState(false);
 
   const [piece, setPiece] = useState({
     id: "",
     name: "",
-    imageUrl: imageUrl,
+    imageUrl: process.env.PUBLIC_URL + "/assets/placeholderimage.jpg",
     description: "",
   });
 
@@ -61,49 +64,64 @@ export default function NewActivityCatch() {
     if (event.target.files.length > 0) {
       const file = event.target.files.item(0);
       const imgUrl: string | ArrayBuffer = await getDataUrl(file);
-
       if (typeof imgUrl === "object") {
-        // setImageUrl(String.fromCharCode.apply(null, new Uint16Array(imgUrl)));
         setPiece({
           ...piece,
           imageUrl: String.fromCharCode.apply(null, new Uint16Array(imgUrl)),
+          id: sha256(
+            name +
+              new Date().toString() +
+              description +
+              piece.imageUrl.slice(50, 65)
+          ),
         });
+        // setImageUrl(String.fromCharCode.apply(null, new Uint16Array(imgUrl)));
       } else if (typeof imgUrl === "string") {
         // setImageUrl(imgUrl);
-        setPiece({ ...piece, imageUrl: imgUrl });
+        setPiece({
+          ...piece,
+          imageUrl: imgUrl,
+          id: sha256(
+            name +
+              new Date().toString() +
+              description +
+              piece.imageUrl.slice(50, 65)
+          ),
+        });
       }
+
       // setPiece({ ...piece, imageUrl });
     }
   };
 
   const handlePictureClick = async () => {
     //for right platforms
-    if (isPlatform("android") || isPlatform("ios")) {
+    if (isPlatform("android") || isPlatform("ios") || isPlatform("mobile")) {
       try {
         const image = await Camera.getPhoto({
-          quality: 90,
+          quality: 70,
           allowEditing: true,
           resultType: CameraResultType.DataUrl,
         });
+        // console.log(image);
 
         setImageUrl(image.dataUrl);
-        setPiece({ ...piece, imageUrl: image.dataUrl });
+        setPiece({
+          ...piece,
+          imageUrl: image.dataUrl,
+          id: sha256(
+            name +
+              new Date().toString() +
+              description +
+              piece.imageUrl.slice(50, 65)
+          ),
+        });
       } catch (error) {
         console.error("Camera Error:", error.message);
       }
     } else {
       fileInputRef.current.click();
     }
-
-    setPiece({
-      ...piece,
-      id: sha256(
-        name +
-          new Date().toString() +
-          description +
-          piece.imageUrl.slice(50, 65)
-      ),
-    });
   };
 
   const handleTextChange = (e) => {
@@ -121,27 +139,28 @@ export default function NewActivityCatch() {
   };
 
   const saveAndNew = async () => {
-    if (
-      piece.imageUrl !=
-      process.env.PUBLIC_URL + "/assets/placeholderimage.jpg"
-    ) {
-      const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
+    setSavedPhoto(true);
 
-      await activity.catches.push(piece);
-      window.sessionStorage.setItem("newActivity", JSON.stringify(activity));
+    const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
 
-      setTempactivity(activity);
+    await activity.catches.push(piece);
+    window.sessionStorage.setItem("newActivity", JSON.stringify(activity));
+    setTempactivity(activity);
 
-      setName("");
-      setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
-      setDescription("");
-      setPiece({
-        id: "",
-        name: name,
-        imageUrl: imageUrl,
-        description: description,
-      });
-    }
+    setPiece({
+      id: "",
+      name: "",
+      imageUrl: process.env.PUBLIC_URL + "/assets/placeholderimage.jpg",
+      description: "",
+    });
+
+    setName("");
+    setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
+
+    setDescription("");
+    setTimeout(() => {
+      setSavedPhoto(false);
+    }, 2000);
   };
 
   const deletePiece = (id, e) => {
@@ -208,6 +227,13 @@ export default function NewActivityCatch() {
             </IonRow>
           </IonGrid>
         </IonList>
+        {savedPhoto && (
+          <IonItem>
+            <IonLabel className="label" color="success">
+              Foto agregada para guardar
+            </IonLabel>
+          </IonItem>
+        )}
 
         <IonList className="capturas">
           <IonItem className="capturas">

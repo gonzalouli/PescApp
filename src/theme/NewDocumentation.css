@@ -27,7 +27,15 @@
 }
 
 .save {
+  margin-top: 15px !important;
+  margin-bottom: 10px !important;
+
   margin: 0 auto;
+}
+
+.saveGuardar {
+  margin: 0 auto;
+  margin-bottom: 10px !important;
 }
 
 .capturasNuevas {
@@ -62,4 +70,10 @@
 .card-desc {
   font-size: 130%;
   text-align: center;
+}
+
+.showImage,
+.delete {
+  margin: 0 auto;
+  max-width: 80%;
 }

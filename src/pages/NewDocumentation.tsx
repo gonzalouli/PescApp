@@ -59,6 +59,7 @@ export default function NewDocumentation() {
   const [error, setError] = useState({ error: false, message: "" });
   const [success, setSuccess] = useState({ success: false, message: "" });
   const [showLoading, setShowLoading] = useState(false);
+  const [savedPhoto, setSavedPhoto] = useState(false);
   const isAuth = async () => {
     try {
       return await Auth.currentAuthenticatedUser();
@@ -117,7 +118,7 @@ export default function NewDocumentation() {
     if (isPlatform("android") || isPlatform("ios") || isPlatform("mobile")) {
       try {
         const image = await Camera.getPhoto({
-          quality: 90,
+          quality: 70,
           allowEditing: true,
           resultType: CameraResultType.DataUrl,
         });
@@ -161,18 +162,15 @@ export default function NewDocumentation() {
     try {
       const licenses = JSON.parse(window.sessionStorage.getItem("license"));
       const CognitoUser = await isAuth();
-      let res;
-      for (const li of licenses) {
-        res = await API.post("api9000aeb3", "/licenses/createLicense", {
-          body: {
-            CognitoUser: CognitoUser.username,
-            License: li,
-          },
-        });
-        if (res.error === true) {
-          setError(res);
-          return;
-        }
+      const res = await API.post("api9000aeb3", "/licenses/createLicense", {
+        body: {
+          CognitoUser: CognitoUser.username,
+          License: licenses,
+        },
+      });
+      if (res.error === true) {
+        setError(res);
+        return;
       }
 
       setSuccess(res);
@@ -185,6 +183,7 @@ export default function NewDocumentation() {
   };
 
   const saveAndNew = async () => {
+    setSavedPhoto(true);
     const license = JSON.parse(window.sessionStorage.getItem("license"));
 
     await license.push(piece);
@@ -202,6 +201,10 @@ export default function NewDocumentation() {
     setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
 
     setDescription("");
+
+    setTimeout(() => {
+      setSavedPhoto(false);
+    }, 2000);
   };
 
   const deletePiece = async (id) => {
@@ -298,8 +301,12 @@ export default function NewDocumentation() {
           <IonButton className="save" onClick={saveAndNew}>
             Añadir
           </IonButton>
-
-          <IonButton className="save" onClick={saveAndBack}>
+          {savedPhoto && (
+            <IonLabel className="label" color="success">
+              Foto agregada para guardar
+            </IonLabel>
+          )}
+          <IonButton className="save saveGuardar" onClick={saveAndBack}>
             Guardar
           </IonButton>
         </IonList>
@@ -342,7 +349,11 @@ export default function NewDocumentation() {
                     </IonButton>
                     <IonCardTitle className="name">{item.name}</IonCardTitle>
                     <div className="card-img">
-                      <img src={item.imageUrl} alt={item.id} />
+                      <img
+                        className="showImage"
+                        src={item.imageUrl}
+                        alt={item.id}
+                      />
                     </div>
                   </IonCardHeader>
                   <IonCardContent className="card-desc">

@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@capacitor-community/capacitor-googlemaps-native": "^1.1.5",
-    "@capacitor/android": "3.3.3",
+    "@capacitor/android": "3.4.1",
     "@capacitor/app": "1.0.6",
     "@capacitor/browser": "1.0.7",
     "@capacitor/camera": "^1.2.2",

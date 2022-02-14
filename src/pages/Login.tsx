@@ -67,7 +67,7 @@ const Home: React.FC = () => {
                     alt="logo"
                     width="60"
                     height="70"
-                    src={`${process.env.PUBLIC_URL}/logo.png`}
+                    src={`${process.env.PUBLIC_URL}/iconwhite.png`}
                   />
                 </IonCol>
                 <IonCol>
