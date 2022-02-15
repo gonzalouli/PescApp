@@ -236,7 +236,7 @@ export default function NewDocumentation() {
         <IonList className="form-container">
           <IonItem>
             <IonLabel className="label" position="floating">
-              Nombre
+              Escriba el nombre aquí:
             </IonLabel>
             <IonInput
               className="text"

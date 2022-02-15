@@ -38,8 +38,6 @@ const MapComponent: React.VFC = () => {
   });
 
   const currentPosition = async () => {
-    setLoading(true);
-
     try {
       const activity = JSON.parse(window.sessionStorage.getItem("newActivity"));
       if (activity.localization.coords === undefined) {
@@ -71,17 +69,17 @@ const MapComponent: React.VFC = () => {
         });
       }
 
-      setLoading(false);
       setError({ showError: false, message: undefined });
     } catch (error) {
       const message =
         error.message.length > 0 ? error.message : "No se pudo localizar...";
       setError({ showError: true, message });
-      setLoading(false);
     }
   };
 
   React.useEffect(() => {
+    setLoading(true);
+
     (async () => {
       // TODO: change with import API amplify
       const params = {
@@ -98,6 +96,7 @@ const MapComponent: React.VFC = () => {
     })();
 
     currentPosition();
+    setLoading(false);
   }, []);
 
   const onClick = (e: google.maps.MapMouseEvent) => {
@@ -125,9 +124,7 @@ const MapComponent: React.VFC = () => {
       <IonLoading
         isOpen={loading}
         message={"Tomando posición..."}
-        onDidDismiss={() => {
-          setLoading(false);
-        }}
+        duration={2000}
       />
       <IonToast
         isOpen={error.showError}

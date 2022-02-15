@@ -109,8 +109,12 @@ export default function NewActivity() {
           {/* <RefreshComponent /> */}
           <IonList className="container">
             <IonItem className="name">
-              <IonLabel className="label nameLabel" position="floating">
-                Nombre
+              <IonLabel
+                color="secondary"
+                className="label nameLabel ion-text-wrap"
+                position="floating"
+              >
+                Introduzca el nombre aquí...
               </IonLabel>
               <IonInput
                 className="text"

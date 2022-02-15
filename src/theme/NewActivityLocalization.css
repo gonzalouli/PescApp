@@ -1,15 +1,23 @@
-.form-container{
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
+.form-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
-.map-container{margin-bottom: -6em; max-width: 1200px; margin: 0 auto;}
+.map-container {
+  margin-bottom: -6em;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-.button-acept{
-    display:flex;
-    margin-top: 3em;
-    margin: 1vh auto !important;
-    align-items: center;
+.button-acept {
+  display: flex;
+  margin-top: 3em;
+  margin: 1vh auto !important;
+  align-items: center;
+}
+.descriptionPlace {
+  width: 80% !important;
+  margin-bottom: 20px !important;
 }

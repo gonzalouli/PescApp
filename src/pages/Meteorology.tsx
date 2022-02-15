@@ -50,6 +50,8 @@ export default function Meteorology() {
   };
 
   const miUbicacion = async () => {
+    setShowLoading(true);
+
     const position = await Geolocation.getCurrentPosition();
     const ubication = JSON.parse(window.sessionStorage.getItem("ubication"));
     ubication.coords = {
@@ -57,11 +59,12 @@ export default function Meteorology() {
       lng: position.coords.longitude,
     };
     window.sessionStorage.setItem("ubication", JSON.stringify(ubication));
+    setShowLoading(false);
 
     setMiUbicacion(true);
     setTimeout(() => {
       setMiUbicacion(false);
-    }, 2000);
+    }, 1000);
   };
 
   const searchMeteorology = async () => {
@@ -112,8 +115,9 @@ export default function Meteorology() {
         <IonLoading
           cssClass="my-custom-class"
           isOpen={showLoading}
+          onDidDismiss={() => setShowLoading(false)}
           message={"Por favor, espere..."}
-          duration={4000}
+          duration={5000}
         />
         {!haveMeteorology && (
           <Fragment>
@@ -123,7 +127,7 @@ export default function Meteorology() {
               </IonButton>
               {MiUbicacion && (
                 <IonItem>
-                  <IonLabel className="label ion-text-wrap  selected">
+                  <IonLabel className="label ion-text-wrap ion-text-center selected">
                     Ubicación actual seleccionada
                   </IonLabel>
                 </IonItem>
@@ -135,7 +139,7 @@ export default function Meteorology() {
             <MeteorologyMapComponent />
 
             <IonItem className="writeOption">
-              <IonLabel className="label">O escríbelo:</IonLabel>
+              <IonLabel className="label">O escríbala:</IonLabel>
               <IonInput
                 className="text"
                 type="text"

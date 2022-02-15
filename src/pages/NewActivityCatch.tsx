@@ -207,8 +207,8 @@ export default function NewActivityCatch() {
           </IonItem>
 
           <IonItem className="description">
-            <IonLabel className="label" position="floating">
-              Descripción
+            <IonLabel className="label descriptionLabel" position="floating">
+              Descripción de la captura:
             </IonLabel>
             <IonTextarea
               value={description}
