@@ -4,9 +4,20 @@
   margin-right: auto;
   width: 90%;
   height: 90%;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .reader {
   width: 90%;
+}
+
+.mobile__pdf__container__header {
+  opacity: 0;
+}
+
+/* ::-webkit-scrollbar {
+  display: none;
+} */
+.grid {
+  margin-top: 10px !important;
 }

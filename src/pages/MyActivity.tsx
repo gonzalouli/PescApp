@@ -32,14 +32,13 @@ export default function MyActivity() {
   const [selectedActivity, setSelectedActivity] = useState(false);
   const [deletedActivity, setDeleteActivity] = useState(false);
   const [EditActivity, setEditActivity] = useState(false);
-  const [showLoading, setShowLoading] = useState(false);
+  const [showLoading, setShowLoading] = useState(true);
   const [present] = useIonAlert();
 
   useEffect(() => {
-    setShowLoading(true);
     getData();
     sessionStorage.removeItem("editActivity");
-    setShowLoading(false);
+    // setShowLoading(false);
   }, [deletedActivity]);
 
   const getData = async () => {
@@ -82,12 +81,15 @@ export default function MyActivity() {
       if (res.error) {
         setError(res);
       }
+      setShowLoading(false);
 
       return res;
     } catch (error) {
       console.error(error);
       setError({ error: true, message: "Error consulte al administrador" });
+      setShowLoading(false);
     }
+    setShowLoading(false);
   };
 
   const chargeSessionStorage = async (res) => {
@@ -174,6 +176,7 @@ export default function MyActivity() {
           <IonLoading
             cssClass="my-custom-class"
             isOpen={showLoading}
+            onDidDismiss={() => setShowLoading(false)}
             message={"Por favor, espere..."}
           />
           <IonGrid className="grid-row">

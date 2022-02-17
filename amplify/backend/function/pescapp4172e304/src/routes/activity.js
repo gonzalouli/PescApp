@@ -26,7 +26,7 @@ activity.post("/getAllActivities", async (req, res) => {
   if (activities === null || activities.length === 0) {
     res.json({
       error: true,
-      message: "Usted no tiene aun ninguna actividad",
+      message: "Usted no tiene aún ninguna actividad",
     });
   } else {
     res.json(activities);
@@ -55,7 +55,7 @@ activity.delete("/deleteActivityWithId", async (req, res) => {
   if (result === false) {
     res.json({
       error: true,
-      message: "La actividad no se pudo borrar, intentelo mas tarde...",
+      message: "La actividad no se pudo borrar, inténtelo mas tarde...",
     });
   } else {
     res.json({ success: true, message: "La actividad ha sido borrada" });
@@ -69,7 +69,7 @@ activity.patch("/editActivityWithId", async (req, res) => {
   if (result === false) {
     res.json({
       error: true,
-      message: "La actividad no se pudo editar, intentelo mas tarde...",
+      message: "La actividad no se pudo editar, inténtelo mas tarde...",
     });
   } else {
     res.json({ success: true, message: "La actividad ha sido editada" });

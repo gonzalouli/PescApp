@@ -232,6 +232,7 @@ export default function NewDocumentation() {
           cssClass="my-custom-class"
           isOpen={showLoading}
           message={"Por favor, espere..."}
+          duration={3000}
         />
         <IonList className="form-container">
           <IonItem>

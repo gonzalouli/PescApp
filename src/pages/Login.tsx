@@ -145,7 +145,7 @@ const Home: React.FC = () => {
             color="light"
             onClick={() => setIsRegister(true)}
           >
-            Registrate aqui
+            Registrate aquí
           </IonButton>
         </IonList>
       </IonContent>

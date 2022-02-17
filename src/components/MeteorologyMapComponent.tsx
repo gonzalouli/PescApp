@@ -112,13 +112,6 @@ const MapComponent: React.VFC = () => {
 
   return (
     <Fragment>
-      <IonLoading
-        isOpen={loading}
-        message={"Tomando posición..."}
-        onDidDismiss={() => {
-          setLoading(false);
-        }}
-      />
       <IonToast
         isOpen={error.showError}
         message={error.message}

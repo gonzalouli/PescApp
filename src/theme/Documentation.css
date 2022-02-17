@@ -1,5 +1,6 @@
-.my-doc {
-  height: 100%;
+.documentation {
+  height: 9vh !important;
+  max-height: 12vh !important;
 }
 
 .imageFromBackend {

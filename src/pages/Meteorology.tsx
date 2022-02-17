@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   IonButton,
   IonContent,
@@ -59,11 +59,11 @@ export default function Meteorology() {
       lng: position.coords.longitude,
     };
     window.sessionStorage.setItem("ubication", JSON.stringify(ubication));
-    setShowLoading(false);
 
     setMiUbicacion(true);
     setTimeout(() => {
       setMiUbicacion(false);
+      setShowLoading(false);
     }, 1000);
   };
 
@@ -105,6 +105,14 @@ export default function Meteorology() {
     setShowLoading(false);
   };
 
+  useEffect(() => {
+    setShowLoading(true);
+
+    setTimeout(() => {
+      setShowLoading(false);
+    }, 1000);
+  }, []);
+
   return (
     <IonPage>
       <IonHeader className="header">
@@ -117,7 +125,6 @@ export default function Meteorology() {
           isOpen={showLoading}
           onDidDismiss={() => setShowLoading(false)}
           message={"Por favor, espere..."}
-          duration={5000}
         />
         {!haveMeteorology && (
           <Fragment>

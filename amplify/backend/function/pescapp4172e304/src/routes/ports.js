@@ -24,7 +24,10 @@ ports.get("/getPorts", async (req, res) => {
 ports.post("/getTide", async (req, res) => {
   const data = await GetTidefromPort(req.body.date, req.body.port);
   if (data == null) {
-    return { error: true, message: "Fuera de servicio, pruebe mas tarde..." };
+    return {
+      error: true,
+      message: "Fuera de servicio, inténtelo mas tarde...",
+    };
   } else {
     res.json(data);
   }

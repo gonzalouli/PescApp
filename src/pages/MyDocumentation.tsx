@@ -98,7 +98,7 @@ export default function MyDocumentation() {
 
       <IonHeader className="header">
         <BackButton refer="/my/Documentation" />
-        <IonTitle className="tittle">Mi Documentacion</IonTitle>
+        <IonTitle className="tittle">Mi Documentación</IonTitle>
       </IonHeader>
       <IonContent>
         <IonLoading

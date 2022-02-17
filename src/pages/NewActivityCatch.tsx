@@ -158,9 +158,7 @@ export default function NewActivityCatch() {
     setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
 
     setDescription("");
-    setTimeout(() => {
-      setSavedPhoto(false);
-    }, 2000);
+    setSavedPhoto(false);
   };
 
   const deletePiece = (id, e) => {
@@ -177,14 +175,14 @@ export default function NewActivityCatch() {
       )}
       <IonHeader className="header">
         <BackButton refer="/my/NewActivity" />
-        <IonTitle className="tittle">Nueva Captura</IonTitle>
+        <IonTitle className="tittle">Nueva Fotografía</IonTitle>
       </IonHeader>
       <IonContent>
         {/* <RefreshComponent /> */}
         <IonList className="form-container">
-          <IonItem>
-            <IonLabel className="label" position="floating">
-              Nombre
+          <IonItem className="nombreFoto">
+            <IonLabel className="label ion-text-wrap" position="floating">
+              Nombre de fotografía:
             </IonLabel>
             <IonInput
               className="text"
@@ -207,8 +205,11 @@ export default function NewActivityCatch() {
           </IonItem>
 
           <IonItem className="description">
-            <IonLabel className="label descriptionLabel" position="floating">
-              Descripción de la captura:
+            <IonLabel
+              className="label descriptionLabel ion-text-wrap"
+              position="stacked"
+            >
+              Descripción de la fotografia:
             </IonLabel>
             <IonTextarea
               value={description}
@@ -229,16 +230,16 @@ export default function NewActivityCatch() {
         </IonList>
         {savedPhoto && (
           <IonItem>
-            <IonLabel className="label" color="success">
+            <IonLabel className="label ion-text-wrap" color="success">
               Foto agregada para guardar
             </IonLabel>
           </IonItem>
         )}
 
         <IonList className="capturas">
-          <IonItem className="capturas">
-            <IonLabel className="capturasNuevas label">
-              Capturas actuales
+          <IonItem className="capturas ">
+            <IonLabel className="capturasNuevas label ion-text-wrap">
+              Fotografias realizadas
             </IonLabel>
           </IonItem>
           <IonList className="listaElementos">

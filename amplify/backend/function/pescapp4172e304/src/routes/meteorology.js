@@ -13,7 +13,7 @@ meteorology.post("/getMeteorology", async (req, res) => {
     if (meteorology != null) {
       res.json(meteorology.place.data);
     } else {
-      res.json({ error: true, message: "Localizacion no encontrada" });
+      res.json({ error: true, message: "Localización no encontrada" });
     }
   } else {
     const meteorology = await MeteorologyPlace(
@@ -24,7 +24,7 @@ meteorology.post("/getMeteorology", async (req, res) => {
     if (meteorology !== null) {
       res.json(meteorology.place.data);
     } else {
-      res.json({ error: true, message: "Localizacion no encontrada" });
+      res.json({ error: true, message: "Localización no encontrada" });
     }
   }
 });

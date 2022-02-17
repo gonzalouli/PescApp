@@ -33,10 +33,15 @@ import { ResetLS } from "../utils/ResetLocalStorage";
 
 function NewActivityLocalization() {
   const ref = useRef(null);
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
     ResetLS();
-  });
+    setShowLoading(true);
+    setTimeout(() => {
+      setShowLoading(false);
+    }, 1000);
+  }, []);
   const [text, setText] = useState(
     JSON.parse(window.sessionStorage.getItem("newActivity")).localization
       .text || ""
@@ -67,11 +72,20 @@ function NewActivityLocalization() {
         <IonTitle className="tittle">Localización</IonTitle>
       </IonHeader>
       <IonContent>
+        <IonLoading
+          cssClass="my-custom-class"
+          isOpen={showLoading}
+          onDidDismiss={() => setShowLoading(false)}
+          message={"Por favor, espere..."}
+        />
         <MapComponent />
 
         <IonList className="form-container">
           <IonItem className="descriptionPlace">
-            <IonLabel className="label descripcion" position="floating">
+            <IonLabel
+              className="label descripcion ion-text-wrap"
+              position="floating"
+            >
               Descripción del lugar:
             </IonLabel>
             <IonTextarea

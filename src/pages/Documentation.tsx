@@ -61,13 +61,13 @@ export default function Documentation() {
             Nueva
           </IonButton>
           <IonButton
-            className="main-button my-doc ion-text-wrap"
+            className="main-button documentation ion-text-wrap"
             expand="block"
             onClick={() => {
               setIsMyDocumentation(true);
             }}
           >
-            Mi Documentacion
+            Documentación Actual
           </IonButton>
         </IonList>
       </IonContent>

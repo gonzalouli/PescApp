@@ -6,6 +6,7 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonLoading,
   IonPage,
   IonTitle,
 } from "@ionic/react";
@@ -26,6 +27,7 @@ export default function NewActivity() {
   const [success, setSuccess] = useState({ success: false, message: "" });
   const [toHome, setToHome] = useState(false);
   const [logOut, setLogOut] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
     ResetLS();
@@ -46,6 +48,7 @@ export default function NewActivity() {
 
   const sendNewActivity = async () => {
     if (name !== "") {
+      setShowLoading(true);
       setButton(false);
       try {
         const data = await Auth.currentAuthenticatedUser();
@@ -72,6 +75,7 @@ export default function NewActivity() {
         }, 2000);
       } catch (error) {}
       setButton(true);
+      setShowLoading(false);
     } else {
       setError({ error: true, message: "La actividad requiere un nombre" });
     }
@@ -107,6 +111,13 @@ export default function NewActivity() {
         </IonHeader>
         <IonContent>
           {/* <RefreshComponent /> */}
+          <IonLoading
+            cssClass="my-custom-class"
+            isOpen={showLoading}
+            onDidDismiss={() => setShowLoading(false)}
+            message={"Por favor, espere..."}
+            duration={3000}
+          />
           <IonList className="container">
             <IonItem className="name">
               <IonLabel
@@ -142,7 +153,7 @@ export default function NewActivity() {
               expand="block"
               onClick={() => setIsNewActivityCatch(true)}
             >
-              Capturas
+              Fotografías
             </IonButton>
             <IonButton
               className="main-button"
