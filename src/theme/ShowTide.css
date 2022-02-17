@@ -5,3 +5,11 @@
 /* .label {
   color: white;
 } */
+.grid-row {
+  margin: 0 auto !important;
+  max-width: 720px !important;
+}
+
+.topItem {
+  align-content: center;
+}

@@ -25,7 +25,7 @@ export default function ShowTide(props) {
         <IonTitle className="ion-text-wrap place ">{datos.puerto}</IonTitle>
       </IonItem>
 
-      <IonGrid className="grid-row">
+      <IonGrid className="grid">
         <IonRow className="grid-row">
           <IonItemDivider className="itemDivider">
             <IonCol className="topItem label">Hora</IonCol>
@@ -36,9 +36,11 @@ export default function ShowTide(props) {
         {marea.map((element) => {
           return (
             <IonRow className="grid-row">
-              <IonCol className="topItem label">{element.hora}</IonCol>
-              <IonCol className="topItem label">{element.altura}</IonCol>
-              <IonCol className="topItem label">{element.tipo}</IonCol>
+              <IonItemDivider className="itemDivider">
+                <IonCol className="topItem label">{element.hora}</IonCol>
+                <IonCol className="topItem label">{element.altura}</IonCol>
+                <IonCol className="topItem label">{element.tipo}</IonCol>
+              </IonItemDivider>
             </IonRow>
           );
         })}
