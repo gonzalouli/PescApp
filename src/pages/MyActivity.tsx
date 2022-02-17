@@ -184,8 +184,8 @@ export default function MyActivity() {
               <IonItemDivider className="itemDivider">
                 <IonCol className="topItem label ">Nombre</IonCol>
                 <IonCol className="topItem label ">Fecha de creación</IonCol>
-                <IonCol className="topItem label ">Editar</IonCol>
-                <IonCol className="topItem label">Borrar</IonCol>
+                <IonCol className="topItem label mode">Editar</IonCol>
+                <IonCol className="topItem label mode">Borrar</IonCol>
               </IonItemDivider>
             </IonRow>
             {!error.error &&
@@ -209,7 +209,7 @@ export default function MyActivity() {
                       >
                         <div className="item">{act.createdAt.slice(0, 10)}</div>
                       </IonCol>
-                      <IonCol className="button item">
+                      <IonCol className="button item mode">
                         <IonButton
                           fill="clear"
                           color="transparent"
@@ -221,7 +221,7 @@ export default function MyActivity() {
                           <UpdateSprite />
                         </IonButton>
                       </IonCol>
-                      <IonCol className="buttonMuActivities item">
+                      <IonCol className="buttonMuActivities item mode">
                         <IonButton
                           fill="clear"
                           color="transparent"

@@ -209,11 +209,13 @@ export default function MyActivityWithId() {
                 </IonCol>
               </IonRow>
             </IonGrid>
-            <ShowMapComponent
-              lat={result.localization?.coords?.lat}
-              lng={result.localization?.coords?.lng}
-            />
-            {""}
+            {result.localization?.coords?.lat !== 0 &&
+              result.localization?.coords?.lng !== 0 && (
+                <ShowMapComponent
+                  lat={result.localization?.coords?.lat}
+                  lng={result.localization?.coords?.lng}
+                />
+              )}
             <IonGrid className="grid-row-two">
               <IonRow className="localization-row">
                 <IonItemDivider className="itemDivider">

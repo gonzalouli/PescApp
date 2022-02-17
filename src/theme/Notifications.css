@@ -38,15 +38,18 @@
   font-weight: bolder;
 }
 
-.button {
-  display: flex;
-  align-items: center;
-  bottom: 0px;
-}
-
 .success {
   display: flex;
   margin-top: 20px !important;
   text-align: center;
   align-items: center;
+}
+
+.deleteSprite {
+  display: flex;
+  margin-top: -13px !important;
+}
+
+.buttonCol {
+  margin-right: -20px !important;
 }

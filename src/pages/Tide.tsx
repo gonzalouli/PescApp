@@ -46,6 +46,7 @@ export default function Tide() {
       setStatus({ error: true, message: "Seleccione un puerto" });
       return;
     } else {
+      setShowLoading(true);
       setTides(
         await API.post("api9000aeb3", "/ports/getTide", {
           body: {
@@ -54,6 +55,7 @@ export default function Tide() {
           },
         })
       );
+      setShowLoading(false);
     }
 
     setHaveTide(true);

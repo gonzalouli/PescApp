@@ -46,13 +46,13 @@ export default function ShowMeteorology(props) {
         }
       }
     }
-    console.log(hourly);
+    console.log(props);
     setDataTransformed(true);
   }, []);
 
   const toDegree = (g) => {
     const degree = Number(g);
-    if (350 < degree && degree <= 10) return "N";
+    if (degree > 350 || (degree > 0 && degree <= 10)) return "N";
     if (10 < degree && degree <= 35) return "N-NE";
     if (35 < degree && degree <= 55) return "NE";
     if (55 < degree && degree <= 80) return "E-NE";
@@ -75,7 +75,11 @@ export default function ShowMeteorology(props) {
 
   const toDateFormated = (time) => {
     const date = new Date(time * 1000);
-    return date.getHours() + ":" + date.getMinutes();
+    let minutes = date.getMinutes().toString();
+    if (minutes.length === 1) {
+      minutes = 0 + minutes;
+    }
+    return date.getHours() + ":" + minutes;
   };
   const toHourFormated = (time) => {
     const date = new Date(time * 1000);
@@ -119,8 +123,8 @@ export default function ShowMeteorology(props) {
               {meteorology.daily[index].temp.min.toFixed(0) - 273} °C
             </IonCol>
             <IonCol className="topItem label">
-              {meteorology.daily[index].wind_speed} Nudos a{" "}
-              {toDegree(meteorology.daily[index].wind_deg)}
+              {(meteorology.daily[index].wind_speed * 1.94384).toFixed(2)} Nudos
+              a {toDegree(meteorology.daily[index].wind_deg)}
             </IonCol>
             <IonCol className="topItem label">
               {meteorology.daily[index].weather[0].description.toUpperCase()}
@@ -181,7 +185,7 @@ export default function ShowMeteorology(props) {
               {meteorology.daily[index].uvi}
             </IonCol>
             <IonCol className="topItem data">
-              {meteorology.daily[index].wind_gust} Nudos
+              {(meteorology.daily[index].wind_gust * 1.94384).toFixed(2)} Nudos
             </IonCol>
           </IonItemDivider>
         </IonGrid>
@@ -205,7 +209,7 @@ export default function ShowMeteorology(props) {
                   Velocidad viento
                 </IonCol>
                 <IonCol color="secondary" className="topItem label">
-                  Ráfaga maxima
+                  Ráfaga maxima (Nudos)
                 </IonCol>
                 <IonCol color="secondary" className="topItem label">
                   °C
@@ -220,9 +224,12 @@ export default function ShowMeteorology(props) {
                       {toHourFormated(hour.dt)}
                     </IonCol>
                     <IonCol className="topItem data">
-                      {hour.wind_speed} a {toDegree(hour.wind_deg)}
+                      {(hour.wind_speed * 1.94384).toFixed(2)} a{" "}
+                      {toDegree(hour.wind_deg)}
                     </IonCol>
-                    <IonCol className="topItem data">{hour.wind_gust}</IonCol>
+                    <IonCol className="topItem data">
+                      {(hour.wind_gust * 1.94384).toFixed(2)}
+                    </IonCol>
                     <IonCol className="topItem data">
                       {hour.temp.toFixed(0) - 273}
                     </IonCol>

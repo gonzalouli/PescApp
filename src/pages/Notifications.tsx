@@ -302,33 +302,36 @@ export default function Notifications() {
         <IonItem>
           <IonLabel className="label aviso">Mis notificaciones</IonLabel>
         </IonItem>
-        {notifications.length != 0 && (
+        {notifications?.length !== 0 && (
           <IonItem>
             <IonGrid className="grid">
               <IonRow>
-                <IonCol className="head ion-text-wrap">Puerto</IonCol>
-                <IonCol className="head ion-text-wrap">Marea</IonCol>
-                <IonCol className="head ion-text-wrap">Altura Marea</IonCol>
-                <IonCol className="head ion-text-wrap">Viento</IonCol>
-                <IonCol className="head ion-text-wrap"></IonCol>
+                <IonCol className="head ion-text-wrap buttonCol">Puerto</IonCol>
+                <IonCol className="head ion-text-wrap buttonCol">Tipo</IonCol>
+                <IonCol className="head ion-text-wrap buttonCol">
+                  Altura Marea
+                </IonCol>
+                <IonCol className="head ion-text-wrap buttonCol">Viento</IonCol>
+                <IonCol className="head ion-text-wrap buttonCol"></IonCol>
               </IonRow>
               {notifications.map((n) => {
                 return (
-                  <IonRow key={n.id}>
-                    <IonCol key={n.id + 1} className=" ion-text-wrap">
+                  <IonRow key={n.id} className="notif">
+                    <IonCol key={n.id + 1} className="buttonCol ion-text-wrap">
                       {n.portName}
                     </IonCol>
-                    <IonCol key={n.id + 2} className=" ion-text-wrap">
-                      {n.tipoMarea}
+                    <IonCol key={n.id + 2} className="buttonCol ion-text-wrap">
+                      {n.tipoMarea.slice(0, 1)}
                     </IonCol>
-                    <IonCol key={n.id + 3} className=" ion-text-wrap">
+                    <IonCol key={n.id + 3} className="buttonCol ion-text-wrap">
                       {n.alturaMarea}
                     </IonCol>
-                    <IonCol key={n.id + 4} className=" ion-text-wrap">
+                    <IonCol key={n.id + 4} className="buttonCol ion-text-wrap">
                       {n.viento}
                     </IonCol>
-                    <IonCol key={n.id + 5} className="button ion-text-wrap">
+                    <IonCol key={n.id + 5} className="buttonCol ion-text-wrap">
                       <IonButton
+                        className="deleteSprite"
                         fill="clear"
                         color="transparent"
                         onClick={() => {
