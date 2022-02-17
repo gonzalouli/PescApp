@@ -8,8 +8,8 @@
   margin-bottom: 10px;
 }
 
-.grid {
-  max-width: 1300px;
+.grid-row {
+  max-width: 720px;
 }
 
 .topItem {
