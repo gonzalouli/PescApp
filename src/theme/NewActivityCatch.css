@@ -37,3 +37,7 @@
 .nombreFoto {
   margin-bottom: 20px !important;
 }
+
+.imagenTemp {
+  max-width: 720px;
+}

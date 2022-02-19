@@ -22,7 +22,7 @@ import "leaflet/dist/leaflet.css";
 import "../theme/NewActivityLocalization.css";
 import { Redirect } from "react-router";
 import EditMapComponent from "../components/EditMapComponent";
-
+import "../theme/EditActivity.css";
 /* initialize() is important for iOS,
     Android doesn't need any initialization.
   */
@@ -63,7 +63,9 @@ function EditActivityLocalization() {
         <IonTitle className="tittle">Editar Localización</IonTitle>
       </IonHeader>
       <IonContent>
-        <EditMapComponent />
+        <div className="map-container">
+          <EditMapComponent />
+        </div>
         <IonList className="form-container">
           <IonItem className="description">
             <IonLabel className="label" position="floating">

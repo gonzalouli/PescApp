@@ -8,12 +8,17 @@ meteorology.post("/getMeteorology", async (req, res) => {
   if (req.body.name !== undefined) {
     const coords = await GeocodingFromLatLng(req.body.name);
 
+    if (coords == null) {
+      res.json({ error: true, message: "Localización no encontrada" });
+      return;
+    }
+
     const meteorology = await MeteorologyPlace(coords.lat, coords.lng);
     // console.log(meteorology.place.data);
     if (meteorology != null) {
       res.json(meteorology.place.data);
     } else {
-      res.json({ error: true, message: "Localización no encontrada" });
+      res.json({ error: true, message: "Meteorologia no disponible" });
     }
   } else {
     const meteorology = await MeteorologyPlace(

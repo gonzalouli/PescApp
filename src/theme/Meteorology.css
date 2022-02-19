@@ -11,9 +11,10 @@
 }
 
 .map-container {
-  margin-bottom: -6em !important;
-  max-width: 1200px !important;
+  margin-bottom: -20vh !important;
+  max-width: 1000px !important;
   margin: 0 auto;
+  height: 80% !important;
 }
 
 .selected {
@@ -23,7 +24,7 @@
 .writeOption {
   display: flex;
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   align-items: center;
   max-width: 500px;
 }

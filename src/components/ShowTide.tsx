@@ -39,7 +39,9 @@ export default function ShowTide(props) {
               <IonItemDivider className="itemDivider">
                 <IonCol className="topItem label">{element.hora}</IonCol>
                 <IonCol className="topItem label">{element.altura}</IonCol>
-                <IonCol className="topItem label">{element.tipo}</IonCol>
+                <IonCol className="topItem label">
+                  {element.tipo.replace("b", "B").replace("p", "P")}
+                </IonCol>
               </IonItemDivider>
             </IonRow>
           );

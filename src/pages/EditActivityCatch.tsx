@@ -27,30 +27,35 @@ import RefreshComponent from "../components/RefreshComponent";
 import { Camera, CameraResultType } from "@capacitor/camera";
 import "../theme/NewActivityCatch.css";
 import { randomBytes } from "crypto";
-import { nanoid } from "nanoid";
 import "../theme/NewDocumentation.css";
 import { Redirect } from "react-router";
 import { ResetLS } from "../utils/ResetLocalStorage";
 import { getDataUrl } from "../utils/get-data-url";
+import { sha256 } from "js-sha256";
+import "../theme/EditActivity.css";
 
-export default function EditActivityCatch() {
-  useEffect(() => {}, []);
+export default function NewActivityCatch() {
+  const [tempactivity, setTempactivity] = useState(
+    JSON.parse(window.sessionStorage.getItem("editActivity")) || []
+  );
+  const [savedPhoto, setSavedPhoto] = useState(false);
 
+  useEffect(() => {
+    ResetLS();
+  }, [tempactivity.catches]);
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState(
     process.env.PUBLIC_URL + "/assets/placeholderimage.jpg"
   );
   const [name, setName] = useState("");
   const fileInputRef = useRef<HTMLInputElement>();
-  const [tempactivity, setTempactivity] = useState(
-    JSON.parse(window.sessionStorage.getItem("editActivity")) || []
-  );
+
   const [isConfirmed, setIsConfirmed] = useState(false);
 
   const [piece, setPiece] = useState({
-    id: nanoid(),
+    id: "",
     name: "",
-    imageUrl: imageUrl,
+    imageUrl: process.env.PUBLIC_URL + "/assets/placeholderimage.jpg",
     description: "",
   });
 
@@ -60,33 +65,58 @@ export default function EditActivityCatch() {
     if (event.target.files.length > 0) {
       const file = event.target.files.item(0);
       const imgUrl: string | ArrayBuffer = await getDataUrl(file);
-
       if (typeof imgUrl === "object") {
-        // setImageUrl(String.fromCharCode.apply(null, new Uint16Array(imgUrl)));
         setPiece({
           ...piece,
           imageUrl: String.fromCharCode.apply(null, new Uint16Array(imgUrl)),
+          id: sha256(
+            name +
+              new Date().toString() +
+              description +
+              piece.imageUrl.slice(50, 65)
+          ),
         });
+        // setImageUrl(String.fromCharCode.apply(null, new Uint16Array(imgUrl)));
       } else if (typeof imgUrl === "string") {
         // setImageUrl(imgUrl);
-        setPiece({ ...piece, imageUrl: imgUrl });
+        setPiece({
+          ...piece,
+          imageUrl: imgUrl,
+          id: sha256(
+            name +
+              new Date().toString() +
+              description +
+              piece.imageUrl.slice(50, 65)
+          ),
+        });
       }
+
       // setPiece({ ...piece, imageUrl });
     }
   };
 
   const handlePictureClick = async () => {
     //for right platforms
-    if (isPlatform("android") || isPlatform("ios")) {
+    if (isPlatform("android") || isPlatform("ios") || isPlatform("mobile")) {
       try {
         const image = await Camera.getPhoto({
-          quality: 90,
+          quality: 70,
           allowEditing: true,
           resultType: CameraResultType.DataUrl,
         });
+        // console.log(image);
 
         setImageUrl(image.dataUrl);
-        setPiece({ ...piece, imageUrl: image.dataUrl });
+        setPiece({
+          ...piece,
+          imageUrl: image.dataUrl,
+          id: sha256(
+            name +
+              new Date().toString() +
+              description +
+              piece.imageUrl.slice(50, 65)
+          ),
+        });
       } catch (error) {
         console.error("Camera Error:", error.message);
       }
@@ -97,12 +127,12 @@ export default function EditActivityCatch() {
 
   const handleTextChange = (e) => {
     setDescription(e.target.value);
-    setPiece({ ...piece, description: description });
+    setPiece({ ...piece, description: e.target.value });
   };
 
   const handleName = (e) => {
     setName(e.target.value);
-    setPiece({ ...piece, name: name });
+    setPiece({ ...piece, name: e.target.value });
   };
 
   const saveAndBack = async () => {
@@ -110,50 +140,48 @@ export default function EditActivityCatch() {
   };
 
   const saveAndNew = async () => {
-    if (imageUrl != process.env.PUBLIC_URL + "/assets/placeholderimage.jpg") {
-      const activity = JSON.parse(
-        window.sessionStorage.getItem("editActivity")
-      );
+    setSavedPhoto(true);
 
-      await activity.catches.push(piece);
-      window.sessionStorage.setItem("editActivity", JSON.stringify(activity));
+    const activity = JSON.parse(window.sessionStorage.getItem("editActivity"));
 
-      setTempactivity(activity);
+    await activity.catches.push(piece);
+    window.sessionStorage.setItem("editActivity", JSON.stringify(activity));
+    setTempactivity(activity);
 
-      setName("");
-      setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
-      setDescription("");
-      setPiece({
-        id: nanoid(),
-        name: name,
-        imageUrl: imageUrl,
-        description: description,
-      });
-    }
+    setPiece({
+      id: "",
+      name: "",
+      imageUrl: process.env.PUBLIC_URL + "/assets/placeholderimage.jpg",
+      description: "",
+    });
+
+    setName("");
+    setImageUrl(process.env.PUBLIC_URL + "/assets/placeholderimage.jpg");
+
+    setDescription("");
+    setSavedPhoto(false);
   };
 
   const deletePiece = (id, e) => {
     const activity = JSON.parse(window.sessionStorage.getItem("editActivity"));
-    activity.catches = activity.catches.filter((piece) => piece.Id !== id.Id);
+    activity.catches = activity.catches.filter((piece) => piece.id !== id.id);
     setTempactivity(activity);
     window.sessionStorage.setItem("editActivity", JSON.stringify(activity));
   };
 
   return (
     <IonPage>
-      {isConfirmed && (
-        <Redirect to="/my/EditActivity" push={true} exact={true} />
-      )}
+      {isConfirmed && <Redirect to="/my/Activity" push={true} exact={true} />}
       <IonHeader className="header">
         <BackButton refer="/my/EditActivity" />
-        <IonTitle className="tittle">Editar Capturas</IonTitle>
+        <IonTitle className="tittle">Nueva Fotografía</IonTitle>
       </IonHeader>
       <IonContent>
         {/* <RefreshComponent /> */}
         <IonList className="form-container">
-          <IonItem>
-            <IonLabel className="label" position="floating">
-              Nombre
+          <IonItem className="nombreFoto">
+            <IonLabel className="label ion-text-wrap" position="floating">
+              Nombre de fotografía:
             </IonLabel>
             <IonInput
               className="text"
@@ -172,12 +200,20 @@ export default function EditActivityCatch() {
               hidden
             ></input>
 
-            <img src={piece.imageUrl} alt="" onClick={handlePictureClick} />
+            <img
+              className="imagenTemp"
+              src={piece.imageUrl}
+              alt=""
+              onClick={handlePictureClick}
+            />
           </IonItem>
 
           <IonItem className="description">
-            <IonLabel className="label" position="floating">
-              Descripción
+            <IonLabel
+              className="label descriptionLabel ion-text-wrap"
+              position="stacked"
+            >
+              Descripción de la fotografia:
             </IonLabel>
             <IonTextarea
               value={description}
@@ -196,11 +232,18 @@ export default function EditActivityCatch() {
             </IonRow>
           </IonGrid>
         </IonList>
+        {savedPhoto && (
+          <IonItem>
+            <IonLabel className="label ion-text-wrap" color="success">
+              Foto agregada para guardar
+            </IonLabel>
+          </IonItem>
+        )}
 
         <IonList className="capturas">
-          <IonItem className="capturas">
-            <IonLabel className="capturasNuevas label">
-              Capturas actuales
+          <IonItem className="capturas ">
+            <IonLabel className="capturasNuevas label ion-text-wrap">
+              Fotografias realizadas
             </IonLabel>
           </IonItem>
           <IonList className="listaElementos">

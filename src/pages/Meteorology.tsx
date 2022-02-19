@@ -77,32 +77,48 @@ export default function Meteorology() {
     const lng = coords.lng;
     const data = { lat, lng };
 
-    if (name === "") {
-      const res = await API.post("api9000aeb3", "/meteorology/getMeteorology", {
-        body: {
-          data,
-        },
-      });
-      if (res.error) {
-        setStatus(res);
+    try {
+      if (name === "") {
+        const res = await API.post(
+          "api9000aeb3",
+          "/meteorology/getMeteorology",
+          {
+            body: {
+              data,
+            },
+          }
+        );
+        if (res.error) {
+          setStatus(res);
+        } else {
+          setResponse(res);
+          setHaveMeteorology(true);
+        }
       } else {
-        setResponse(res);
-        setHaveMeteorology(true);
+        const res = await API.post(
+          "api9000aeb3",
+          "/meteorology/getMeteorology",
+          {
+            body: {
+              name: name.replace("ñ", "n").replace("Ñ", "N"),
+            },
+          }
+        );
+        if (res.error) {
+          setStatus(res);
+        } else {
+          setResponse(res);
+          setHaveMeteorology(true);
+        }
       }
-    } else {
-      const res = await API.post("api9000aeb3", "/meteorology/getMeteorology", {
-        body: {
-          name,
-        },
-      });
-      if (res.error) {
-        setStatus(res);
-      } else {
-        setResponse(res);
-        setHaveMeteorology(true);
-      }
+    } catch (e) {
+      // setStatus({
+      //   error: true,
+      //   message: "No existe la ciudad escrita o no está bien escrita...",
+      // });
+    } finally {
+      setShowLoading(false);
     }
-    setShowLoading(false);
   };
 
   useEffect(() => {

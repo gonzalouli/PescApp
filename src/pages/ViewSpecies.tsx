@@ -42,24 +42,27 @@ export default function ViewSpecies(props) {
     <IonPage>
       <Fragment>
         <IonContent>
-          {/* {movile && (
+          {movile && (
             <div className="visor">
               <MobilePDFReader
                 className="reader"
                 url={
                   process.env.PUBLIC_URL + "/assets/fishes/" + props.props.url
                 }
+                scale="auto"
               />
             </div>
-          )} */}
-
-          <div className="visor">
-            <PDFReader
-              className="reader"
-              url={process.env.PUBLIC_URL + "/assets/fishes/" + props.props.url}
-            />
-          </div>
-
+          )}
+          {!movile && (
+            <div className="visor">
+              <PDFReader
+                className="reader"
+                url={
+                  process.env.PUBLIC_URL + "/assets/fishes/" + props.props.url
+                }
+              />
+            </div>
+          )}
           {error.error === true && (
             <IonItem>
               <IonLabel className="error ion-text-wrap">

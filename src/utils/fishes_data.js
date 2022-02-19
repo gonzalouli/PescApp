@@ -13,7 +13,7 @@ export const fishes = [
   { nombre: "Breca", index: 12, url: "12_breca.pdf" },
   { nombre: "Caballa", index: 13, url: "13_caballa.pdf" },
   {
-    nombre: "Caballas/Estorninos",
+    nombre: "Caballas / Estorninos",
     index: 14,
     url: "14_caballas_estorninos.pdf",
   },
@@ -31,7 +31,7 @@ export const fishes = [
   { nombre: "Jurel", index: 26, url: "26_jurel.pdf" },
   { nombre: "Lenguado europeo", index: 27, url: "27_lenguado_europeo.pdf" },
   { nombre: "Lubina", index: 28, url: "28_lubina.pdf" },
-  { nombre: "Marlín azul", index: 29, url: "29_martlin?azul.pdf" },
+  { nombre: "Marlín azul", index: 29, url: "29_marlin_azul.pdf" },
   { nombre: "Merluza", index: 30, url: "30_merluza.pdf" },
   { nombre: "Meros", index: 31, url: "31_meros.pdf" },
   { nombre: "Mielga", index: 32, url: "32_mielga.pdf" },
@@ -54,7 +54,7 @@ export const fishes = [
   { nombre: "Salmonete de fango", index: 49, url: "49_salmonete_de_fango.pdf" },
   { nombre: "Salmonete de roca", index: 50, url: "50_salmonete_de_roca.pdf" },
   { nombre: "Sardina", index: 51, url: "51_sardina.pdf" },
-  { nombre: "Sargo", index: 52, url: "52_sargopdf" },
+  { nombre: "Sargo", index: 52, url: "52_sargo.pdf" },
   { nombre: "Sargo breado", index: 53, url: "53_sargo_breado.pdf" },
   { nombre: "Sargo picudo", index: 54, url: "54_sargo_picudo.pdf" },
 ];

@@ -194,12 +194,14 @@ export default function MyActivity() {
                   <IonRow className="row">
                     <IonItemDivider className="itemDivider">
                       <IonCol
-                        className="item"
+                        className="item ion-text-wrap"
                         onClick={() => {
                           handleShowActivity(act.Id);
                         }}
                       >
-                        <div className="item">{act.name}</div>
+                        <IonLabel className="item ion-text-wrap">
+                          {act.name}
+                        </IonLabel>
                       </IonCol>
                       <IonCol
                         className="item "

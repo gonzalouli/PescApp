@@ -11,12 +11,12 @@ import {
   IonRefresherContent,
   IonTitle,
 } from "@ionic/react";
-import { nanoid } from "nanoid";
 import React, { useEffect, useState } from "react";
 import BackButton from "../components/BackButton";
 import RefreshComponent from "../components/RefreshComponent";
 import "../theme/NewActivityTackle.css";
 import { ResetLS } from "../utils/ResetLocalStorage";
+import { sha256 } from "js-sha256";
 
 export default function EditActivityTackle() {
   useEffect(() => {}, []);
@@ -31,7 +31,7 @@ export default function EditActivityTackle() {
     setItems([
       ...items,
       {
-        id: nanoid(),
+        id: sha256(itemName + new Date().toString()),
         name: itemName,
       },
     ]);
@@ -40,7 +40,7 @@ export default function EditActivityTackle() {
       window.sessionStorage.getItem("editActivity")
     );
     activityMod.tackle.push({
-      id: nanoid(),
+      id: sha256(itemName + new Date().toString()),
       name: itemName,
     });
     window.sessionStorage.setItem("editActivity", JSON.stringify(activityMod));
