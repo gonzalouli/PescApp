@@ -8,8 +8,6 @@ import { initializeFirebase, askPermissionNotification } from "./firebase";
 import Amplify from "aws-amplify";
 
 import awsExports from "./aws-exports";
-import { Capacitor } from "@capacitor/core";
-import { SplashScreen } from "@capacitor/splash-screen";
 // if (process.env.REACT_APP_LOCAL && true) {
 //   awsExports.aws_cloud_logic_custom[0].endpoint = Capacitor.isNativePlatform()
 //     ? "http://10.0.2.2:4444"
