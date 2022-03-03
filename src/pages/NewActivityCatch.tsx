@@ -206,6 +206,7 @@ export default function NewActivityCatch() {
               src={piece.imageUrl}
               alt=""
               onClick={handlePictureClick}
+              style="max-width=480px;"
             />
           </IonItem>
 
