@@ -237,7 +237,7 @@ export default function MyActivityWithId() {
                     <IonRow className="row">
                       <IonCol>
                         <IonItemDivider className="itemDivider">
-                          <IonLabel className="label">{item?.name}</IonLabel>
+                          <IonLabel className="ion-text-wrap label">{item?.name}</IonLabel>
                         </IonItemDivider>
                       </IonCol>
                     </IonRow>
