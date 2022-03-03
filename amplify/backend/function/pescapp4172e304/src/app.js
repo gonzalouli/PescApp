@@ -85,13 +85,8 @@ const sequelize = require("./database/sequelize");
 require("./database/models/models");
 (async () => {
   await sequelize
-    .sync()
-    .then(() => {
-      console.log("DB sincronizada");
-    })
-    .catch((e) => {
-      console.error(e);
-    });
+    .sync({force : true})
+   
   const ResetCodes = require("./database/services/ResetCodes");
   await ResetCodes();
 })();
