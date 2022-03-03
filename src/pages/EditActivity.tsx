@@ -26,48 +26,48 @@ export default function NewActivity() {
   const [MyActivity, setMyActivity] = useState(false);
   const [logOut, setLogOut] = useState(false);
 
-  // const isAuth = async () => {
-  //   try {
-  //     return await Auth.currentAuthenticatedUser();
-  //   } catch (error) {
-  //     setLogOut(true);
-  //     console.error("Ususario no loggeado: " + error.message);
-  //     return null;
-  //   }
-  // };
+  const isAuth = async () => {
+    try {
+      return await Auth.currentAuthenticatedUser();
+    } catch (error) {
+      setLogOut(true);
+      console.error("Ususario no loggeado: " + error.message);
+      return null;
+    }
+  };
 
   useEffect(() => {
-    // if (sessionStorage.getItem("editActivity") == null) {
-    //   try {
-    //     const res = getActivity(isAuth(), sessionStorage.getItem("IdToEdit"));
-    //   } catch (error) {
-    //     setLogOut(true);
-    //   }
-    // }
+    if (sessionStorage.getItem("editActivity") == null) {
+      try {
+        const res = getActivity(isAuth(), sessionStorage.getItem("IdToEdit"));
+      } catch (error) {
+        setLogOut(true);
+      }
+    }
   }, []);
 
-  // const getActivity = async (CognitoUser, ActivityId) => {
-  //   try {
-  //     const res = await API.post(
-  //       "api9000aeb3",
-  //       "/activities/getActivityWithId",
-  //       {
-  //         body: {
-  //           CognitoUser: CognitoUser,
-  //           ActivityId: ActivityId,
-  //         },
-  //       }
-  //     );
-  //     if (res.error) {
-  //       setError(res);
-  //     }
-  //     console.log(res);
-  //     sessionStorage.setItem("editActivity", JSON.stringify(res));
-  //     return res;
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const getActivity = async (CognitoUser, ActivityId) => {
+    try {
+      const res = await API.post(
+        "api9000aeb3",
+        "/activities/getActivityWithId",
+        {
+          body: {
+            CognitoUser: CognitoUser,
+            ActivityId: ActivityId,
+          },
+        }
+      );
+      if (res.error) {
+        setError(res);
+      }
+      console.log(res);
+      sessionStorage.setItem("editActivity", JSON.stringify(res));
+      return res;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleChange = (e) => {
     e.preventDefault();

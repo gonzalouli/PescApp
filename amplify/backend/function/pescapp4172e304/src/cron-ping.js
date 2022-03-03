@@ -48,8 +48,8 @@ const CronSchedule = async () => {
               });
               for (const userToken of userTokens) {
                 const notificationMessage = {
-                  title: `En los proximos dias tendras la meteorologia querida en ${not.portName}`,
-                  body: `A las ${dato.hora} de tipo ${dato.tipo} y altura ${dato.altura}`,
+                  title: `La meteorologia es idonea en las proximas horas`,
+                  body: `Se ha cumplido una de tus notificaciones registradas`,
                 };
                 userToNotificate.push({
                   idUser: not.CognitoUser,

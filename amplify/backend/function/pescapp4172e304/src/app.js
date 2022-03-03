@@ -90,8 +90,8 @@ require("./database/models/models");
   await ResetCodes();
 })();
 
-const CronSchedule = require("./cron-ping");
-CronSchedule();
+// const CronSchedule = require("./cron-ping");
+// CronSchedule();
 
 app.listen(4444, function () {
   console.log("App started");

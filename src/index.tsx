@@ -8,11 +8,12 @@ import { initializeFirebase, askPermissionNotification } from "./firebase";
 import Amplify from "aws-amplify";
 
 import awsExports from "./aws-exports";
-// if (process.env.REACT_APP_LOCAL && true) {
-//   awsExports.aws_cloud_logic_custom[0].endpoint = Capacitor.isNativePlatform()
-//     ? "http://10.0.2.2:4444"
-//     : "http://localhost:4444";
-// }
+import { Capacitor } from "@capacitor/core";
+if (process.env.REACT_APP_LOCAL && true) {
+  awsExports.aws_cloud_logic_custom[0].endpoint = Capacitor.isNativePlatform()
+    ? "http://10.0.2.2:4444"
+    : "http://localhost:4444";
+}
 
 Amplify.configure(awsExports);
 
