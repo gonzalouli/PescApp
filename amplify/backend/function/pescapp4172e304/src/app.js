@@ -84,9 +84,7 @@ const sequelize = require("./database/sequelize");
 // const { CodeStarNotifications } = require("aws-sdk");
 require("./database/models/models");
 (async () => {
-  await sequelize
-    .sync({force : true})
-   
+  await sequelize.sync({ force: true });
   const ResetCodes = require("./database/services/ResetCodes");
   await ResetCodes();
 })();
@@ -95,8 +93,8 @@ app.listen(4444, function () {
   console.log("App started");
 });
 
-// const CronSchedule = require("./cron-ping");
-// CronSchedule();
+const CronSchedule = require("./cron-ping");
+CronSchedule();
 
 // Export the app object. When executing the application local this does nothing. However,
 // to port it to AWS Lambda we will create a wrapper around that will load the app from

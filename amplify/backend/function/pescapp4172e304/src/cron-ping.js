@@ -20,7 +20,7 @@ const { UserTokens } = require("./database/models/models");
  * @execute Execute the initial cron tab operation for sending all notification of all users
  */
 const CronSchedule = async () => {
-  cron.schedule("* * 24 * *", async () => {
+  cron.schedule("* * 48 * *", async () => {
     const userToNotificate = [];
 
     const date = moment().add(2, "day").format("YYYY-MM-DD");
