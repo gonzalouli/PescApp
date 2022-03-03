@@ -84,7 +84,7 @@ const sequelize = require("./database/sequelize");
 // const { CodeStarNotifications } = require("aws-sdk");
 require("./database/models/models");
 (async () => {
-  await sequelize.sync({ force: true });
+  await sequelize.sync();
 
   const ResetCodes = require("./database/services/ResetCodes");
   await ResetCodes();
