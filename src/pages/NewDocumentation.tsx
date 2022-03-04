@@ -255,15 +255,16 @@ export default function NewDocumentation() {
               ref={fileInputRef}
               hidden
             ></input>
-
-            <img
-              src={piece.imageUrl}
-              alt=""
-              onClick={handlePictureClick}
-              defaultValue={
-                process.env.PUBLIC_URL + "/assets/placeholderimage.jpg"
-              }
-            />
+            <div className="imageDoc">
+              <img
+                src={piece.imageUrl}
+                alt=""
+                onClick={handlePictureClick}
+                defaultValue={
+                  process.env.PUBLIC_URL + "/assets/placeholderimage.jpg"
+                }
+              />
+            </div>
           </IonItem>
 
           <IonItem className="description">

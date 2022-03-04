@@ -200,14 +200,9 @@ export default function NewActivityCatch() {
               ref={fileInputRef}
               hidden
             ></input>
-
-            <img
-              className="imagenTemp"
-              src={piece.imageUrl}
-              alt=""
-              onClick={handlePictureClick}
-              style="max-width=480px;"
-            />
+            <div className="imagenTemp">
+              <img src={piece.imageUrl} alt="" onClick={handlePictureClick} />
+            </div>
           </IonItem>
 
           <IonItem className="description">

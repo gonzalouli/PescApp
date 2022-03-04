@@ -118,6 +118,8 @@ export default function MyDocumentation() {
                       </IonItemDivider>
                     </IonCol>
                   </IonRow>
+                  <></>
+
                   <IonRow className="row">
                     <img
                       alt={item.Id}
@@ -125,6 +127,7 @@ export default function MyDocumentation() {
                       className="imageFromBackend"
                     />
                   </IonRow>
+                  <></>
                   <IonRow className="row">
                     <IonCol>
                       <IonItemDivider className="itemDivider">
