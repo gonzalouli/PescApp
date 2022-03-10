@@ -41,7 +41,7 @@ const Home: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const user: CognitoUser = await Auth.signIn(email, pass);
+      const user: CognitoUser = await Auth.signIn(email.trim(), pass);
       setIsLog(true);
     } catch (error) {
       console.error(error);
