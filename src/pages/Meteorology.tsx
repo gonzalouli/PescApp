@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, Suspense, useEffect, useState } from "react";
 import {
   IonButton,
   IonContent,
@@ -159,8 +159,9 @@ export default function Meteorology() {
                 <IonLabel>Selecciona ubicación</IonLabel>
               </IonItem>
             </IonList>
-            <MeteorologyMapComponent />
-
+            <Suspense fallback={<h1>Cargando mapa...</h1>}>
+              <MeteorologyMapComponent />
+            </Suspense>
             <IonItem className="writeOption">
               <IonLabel className="label">O escríbala:</IonLabel>
               <IonInput
