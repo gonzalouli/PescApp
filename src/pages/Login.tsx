@@ -90,7 +90,7 @@ const Home: React.FC = () => {
         />
         <IonList className="container">
           <IonItem className="item-container">
-            <IonLabel className="label email" position="stacked">
+            <IonLabel className="label" position="stacked">
               Email
             </IonLabel>
             <IonInput

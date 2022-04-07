@@ -142,10 +142,21 @@ export default function ShowMeteorology(props) {
         <IonGrid className="grid">
           <IonRow className="grid-row">
             <IonItemDivider className="itemDivider">
-              <IonCol className="topItem data text">Salida de la luna</IonCol>
-              <IonCol className="topItem data  text">Puesta de la luna</IonCol>
-              <IonCol className="topItem data  text">Salida del sol</IonCol>
-              <IonCol className="topItem data  text">Puesta de Sol</IonCol>
+              <IonCol className="topItem data text">
+                <p className="underline">Salida de la luna</p>
+              </IonCol>
+              <IonCol className="topItem data  text">
+                {" "}
+                <p className="underline">Puesta de la luna</p>
+              </IonCol>
+              <IonCol className="topItem data  text">
+                {" "}
+                <p className="underline">Salida del sol</p>
+              </IonCol>
+              <IonCol className="topItem data  text">
+                {" "}
+                <p className="underline">Puesta de Sol</p>
+              </IonCol>
             </IonItemDivider>
           </IonRow>
           <IonItemDivider className="itemDivider">
@@ -166,11 +177,17 @@ export default function ShowMeteorology(props) {
         <IonGrid className="grid">
           <IonRow className="grid-row">
             <IonItemDivider className="itemDivider">
-              <IonCol className="topItem data text">Humedad </IonCol>
-              <IonCol className="topItem data text">Presión</IonCol>
-              <IonCol className="topItem data text">Factor UVI</IonCol>
               <IonCol className="topItem data text">
-                Ráfaga máxima de viento
+                <p className="underline">Humedad</p>{" "}
+              </IonCol>
+              <IonCol className="topItem data text">
+                <p className="underline">Presión</p>
+              </IonCol>
+              <IonCol className="topItem data text">
+                <p className="underline">Factor UVI</p>
+              </IonCol>
+              <IonCol className="topItem data text">
+                <p className="underline">Ráfaga máxima de viento</p>
               </IonCol>
             </IonItemDivider>
           </IonRow>
@@ -203,16 +220,16 @@ export default function ShowMeteorology(props) {
             <IonRow className="grid-row">
               <IonItemDivider className="itemDivider">
                 <IonCol color="secondary" className="topItem data">
-                  Hora
+                  <p className="underline">Hora</p>
                 </IonCol>
                 <IonCol color="secondary" className="topItem data">
-                  Velocidad viento
+                  <p className="underline">Velocidad viento</p>
                 </IonCol>
                 <IonCol color="secondary" className="topItem data">
-                  Ráfaga maxima (Nudos)
+                  <p className="underline">Ráfaga maxima (Nudos)</p>
                 </IonCol>
                 <IonCol color="secondary" className="topItem data">
-                  °C
+                  <p className="underline">°C</p>
                 </IonCol>
               </IonItemDivider>
             </IonRow>

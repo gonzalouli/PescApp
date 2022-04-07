@@ -6,10 +6,20 @@
   color: white;
 } */
 .grid-row {
+  text-align: center;
   margin: 0 auto !important;
   max-width: 720px !important;
 }
 
 .topItem {
   align-content: center;
+}
+.data {
+  /* color: white; */
+  font-weight: bold;
+  font-size: 100% !important;
+}
+.underline {
+  font-size: 120%;
+  text-decoration: underline;
 }

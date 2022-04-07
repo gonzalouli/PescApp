@@ -63,7 +63,7 @@ export default function Species() {
         <IonContent>
           {!isFishSelected && (
             <IonList>
-              <IonGrid className="grid">
+              <IonGrid className="grid-row">
                 {fishes.map((fish) => {
                   return (
                     <IonButton

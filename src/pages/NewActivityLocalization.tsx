@@ -85,7 +85,7 @@ function NewActivityLocalization() {
           <IonItem className="descriptionPlace">
             <IonLabel
               className="label descripcion ion-text-wrap"
-              position="floating"
+              position="stacked"
             >
               Descripción del lugar:
             </IonLabel>

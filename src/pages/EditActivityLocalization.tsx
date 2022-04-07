@@ -14,7 +14,7 @@ import {
   IonTitle,
   IonToast,
 } from "@ionic/react";
-import { Component, useEffect, useRef, useState } from "react";
+import { Component, Suspense, useEffect, useRef, useState } from "react";
 import BackButton from "../components/BackButton";
 import "leaflet-css/dist/leaflet.css";
 
@@ -22,7 +22,7 @@ import "leaflet/dist/leaflet.css";
 import "../theme/NewActivityLocalization.css";
 import { Redirect } from "react-router";
 import EditMapComponent from "../components/EditMapComponent";
-import "../theme/EditActivity.css";
+import "../theme/EditActivityLocalization.css";
 /* initialize() is important for iOS,
     Android doesn't need any initialization.
   */
@@ -31,8 +31,14 @@ import "../theme/EditActivity.css";
 
 function EditActivityLocalization() {
   const ref = useRef(null);
+  const [showLoading, setShowLoading] = useState(false);
 
-  useEffect(() => {});
+  useEffect(() => {
+    setShowLoading(true);
+    setTimeout(() => {
+      setShowLoading(false);
+    }, 2000);
+  }, []);
   const [text, setText] = useState(
     JSON.parse(window.sessionStorage.getItem("editActivity")).localization
       .text || ""
@@ -62,14 +68,24 @@ function EditActivityLocalization() {
         <BackButton refer="/my/EditActivity" />
         <IonTitle className="tittle">Editar Localización</IonTitle>
       </IonHeader>
+
+      <IonLoading
+        cssClass="my-custom-class"
+        isOpen={showLoading}
+        onDidDismiss={() => setShowLoading(false)}
+        message={"Por favor, espere..."}
+      />
       <IonContent>
-        <div className="map-container">
+        <Suspense fallback={<h1>Cargando mapa...</h1>}>
           <EditMapComponent />
-        </div>
+        </Suspense>
         <IonList className="form-container">
-          <IonItem className="description">
-            <IonLabel className="label" position="floating">
-              Descripción
+          <IonItem className="descriptionPlace">
+            <IonLabel
+              className="label descripcion ion-text-wrap"
+              position="stacked"
+            >
+              Descripción del lugar:
             </IonLabel>
             <IonTextarea
               value={text}

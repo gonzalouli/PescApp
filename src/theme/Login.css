@@ -37,7 +37,7 @@
   flex-direction: column !important;
   align-items: center;
   justify-content: center;
-  margin: 15% auto !important;
+  margin: 10% auto !important;
   max-width: 400px;
 }
 
@@ -75,4 +75,7 @@
 .buttonlink {
   max-width: 90%;
   height: 3em !important;
+}
+.label {
+  font-weight: bolder !important;
 }

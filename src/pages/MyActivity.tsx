@@ -182,10 +182,10 @@ export default function MyActivity() {
           <IonGrid className="grid-row">
             <IonRow className="row">
               <IonItemDivider className="itemDivider">
-                <IonCol className="topItem label ">Nombre</IonCol>
-                <IonCol className="topItem label ">Fecha de creación</IonCol>
-                <IonCol className="topItem label mode">Editar</IonCol>
-                <IonCol className="topItem label mode">Borrar</IonCol>
+                <IonCol className="topItem bolder ">Nombre</IonCol>
+                <IonCol className="topItem bolder ">Fecha de creación</IonCol>
+                <IonCol className="topItem bolder mode">Editar</IonCol>
+                <IonCol className="topItem bolder mode">Borrar</IonCol>
               </IonItemDivider>
             </IonRow>
             {!error.error &&

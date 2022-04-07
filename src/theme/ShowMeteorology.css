@@ -1,3 +1,6 @@
+.grid {
+  margin-right: 1%;
+}
 .place {
   text-align: center;
   display: flex;
@@ -35,4 +38,9 @@
   /* color: white; */
   font-weight: bold;
   font-size: 100% !important;
+}
+
+.underline {
+  font-size: 110%;
+  text-decoration: underline;
 }

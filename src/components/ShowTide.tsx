@@ -9,7 +9,6 @@ import {
 } from "@ionic/react";
 import React, { Fragment, useEffect, useState } from "react";
 import "../theme/ShowTide.css";
-import "../theme/ShowMeteorology.css";
 export default function ShowTide(props) {
   const [datos, setDatos] = useState(props.props.mareas);
   const [marea, setMarea] = useState(datos.datos.marea);
@@ -25,21 +24,27 @@ export default function ShowTide(props) {
         <IonTitle className="ion-text-wrap place ">{datos.puerto}</IonTitle>
       </IonItem>
 
-      <IonGrid className="grid">
+      <IonGrid className="grid-row">
         <IonRow className="grid-row">
           <IonItemDivider className="itemDivider">
-            <IonCol className="topItem label">Hora</IonCol>
-            <IonCol className="topItem label">Altura</IonCol>
-            <IonCol className="topItem label">Tipo</IonCol>
+            <IonCol className="topItem data">
+              <p className="underline">Hora</p>
+            </IonCol>
+            <IonCol className="topItem data">
+              <p className="underline">Altura</p>
+            </IonCol>
+            <IonCol className="topItem data">
+              <p className="underline">Tipo</p>
+            </IonCol>
           </IonItemDivider>
         </IonRow>
         {marea.map((element) => {
           return (
             <IonRow className="grid-row">
               <IonItemDivider className="itemDivider">
-                <IonCol className="topItem label">{element.hora}</IonCol>
-                <IonCol className="topItem label">{element.altura}</IonCol>
-                <IonCol className="topItem label">
+                <IonCol className="topItem data">{element.hora}</IonCol>
+                <IonCol className="topItem data">{element.altura}</IonCol>
+                <IonCol className="topItem data">
                   {element.tipo.replace("b", "B").replace("p", "P")}
                 </IonCol>
               </IonItemDivider>
