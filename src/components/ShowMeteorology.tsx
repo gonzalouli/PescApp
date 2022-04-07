@@ -216,7 +216,7 @@ export default function ShowMeteorology(props) {
             </IonLabel>
           </IonItem>
 
-          <IonGrid className="grid-row">
+          <IonGrid className="grid">
             <IonRow className="grid-row">
               <IonItemDivider className="itemDivider">
                 <IonCol color="secondary" className="topItem data">

@@ -1,5 +1,6 @@
 .grid {
-  margin-right: 1%;
+  position: relative;
+  right: 6px !important;
 }
 .place {
   text-align: center;
