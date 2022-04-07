@@ -14,18 +14,18 @@ import {
   IonTitle,
   IonToast,
 } from "@ionic/react";
-import React, { Component, useEffect, useRef, useState } from "react";
-import RefreshComponent from "../components/RefreshComponent";
+import React, { Component, Suspense, useEffect, useRef, useState } from "react";
 import BackButton from "../components/BackButton";
 import "leaflet-css/dist/leaflet.css";
 import { Geolocation } from "@capacitor/geolocation";
 
 import "leaflet/dist/leaflet.css";
 import "../theme/NewActivityLocalization.css";
-import MapComponent from "../components/MapComponent";
+// import MapComponent from "../components/MapComponent";
 import { Redirect } from "react-router";
 import { ResetLS } from "../utils/ResetLocalStorage";
 
+const MapComponent = React.lazy(() => import("../components/MapComponent")); //
 /* initialize() is important for iOS,
   Android doesn't need any initialization.
 */
@@ -40,7 +40,7 @@ function NewActivityLocalization() {
     setShowLoading(true);
     setTimeout(() => {
       setShowLoading(false);
-    }, 1000);
+    }, 2000);
   }, []);
   const [text, setText] = useState(
     JSON.parse(window.sessionStorage.getItem("newActivity")).localization
@@ -78,8 +78,9 @@ function NewActivityLocalization() {
           onDidDismiss={() => setShowLoading(false)}
           message={"Por favor, espere..."}
         />
-        <MapComponent />
-
+        <Suspense fallback={<h1>Cargando mapa...</h1>}>
+          <MapComponent />
+        </Suspense>
         <IonList className="form-container">
           <IonItem className="descriptionPlace">
             <IonLabel
