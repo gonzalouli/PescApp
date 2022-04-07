@@ -18,12 +18,18 @@
 
 .nameLabel {
   display: flex;
-  margin: 0 auto !important;
-  text-align: center !important;
+  margin-left: 13% !important;
+  margin-right: 50% !important;
+  min-width: 100%;
 }
 
 .success {
   display: flex;
   text-align: center !important;
   margin: 0 auto !important;
+}
+
+.name {
+  display: flex;
+  margin-bottom: 2em !important;
 }

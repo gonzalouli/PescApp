@@ -90,7 +90,7 @@ const Home: React.FC = () => {
         />
         <IonList className="container">
           <IonItem className="item-container">
-            <IonLabel className="label" position="stacked">
+            <IonLabel className="label email" position="stacked">
               Email
             </IonLabel>
             <IonInput
@@ -134,14 +134,14 @@ const Home: React.FC = () => {
         <IonLoading isOpen={status.loading}></IonLoading>
         <IonList className="links">
           <IonButton
-            className="button"
+            className="button buttonlink ion-text-wrap"
             color="light"
             onClick={() => setIsForgotPass(true)}
           >
             ¿Olvidaste tu contraseña?
           </IonButton>
           <IonButton
-            className="button"
+            className="button buttonlink"
             color="light"
             onClick={() => setIsRegister(true)}
           >

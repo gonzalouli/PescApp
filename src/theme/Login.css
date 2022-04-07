@@ -24,15 +24,11 @@
   align-items: center;
 }
 
-.entrar,
-.label {
+.entrar {
   font-weight: bolder;
   font-size: 20%;
   max-width: 300px;
   margin: 20px auto;
-}
-
-.entrar {
   margin-top: 40px !important;
 }
 
@@ -41,7 +37,7 @@
   flex-direction: column !important;
   align-items: center;
   justify-content: center;
-  margin: 5% auto !important;
+  margin: 15% auto !important;
   max-width: 400px;
 }
 
@@ -69,4 +65,14 @@
   margin-top: 1vh !important;
   margin-bottom: 2vh !important;
   width: auto;
+}
+
+.label-stacked {
+  display: flex;
+  margin-left: 19% !important;
+}
+
+.buttonlink {
+  max-width: 90%;
+  height: 3em !important;
 }

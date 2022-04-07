@@ -122,13 +122,13 @@ export default function NewActivity() {
             <IonItem className="name">
               <IonLabel
                 color="secondary"
-                className="label nameLabel ion-text-wrap"
-                position="floating"
+                className="label nameLabel"
+                position="stacked"
               >
-                Introduzca el nombre aquí...
+                Introduzca un nombre:
               </IonLabel>
               <IonInput
-                className="text"
+                className="text nombre"
                 type="text"
                 value={name}
                 onIonChange={handleChange}
