@@ -6,6 +6,7 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonLoading,
   IonPage,
   IonTitle,
 } from "@ionic/react";
@@ -25,6 +26,7 @@ export default function NewActivity() {
   const [success, setSuccess] = useState({ success: false, message: "" });
   const [MyActivity, setMyActivity] = useState(false);
   const [logOut, setLogOut] = useState(false);
+  const [verboton, setVerboton] = useState(true);
 
   const isAuth = async () => {
     try {
@@ -78,6 +80,8 @@ export default function NewActivity() {
   };
 
   const sendEditActivity = async () => {
+    setVerboton(false);
+
     if (name !== "") {
       try {
         const data = await Auth.currentAuthenticatedUser();
@@ -137,6 +141,15 @@ export default function NewActivity() {
           <IonTitle className="tittle">Editar Actividad</IonTitle>
         </IonHeader>
         <IonContent>
+          {!success.success && (
+            <IonLoading
+              cssClass="my-custom-class"
+              isOpen={!verboton}
+              onDidDismiss={() => setVerboton(false)}
+              message={"Espere..."}
+              duration={3000}
+            />
+          )}
           {/* <RefreshComponent /> */}
           <IonList className="container">
             <IonItem className="name">
@@ -192,11 +205,13 @@ export default function NewActivity() {
             </IonItem>
           )}
 
-          <div className="submit buttons">
-            <IonButton className="save" onClick={sendEditActivity}>
-              Editar
-            </IonButton>
-          </div>
+          {verboton && (
+            <div className="submit buttons">
+              <IonButton className="save" onClick={sendEditActivity}>
+                Editar
+              </IonButton>
+            </div>
+          )}
         </IonContent>
       </Fragment>
     </IonPage>

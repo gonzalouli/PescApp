@@ -28,6 +28,7 @@ export default function NewActivity() {
   const [toHome, setToHome] = useState(false);
   const [logOut, setLogOut] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
+  const [verboton, setVerboton] = useState(true);
 
   useEffect(() => {
     ResetLS();
@@ -47,6 +48,7 @@ export default function NewActivity() {
   };
 
   const sendNewActivity = async () => {
+    setVerboton(false);
     if (name !== "") {
       setShowLoading(true);
       setButton(false);
@@ -78,6 +80,7 @@ export default function NewActivity() {
       setShowLoading(false);
     } else {
       setError({ error: true, message: "La actividad requiere un nombre" });
+      setVerboton(true);
     }
   };
 
@@ -176,11 +179,13 @@ export default function NewActivity() {
             </IonItem>
           )}
 
-          <div className="submit buttons">
-            <IonButton className="save" onClick={button && sendNewActivity}>
-              Guardar
-            </IonButton>
-          </div>
+          {verboton && (
+            <div className="submit buttons">
+              <IonButton className="save" onClick={button && sendNewActivity}>
+                Guardar
+              </IonButton>
+            </div>
+          )}
         </IonContent>
       </Fragment>
     </IonPage>

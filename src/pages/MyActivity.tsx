@@ -36,6 +36,7 @@ export default function MyActivity() {
   const [present] = useIonAlert();
 
   useEffect(() => {
+    setDeleteActivity(false);
     getData();
     sessionStorage.removeItem("editActivity");
     // setShowLoading(false);
