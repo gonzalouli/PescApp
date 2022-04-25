@@ -62,9 +62,10 @@
 }
 
 .name {
+  display: flex;
   margin-bottom: 10px;
   font-weight: bold;
-  text-align: center;
+  margin-left: 50%;
 }
 
 .card-desc {
@@ -76,6 +77,10 @@
 .delete {
   margin: 0 auto;
   max-width: 80%;
+}
+
+.delete {
+  max-width: 500px;
 }
 
 .imageDoc {

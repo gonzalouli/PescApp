@@ -60,6 +60,8 @@ export default function NewDocumentation() {
   const [success, setSuccess] = useState({ success: false, message: "" });
   const [showLoading, setShowLoading] = useState(false);
   const [savedPhoto, setSavedPhoto] = useState(false);
+  const [verboton, setVerboton] = useState(true);
+
   const isAuth = async () => {
     try {
       return await Auth.currentAuthenticatedUser();
@@ -156,6 +158,7 @@ export default function NewDocumentation() {
 
   const saveAndBack = async () => {
     setShowLoading(true);
+    setVerboton(false);
     // const license = JSON.parse(window.sessionStorage.getItem("license"));
     // await license.push(piece);
     // window.sessionStorage.setItem("license", JSON.stringify(license));
@@ -179,7 +182,9 @@ export default function NewDocumentation() {
       setTimeout(() => {
         setBack(true);
       }, 1500);
-    } catch (error) {}
+    } catch (error) {
+      setVerboton(true);
+    }
   };
 
   const saveAndNew = async () => {
@@ -308,9 +313,11 @@ export default function NewDocumentation() {
               Foto agregada para guardar
             </IonLabel>
           )}
-          <IonButton className="save saveGuardar" onClick={saveAndBack}>
-            Guardar
-          </IonButton>
+          {verboton && (
+            <IonButton className="save saveGuardar" onClick={saveAndBack}>
+              Guardar
+            </IonButton>
+          )}
         </IonList>
 
         <IonList className="capturas">
