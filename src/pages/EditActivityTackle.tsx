@@ -60,7 +60,7 @@ export default function EditActivityTackle() {
     <IonPage>
       <IonHeader className="header">
         <BackButton refer="/my/EditActivity" />
-        <IonTitle className="tittle">Equipo utilizado</IonTitle>
+        <IonTitle className="tittle">Editar equipo utilizado</IonTitle>
       </IonHeader>
       <IonContent>
         {/* <RefreshComponent /> */}
