@@ -40,7 +40,7 @@ export default function EditActivityDate() {
     <IonPage>
       <IonHeader className="header">
         <BackButton refer="/my/EditActivity" />
-        <IonTitle className="tittle">Nueva Fecha</IonTitle>
+        <IonTitle className="tittle">Editar Fecha</IonTitle>
       </IonHeader>
       <IonContent>
         {/* <RefreshComponent /> */}
