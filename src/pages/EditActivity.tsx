@@ -182,7 +182,7 @@ export default function NewActivity() {
               expand="block"
               onClick={() => setIsEditActivityCatch(true)}
             >
-              Capturas
+              Fotografías
             </IonButton>
             <IonButton
               className="main-button"
