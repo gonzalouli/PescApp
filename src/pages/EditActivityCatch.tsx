@@ -174,7 +174,7 @@ export default function NewActivityCatch() {
       {isConfirmed && <Redirect to="/my/Activity" push={true} exact={true} />}
       <IonHeader className="header">
         <BackButton refer="/my/EditActivity" />
-        <IonTitle className="tittle">Nueva Fotografía</IonTitle>
+        <IonTitle className="tittle">Editar Fotografías</IonTitle>
       </IonHeader>
       <IonContent>
         {/* <RefreshComponent /> */}
