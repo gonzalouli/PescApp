@@ -204,7 +204,7 @@ export default function Notifications() {
         {!movile && (
           <IonItem>
             <IonText color="danger" className="label ion-text-center">
-              Insercción de solo disponibles en la versión móvil
+              NO DISPONIBLE EN VERSIÓN WEB
             </IonText>
           </IonItem>
         )}
