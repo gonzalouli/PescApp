@@ -8,5 +8,5 @@ Para realizar una instalacion multiplataforma con Capacitor realizaremos los sig
 `ionic integrations enable capacitor`  
 `ionic capacitor add android`  
 `ionic capacitor add ios`  
-`ionis cap sync`  
+`ionic cap sync`  
   *Para realizar las acciones anteriores debemos tener AndroidStudio instalado y en el path de nuestra computadora o Xcode y emulador de iOs.
